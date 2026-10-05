@@ -1,3 +1,16 @@
+## Permanent Owner instructions — consolidation, AI parity and staff tree (CP153)
+
+- The sole approved Owner panel is https://officialavora.github.io/funny-room-owner-panel/ and its repository officialavora/funny-room-owner-panel. Do not create, deploy, reopen, or use a ChatGPT Sites Owner/admin panel for Funny Room. Do not reintroduce that host as a link, recovery redirect, preview fallback or deployment target. The unwanted Owner Site was deleted; its unique source is archived only as migration reference.
+- The approved work/recovery identity is officialavora7@gmail.com. Do not invent another Owner email or replace the protected Root Founder account. Never commit passwords, tokens or service-role keys.
+- Every worker must implement the matching application source, existing Owner panel, shared API/database rules and catalogs together. Inventory all affected functions, screens, controls, rules, expiry, history, consumers and failure states; document any gap explicitly. A UI-only switch or catalog row is not completion.
+- Requested gifts, frames, noble/entry visuals, medals, bubbles, backgrounds and panel artwork must be original AI-generated work or explicitly approved originals, with recorded provenance and hashes. Preserve the application's actual accepted artwork and media. Native animation of AI art is not neural video; recorded/procedural sound is not neural AI. Never substitute stock placeholders or claim missing AI outputs exist.
+- Reusable staff access is a network tree: Founder -> assigned country/agency manager -> authorized descendants. An upper worker may access only descendants within granted scope and powers; a lower worker must not see/manage parents, equal/higher authority, another branch or another country. Apply this on the server, not only in menus. Keep suspended descendants manageable without reviving suspended/revoked/expired staff through legacy role fallbacks.
+- Allow Founder to grant powers to an existing permanent ID or create a staff login on the same panel. New staff receive EXACTLY selected permissions in their assigned scope; omitted role-default powers must remain denied. Role rank, delegation ceiling, permission denials, expiry, Root protection and audit history must all remain enforced. Cosmetic role art never grants administrative authority.
+- Release only after relevant tests pass for BOTH repositories and shared contracts, plus required integration/device acceptance. Preserve the APK-only release/isolation policy: no Store/production/OTA or shared-live candidate SQL/catalog/permissions until its verified preview-only scope and release gates pass. Staging/source checks do not establish live completion.
+- Update the existing WORK_HANDOFF.md and checkpoint report with actual refs, deployment state, test evidence and remaining gates. Do not erase prior workers' history or claim A–Z completion while any requested feature or release gate remains unverified.
+
+These repository rules govern workers using this project. They cannot guarantee control of unrelated workers or independently owned infrastructure. A new Owner instruction may revise them; no worker may silently override them.
+
 # Owner panel project instructions
 
 User decision locked on 2026-10-06 (Asia/Riyadh).
