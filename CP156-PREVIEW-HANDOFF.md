@@ -1,3 +1,10 @@
+# CP157 — Owner rejected CP156 zero-data regression — urgent rollback in progress
+
+Owner reported on 6 October 2026 that CP156 made the existing app look reset/empty. This is a release regression: CP156 silently substituted a separate empty business backend for preview/runtime0.10.65. Passing isolation/source CI did NOT satisfy preservation of the existing application.
+DO NOT publish CP156 staging-routing source again. Preserve the existing account, email, users, rooms, gifts, balances and app appearance; never silently switch the Owner's installed app to a new empty dataset. The requested work is improvement of the existing application. Isolated test tooling must not replace it.
+Recovery target: republish verified CP141 Android group 098090dd-7805-488d-8bb4-1d13a5dda807 to the unchanged preview branch/runtime0.10.65. Rollback is NOT yet confirmed; inspection workflow https://github.com/officialavora/funny-room/actions/runs/37499928473 is running. No native build, production release, channel remap, reset, reinstall or business data deletion.
+Live read-only check: auth users62, profiles62, gifts83; original business backend remains present. Physical device recovery is not yet verified. Retain newer source/features for corrected integration; do not erase all worker work or declare A–Z done. Latest incident supersedes CP156 shipping acceptance below.
+
 # CP156 final combined test delivery — 6 October 2026
 
 Android preview/runtime0.10.65 published at2026-10-06T16:43:35.124Z from canonical native e7350887f0577852505350a7c5cb1b89d186b58c. Group4bea6096-bb3b-4246-9d93-e8d8abe1b456; update01a11219-5f54-7382-9857-859799dca549. Full canonical publisher37497342397/job112385164968 PASS: all original required guards,73 authentication/isolation cases, Doctor18/18 and1666-module Android export. Normal manifestHTTP200 delivered exact ID/453assets; CP131 production isolation before/after PASS; no native build/Play/production OTA/channel remap. EAS actual installs0 at audit; phone acceptance is NOT TESTED.
