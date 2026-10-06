@@ -1,3 +1,31 @@
+-- Account-wide explicit mode survives future permission definitions and later role preset edits.
+CREATE TABLE IF NOT EXISTS private.explicit_staff_authority_v153(
+ user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+ created_by uuid REFERENCES auth.users(id) ON DELETE SET NULL,
+ created_at timestamptz NOT NULL DEFAULT now());
+REVOKE ALL ON TABLE private.explicit_staff_authority_v153 FROM PUBLIC,anon,authenticated;
+
+CREATE OR REPLACE FUNCTION private.has_permission(p_permission text,p_context_type text DEFAULT 'global',p_context_id text DEFAULT '*',p_user uuid DEFAULT auth.uid())
+RETURNS boolean LANGUAGE plpgsql STABLE SECURITY DEFINER SET search_path='' AS $$
+BEGIN
+ IF p_user IS NULL THEN RETURN false;END IF;
+ IF private.is_founder(p_user) THEN RETURN true;END IF;
+ IF private.has_permission_denial(p_permission,p_context_type,p_context_id,p_user) THEN RETURN false;END IF;
+ RETURN EXISTS(
+  SELECT 1 FROM private.permission_overrides po
+  WHERE po.user_id=p_user AND po.permission_key=p_permission AND po.allowed
+   AND po.status='active' AND (po.expires_at IS NULL OR po.expires_at>now())
+   AND (po.context_type='global' OR (po.context_type=p_context_type AND (po.context_id='*' OR po.context_id=p_context_id)))
+ ) OR (NOT EXISTS(SELECT 1 FROM private.explicit_staff_authority_v153 mode WHERE mode.user_id=p_user) AND EXISTS(
+  SELECT 1 FROM private.role_assignments ra JOIN private.role_permissions rp ON rp.role_key=ra.role_key
+  WHERE ra.user_id=p_user AND rp.permission_key=p_permission
+   AND ra.status IN('active','temporary') AND (ra.starts_at IS NULL OR ra.starts_at<=now())
+   AND EXISTS(SELECT 1 FROM private.role_definitions definition WHERE definition.role_key=ra.role_key AND definition.active)
+   AND (ra.expires_at IS NULL OR ra.expires_at>now())
+   AND (ra.context_type='global' OR (ra.context_type=p_context_type AND (ra.context_id='*' OR ra.context_id=p_context_id)))
+ ));
+END $$;
+
 CREATE OR REPLACE FUNCTION public.panel_create_explicit_staff_authority(
  p_user uuid,p_role text,p_permissions text[],p_context_type text,p_context_id text,p_expires_at timestamptz DEFAULT NULL)
 RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path='' AS $$
@@ -17,6 +45,7 @@ BEGIN
  ctx:=CASE WHEN p_context_type='country' THEN upper(p_context_id) ELSE p_context_id END;
  assignment:=public.owner_assign_multi_role(p_user,p_role,p_context_type,ctx,p_expires_at,'Explicit scoped staff creation',true);
  SELECT public_id INTO target_public FROM public.profiles WHERE id=p_user;
+ INSERT INTO private.explicit_staff_authority_v153(user_id,created_by) VALUES(p_user,actor);
  -- Every omitted role preset receives a scoped denial: selected powers are exact, not additive.
  FOR permission IN SELECT permission_key FROM private.permission_definitions LOOP
   chosen:=permission.permission_key=ANY(p_permissions);

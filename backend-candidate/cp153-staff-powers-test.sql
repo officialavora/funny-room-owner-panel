@@ -1,8 +1,8 @@
 BEGIN;
 DO $$
-DECLARE f uuid:=gen_random_uuid(); child uuid:=gen_random_uuid(); parent uuid:=gen_random_uuid(); leaf uuid:=gen_random_uuid(); illegal uuid:=gen_random_uuid(); outsider uuid:=gen_random_uuid();u uuid;agency_parent uuid:=gen_random_uuid();agency_leaf uuid:=gen_random_uuid();agency_id uuid:=gen_random_uuid();upper_assignment uuid;foreign_assignment uuid;denied boolean;body jsonb;mode text;
+DECLARE f uuid:=gen_random_uuid(); child uuid:=gen_random_uuid(); parent uuid:=gen_random_uuid(); leaf uuid:=gen_random_uuid(); illegal uuid:=gen_random_uuid(); outsider uuid:=gen_random_uuid();future_legacy uuid:=gen_random_uuid();u uuid;agency_parent uuid:=gen_random_uuid();agency_leaf uuid:=gen_random_uuid();agency_id uuid:=gen_random_uuid();upper_assignment uuid;foreign_assignment uuid;denied boolean;body jsonb;mode text;
 BEGIN
- FOREACH u IN ARRAY ARRAY[f,child,parent,leaf,illegal,outsider,agency_parent,agency_leaf] LOOP
+ FOREACH u IN ARRAY ARRAY[f,child,parent,leaf,illegal,outsider,agency_parent,agency_leaf,future_legacy] LOOP
   INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES(u,'cp153-staff-'||u||'@example.invalid','{"display_name":"CP153 rollback staff"}');
   INSERT INTO public.profiles(id,display_name,country_code) VALUES(u,'CP153 rollback staff','IN') ON CONFLICT(id) DO UPDATE SET country_code='IN';
  END LOOP;
@@ -13,6 +13,16 @@ BEGIN
  IF body->>'permission_mode'<>'explicit' OR NOT private.has_permission('users.view','country','IN',child) THEN RAISE EXCEPTION 'EXPLICIT_SELECTED_POWER_MISSING';END IF;
  IF EXISTS(SELECT 1 FROM private.permission_definitions p WHERE p.permission_key<>'users.view' AND private.has_permission(p.permission_key,'country','IN',child)) THEN RAISE EXCEPTION 'UNSELECTED_ROLE_PRESET_ESCALATION';END IF;
  IF private.has_permission('users.view','country','PK',child) OR private.has_permission('users.view','global','*',child) THEN RAISE EXCEPTION 'EXPLICIT_SCOPE_ESCAPED';END IF;
+ -- Simulate a future worker adding a brand-new preset after this account was created.
+ INSERT INTO private.permission_definitions(permission_key,description) VALUES('cp153.future_power_probe','Rollback-only future permission');
+ INSERT INTO private.role_permissions(role_key,permission_key) VALUES('admin','cp153.future_power_probe');
+ INSERT INTO private.role_assignments(user_id,role_key,context_type,context_id,status,granted_by) VALUES(future_legacy,'admin','country','IN','active',f);
+ IF NOT private.has_permission('cp153.future_power_probe','country','IN',future_legacy) THEN RAISE EXCEPTION 'LEGACY_DEFAULT_POLICY_CHANGED';END IF;
+ IF private.has_permission('cp153.future_power_probe','country','IN',child) THEN RAISE EXCEPTION 'FUTURE_UNSELECTED_PRESET_ESCALATION';END IF;
+ PERFORM public.owner_set_permission_override((SELECT public_id FROM public.profiles WHERE id=child),'cp153.future_power_probe',true,'country','IN',null,'Explicit later selected power');
+ IF NOT private.has_permission('cp153.future_power_probe','country','IN',child) OR private.has_permission('cp153.future_power_probe','country','PK',child) THEN RAISE EXCEPTION 'LATER_EXPLICIT_GRANT_SCOPE_FAILED';END IF;
+ PERFORM public.owner_set_permission_override((SELECT public_id FROM public.profiles WHERE id=child),'cp153.future_power_probe',false,'country','IN',null,'Explicit later power removed');
+ IF private.has_permission('cp153.future_power_probe','country','IN',child) THEN RAISE EXCEPTION 'LATER_EXPLICIT_REVOKE_FAILED';END IF;
  denied:=false;BEGIN PERFORM public.panel_create_explicit_staff_authority(outsider,'admin',ARRAY['users.view'],'country','IN',null);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%authenticated parent%';END;
  IF NOT denied THEN RAISE EXCEPTION 'UNOWNED_ID_REPLACED';END IF;
  PERFORM public.panel_create_explicit_staff_authority(parent,'country_manager',ARRAY['users.view','roles.assign','roles.remove','permissions.assign'],'country','IN',null);
