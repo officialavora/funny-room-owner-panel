@@ -1,0 +1,44 @@
+name: CP155 paired Owner candidate rebuild
+on:
+  push:
+    branches: [checkpoint153-owner-consolidation]
+    paths: ['.github/workflows/cp155-candidate-rebuild.yml']
+permissions:
+  contents: write
+concurrency:
+  group: cp155-owner-candidate-rebuild
+  cancel-in-progress: false
+jobs:
+  rebuild:
+    if: github.ref == 'refs/heads/checkpoint153-owner-consolidation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/check-owner-destination.cjs
+      - name: Restore and validate paired original audio
+        working-directory: owner-port
+        run: |
+          npm ci --ignore-scripts
+          node restore-assets-from-media.mjs
+          node marry-me-test.cjs
+          npm run build
+          cp -a dist/. ../
+          node verify-built-output.mjs
+          npm test
+          npm run test:browser
+      - name: Save verified compiled candidate only
+        run: |
+          test "$(git branch --show-current)" = "checkpoint153-owner-consolidation"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add full-controls.js media/
+          if ! git diff --cached --quiet; then
+            git commit -m "CP155: rebuild verified paired proposal voice candidate [skip ci]"
+            git push origin HEAD:checkpoint153-owner-consolidation
+          fi
