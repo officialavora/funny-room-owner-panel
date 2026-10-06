@@ -1,0 +1,1026 @@
+{
+  "missing_live": [
+    "equip_cosmetic_v142",
+    "load_coin_authority_history_v149",
+    "load_owner_room_controls_v149",
+    "owner_grant_cosmetic_set_v142",
+    "owner_load_coin_authority_limit_v149",
+    "owner_load_daily_signin_v149",
+    "owner_save_daily_signin_v149",
+    "owner_set_coin_authority_limit_v149",
+    "owner_set_room_controls_v149",
+    "purchase_cosmetic_set_v142",
+    "purchase_cosmetics_v142",
+    "unequip_cosmetic_v142"
+  ],
+  "source_references": [
+    "claim_campaign_daily_benefit",
+    "claim_recharge_reward",
+    "current_staff_access",
+    "equip_cosmetic_v142",
+    "get_coin_economy_config",
+    "get_merchant_transfer_policy",
+    "load_affinity_restore_policy",
+    "load_coin_authority_history_v149",
+    "load_my_effect_preferences",
+    "load_my_lucky_gift_reversal_capability_v1",
+    "load_my_recharge_reward_state",
+    "load_owner_room_controls_v149",
+    "load_recharge_campaigns",
+    "load_recharge_limits",
+    "load_svip_owner_history",
+    "load_withdrawal_policy",
+    "lookup_transaction_recipient",
+    "owner_account_deletion_requests",
+    "owner_active_bans",
+    "owner_adjust_user_level_by_public_id",
+    "owner_adjust_wallet_asset",
+    "owner_analytics_overview",
+    "owner_approve_campaign_top3",
+    "owner_assign_multi_role",
+    "owner_authority_dashboard",
+    "owner_ban_timeline_v2",
+    "owner_campaign_metrics",
+    "owner_capture_overrides",
+    "owner_confirm_safe_reset_v3_batch",
+    "owner_cosmetic_grants",
+    "owner_create_access_ban",
+    "owner_create_google_play_package_version",
+    "owner_create_incident",
+    "owner_delete_system_notice",
+    "owner_duplicate_reward_campaign",
+    "owner_evidence_search",
+    "owner_execute_entity_lifecycle",
+    "owner_execute_lucky_gift_reversal_v1",
+    "owner_execute_progression_operation",
+    "owner_execute_safe_reset_v3_complete",
+    "owner_execute_vanity_operation",
+    "owner_finance_activity_report",
+    "owner_finance_dashboard",
+    "owner_grant_award_by_public_id",
+    "owner_grant_cosmetic",
+    "owner_grant_cosmetic_set_v142",
+    "owner_grant_reward_v2",
+    "owner_import_vanity_inventory_v2",
+    "owner_incident_cases",
+    "owner_list_room_emoji_catalog_v3",
+    "owner_list_user_reset_countries",
+    "owner_load_banners",
+    "owner_load_campaign_detail",
+    "owner_load_coin_authority_limit_v149",
+    "owner_load_daily_benefits",
+    "owner_load_daily_coin_policy_v1",
+    "owner_load_daily_signin_v149",
+    "owner_load_payment_controls",
+    "owner_load_ranking_review",
+    "owner_load_reward_campaigns",
+    "owner_load_vanity_inventory",
+    "owner_lookup_room",
+    "owner_lucky_gift_reversal_history_v1",
+    "owner_manage_system_notice",
+    "owner_manage_vanity",
+    "owner_moderation_queue",
+    "owner_mutate_svip",
+    "owner_mutate_vip",
+    "owner_ops_banners",
+    "owner_ops_campaigns",
+    "owner_ops_dashboard",
+    "owner_prepare_entity_lifecycle",
+    "owner_prepare_progression_operation",
+    "owner_prepare_recharge_operation",
+    "owner_prepare_safe_reset_v3_batch",
+    "owner_prepare_safe_reset_v3_complete",
+    "owner_preview_lucky_gift_reversal_v1",
+    "owner_preview_user_test_reset",
+    "owner_preview_user_test_reset_scope",
+    "owner_progression_operation_history_v2",
+    "owner_record_account_security_review",
+    "owner_replace_campaign_tiers",
+    "owner_reset_user_test_data",
+    "owner_reset_user_test_data_scope",
+    "owner_resolve_report",
+    "owner_reverse_progression_operation",
+    "owner_reverse_reward_grant",
+    "owner_reverse_safe_reset_v3_complete",
+    "owner_review_account_deletion",
+    "owner_review_role_application",
+    "owner_revoke_access_ban",
+    "owner_reward_operation_history",
+    "owner_role_applications",
+    "owner_room_access_action",
+    "owner_room_action",
+    "owner_safe_reset_v3_complete_history",
+    "owner_salary_policies",
+    "owner_salary_user_report",
+    "owner_save_daily_coin_policy_v1",
+    "owner_save_daily_signin_v149",
+    "owner_save_gift_v3",
+    "owner_save_notice_v85",
+    "owner_session_audit",
+    "owner_set_affinity_restore_cost",
+    "owner_set_banner_state",
+    "owner_set_campaign_banner_state",
+    "owner_set_campaign_state",
+    "owner_set_capture_override",
+    "owner_set_coin_authority_limit_v149",
+    "owner_set_cosmetic_grant",
+    "owner_set_device_trust",
+    "owner_set_google_play_package_state",
+    "owner_set_merchant_transfer_policy",
+    "owner_set_online_coin_purchase",
+    "owner_set_permission_override",
+    "owner_set_progression_freeze_v2",
+    "owner_set_reward_campaign_state",
+    "owner_set_role_state",
+    "owner_set_room_controls_v149",
+    "owner_set_runtime_flag",
+    "owner_set_salary_progress",
+    "owner_set_seller_transfer_policy",
+    "owner_set_wallet_freeze",
+    "owner_settle_salary_record",
+    "owner_snapshot_campaign_top3",
+    "owner_system_notice_history",
+    "owner_update_coin_economy_config",
+    "owner_update_cosmetic_product",
+    "owner_update_diamond_economy_rate",
+    "owner_update_gift",
+    "owner_update_incident",
+    "owner_update_recharge_limits",
+    "owner_update_room_audio",
+    "owner_update_room_profile",
+    "owner_update_user_identity_v1",
+    "owner_update_withdrawal_policy",
+    "owner_upsert_banner",
+    "owner_upsert_campaign",
+    "owner_upsert_campaign_banner",
+    "owner_upsert_cosmetic_product",
+    "owner_upsert_daily_benefit",
+    "owner_upsert_reward_campaign",
+    "owner_upsert_room_emoji_catalog_v3",
+    "owner_upsert_salary_policy",
+    "owner_user_analytics",
+    "owner_vanity_history",
+    "owner_wallet_freezes",
+    "owner_withdrawal_history",
+    "purchase_cosmetic_set_v142",
+    "purchase_cosmetics_v142",
+    "resolve_profile_identifier",
+    "save_my_effect_preferences",
+    "transfer_seller_balance",
+    "unequip_cosmetic_v142"
+  ],
+  "live_signatures": [
+    {
+      "name": "claim_campaign_daily_benefit",
+      "arguments": "p_benefit uuid, p_day date, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "claim_recharge_reward",
+      "arguments": "p_tier uuid, p_request_id uuid, p_vanity_id bigint DEFAULT NULL::bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "current_staff_access",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "get_coin_economy_config",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "get_merchant_transfer_policy",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_affinity_restore_policy",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_my_effect_preferences",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_my_lucky_gift_reversal_capability_v1",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_my_recharge_reward_state",
+      "arguments": "p_campaign uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_recharge_campaigns",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_recharge_limits",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_svip_owner_history",
+      "arguments": "p_public_id bigint, p_limit integer DEFAULT 50",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "load_withdrawal_policy",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "lookup_transaction_recipient",
+      "arguments": "p_public_id bigint, p_require_seller boolean DEFAULT false",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_account_deletion_requests",
+      "arguments": "p_status text DEFAULT 'open'::text",
+      "result": "TABLE(id uuid, public_id bigint, display_name text, status text, reason text, requested_at timestamp with time zone, cooling_until timestamp with time zone, review_note text)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_active_bans",
+      "arguments": "p_limit integer DEFAULT 150",
+      "result": "TABLE(id uuid, target_type text, target_hash text, target_display text, reason text, created_at timestamp with time zone, expires_at timestamp with time zone, created_by_public_id bigint, created_by_name text)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_adjust_user_level_by_public_id",
+      "arguments": "p_public_id bigint, p_delta integer, p_reason text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_adjust_wallet_asset",
+      "arguments": "p_public_id bigint, p_asset text, p_amount bigint, p_note text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_analytics_overview",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_approve_campaign_top3",
+      "arguments": "p_snapshot uuid, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_assign_multi_role",
+      "arguments": "p_user uuid, p_role text, p_context_type text DEFAULT 'global'::text, p_context_id text DEFAULT '*'::text, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_reason text DEFAULT ''::text, p_primary boolean DEFAULT false",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_authority_dashboard",
+      "arguments": "p_public_id bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_ban_timeline_v2",
+      "arguments": "p_limit integer DEFAULT 500",
+      "result": "TABLE(id uuid, ban_id uuid, target_type text, target_hash text, target_display text, event_action text, reason text, duration_hours integer, status_after text, occurred_at timestamp with time zone, actor_public_id bigint, actor_name text, action_number bigint)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_campaign_metrics",
+      "arguments": "p_campaign uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_capture_overrides",
+      "arguments": "p_capture_type text DEFAULT 'screen'::text",
+      "result": "TABLE(scope_type text, scope_value text, target_name text, enabled boolean, expires_at timestamp with time zone, updated_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_confirm_safe_reset_v3_batch",
+      "arguments": "p_job_id uuid, p_snapshot_hash text, p_confirmation text, p_second_confirmation text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_cosmetic_grants",
+      "arguments": "p_public_id bigint",
+      "result": "TABLE(grant_id uuid, cosmetic_code text, cosmetic_name text, status text, starts_at timestamp with time zone, expires_at timestamp with time zone, reason text)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_create_access_ban",
+      "arguments": "p_target_type text, p_target_value text, p_duration_hours integer, p_reason text",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_create_google_play_package_version",
+      "arguments": "p_internal_code text, p_product_id text, p_coin_amount bigint, p_version integer, p_display_order integer DEFAULT 100, p_active boolean DEFAULT false, p_reason text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_create_incident",
+      "arguments": "p_type text, p_severity text, p_title text, p_description text, p_scope jsonb DEFAULT '{}'::jsonb",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_delete_system_notice",
+      "arguments": "p_notice uuid",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_duplicate_reward_campaign",
+      "arguments": "p_campaign uuid, p_title text, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_evidence_search",
+      "arguments": "p_source text DEFAULT NULL::text, p_query text DEFAULT NULL::text, p_limit integer DEFAULT 100",
+      "result": "TABLE(evidence_id uuid, source_table text, source_id text, operation text, subject_public_id bigint, actor_public_id bigint, actor_name text, before_data jsonb, after_data jsonb, created_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_execute_entity_lifecycle",
+      "arguments": "p_operation_id uuid, p_snapshot_hash text, p_confirmation text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_execute_lucky_gift_reversal_v1",
+      "arguments": "p_reversal_operation_id uuid, p_original_request_id uuid, p_preview_id uuid, p_snapshot_hash text, p_reason text, p_execution_request_id uuid, p_confirmation text, p_expected_reversal_version bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_execute_progression_operation",
+      "arguments": "p_operation_id uuid, p_snapshot_hash text, p_confirmation text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_execute_safe_reset_v3_complete",
+      "arguments": "p_operation_id uuid, p_snapshot_hash text, p_confirmation text, p_red_zone_confirmation text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_execute_vanity_operation",
+      "arguments": "p_operation_id uuid, p_operation text, p_vanity_id bigint, p_target_public_id bigint, p_new_public_id bigint, p_ends_at timestamp with time zone, p_reason text, p_request_id uuid, p_confirmation_token text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_finance_activity_report",
+      "arguments": "p_asset text DEFAULT 'all'::text, p_limit integer DEFAULT 200",
+      "result": "TABLE(event_id text, target_public_id bigint, target_name text, actor_public_id bigint, actor_name text, asset text, amount bigint, reference_type text, reference_id text, note text, created_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_finance_dashboard",
+      "arguments": "p_public_id bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_grant_award_by_public_id",
+      "arguments": "p_public_id bigint, p_asset text, p_amount bigint DEFAULT 0, p_cosmetic_code text DEFAULT NULL::text, p_duration_days integer DEFAULT NULL::integer, p_note text DEFAULT 'Owner award grant'::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_grant_cosmetic",
+      "arguments": "target_public_id bigint, asset_code text, duration_days integer DEFAULT NULL::integer, reason_text text DEFAULT ''::text",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_grant_reward_v2",
+      "arguments": "p_operation_id uuid, p_public_id bigint, p_kind text, p_code text, p_quantity bigint, p_duration_seconds bigint, p_permanent boolean, p_reason text, p_request_id uuid, p_confirmation_token text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_import_vanity_inventory_v2",
+      "arguments": "p_operation_id uuid, p_ids bigint[], p_protected boolean, p_reason text, p_request_id uuid, p_confirmation_token text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_incident_cases",
+      "arguments": "",
+      "result": "TABLE(id uuid, incident_type text, severity text, status text, title text, description text, scope jsonb, created_at timestamp with time zone, updated_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_list_room_emoji_catalog_v3",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_list_user_reset_countries",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_banners",
+      "arguments": "p_states text[] DEFAULT NULL::text[], p_limit integer DEFAULT 50, p_offset integer DEFAULT 0",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_campaign_detail",
+      "arguments": "p_campaign uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_daily_benefits",
+      "arguments": "p_campaign uuid, p_limit integer DEFAULT 50, p_offset integer DEFAULT 0",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_daily_coin_policy_v1",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_payment_controls",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_ranking_review",
+      "arguments": "p_campaign uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_reward_campaigns",
+      "arguments": "p_states text[] DEFAULT NULL::text[], p_search text DEFAULT NULL::text, p_limit integer DEFAULT 25, p_offset integer DEFAULT 0",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_load_vanity_inventory",
+      "arguments": "p_states text[] DEFAULT NULL::text[], p_search text DEFAULT NULL::text, p_limit integer DEFAULT 50, p_offset integer DEFAULT 0",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_lookup_room",
+      "arguments": "p_room_public_id bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_lucky_gift_reversal_history_v1",
+      "arguments": "p_request_id uuid DEFAULT NULL::uuid, p_limit integer DEFAULT 50",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_manage_system_notice",
+      "arguments": "p_action text, p_notice uuid DEFAULT NULL::uuid, p_title text DEFAULT NULL::text, p_body text DEFAULT NULL::text, p_country_code text DEFAULT NULL::text, p_starts_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_room uuid DEFAULT NULL::uuid, p_scope text DEFAULT NULL::text",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_manage_vanity",
+      "arguments": "p_operation text, p_vanity_id bigint, p_target_public_id bigint, p_new_public_id bigint, p_ends_at timestamp with time zone, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_moderation_queue",
+      "arguments": "p_status text DEFAULT 'open'::text, p_limit integer DEFAULT 150",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_mutate_svip",
+      "arguments": "p_public_id bigint, p_action text, p_tier integer, p_days integer, p_exact_expiry timestamp with time zone, p_reason text, p_request_id uuid, p_expected_version bigint DEFAULT NULL::bigint, p_preview boolean DEFAULT true",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_mutate_vip",
+      "arguments": "p_public_id bigint, p_action text, p_value integer, p_reason text, p_request_id uuid, p_expected_level integer DEFAULT NULL::integer, p_preview boolean DEFAULT true",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_ops_banners",
+      "arguments": "",
+      "result": "TABLE(id uuid, placement text, title text, subtitle text, image_url text, action_type text, action_value text, country_code text, starts_at timestamp with time zone, ends_at timestamp with time zone, sort_order integer, active boolean, updated_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_ops_campaigns",
+      "arguments": "",
+      "result": "TABLE(id uuid, kind text, title text, description text, country_code text, starts_at timestamp with time zone, ends_at timestamp with time zone, reward_asset text, reward_value bigint, config jsonb, active boolean, updated_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_ops_dashboard",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_prepare_entity_lifecycle",
+      "arguments": "p_entity_type text, p_entity_id text, p_action text, p_target_owner_public_id bigint, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_prepare_progression_operation",
+      "arguments": "p_public_id bigint, p_system text, p_action text, p_value bigint, p_value_kind text, p_reason text, p_request_id uuid, p_preview_ttl_minutes integer DEFAULT 15",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_prepare_recharge_operation",
+      "arguments": "p_operation_type text, p_target_public_ids bigint[], p_reason text, p_request_id uuid, p_confirmation_token text DEFAULT NULL::text, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_prepare_safe_reset_v3_batch",
+      "arguments": "p_scope_type text, p_selected_public_ids bigint[], p_country_code text, p_categories text[], p_reason text, p_request_id uuid, p_max_targets integer DEFAULT 1000",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_prepare_safe_reset_v3_complete",
+      "arguments": "p_public_id bigint, p_categories text[], p_reason text, p_request_id uuid, p_preview_ttl_minutes integer DEFAULT 15",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_preview_lucky_gift_reversal_v1",
+      "arguments": "p_original_request_id uuid, p_preview_id uuid, p_expected_reversal_version bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_preview_user_test_reset",
+      "arguments": "p_public_id bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_preview_user_test_reset_scope",
+      "arguments": "p_scope text, p_country_code text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_progression_operation_history_v2",
+      "arguments": "p_public_id bigint, p_limit integer DEFAULT 50",
+      "result": "TABLE(operation_id uuid, request_id uuid, system text, action text, status text, before_state jsonb, after_state jsonb, reversal_of uuid, reason text, actor_public_id bigint, created_at timestamp with time zone, completed_at timestamp with time zone, freeze_expires_at timestamp with time zone, conflict_reason text)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_record_account_security_review",
+      "arguments": "p_public_id bigint, p_status text, p_note text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_replace_campaign_tiers",
+      "arguments": "p_campaign uuid, p_tiers jsonb, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_reset_user_test_data",
+      "arguments": "p_public_id bigint, p_confirmation text, p_reason text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_reset_user_test_data_scope",
+      "arguments": "p_scope text, p_country_code text, p_confirmation text, p_reason text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_resolve_report",
+      "arguments": "p_report uuid, p_resolution text, p_note text DEFAULT ''::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_reverse_progression_operation",
+      "arguments": "p_operation_id uuid, p_reason text, p_request_id uuid, p_confirmation text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_reverse_reward_grant",
+      "arguments": "p_grant uuid, p_operation_id uuid, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_reverse_safe_reset_v3_complete",
+      "arguments": "p_operation_id uuid, p_reason text, p_request_id uuid, p_confirmation text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_review_account_deletion",
+      "arguments": "p_request uuid, p_action text, p_note text DEFAULT ''::text",
+      "result": "boolean",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_review_role_application",
+      "arguments": "p_application uuid, p_approve boolean, p_review_note text DEFAULT ''::text, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_revoke_access_ban",
+      "arguments": "p_ban uuid, p_reason text DEFAULT 'Owner unban'::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_reward_operation_history",
+      "arguments": "p_limit integer DEFAULT 50",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_role_applications",
+      "arguments": "p_status text DEFAULT 'pending'::text, p_limit integer DEFAULT 100",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_room_access_action",
+      "arguments": "p_room_public_id bigint, p_action text, p_target_public_id bigint, p_duration_hours integer DEFAULT 24, p_reason text DEFAULT 'Owner room moderation'::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_room_action",
+      "arguments": "p_room_public_id bigint, p_action text, p_target_public_id bigint DEFAULT NULL::bigint, p_reason text DEFAULT 'Owner moderation'::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_safe_reset_v3_complete_history",
+      "arguments": "p_public_id bigint, p_limit integer DEFAULT 50",
+      "result": "TABLE(operation_id uuid, request_id uuid, status text, categories text[], red_zone_categories text[], reason text, before_state jsonb, after_state jsonb, reversal_status text, reversal_operation_id uuid, actor_public_id bigint, created_at timestamp with time zone, completed_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_salary_policies",
+      "arguments": "",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_salary_user_report",
+      "arguments": "p_public_id bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_save_daily_coin_policy_v1",
+      "arguments": "p_config jsonb, p_expected_updated_at timestamp with time zone, p_reason text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_save_gift_v3",
+      "arguments": "p_gift uuid, p_values jsonb, p_expected_version integer",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_save_notice_v85",
+      "arguments": "p_action text, p_notice uuid DEFAULT NULL::uuid, p_title text DEFAULT NULL::text, p_body text DEFAULT NULL::text, p_country_code text DEFAULT NULL::text, p_starts_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_delivery text DEFAULT 'both'::text, p_pin_system boolean DEFAULT false, p_pin_room boolean DEFAULT false",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_session_audit",
+      "arguments": "p_public_id bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_affinity_restore_cost",
+      "arguments": "p_coin_cost bigint, p_reason text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_banner_state",
+      "arguments": "p_id uuid, p_active boolean",
+      "result": "boolean",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_campaign_banner_state",
+      "arguments": "p_banner uuid, p_operation text, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_campaign_state",
+      "arguments": "p_id uuid, p_active boolean",
+      "result": "boolean",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_capture_override",
+      "arguments": "p_capture_type text DEFAULT 'screen'::text, p_scope_type text DEFAULT 'all'::text, p_scope_value text DEFAULT '*'::text, p_enabled boolean DEFAULT true, p_duration_minutes integer DEFAULT 120",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_cosmetic_grant",
+      "arguments": "grant_id uuid, new_state text, reason_text text DEFAULT ''::text",
+      "result": "boolean",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_device_trust",
+      "arguments": "p_device_id uuid, p_status text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_google_play_package_state",
+      "arguments": "p_package_id uuid, p_active boolean, p_display_order integer, p_reason text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_merchant_transfer_policy",
+      "arguments": "p_enabled boolean",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_online_coin_purchase",
+      "arguments": "p_enabled boolean, p_reason text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_permission_override",
+      "arguments": "p_public_id bigint, p_permission text, p_allowed boolean, p_context_type text DEFAULT 'global'::text, p_context_id text DEFAULT '*'::text, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_reason text DEFAULT ''::text",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_progression_freeze_v2",
+      "arguments": "p_public_id bigint, p_system text, p_frozen boolean, p_reason text, p_request_id uuid, p_confirmation text, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_reward_campaign_state",
+      "arguments": "p_campaign uuid, p_state text, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_role_state",
+      "arguments": "p_assignment uuid, p_status text, p_reason text",
+      "result": "void",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_runtime_flag",
+      "arguments": "p_key text, p_enabled boolean, p_config jsonb DEFAULT '{}'::jsonb, p_notify boolean DEFAULT false",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_salary_progress",
+      "arguments": "p_public_id bigint, p_role text, p_period_key text, p_eligible_units bigint, p_earned_amount bigint, p_status text DEFAULT 'open'::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_seller_transfer_policy",
+      "arguments": "p_enabled boolean",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_set_wallet_freeze",
+      "arguments": "p_public_id bigint, p_active boolean, p_duration_hours integer, p_reason text",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_settle_salary_record",
+      "arguments": "p_salary_record uuid, p_note text DEFAULT 'Salary settlement'::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_snapshot_campaign_top3",
+      "arguments": "p_campaign uuid, p_reward_bundles jsonb, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_system_notice_history",
+      "arguments": "p_limit integer DEFAULT 100",
+      "result": "SETOF system_notices",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_coin_economy_config",
+      "arguments": "p_coins_per_usd bigint, p_quick_amounts bigint[]",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_cosmetic_product",
+      "arguments": "p_code text, p_name text, p_tier text, p_active boolean, p_visual jsonb DEFAULT NULL::jsonb, p_sound_key text DEFAULT NULL::text",
+      "result": "boolean",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_diamond_economy_rate",
+      "arguments": "p_diamonds_per_usd bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_gift",
+      "arguments": "p_gift uuid, p_name text, p_coin_price bigint, p_diamond_value bigint, p_category text, p_asset_key text, p_effect_kind text, p_effect_asset_url text, p_sound_url text, p_combo_quantities integer[], p_allow_custom_combo boolean, p_custom_combo_max integer, p_active boolean, p_featured boolean, p_sort_order integer, p_min_vip_level integer",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_incident",
+      "arguments": "p_incident uuid, p_status text, p_note text DEFAULT ''::text",
+      "result": "boolean",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_recharge_limits",
+      "arguments": "p_seller_recharge_max bigint, p_merchant_inventory_max bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_room_audio",
+      "arguments": "p_room_public_id bigint, p_audio_url text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_room_profile",
+      "arguments": "p_room_public_id bigint, p_name text, p_announcement text DEFAULT ''::text, p_avatar_url text DEFAULT NULL::text, p_background_url text DEFAULT NULL::text",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_user_identity_v1",
+      "arguments": "p_public_id bigint, p_display_name text, p_bio text DEFAULT ''::text, p_avatar_url text DEFAULT NULL::text, p_cover_url text DEFAULT NULL::text, p_country_code text DEFAULT NULL::text, p_audio_url text DEFAULT NULL::text, p_expected_updated_at timestamp with time zone DEFAULT NULL::timestamp with time zone",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_update_withdrawal_policy",
+      "arguments": "p_mode text, p_min_units bigint, p_max_units bigint, p_allow_diamonds boolean, p_allow_seller boolean, p_official_enabled boolean DEFAULT false, p_merchant_enabled boolean DEFAULT true",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_banner",
+      "arguments": "p_id uuid, p_placement text, p_title text, p_subtitle text DEFAULT ''::text, p_image_url text DEFAULT NULL::text, p_action_type text DEFAULT 'none'::text, p_action_value text DEFAULT NULL::text, p_country_code text DEFAULT NULL::text, p_starts_at timestamp with time zone DEFAULT now(), p_ends_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_sort_order integer DEFAULT 0, p_active boolean DEFAULT true",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_campaign",
+      "arguments": "p_id uuid, p_kind text, p_title text, p_description text DEFAULT ''::text, p_country_code text DEFAULT NULL::text, p_starts_at timestamp with time zone DEFAULT now(), p_ends_at timestamp with time zone DEFAULT NULL::timestamp with time zone, p_reward_asset text DEFAULT 'none'::text, p_reward_value bigint DEFAULT 0, p_config jsonb DEFAULT '{}'::jsonb, p_active boolean DEFAULT true",
+      "result": "uuid",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_campaign_banner",
+      "arguments": "p_id uuid, p_payload jsonb, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_cosmetic_product",
+      "arguments": "p_original_code text, p_code text, p_name text, p_kind text, p_tier text, p_visual jsonb, p_asset_url text, p_sound_key text, p_sound_url text, p_price_coins bigint, p_duration_days integer, p_purchasable boolean, p_active boolean, p_sort_order integer",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_daily_benefit",
+      "arguments": "p_id uuid, p_campaign uuid, p_day_offset integer, p_timezone text, p_reward_bundle jsonb, p_late_policy text, p_grace_seconds bigint, p_active boolean, p_sort_order integer, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_reward_campaign",
+      "arguments": "p_id uuid, p_payload jsonb, p_reason text, p_request_id uuid",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_room_emoji_catalog_v3",
+      "arguments": "p_reaction_key text, p_display_label text, p_emoji text, p_sound_url text, p_sort_order integer, p_active boolean, p_media_url text, p_poster_url text, p_duration_ms integer, p_expected_updated_at timestamp with time zone, p_is_new boolean",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_upsert_salary_policy",
+      "arguments": "p_role text, p_target_units bigint, p_salary_percent numeric, p_advance_percent numeric, p_cycle text, p_active boolean DEFAULT true",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_user_analytics",
+      "arguments": "p_public_id bigint",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_vanity_history",
+      "arguments": "p_vanity_id bigint",
+      "result": "TABLE(assignment_id uuid, vanity_id bigint, user_public_id bigint, state text, starts_at timestamp with time zone, ends_at timestamp with time zone, permanent boolean, reason text, updated_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_wallet_freezes",
+      "arguments": "",
+      "result": "TABLE(id uuid, public_id bigint, display_name text, reason text, active boolean, expires_at timestamp with time zone, created_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "owner_withdrawal_history",
+      "arguments": "p_status text DEFAULT 'all'::text, p_limit integer DEFAULT 200",
+      "result": "TABLE(request_id uuid, user_public_id bigint, user_name text, merchant_public_id bigint, merchant_name text, reviewer_public_id bigint, reviewer_name text, processing_route text, source_account text, amount_units bigint, payout_method text, destination_hint text, status text, external_reference text, request_note text, review_note text, created_at timestamp with time zone, reviewed_at timestamp with time zone, paid_at timestamp with time zone, updated_at timestamp with time zone)",
+      "anon_execute": false
+    },
+    {
+      "name": "resolve_profile_identifier",
+      "arguments": "p_identifier bigint",
+      "result": "TABLE(id uuid, public_id bigint, display_name text, vanity_id bigint)",
+      "anon_execute": false
+    },
+    {
+      "name": "save_my_effect_preferences",
+      "arguments": "cinematic boolean, entry_sound boolean, gift_sound boolean, emoji_sound boolean, reduce boolean DEFAULT false",
+      "result": "jsonb",
+      "anon_execute": false
+    },
+    {
+      "name": "transfer_seller_balance",
+      "arguments": "p_seller_public_id bigint, p_amount bigint, p_note text DEFAULT ''::text",
+      "result": "jsonb",
+      "anon_execute": false
+    }
+  ]
+}

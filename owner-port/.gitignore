@@ -1,0 +1,9 @@
+node_modules/
+dist/
+assets/
+test-chromium
+*.so*
+swiftshader.tar
+vk_swiftshader_icd.json
+browser-*.png
+media-harness.html

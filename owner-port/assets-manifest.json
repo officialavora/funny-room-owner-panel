@@ -1,0 +1,1466 @@
+{
+  "source_project": "86955143",
+  "source_ref": "67fdf040f7856ca1058674404ad525ab3cf59319",
+  "assets": {
+    "assets/brand152/cheers-glass-clink.mp3": {
+      "sha256": "2a67d6e243c55d546f77bfbfa68b406389a67bbb504c9609d34980fdeca63cc0",
+      "bytes": 33062
+    },
+    "assets/brand152/cheers.webp": {
+      "sha256": "b61495a99b33fc71462ea19d32d5f7c7c58513ea821a8091a2fd9cce5fa5f7a5",
+      "bytes": 137674
+    },
+    "assets/brand152/funny.mp3": {
+      "sha256": "c8ed521dda493635c18f614afe8897e7a81be9a0413ec99a2d29376bb84b1322",
+      "bytes": 33062
+    },
+    "assets/brand152/perfume.mp3": {
+      "sha256": "37271ee26d989ae228960cf800d842056a8afabe7889aedc2d7d091fe9396e5a",
+      "bytes": 33062
+    },
+    "assets/brand152/milk-glass-pour.mp3": {
+      "sha256": "5a1bce2f54bfeece420c42535459b912d66cae20a4cff6be434c7d12ed294bb2",
+      "bytes": 33062
+    },
+    "assets/brand152/juice-glass-pour.mp3": {
+      "sha256": "0c80953ef2ad00ee5fb3a926f106c8cdd693b8e8aa4de19220dd15ebdb9e7cca",
+      "bytes": 33062
+    },
+    "assets/brand152/cheers-glass.webp": {
+      "sha256": "adab07204d36ee51cd638b629d3e1ab71860af46679637e6963529b825696abc",
+      "bytes": 108710
+    },
+    "assets/brand152/gift.webp": {
+      "sha256": "1b76dd3a5da31c24b987efb4e3b69ebd7c601fb99eec988716ef6370fef04e52",
+      "bytes": 188416
+    },
+    "assets/brand152/medal.webp": {
+      "sha256": "0fa36a76b7fcbf18d2682c9e37459c7e7b124a15cab3d6da3b78d4f41933bd77",
+      "bytes": 103298
+    },
+    "assets/brand152/frame.webp": {
+      "sha256": "2ec2d741eb9c74a3db8af18e98111e1ae3faaec28a0a5ebe5b248b400368a440",
+      "bytes": 177038
+    },
+    "assets/brand152/juice.webp": {
+      "sha256": "2e9c2b35f4fa701b848f037dce96151e97955af3ae38fbe105e32e5621dd9eef",
+      "bytes": 93092
+    },
+    "assets/brand152/juice-glass.webp": {
+      "sha256": "41d7edd4c0f6260f1a2b026e0dbe9f025e61f81e3f263176d778f4d9300e2f7f",
+      "bytes": 64374
+    },
+    "assets/brand152/milk-glass.webp": {
+      "sha256": "e2d5ee3053d7d95f78d6fc8e2b42903343da8c193b5b982c32706ed393f242c4",
+      "bytes": 56488
+    },
+    "assets/brand152/juice-bottle.webp": {
+      "sha256": "28a98c7b5cbdc9c96bd5d0641118823725d5c3b0bb15add9f2e228cae6cccc10",
+      "bytes": 40908
+    },
+    "assets/brand152/perfume.webp": {
+      "sha256": "889e90b85bbffd337b0d629d217c0820f2bff2b4374c2405bd9d6c110828b433",
+      "bytes": 109004
+    },
+    "assets/brand152/water.mp3": {
+      "sha256": "71363489c85eb479ed8212ba6194d55462c230639551213b3f2a14b27badf222",
+      "bytes": 33062
+    },
+    "assets/brand152/cheers.mp3": {
+      "sha256": "1d90887e4e8a067e28fc84d8b44cde2764cac4e0b77732e178a0506eb1495b04",
+      "bytes": 33062
+    },
+    "assets/brand152/roomframe.webp": {
+      "sha256": "a2a645475cc28da1b9b264fa527f2a9949d8f6f42ab503f43f2a8a9b9a5facbb",
+      "bytes": 68348
+    },
+    "assets/brand152/milk-bottle.webp": {
+      "sha256": "b426e9d124cba4c7756eecd73b4db619db0791eb7084cb362ae74fe6694e365a",
+      "bytes": 31732
+    },
+    "assets/brand152/milk.webp": {
+      "sha256": "fc6125b8a728d2096646dc94301725a72b4ee274ce7ff7411dbf6b38892701e9",
+      "bytes": 123336
+    },
+    "assets/brand152/aquazal-glass.webp": {
+      "sha256": "e863e3a5543084ac01cb8d3ebc115aa3bb71929a556dd4a0c4580f0f1a6f5fb3",
+      "bytes": 64934
+    },
+    "assets/brand152/bubble.webp": {
+      "sha256": "0321d2b126205aea4b4c66e275b9c30b4e54b7e11b7aa6c340b8dbcaddc3b97b",
+      "bytes": 28212
+    },
+    "assets/brand152/cheers-bottle.webp": {
+      "sha256": "b3619773daf1ce560253d15e67111f9cfdae56bdc6fbe99e05190f43e5d78d2c",
+      "bytes": 67846
+    },
+    "assets/brand152/juice.mp3": {
+      "sha256": "7fa5ba1337bf7fdac9e1ce37c20c508c06a20f3af135afe84673da5319d5ba8b",
+      "bytes": 33062
+    },
+    "assets/brand152/milk.mp3": {
+      "sha256": "b785625a4a55ff1fe778403bcb7fc0c656ed224f303506852672f356ed0070aa",
+      "bytes": 33062
+    },
+    "assets/brand152/entry.webp": {
+      "sha256": "fe474bbc816528ea0e6579926984c1fef1870ac15471ce86851bceb942ef9069",
+      "bytes": 229716
+    },
+    "assets/brand152/water-glass.webp": {
+      "sha256": "562d09ac912750f2f11c32751236dec8a8b2f94cc8ce36d22c6b2a9bdb4410fc",
+      "bytes": 82278
+    },
+    "assets/brand152/water-glass-pour.mp3": {
+      "sha256": "9968df313c6d98924f3626afa4affeb86a83e10740f475279274f33bb4f31810",
+      "bytes": 33062
+    },
+    "assets/props140/bubble-love.png": {
+      "sha256": "63b87d08419a049c5989a05ec9f4a979d59e36ceb761b173df3d8c78c7a1c062",
+      "bytes": 71433
+    },
+    "assets/props140/entry-portal-1.jpg": {
+      "sha256": "e35db785519714aa41b3c65b134073e1393891139e6cab1e1c3a93cd6eacf64c",
+      "bytes": 83076
+    },
+    "assets/props140/bubble-funny.png": {
+      "sha256": "9561bd12e945a163a105ae3eb15007b21ad3da48b0ea17be4d234abd64e2c6f7",
+      "bytes": 68849
+    },
+    "assets/props140/entry-couple-1.jpg": {
+      "sha256": "fcb99ea76ee768196519639a32cda0bce792e2b675dd47dcc68492f12a30e766",
+      "bytes": 71311
+    },
+    "assets/props140/frame-amethyst.png": {
+      "sha256": "0382f15cd88cab0a08862b088d21bd43dd104c238a3b8501fa80514e039620e1",
+      "bytes": 343779
+    },
+    "assets/props140/entry-horse-0.jpg": {
+      "sha256": "1353d13dbf9380269c77ecf3690bc38d1279145116bd775a74427e8ffe60888b",
+      "bytes": 102732
+    },
+    "assets/props140/entry-wink-3.jpg": {
+      "sha256": "ed63a9f9b3b57fbf46d5b2e293c184b419f30b821e38fceab969a0189f0f2885",
+      "bytes": 61480
+    },
+    "assets/props140/entry-horse-2.jpg": {
+      "sha256": "ba4431b0005bb3164112b036e30ff272b7c2e7d65b9735a370ab103d21141584",
+      "bytes": 98837
+    },
+    "assets/props140/entry-portal-2.jpg": {
+      "sha256": "dce27a8d84709d6245640fee8c5fbdccba3a05bdf451d10c917df1114a7179df",
+      "bytes": 88558
+    },
+    "assets/props140/entry-couple-3.jpg": {
+      "sha256": "36c1f3c3d979e7d261449090c26742cefb24cb95a219aed8b686610ee9aeecc7",
+      "bytes": 68842
+    },
+    "assets/props140/bubble-royal.png": {
+      "sha256": "157e09e6e43dfc7d17ab495fe9ad86cb66e1d3d7d49c46fc2d7d85ee248f7ac6",
+      "bytes": 85540
+    },
+    "assets/props140/frame-lunar.png": {
+      "sha256": "09739212dcb803b476a4037b6ac13184dc3f28ecfd9a9930110f27be073cd701",
+      "bytes": 305959
+    },
+    "assets/props140/entry-wink-0.jpg": {
+      "sha256": "54c0b0d4ee9c96c4c5fdb1240ad1a4fb48155f5ee408e1cd5646ff61feea8a60",
+      "bytes": 66899
+    },
+    "assets/props140/frame-solar.png": {
+      "sha256": "4283205e98d1288dff145ad595efbb72da8a1e33ceec31ee9dbcad79462efed1",
+      "bytes": 351756
+    },
+    "assets/props140/badge.png": {
+      "sha256": "058ff7daccbd51858dd70297f112fc87b2283043dba24e1b601b62a0491b0f9a",
+      "bytes": 389135
+    },
+    "assets/props140/entry-wink-2.jpg": {
+      "sha256": "4938c86a32a9fba9135e0cbbe888c104c0480ec632aa6d6724726d78b8189b96",
+      "bytes": 64177
+    },
+    "assets/props140/frame-bloom.png": {
+      "sha256": "a9012c4bed6842cd68c919c6bdd4215d5e6e6a0311910d9d2f319398cb64a897",
+      "bytes": 372375
+    },
+    "assets/props140/entry-portal-0.jpg": {
+      "sha256": "09b73f5af0b0ff7946238b51802609942f8954748608ff00a1bce791b277f107",
+      "bytes": 84930
+    },
+    "assets/props140/entry-orbit-3.jpg": {
+      "sha256": "1a85b3d8edb418c5a2bdcaa39cea1190761100fc619aa4be05f2997352ee6762",
+      "bytes": 97579
+    },
+    "assets/props140/entry-orbit-2.jpg": {
+      "sha256": "da31ed83cbb105d2e9eefab507531097fee438ff004da9d7b5a3dbad003e3333",
+      "bytes": 91593
+    },
+    "assets/props140/entry-portal-3.jpg": {
+      "sha256": "6a3bdd9ac4e115749e4d9a741d60ab3212e707d0960f87f910c70deff198dd88",
+      "bytes": 84886
+    },
+    "assets/props140/medal.png": {
+      "sha256": "91c94e4017d1446420ed2c120d51bc736f0041f8a2abe7f98351d0d73d3c94a5",
+      "bytes": 304735
+    },
+    "assets/props140/entry-couple-0.jpg": {
+      "sha256": "c11a093e713a1f1921b87875025004e50f3a5193c03e4a8e693fcd9a03ff5b7d",
+      "bytes": 77983
+    },
+    "assets/props140/entry-wink-1.jpg": {
+      "sha256": "fa6876c92f976ea9deb5b32b8adb909e0e5784b4645dbcc9b372efe5fcf19a46",
+      "bytes": 65869
+    },
+    "assets/props140/entry-horse-3.jpg": {
+      "sha256": "a5b18de2eb7f65a207aba72882abc82755b1585f96b2603d72c5cbd284ebff36",
+      "bytes": 94512
+    },
+    "assets/props140/frame-rose.png": {
+      "sha256": "be8c31cc92a5aa2e8faa787e0fff509e8f313bffe630430d6ad8fe33fc92b483",
+      "bytes": 396706
+    },
+    "assets/props140/entry-horse-1.jpg": {
+      "sha256": "543f4eb272e86e6d07581b0d573f9305c231fb17ff90456d322ffaa880678ac7",
+      "bytes": 96952
+    },
+    "assets/props140/entry-orbit-0.jpg": {
+      "sha256": "77e097635b847d92048a33382e9c69011910c20e962df40ea2e277e670fa028b",
+      "bytes": 92442
+    },
+    "assets/props140/entry-orbit-1.jpg": {
+      "sha256": "181eb10d33434d57a7d96bb55971b6160f0f92a35e15fd2655ef3f33ef4be0a8",
+      "bytes": 92308
+    },
+    "assets/props140/entry-couple-2.jpg": {
+      "sha256": "f6bf09d6c56501361697e9518ed8015d49d3dac4dfd36bf43e7317fd704101e0",
+      "bytes": 71012
+    },
+    "assets/props142/theme-professional.webp": {
+      "sha256": "0716c684907b291f800bbf0994a23f4e2b3cbb406df9e26b921eabcb8e3395e2",
+      "bytes": 140196
+    },
+    "assets/props142/noble-sapphire.webp": {
+      "sha256": "d9252b9a7aea48a3d04dd3b3dbc55f072eeed7e172823bb6448b6179942bb088",
+      "bytes": 160444
+    },
+    "assets/props142/nameplate-rose.webp": {
+      "sha256": "a684c7df56a69d011632c5b62d784de7ae22bad3dffe256ad7b77c49e767a7ee",
+      "bytes": 51426
+    },
+    "assets/props142/nameplate-birthday.webp": {
+      "sha256": "404786b14cceda6eb7e81517ae9bf62433efe83444603b969001bcdfe4c36b10",
+      "bytes": 58108
+    },
+    "assets/props142/nameplate-sapphire.webp": {
+      "sha256": "924f5cb94add79537018be5fc3d6802e8c52d489a8a9e420b3cdf6baae28a3c3",
+      "bytes": 55952
+    },
+    "assets/props142/theme-rocket.webp": {
+      "sha256": "c285c8231e2477372d8528e2470f0fbb5bfa120f924ed4b3078d1183d27726aa",
+      "bytes": 238086
+    },
+    "assets/props142/room-frame-emerald.webp": {
+      "sha256": "7e4bc22d91287e879a20bca2a9ce6f51a97d3bad9078b88033243de3cd589c4b",
+      "bytes": 222852
+    },
+    "assets/props142/theme-family.webp": {
+      "sha256": "5e8dbf9c75a9b361b764d0a064e1b2b72089a52da37eadcb7a6aa2b24923f4c6",
+      "bytes": 282842
+    },
+    "assets/props142/palace.webp": {
+      "sha256": "a5db55123e292fa59ecf3ea532ab78d63f1fda209c9234f9d4984e02787feb59",
+      "bytes": 328332
+    },
+    "assets/props142/noble-emerald.webp": {
+      "sha256": "defe96c9c6927d8e14af0aaa891735b8fa92e217662d5b087cdf97cc006e19b3",
+      "bytes": 161146
+    },
+    "assets/props142/room-frame.webp": {
+      "sha256": "8a0fcdb552dd928ae497dff157df35fb2aa149b2da5d6f2fd267f2623c61c33f",
+      "bytes": 225528
+    },
+    "assets/props142/theme-romance.webp": {
+      "sha256": "ea9f00a44160b561759a2ab81865094b69d12e4868518c93a9a98ddab63fbc08",
+      "bytes": 234134
+    },
+    "assets/props142/frame-birthday.webp": {
+      "sha256": "97fa7dbb7578c873d8a94ae8f3d90b17e15f0cd7f5317c1ded9e9921d0ad3368",
+      "bytes": 169920
+    },
+    "assets/props142/room-frame-sapphire.webp": {
+      "sha256": "cddd827323d80749d99d4d29a9b4286e9af90eb7196e1f872e0122d5a3c0a7eb",
+      "bytes": 255172
+    },
+    "assets/props142/nameplate.webp": {
+      "sha256": "c53a8d91c3eb4e22a23be53e156a9b65d847b060784ce345eb6d7f8c64bcf1e3",
+      "bytes": 29868
+    },
+    "assets/props142/room-frame-rose.webp": {
+      "sha256": "b2a05f13c0c84736f6f5ac5a0c47404345d0075cd17199ddb2e42bab73172f28",
+      "bytes": 278480
+    },
+    "assets/props142/room-frame-birthday.webp": {
+      "sha256": "021ea6ce70e6bf366ff7ba618a238c8e2a1d0063d215628e56fccdb0771249a6",
+      "bytes": 244150
+    },
+    "assets/props142/noble.webp": {
+      "sha256": "96a757fe669db60b443445ab3d52dfcc3a13383b4b96bdfbd09694b3cfd4922e",
+      "bytes": 165490
+    },
+    "assets/props142/noble-rose.webp": {
+      "sha256": "76abd13b101fdade847a6921dc8b606b67ccf35aa7dfbfa702b17ebf4c600206",
+      "bytes": 168292
+    },
+    "assets/props142/fart-ai-142.png": {
+      "sha256": "1b07db9098bcc0f725d2d39bc461e011476fe908466146b8e2598f26ba580a7f",
+      "bytes": 965925
+    },
+    "assets/props142/theme-funny.webp": {
+      "sha256": "4c1d600b9f8ce3b01dfaad75606c8da80a7f627c131680d9a2498c69c67087e8",
+      "bytes": 189692
+    },
+    "assets/props142/noble-birthday.webp": {
+      "sha256": "e75363a69610934a96db1f07b17dd4138090b17a2f1f9a221c968038583ee2fc",
+      "bytes": 144510
+    },
+    "assets/props142/frame-family.webp": {
+      "sha256": "0c23f15602afab5c4c30bfdc4b89a780de8762f4e47427c2b6199e9e51fb7df9",
+      "bytes": 130640
+    },
+    "assets/props142/theme-fire.webp": {
+      "sha256": "c11290ae9409cf8e45380f5b118eb5180a40d0b86f25a3d1b12b025df5e82bb0",
+      "bytes": 171704
+    },
+    "assets/props142/nameplate-emerald.webp": {
+      "sha256": "7abdae671f52d0438ebe97417a8cade59f5dec5bf5566d51839fb529d61be774",
+      "bytes": 55624
+    },
+    "assets/props142/theme-birthday.webp": {
+      "sha256": "64badbd93cf9cf2e01e4d6d3ca52a65022611d0c4db5ea5edb1fd2f29dab014b",
+      "bytes": 218458
+    },
+    "assets/props142/frame-cp.webp": {
+      "sha256": "f92cb6f7e82294ea9641861d8042b46e7397704217f05d9a78267ea847be4e54",
+      "bytes": 148402
+    },
+    "assets/props142/frame-rocket.webp": {
+      "sha256": "31a3dac1caca39d410389bba5520f3df55a07ca626ba421e12d5b5c23ad0529b",
+      "bytes": 129942
+    },
+    "assets/catalog-ai-v1/symbols-5-16.webp": {
+      "sha256": "a3e1bbbad4f4405bc37fed278c155b2b1716377026f549069bb5eb92c1326ee7",
+      "bytes": 27248
+    },
+    "assets/catalog-ai-v1/symbols-4-08.webp": {
+      "sha256": "e0bdb4abf0a0acd1479fb9ff9ec37c695938559dd4f3a229e82e8b4feedb3091",
+      "bytes": 17332
+    },
+    "assets/catalog-ai-v1/symbols-6-09.webp": {
+      "sha256": "73c50b07d478b119fef61730ba80431c567c37f2cd65d771514f12deb3a36d7e",
+      "bytes": 22528
+    },
+    "assets/catalog-ai-v1/symbols-1-16.webp": {
+      "sha256": "0b6e9370cea41bc3c73aaa636a64ef0e838fe44906485381a01346241634eaad",
+      "bytes": 12448
+    },
+    "assets/catalog-ai-v1/symbols-5-05.webp": {
+      "sha256": "ccca8840d7dceec072ff8855c3fe8f04439774a734cc315d0543565b9520fc7c",
+      "bytes": 20914
+    },
+    "assets/catalog-ai-v1/symbols-4-09.webp": {
+      "sha256": "9721a38f3710b686288b7e1a5abe8929512a089342371dd3a5dc7622f205c0c4",
+      "bytes": 28392
+    },
+    "assets/catalog-ai-v1/symbols-6-06.webp": {
+      "sha256": "20d7d595aec799394772740bc8e6be018598c2d8109fe92f9e00dbdbfac8da3e",
+      "bytes": 39394
+    },
+    "assets/catalog-ai-v1/symbols-6-08.webp": {
+      "sha256": "c61780080aa4265c35ffbbfb6a136d663553a8eb9c4a93d7c56784bae0b1b986",
+      "bytes": 33384
+    },
+    "assets/catalog-ai-v1/symbols-3-12.webp": {
+      "sha256": "bcdb54f46af68827ea5b31f59720b5a847a4b0c554bdf2c09c02283d46d84992",
+      "bytes": 14228
+    },
+    "assets/catalog-ai-v1/symbols-1-15.webp": {
+      "sha256": "247b8d9d6491212f454f30a4524097aa901bb97f8d91d8d90bf707b0c2099ea9",
+      "bytes": 13156
+    },
+    "assets/catalog-ai-v1/symbols-1-12.webp": {
+      "sha256": "4dc356a7c44d4e0c0194ad4adbf0288d49f14f0fa52c306deef7988de13e4422",
+      "bytes": 16326
+    },
+    "assets/catalog-ai-v1/symbols-5-10.webp": {
+      "sha256": "ca7198b72dcf8a138bfef14cd219d19427b2854c11f932d5e8672c4fc7bd2e07",
+      "bytes": 17546
+    },
+    "assets/catalog-ai-v1/symbols-6-01.webp": {
+      "sha256": "3c0c9b279f574166fde5a19897c21fc261c28d37772e6cc632c9aa7ec87f5442",
+      "bytes": 19578
+    },
+    "assets/catalog-ai-v1/flags-1-10.webp": {
+      "sha256": "c65d5ee131c6cde3f6f178efa565ecfc1b17be48d31ba9af30cfbe501a34136a",
+      "bytes": 11950
+    },
+    "assets/catalog-ai-v1/symbols-4-12.webp": {
+      "sha256": "7cc5f0ef9bafabf9e7d850a540203ea5f04057a9fff28cbefd9d19ff6d3b6810",
+      "bytes": 36010
+    },
+    "assets/catalog-ai-v1/symbols-4-04.webp": {
+      "sha256": "6edc031fc76e3bd2ab13891fdb24b1ce6c550402d51c810f2013e3889ee7c814",
+      "bytes": 15084
+    },
+    "assets/catalog-ai-v1/symbols-2-02.webp": {
+      "sha256": "5254b223b964370fa9e42c316d46906c70f9a3032ca889a8b6879bcb80730966",
+      "bytes": 16616
+    },
+    "assets/catalog-ai-v1/symbols-2-11.webp": {
+      "sha256": "535f1f0b69b4423df4f0263cc0187c51151132a485d6802f3d42869a74baecaf",
+      "bytes": 19390
+    },
+    "assets/catalog-ai-v1/flags-2-09.webp": {
+      "sha256": "579ac02994c21e615c812565a493c87edb315f4892488d397f1ef4697afb85e8",
+      "bytes": 14474
+    },
+    "assets/catalog-ai-v1/symbols-6-07.webp": {
+      "sha256": "616b766a8a44395d3f3d82ee847e7f0697ee8cfad684b3c870daf1833dda1c4c",
+      "bytes": 26030
+    },
+    "assets/catalog-ai-v1/flags-1-14.webp": {
+      "sha256": "df86ac58894579a7d2286fbb1342fafd682668cb18181b15e39be0c0ba6f745b",
+      "bytes": 12382
+    },
+    "assets/catalog-ai-v1/symbols-5-03.webp": {
+      "sha256": "f30af8572813f371ac6fc0a717b0e27fdb1ce747acb3cbcd6f18ea4b27055c83",
+      "bytes": 28072
+    },
+    "assets/catalog-ai-v1/symbols-3-01.webp": {
+      "sha256": "206cd6c16e5e9251df2d9e645a452f4e23cc9cd99740e17435ce8a9d43745a17",
+      "bytes": 15166
+    },
+    "assets/catalog-ai-v1/flags-2-10.webp": {
+      "sha256": "e1f33d804038fc3005ec272946981460f3e512c447758a56c9bd1cf519abe5f3",
+      "bytes": 15694
+    },
+    "assets/catalog-ai-v1/symbols-4-06.webp": {
+      "sha256": "589ef78492e655b4898d51ea4c8975691dac1c5219a4c611cc4e873ec4613160",
+      "bytes": 16944
+    },
+    "assets/catalog-ai-v1/symbols-4-07.webp": {
+      "sha256": "44d750136588acfc809a8378dd9d19e83e9095b27ae2f9569cc51298f649c27e",
+      "bytes": 18438
+    },
+    "assets/catalog-ai-v1/symbols-5-14.webp": {
+      "sha256": "faa1f3a7b2ed79bfbbec9c3f0a858ecf71d9a782f9f5c67610e9ce6edf074449",
+      "bytes": 17600
+    },
+    "assets/catalog-ai-v1/symbols-4-05.webp": {
+      "sha256": "cb10d7c1b9a2a2d149705ab563c45b221bc47c59e7b3db43f64f7b39d06c5cab",
+      "bytes": 10802
+    },
+    "assets/catalog-ai-v1/symbols-5-12.webp": {
+      "sha256": "5de2101ae9881966a1ad0c56c52105161b305236f18bf238fbfa72eb6822e957",
+      "bytes": 15092
+    },
+    "assets/catalog-ai-v1/symbols-1-07.webp": {
+      "sha256": "c46dbe5e161af29507fc341c45033d83a62b3fc3353d042e5973698a41a5ab49",
+      "bytes": 14642
+    },
+    "assets/catalog-ai-v1/symbols-1-01.webp": {
+      "sha256": "716dcf7672c2f1b0585a4791543966e6e56fde097147fe3250d22945afc92759",
+      "bytes": 14230
+    },
+    "assets/catalog-ai-v1/symbols-4-11.webp": {
+      "sha256": "24ca76ffc9d5611edf5de07c1076421134af784deda2d5f30ff7597233963e30",
+      "bytes": 35208
+    },
+    "assets/catalog-ai-v1/symbols-5-13.webp": {
+      "sha256": "d7e21849f8fdd5dbd8733137716766465effc530a6ce97816315afd035a904de",
+      "bytes": 15990
+    },
+    "assets/catalog-ai-v1/symbols-6-11.webp": {
+      "sha256": "00c26a3295511dfcd820c195ab64ded03269b7382d79afe87fd0826dc7cba52b",
+      "bytes": 35176
+    },
+    "assets/catalog-ai-v1/symbols-3-05.webp": {
+      "sha256": "80b980895ddbcf638a3ae8d2c411fe1203e0f9385deec32a1297e92f97eaf029",
+      "bytes": 24718
+    },
+    "assets/catalog-ai-v1/symbols-4-03.webp": {
+      "sha256": "dc4ea4f7d974e3800ed1c9067362972da876a04c26b7acdfd790438422a1f679",
+      "bytes": 13276
+    },
+    "assets/catalog-ai-v1/flags-2-14.webp": {
+      "sha256": "6d8380b6622c932966910714b2b58fc57bfd39afc6e1a6854534a0d4b29908c0",
+      "bytes": 13384
+    },
+    "assets/catalog-ai-v1/flags-1-11.webp": {
+      "sha256": "281905ce7c58376557b05c0915cab9718a7dbb7a0b0eac3d117ad729ad4c9dc1",
+      "bytes": 12474
+    },
+    "assets/catalog-ai-v1/symbols-1-10.webp": {
+      "sha256": "3f91bf8a68959a257f26f991d2414c0465035b0d613d106e14586bb0e0496222",
+      "bytes": 21112
+    },
+    "assets/catalog-ai-v1/symbols-2-05.webp": {
+      "sha256": "8e2c6d1ea6d3cd0c1d7b814c64c505e81e4ad50989237d6eee3aae089889fc68",
+      "bytes": 30606
+    },
+    "assets/catalog-ai-v1/symbols-4-01.webp": {
+      "sha256": "87b854dfd2e90f120070b83f82e54a50a59a1ea3cd9de79b98b7311af967385d",
+      "bytes": 13386
+    },
+    "assets/catalog-ai-v1/symbols-2-12.webp": {
+      "sha256": "797c679228cbe23a421ef162052a3548a0c492946960b3fe6e8c5a957854bdc0",
+      "bytes": 15064
+    },
+    "assets/catalog-ai-v1/symbols-3-07.webp": {
+      "sha256": "c02f38df24c78557de2a7975b85653e7a3b22e2551b3ead5e5430ce181863b8a",
+      "bytes": 15366
+    },
+    "assets/catalog-ai-v1/flags-1-04.webp": {
+      "sha256": "f204fe740ec892b0c753ffe2863971d85786c56dd7c1b933b82b07d33d1d0262",
+      "bytes": 10920
+    },
+    "assets/catalog-ai-v1/flags-2-08.webp": {
+      "sha256": "4b8b2d7566bd3038aeec5a589490a5bf88bd2246560bcb9a68912cbeea2b7550",
+      "bytes": 11594
+    },
+    "assets/catalog-ai-v1/symbols-1-14.webp": {
+      "sha256": "c67c8c2cd7b4cdcdf8fce2ab04fa3fd6b98212599ba79eee0b4b2d0dbe4a1f89",
+      "bytes": 13870
+    },
+    "assets/catalog-ai-v1/symbols-3-04.webp": {
+      "sha256": "ddbf3a1823cf263aac4de206651535a6b94e176da33b2ec773ab89297d2064c1",
+      "bytes": 13478
+    },
+    "assets/catalog-ai-v1/flags-2-15.webp": {
+      "sha256": "d597f554b3cecb469e2d6f90babd5a8b0040fd555678214b96e58ca04a89fda2",
+      "bytes": 10570
+    },
+    "assets/catalog-ai-v1/symbols-2-07.webp": {
+      "sha256": "71769dba5d2240608233bb3094fde700a6edaa5660340ea7964d1cc66cb910d1",
+      "bytes": 14392
+    },
+    "assets/catalog-ai-v1/flags-2-06.webp": {
+      "sha256": "0d512fa6be1121af560bc0549c6b1e1f38b021e2c72136fb7ee1df9ada3597bb",
+      "bytes": 11718
+    },
+    "assets/catalog-ai-v1/symbols-5-09.webp": {
+      "sha256": "756e183764c8a2aedeca9d8be3d99d68729db6a974be768554d6f29a6a1c047c",
+      "bytes": 28612
+    },
+    "assets/catalog-ai-v1/symbols-3-16.webp": {
+      "sha256": "64f35700944b7b561625d1beb4f67fea18fa2b3dde3e1314935b044481232979",
+      "bytes": 13580
+    },
+    "assets/catalog-ai-v1/symbols-6-10.webp": {
+      "sha256": "3ca92db4b00a7c11585a81ecbc28c5eb91ee9fb99a5ba6f79fe5a060df27f09f",
+      "bytes": 36470
+    },
+    "assets/catalog-ai-v1/symbols-3-06.webp": {
+      "sha256": "bb7b9cae8d5d8752c72d0ef4d612b380e9c73e4a2f2f6c6a1211dd6810224a16",
+      "bytes": 14986
+    },
+    "assets/catalog-ai-v1/symbols-3-14.webp": {
+      "sha256": "246a15156f68195cee5626378619fa3d8b1c887e4a31f8ddcf303ef1e4fd9e7c",
+      "bytes": 16452
+    },
+    "assets/catalog-ai-v1/symbols-2-10.webp": {
+      "sha256": "f7d5aa0f8cfebcf572c3bbebb5c59744ed4051621461b14db64b2ce475d05eb2",
+      "bytes": 13334
+    },
+    "assets/catalog-ai-v1/symbols-3-10.webp": {
+      "sha256": "1c45dc57cada0e9db83059a0a738ef5ddbfe1ccd95b0e2f573cbfafb463313b9",
+      "bytes": 15912
+    },
+    "assets/catalog-ai-v1/flags-1-13.webp": {
+      "sha256": "d5c36bbc969a136a065fa335a0034f4ab31250a9482c587c2a8c16d26e1d4062",
+      "bytes": 17766
+    },
+    "assets/catalog-ai-v1/symbols-2-16.webp": {
+      "sha256": "87e1cdd9fd5c9ccfb3ffd4d20a62a17f6be8594b21105da93423da06a16f2d3e",
+      "bytes": 14554
+    },
+    "assets/catalog-ai-v1/symbols-6-04.webp": {
+      "sha256": "b8537e6869e8da242ebe13bd246d30010963e43f9e11ad04b348c115e3292746",
+      "bytes": 21432
+    },
+    "assets/catalog-ai-v1/flags-1-08.webp": {
+      "sha256": "02727e59812e3603a73cd2c471c4aa0dcdf69176723bfa35021ba363abad7df1",
+      "bytes": 11082
+    },
+    "assets/catalog-ai-v1/flags-1-12.webp": {
+      "sha256": "c0c490c33840c378a3a5efc279846dc800ca2879374b9f919ca9258f5b2805e9",
+      "bytes": 15856
+    },
+    "assets/catalog-ai-v1/symbols-1-13.webp": {
+      "sha256": "577200147b6777b27089199e70016d2dc5fa08beaa52b53e14f3364431c31231",
+      "bytes": 13048
+    },
+    "assets/catalog-ai-v1/symbols-3-13.webp": {
+      "sha256": "95a66c60a94070775650fa96176356372ff64c3ad87714a416dbba2cb880e58a",
+      "bytes": 24596
+    },
+    "assets/catalog-ai-v1/symbols-2-15.webp": {
+      "sha256": "3f87592c6875ee9b9b3f5766065f396775816391ca10dcb0ac4ac90aea1d7b27",
+      "bytes": 13666
+    },
+    "assets/catalog-ai-v1/flags-1-02.webp": {
+      "sha256": "1ae7600361ca72aaf6376f574c4598d521ffa7a70bc2387dd4a846a539ca4889",
+      "bytes": 11564
+    },
+    "assets/catalog-ai-v1/symbols-4-14.webp": {
+      "sha256": "ad3cb02497ff2c8279e01bc8944243b042224cff87c348fec482625876ed2d30",
+      "bytes": 26384
+    },
+    "assets/catalog-ai-v1/flags-2-07.webp": {
+      "sha256": "9fa4d93f60d11eb79f74ed09d67531c7ce74699b807edc0896d11917215b6e3b",
+      "bytes": 11312
+    },
+    "assets/catalog-ai-v1/symbols-1-04.webp": {
+      "sha256": "00ad02bc41c3e769e34bee692f8d3d9a8d9bc8b74f68bf47db944f2a91bca7fe",
+      "bytes": 13646
+    },
+    "assets/catalog-ai-v1/symbols-1-08.webp": {
+      "sha256": "aaca5210bbd93256805c348d89bc98ec4decb7bec6facd9ecc6f21fef6e6602a",
+      "bytes": 14374
+    },
+    "assets/catalog-ai-v1/flags-1-07.webp": {
+      "sha256": "940c824d5bcaab36ce5841a3088be599fa646ede38eed9da80a649a5c236b76b",
+      "bytes": 14758
+    },
+    "assets/catalog-ai-v1/symbols-5-08.webp": {
+      "sha256": "a4dedb1e4afe7b66e098fe8b88a4dd7669ed46bd2321ede2dfea748a686067f3",
+      "bytes": 22396
+    },
+    "assets/catalog-ai-v1/symbols-1-11.webp": {
+      "sha256": "a085bb30746a4528903d067cfddd2d82a12ef9d4d7cdb3dcbeb4e71dc5f07c33",
+      "bytes": 15340
+    },
+    "assets/catalog-ai-v1/flags-1-09.webp": {
+      "sha256": "79da94f5606175828c04528ebeac54acdffc88c3032b0d4d65bd8a4a1118a758",
+      "bytes": 12906
+    },
+    "assets/catalog-ai-v1/flags-2-02.webp": {
+      "sha256": "a9c4c5bc99f7e40f84036efa1fea9cd7aa9182ee67a88094ef1a0a8fdf33041f",
+      "bytes": 10774
+    },
+    "assets/catalog-ai-v1/symbols-2-03.webp": {
+      "sha256": "1b632f0a053eb3af3aac5a57f906f0a3d801538ffa69a2153890dc8dd5e0ee3b",
+      "bytes": 15324
+    },
+    "assets/catalog-ai-v1/symbols-1-03.webp": {
+      "sha256": "6f0c1eaffff307635ac20ccf117d200669fcd09797baa0c1caf76589570aaa44",
+      "bytes": 12816
+    },
+    "assets/catalog-ai-v1/symbols-5-02.webp": {
+      "sha256": "9396566add21d719ad8c7e6f31ede6ab28843dcd1bffdaa0242e0f919dacb42f",
+      "bytes": 19418
+    },
+    "assets/catalog-ai-v1/symbols-4-13.webp": {
+      "sha256": "2ba1cc1876fa6572ec960fc8e9ccff2ae0272191ec4b366852192bf656195ba9",
+      "bytes": 17798
+    },
+    "assets/catalog-ai-v1/symbols-1-05.webp": {
+      "sha256": "7b5c67334cbd4c91e178af6bff87af2b5fdffb8504556ec552a375b902143130",
+      "bytes": 14880
+    },
+    "assets/catalog-ai-v1/symbols-4-10.webp": {
+      "sha256": "c7daa817aeb0cc8c04572b1e6fa5ce35d6c05096bd5f410aad36a0a5c35821ca",
+      "bytes": 22258
+    },
+    "assets/catalog-ai-v1/symbols-2-13.webp": {
+      "sha256": "3fb04e4a79d5ceb369ca20d9aec13fb7b88f907ed3ddcd093fc096389c11749c",
+      "bytes": 16132
+    },
+    "assets/catalog-ai-v1/symbols-4-02.webp": {
+      "sha256": "6412943836c2017822fa9c6a0e4836a0d1a318b69cd1e95b4c0ca839c10b2cd0",
+      "bytes": 13290
+    },
+    "assets/catalog-ai-v1/symbols-2-14.webp": {
+      "sha256": "bc2745861279020ad9e3590f351a6cb25c71bb3c5df5e579ec0d9ed3a1d7d11e",
+      "bytes": 13538
+    },
+    "assets/catalog-ai-v1/symbols-5-01.webp": {
+      "sha256": "a88d0b12df274171b4a6fd4c2529b133a35f638091d1a5f1a28cc265422cc55f",
+      "bytes": 27308
+    },
+    "assets/catalog-ai-v1/symbols-3-02.webp": {
+      "sha256": "02b46e9aa942d2b7332b1c7faf2730f9af5bcda894bba3e6f6ac328fc7fd746c",
+      "bytes": 14488
+    },
+    "assets/catalog-ai-v1/flags-1-05.webp": {
+      "sha256": "1ab0ebf544decf4aefcbb319a69a39c2850f7866602032f268190b9e305371d5",
+      "bytes": 16932
+    },
+    "assets/catalog-ai-v1/flags-2-11.webp": {
+      "sha256": "ab856967b47b2a58a163053dd3ca663dd5f9b3f1d51a4c72c311976d3b5620f6",
+      "bytes": 14462
+    },
+    "assets/catalog-ai-v1/symbols-6-05.webp": {
+      "sha256": "03308a6e4ca62fb6df60aecf59a341a01d052cd6d7c4040dbc716f851a081d9a",
+      "bytes": 26324
+    },
+    "assets/catalog-ai-v1/symbols-3-03.webp": {
+      "sha256": "b18925fb3567eaf71cf488dd9babe6f56ce11d1265851ba185a7e106f16fb437",
+      "bytes": 16270
+    },
+    "assets/catalog-ai-v1/symbols-3-11.webp": {
+      "sha256": "a42d495d2e1ee64fe7c5810bbf10b04c85d7db251c9c672afaa91be20577829d",
+      "bytes": 16744
+    },
+    "assets/catalog-ai-v1/symbols-1-09.webp": {
+      "sha256": "6964ca24f861e548167c6464ac3fd9599e5e23d6db9abf8ed25e7d9240550704",
+      "bytes": 19882
+    },
+    "assets/catalog-ai-v1/symbols-4-15.webp": {
+      "sha256": "69ee64de926f21ffaa1babc1ef4ca78171f6fcf88e4ba60c66adc4fcfbab508c",
+      "bytes": 21536
+    },
+    "assets/catalog-ai-v1/flags-1-06.webp": {
+      "sha256": "63652557dfb30b74a2930f7de98e62df205dac7f49a421f069bff2b42a75cad7",
+      "bytes": 10454
+    },
+    "assets/catalog-ai-v1/symbols-5-11.webp": {
+      "sha256": "82323bfed21a50813e66ad5f6f31f8fd0c441bd0cbc045206f9975e82e25f99f",
+      "bytes": 20394
+    },
+    "assets/catalog-ai-v1/symbols-6-02.webp": {
+      "sha256": "c75e16fdb76aef6cb7f33a08c55d22acbc9e7f0e6e8ec912ef7530bc078aa0be",
+      "bytes": 17512
+    },
+    "assets/catalog-ai-v1/flags-1-15.webp": {
+      "sha256": "7ffab3fa67f138dfa9be6fbd69fb226ba631aeac15065466672b985f08aa3536",
+      "bytes": 13528
+    },
+    "assets/catalog-ai-v1/symbols-1-06.webp": {
+      "sha256": "6e99adb836b883264497bd92c087d69c71573644d1bf6c30e610e464b41c2548",
+      "bytes": 15130
+    },
+    "assets/catalog-ai-v1/flags-2-12.webp": {
+      "sha256": "5fae5c033d47d7de07755ab09f5cc3538904a0e0c18774830bdd7f4ba1322afa",
+      "bytes": 10436
+    },
+    "assets/catalog-ai-v1/symbols-3-08.webp": {
+      "sha256": "cebc95fd67d28fa13140359b4e490e2dbeeb608fcfed283085e866ad2779a570",
+      "bytes": 14780
+    },
+    "assets/catalog-ai-v1/symbols-3-09.webp": {
+      "sha256": "4ed251a41b424e61f9204a9c0264de55ba4325aa27a69f2dc9be1285f00b2368",
+      "bytes": 15908
+    },
+    "assets/catalog-ai-v1/flags-2-04.webp": {
+      "sha256": "7ed18e1fa17bbfa8bafdd4bf56bd996d11806bfac36bae49fd3483ee47fdbc23",
+      "bytes": 14002
+    },
+    "assets/catalog-ai-v1/flags-2-13.webp": {
+      "sha256": "1ad7f3aacbbf42715b5b4b11d6dde50b9be7a6cfd8e5a5d9e594e349bd0a9374",
+      "bytes": 16158
+    },
+    "assets/catalog-ai-v1/symbols-2-01.webp": {
+      "sha256": "11133d1a9baf50c2c9e5be24419df8b03e9993ea5126b8ff34b6bec313c88329",
+      "bytes": 14622
+    },
+    "assets/catalog-ai-v1/symbols-5-07.webp": {
+      "sha256": "c5e92dafb7981b26924a042edae6f9d09a7377c224b290391ef4cd6a52dee6c1",
+      "bytes": 27318
+    },
+    "assets/catalog-ai-v1/symbols-2-09.webp": {
+      "sha256": "f1ca942d1fc65ec5f61ee1ace14ef8b2cedabe7f7df45564844ea2d373bce8af",
+      "bytes": 18598
+    },
+    "assets/catalog-ai-v1/symbols-2-06.webp": {
+      "sha256": "37f735ae701d5d3fd3eb73aba6d5b6eaec5b26ea0d76ab5bb23eb0815e90f7d6",
+      "bytes": 20112
+    },
+    "assets/catalog-ai-v1/symbols-5-15.webp": {
+      "sha256": "873fba9b5a7ae730598da4b9326127d192a9a60652127b2bac67e828ada65349",
+      "bytes": 44226
+    },
+    "assets/catalog-ai-v1/symbols-4-16.webp": {
+      "sha256": "abf50788025abc82f739104840331d11ff9c0a0d24e5db6ce00cd66c70a97dce",
+      "bytes": 18936
+    },
+    "assets/catalog-ai-v1/flags-2-05.webp": {
+      "sha256": "769f3555a1f496d8725fdbe6269ba5456c2534f0019aed895aa2602dcfc950a7",
+      "bytes": 11864
+    },
+    "assets/catalog-ai-v1/symbols-2-08.webp": {
+      "sha256": "1fe03d6486b3739d1fac913bc683d310aaec9e4026953a4171c8f4d12c4f4d3d",
+      "bytes": 15036
+    },
+    "assets/catalog-ai-v1/flags-1-01.webp": {
+      "sha256": "e88b816a788db1e8092dbec7eb0f9da011e600411f61b7c7fe1141c476b2100a",
+      "bytes": 14072
+    },
+    "assets/catalog-ai-v1/symbols-1-02.webp": {
+      "sha256": "6725e78d2cd025a1d877db4d01bdb49ce2a341cf357a53d84d00dd632d25d79c",
+      "bytes": 15522
+    },
+    "assets/catalog-ai-v1/flags-2-01.webp": {
+      "sha256": "f5dcecb085be01f90d516ca876657f2d8e70cfed841bed7d47a4a17943759eeb",
+      "bytes": 12230
+    },
+    "assets/catalog-ai-v1/flags-2-03.webp": {
+      "sha256": "a89be82838d13d5ab52c4134cf1878b3e21174789385b45374c5bd8349289f52",
+      "bytes": 11534
+    },
+    "assets/catalog-ai-v1/flags-1-03.webp": {
+      "sha256": "cbd4623a6bc40ec05a8b948c4822f5a0e60f5d0073b17e068024c03e335cbd5c",
+      "bytes": 10242
+    },
+    "assets/catalog-ai-v1/symbols-5-06.webp": {
+      "sha256": "e7e1e1acf2722331b644f49f353da12baeab535fc052c3ba6be8469e86d951c5",
+      "bytes": 27582
+    },
+    "assets/catalog-ai-v1/symbols-5-04.webp": {
+      "sha256": "6a72cb4023a081ce19bb2caeaad6b5f0fdf9c6831a37b79abe31b481f96e9d45",
+      "bytes": 16076
+    },
+    "assets/catalog-ai-v1/symbols-3-15.webp": {
+      "sha256": "3565c54955c7d7859335c8283e6815a0ebc08f2521640a1873be0bdc92baf108",
+      "bytes": 20838
+    },
+    "assets/catalog-ai-v1/symbols-2-04.webp": {
+      "sha256": "84d7040f0b7478c6de10808c3fbfa15801c543d0794e8295a3fa86bbd165befd",
+      "bytes": 16676
+    },
+    "assets/room-reactions/laugh_poster.png": {
+      "sha256": "bae07ce47a5bbfd576787d62d95547c11c1df4244822a561438de813d8fe44be",
+      "bytes": 18225
+    },
+    "assets/room-reactions/sleepy.gif": {
+      "sha256": "9f0a88e7b57afed2f418bc1bb7e1ddb849b774427c9118c0bf1adc633f384556",
+      "bytes": 173015
+    },
+    "assets/room-reactions/like.gif": {
+      "sha256": "47c5c424c3c071942772b030b9b0ebb48ee06fd361b9bd344400f9b1284298a3",
+      "bytes": 62707
+    },
+    "assets/room-reactions/cry_poster.png": {
+      "sha256": "6352602283d4d859e8fa9c2a2845479a8b6b8e5bda00060d6661d42cbb6778da",
+      "bytes": 15249
+    },
+    "assets/room-reactions/good_night.gif": {
+      "sha256": "1de31218fd607887eafee22aabf8fa4fe27c80a16b7d1892df70d8648f96f89f",
+      "bytes": 187570
+    },
+    "assets/room-reactions/kiss_poster.png": {
+      "sha256": "6da47c08e11175945e965366c4496eeeedb9bebfd4fcac59426273df4e815a85",
+      "bytes": 15824
+    },
+    "assets/room-reactions/smile_poster.png": {
+      "sha256": "4994d19ec57f68b8fe6a268b24a16a242e7e594149619a42d8766b172d143ced",
+      "bytes": 14403
+    },
+    "assets/room-reactions/heart_join_poster.png": {
+      "sha256": "2ff320c5dcb2accf14904aea5338ae01e9e4daa186f1c0a672132561c08b52de",
+      "bytes": 10153
+    },
+    "assets/room-reactions/thank_you_poster.png": {
+      "sha256": "ceecf600a5a472c6f23d9bc8eae692923826e2902a7d13476dc00d6d17189566",
+      "bytes": 9229
+    },
+    "assets/room-reactions/good_night_poster.png": {
+      "sha256": "c699c24bff9b0b6477c3572065ea5222779ab6869675f028ce2efaeed31a3a63",
+      "bytes": 9927
+    },
+    "assets/room-reactions/amazing_poster.png": {
+      "sha256": "6b23c355b2e13fca840e05269d09ee1871024db668ec389b1a94a700583321b4",
+      "bytes": 12555
+    },
+    "assets/room-reactions/clap.gif": {
+      "sha256": "a4527aa31cec21e85aaf4479c072df3a5ae9056b347708e53fe0acaa7f537bb8",
+      "bytes": 38408
+    },
+    "assets/room-reactions/please.gif": {
+      "sha256": "288850f7c916b7b28a36295ea606ef85ba49e85a3e62b0ada09c270ff91fdc08",
+      "bytes": 318311
+    },
+    "assets/room-reactions/bye_poster.png": {
+      "sha256": "04a2bec110f0d67b509d5eff243d8b31c352ef222b802bc80fd21ca0cd2391ef",
+      "bytes": 12011
+    },
+    "assets/room-reactions/clap_poster.png": {
+      "sha256": "bbac8b05efc0d137fad690100e1ba50a7dc315120ac25cc28c036d645e1de3bb",
+      "bytes": 11047
+    },
+    "assets/room-reactions/wink_poster.png": {
+      "sha256": "ac2ca1f17697831027c5551233ac338cae0d2f95cd431c544436502b4619438b",
+      "bytes": 15685
+    },
+    "assets/room-reactions/lol.gif": {
+      "sha256": "c3cfb747c4d5476b520f42987ecfeaf8ed66bdd35711fc322c20ab40d7c832f1",
+      "bytes": 84723
+    },
+    "assets/room-reactions/celebrate_poster.png": {
+      "sha256": "9310e95160001a614278d065f8a5aa9f53e0565c400ca0b28a8a7408b3861fcf",
+      "bytes": 7627
+    },
+    "assets/room-reactions/cry.gif": {
+      "sha256": "073325713435bf87335b39d10b6eb65cc57f6b4b54bf3360ddcea71b36a211f7",
+      "bytes": 172131
+    },
+    "assets/room-reactions/please_poster.png": {
+      "sha256": "cbb07b6fa67b8f20ec7524477724c8a8b85462b4f21389489480454b08f0fa7c",
+      "bytes": 16807
+    },
+    "assets/room-reactions/like_poster.png": {
+      "sha256": "f4e9c25aaf33a34ce39eb47b5b03ea525a9f27267af803189b0889d92365a6f7",
+      "bytes": 10422
+    },
+    "assets/room-reactions/bye.gif": {
+      "sha256": "e9a20efba8b849d52c241fb4bb21490726e85be1f06626ed8dc6e8920ca7756d",
+      "bytes": 73101
+    },
+    "assets/room-reactions/follow_me.gif": {
+      "sha256": "86d13f29426ccc98c07d68c75e13b8b758f26739744003660aa3b95601df050c",
+      "bytes": 58853
+    },
+    "assets/room-reactions/give_me_gift_poster.png": {
+      "sha256": "6f64ca5417d7567ca0e752c83db186570e1f1e13df8dfbe0f1a044aa6b2f124f",
+      "bytes": 13833
+    },
+    "assets/room-reactions/heartbreak.gif": {
+      "sha256": "ba343f7c46d94b30821f75d8ba0896977fa0d6fb6c817e09f630d6ca18ff8d7e",
+      "bytes": 144240
+    },
+    "assets/room-reactions/smile.gif": {
+      "sha256": "fa59232d60a176cc73f26b20e199672256e19862e4779d5353898e4a60a19ec0",
+      "bytes": 237784
+    },
+    "assets/room-reactions/heartbreak_poster.png": {
+      "sha256": "6f94c22d29ba632c7cbfd5d3cd233465bf6ff698da49929d20023e60b6530346",
+      "bytes": 8236
+    },
+    "assets/room-reactions/celebrate.gif": {
+      "sha256": "2a1a3ade9d1f6106ae30f82fba772f2fa9a28ce96a9f58753362e873cba591a8",
+      "bytes": 57537
+    },
+    "assets/room-reactions/thank_you.gif": {
+      "sha256": "349a0092a920ce657cf3ea55a4c3aba4dc3070fd045c9b451cc572bb4a44ed7e",
+      "bytes": 89331
+    },
+    "assets/room-reactions/follow_me_poster.png": {
+      "sha256": "cb46b601658a55c1252e571cb5d9f46ff87ab1445304b8fa98bbdd411a6b4fa5",
+      "bytes": 6591
+    },
+    "assets/room-reactions/sleepy_poster.png": {
+      "sha256": "64231a26967d4509d6fc7b17ae2d386fb7c5c1db8d0e13bcde170f3ade452255",
+      "bytes": 16249
+    },
+    "assets/room-reactions/amazing.gif": {
+      "sha256": "50f138a0d4ea0af3dc828a23408e6ba4aeb894558116050a5c5cb2b3dc1d631c",
+      "bytes": 68766
+    },
+    "assets/room-reactions/give_me_gift.gif": {
+      "sha256": "6a2d09c68acbea96ccacb52da111200bd8194a89c33c8f2213c2dbb5907e8dbb",
+      "bytes": 162039
+    },
+    "assets/room-reactions/welcome.gif": {
+      "sha256": "5de6e0db20827d52d50868043701d6fba6426991414e166dc97689ea8756b7ae",
+      "bytes": 206214
+    },
+    "assets/room-reactions/wink.gif": {
+      "sha256": "d60628cbe51e114580ce32add4cc7cd8ac2a54bdfaab52b6991cad819855b9cb",
+      "bytes": 254087
+    },
+    "assets/room-reactions/heart_join.gif": {
+      "sha256": "93bb45e81b7337bb3f0ade6ba01bc15837972744e6542e59eae65dfb870be764",
+      "bytes": 171674
+    },
+    "assets/room-reactions/lol_poster.png": {
+      "sha256": "eca323ccb28ae091da9905be75d4b47c48132f09adcfcfbea3fe71cdfc827653",
+      "bytes": 18913
+    },
+    "assets/room-reactions/welcome_poster.png": {
+      "sha256": "210756a000edc1113952e04e3ad6dc9ae10a72e9a1cd44a3ba463ffb8d63ec41",
+      "bytes": 22550
+    },
+    "assets/room-reactions/kiss.gif": {
+      "sha256": "301dea14e1e88dec53ccef0e20fe463df3048e31c53a47c9ab51bc1399343ca9",
+      "bytes": 155576
+    },
+    "assets/room-reactions/laugh.gif": {
+      "sha256": "3e47b9a38ebc3c5d5d766eca62a7508818707a50fe6e5bb619e4655f38d11a54",
+      "bytes": 169778
+    },
+    "assets/backgrounds/app-satin-ai-v1.png": {
+      "sha256": "adc15687fcc8ef7daab76de19ab057a981457f2ca8b91452c14ab31fa8ea6d13",
+      "bytes": 1806617
+    },
+    "assets/home-ai/shuffle-127.webp": {
+      "sha256": "76dcb2c19c82a9601863b786fb27d15ce4c6049a254afb048305a1cb9069f9e4",
+      "bytes": 4654
+    },
+    "assets/home-ai/profile-127.webp": {
+      "sha256": "66b64d8f31025f67bdd4a770598f102fc11265642353957fe94573db06ed4d29",
+      "bytes": 4072
+    },
+    "assets/home-ai/disc-135.webp": {
+      "sha256": "e923cabb590867894cba266bb55de3fe385b39fc34e0363d8dc7378caa9ae37e",
+      "bytes": 11876
+    },
+    "assets/home-ai/pk-127.webp": {
+      "sha256": "f7abf2b42f829c698576bd5051844c7f9838772805ab351ba3ea0bc3f8986316",
+      "bytes": 5744
+    },
+    "assets/home-ai/share-127.webp": {
+      "sha256": "a820ecf619c818a34d5726ea1b87eaf513c667e1a9e6c3308d0969ee6f8cddba",
+      "bytes": 4378
+    },
+    "assets/home-ai/grid-127.webp": {
+      "sha256": "8ec6116cec7d2f393084d1f84f184575e7164d55981f7f7f6d9c986aaa905fca",
+      "bytes": 6700
+    },
+    "assets/home-ai/wallet-127.webp": {
+      "sha256": "650ffca0c111736fe699ea67dcbb387ff32349e5cbc6a6913b7f79d6bf862364",
+      "bytes": 4116
+    },
+    "assets/home-ai/inbox-127.webp": {
+      "sha256": "6bdbd4d114b98e084cac76aa1d1353e614aca4a117357dda754bfffb3352cd3d",
+      "bytes": 3766
+    },
+    "assets/home-ai/pocket-127.webp": {
+      "sha256": "c4216077ac28d79a2bb70e2c1c002f68fad4dfe3dd3636c8f23f1006120996ae",
+      "bytes": 3030
+    },
+    "assets/home-ai/lock-127.webp": {
+      "sha256": "2fc3e27e0d1a495aba6c86ab690327c89239d55be04f3497422596781124cd85",
+      "bytes": 4024
+    },
+    "assets/home-ai/repeat-127.webp": {
+      "sha256": "c3179ff9813bbce40a728c26132b191fd379d7fb8aee5598142805cfbdfd7157",
+      "bytes": 4306
+    },
+    "assets/home-ai/system-127.webp": {
+      "sha256": "a3bd7c81a6a868a8ad211cf3068cadf150fc1ba834ff3922397d5fe3d1e7a3ac",
+      "bytes": 5840
+    },
+    "assets/home-ai/home-127.webp": {
+      "sha256": "70bcfa490a933eff6ad8108b6987665b2c5d61f902d3cf562bb867e8044995be",
+      "bytes": 4062
+    },
+    "assets/home-ai/previous-127.webp": {
+      "sha256": "85ca8456147a278e15d2eee1c28e4e1e702c71d8e9dda59f0d348e0539d93cf0",
+      "bytes": 3760
+    },
+    "assets/home-ai/next-127.webp": {
+      "sha256": "055672b7f11448af9569fe5aff0a85a3b4cc04032f904b78a5ad060e9cedb7e7",
+      "bytes": 3856
+    },
+    "assets/home-ai/games-127.webp": {
+      "sha256": "b405f9270f3e7b7cdc5cf199b8fe5a0af3a0a3945d284efd1340ffb6bf89bb59",
+      "bytes": 5114
+    },
+    "assets/home-ai/visitors-127.webp": {
+      "sha256": "8707c103e27bd5fdda77250feeaff4ad8ee27aaeed01f27cfcffc7c2e4d44f0f",
+      "bytes": 3978
+    },
+    "assets/home-ai/cp-127.webp": {
+      "sha256": "f3cea74fba6df5bbf6d71a40008d911a0569bd9132550a7b2d3c5db82c73e982",
+      "bytes": 4078
+    },
+    "assets/home-ai/vip-127.webp": {
+      "sha256": "edb97be0224aa37fa7ac00a040ca30729fc4fab29cbc363acbb200a98d43cecd",
+      "bytes": 3606
+    },
+    "assets/home-ai/noise-127.webp": {
+      "sha256": "2b25c87f213bd21105236e30f0b768e8ad7eaa5b2ef901d4f70b995051716b3d",
+      "bytes": 3994
+    },
+    "assets/home-ai/gift-127.webp": {
+      "sha256": "32810d9fc45c47569ffc799c5dc447e39ce7cc2166e4ceceb44cfed843324f62",
+      "bytes": 4846
+    },
+    "assets/home-ai/clean-127.webp": {
+      "sha256": "bc227c8fbc6b4f9002dc23f1d72de897d6a93b6b690e57a69d9423690c87b60e",
+      "bytes": 4156
+    },
+    "assets/home-ai/pause-127.webp": {
+      "sha256": "b3b908d90e80ea2eaf4c530e3b213fdcb53d8b9411dbb20f609020b936a48fb6",
+      "bytes": 3298
+    },
+    "assets/home-ai/medal-127.webp": {
+      "sha256": "c9d82028a4e87037c779579ad922a21d9eea68812f8d9ffc7a76aadbf16382d5",
+      "bytes": 4488
+    },
+    "assets/home-ai/lockchat-127.webp": {
+      "sha256": "98b007ccf7e860f3e156dd60b15669a676a8117f04acc66356562e9e38a8ffd6",
+      "bytes": 5038
+    },
+    "assets/home-ai/gear-127.webp": {
+      "sha256": "357ed93510345050f07fb498889149bfc46409b48602e678702888a876442c1a",
+      "bytes": 5446
+    },
+    "assets/home-ai/keep-127.webp": {
+      "sha256": "750873650dfdec7cffa3964eb2df24e3b8dc6e39558e6a53e8fa4ac3608f5dfc",
+      "bytes": 4072
+    },
+    "assets/home-ai/rank-127.webp": {
+      "sha256": "eeb0e6676739fb59b90db906acdc13c66c842f9530f32f478b033ac74ce49582",
+      "bytes": 5320
+    },
+    "assets/home-ai/music-127.webp": {
+      "sha256": "65c45d9fb4282fb20f7a7c0184f3d67eb18a234403054a00370e5764b0ea81ff",
+      "bytes": 4498
+    },
+    "assets/home-ai/exit-127.webp": {
+      "sha256": "1055ca6530838f74f35aaa9079230711c20249a806c766c3a2d30b20d368e429",
+      "bytes": 4420
+    },
+    "assets/home-ai/mode-127.webp": {
+      "sha256": "659078a615049551cc36dfd9316315e8095e2cea833064ed54ceaae66ea5b2d7",
+      "bytes": 4786
+    },
+    "assets/home-ai/create-127.webp": {
+      "sha256": "b5ee8f9c17b3f5637676274570e7e6c5fb0e38eba05a4719e0e8826e83c0b692",
+      "bytes": 4624
+    },
+    "assets/home-ai/mic-127.webp": {
+      "sha256": "91a5aafbabb598426cdcb6b40f9001c304556553c22affea90f31508a18c47ef",
+      "bytes": 4758
+    },
+    "assets/home-ai/moments-127.webp": {
+      "sha256": "1918d6d5d44668c3eea45e0d0bf81f85e4569e68c89a993c01aca487d4470054",
+      "bytes": 5492
+    },
+    "assets/home-ai/close-127.webp": {
+      "sha256": "5e348be4f2d81cc393abbe10b8e80343d722f88803530ed5a0b60bd9a2501fc5",
+      "bytes": 4254
+    },
+    "assets/home-ai/my-127.webp": {
+      "sha256": "f26cc84f0f259c212183edc20a82b78118cb696c8095abee3880eba2dcc3de71",
+      "bytes": 5354
+    },
+    "assets/home-ai/copy-127.webp": {
+      "sha256": "0cb98bd1dc9df2bcc71aea27128b55302582ea4eb1fde9279cb56399a671f244",
+      "bytes": 3932
+    },
+    "assets/home-ai/notifications-127.webp": {
+      "sha256": "e12d3938c5616f755c8db3515adcb901d69542895269d0925c7d01f4bedc4a42",
+      "bytes": 4632
+    },
+    "assets/home-ai/post-127.webp": {
+      "sha256": "e578a8a6a2b85fa79c28f63c24bac899f8200f4f98ffba5ad85b6cad60903b76",
+      "bytes": 4932
+    },
+    "assets/home-ai/collapse-127.webp": {
+      "sha256": "e989ed348e6d8b7ffccc00a1d77ee441dd222dfaf916d8cc9318bacc68f719a7",
+      "bytes": 3890
+    },
+    "assets/home-ai/like-127.webp": {
+      "sha256": "3c536d362a994c290195b7523b393a6b2a65f31d3d6da769ce25f85543735dbe",
+      "bytes": 4440
+    },
+    "assets/home-ai/tasks-127.webp": {
+      "sha256": "8d8f22e114ed68bab5c3b221d50ff8a6b6e79345802cb418cff6434a0989422a",
+      "bytes": 3736
+    },
+    "assets/home-ai/members-127.webp": {
+      "sha256": "0f89d259d3ca9e29188772f9841419d9e91ba801ed7dfc23a397720619697bc1",
+      "bytes": 4554
+    },
+    "assets/home-ai/invite-127.webp": {
+      "sha256": "f31183f9e7121d6827a1bd155103ce098548b395ea44824dbbfcd30b66b56cc0",
+      "bytes": 4978
+    },
+    "assets/home-ai/photo-127.webp": {
+      "sha256": "3a7a428b30829750a42dc01b02f9c8882e84152ae3d8468a66332e539ffa9a94",
+      "bytes": 5136
+    },
+    "assets/home-ai/popular-127.webp": {
+      "sha256": "80c626fd7923490e49b4c11e88601fe739d87fc0f3bcff5a7ffab867526fc9c3",
+      "bytes": 5204
+    },
+    "assets/home-ai/speaker-127.webp": {
+      "sha256": "12a198616c55c08e8f9f08e389dc7a19510da25961a8126cd4fbd274daca5a9b",
+      "bytes": 5030
+    },
+    "assets/home-ai/video-127.webp": {
+      "sha256": "8568372a329b8975c1b2e9d70c1b136fb68bb6b77e0e5ad97822128e6c695491",
+      "bytes": 3652
+    },
+    "assets/home-ai/comment-127.webp": {
+      "sha256": "11b1ead3e71d82a0057b2ebbc05d06e8b97ea9b4a794600f906d6f03e69d0139",
+      "bytes": 4406
+    },
+    "assets/home-ai/family-127.webp": {
+      "sha256": "1788d4e8aebfcffc9197a7fbc7c758aa75c93070658aee1e666a912cd71488ae",
+      "bytes": 4850
+    },
+    "assets/home-ai/list-127.webp": {
+      "sha256": "31bcb091b769b3af2e47bf24101b4ddf7efc113c6f06f37afeecdef52b86ed54",
+      "bytes": 4024
+    },
+    "assets/home-ai/done-127.webp": {
+      "sha256": "6e7f7d31fb0c26bd63e7dbb33e7ac11d665fec8c4d2ebc842e9a2c6f8cc562fd",
+      "bytes": 3966
+    },
+    "assets/home-ai/search-127.webp": {
+      "sha256": "48489fb76a2c137863c4c80304c37486c172153b5579db755e5c7cc4eb7cd400",
+      "bytes": 4954
+    },
+    "assets/home-ai/play-127.webp": {
+      "sha256": "464a645e8ae7a5e70316c57679f692019ee5f4f290c40724b5995e2530b52459",
+      "bytes": 3016
+    },
+    "assets/home-ai/effects-127.webp": {
+      "sha256": "d1c993834f9f92dc8653052c471c4d469acb1ea75bb4d754cceb690463df91cc",
+      "bytes": 4528
+    },
+    "assets/home-ai/support-127.webp": {
+      "sha256": "2413d80d912ccd5c7747309838a9a86ee16b928cb75512a35819c07762d976ac",
+      "bytes": 5780
+    },
+    "assets/home-ai/more-127.webp": {
+      "sha256": "202c23abdb9693732f18f52c1debece230d7c34a83e12182e94ffb0a24a5d049",
+      "bytes": 3872
+    },
+    "assets/audio/clap-neural-ai-cp118.wav": {
+      "sha256": "84bb09d43c0ccbdab474b1079183866fc9b15dbab3b5e6752f62ae2a72db6fb4",
+      "bytes": 529244
+    },
+    "assets/audio/rocket-reference-launch-blast-cp124.m4a": {
+      "sha256": "0ebccd75d50971851ad36b58226efa7d91667431e5437d605eca072a5721b285",
+      "bytes": 130647
+    },
+    "assets/gifts-cp137/crow-caw.webp": {
+      "sha256": "db69f25c2347cfa0d34155dd39283c736351f43f2bf726d73d0a2b29ff293175",
+      "bytes": 10056
+    },
+    "assets/gifts-cp137/eagle-call.webp": {
+      "sha256": "59353a4cf3fd4306fac82e4ae0d76bf1f851c0892b343b4db7bf5bada417a3c6",
+      "bytes": 14424
+    },
+    "assets/gifts-cp137/eagle-call.gif": {
+      "sha256": "5153a1822aca7225fec3159ba9dfdf19e87a8e58b6d381c6dc9e032ab96a1bfe",
+      "bytes": 270531
+    },
+    "assets/gifts-cp137/thunder-hammer.gif": {
+      "sha256": "de24abe005a763a0f2d724ba9dde40669064762417525ba00123ab0f2568e814",
+      "bytes": 331060
+    },
+    "assets/gifts-cp137/thunder-hammer.webp": {
+      "sha256": "33c2b744bab2ab066ef4c34380823d5bf693d030260fee922764db8c10100f8d",
+      "bytes": 15744
+    },
+    "assets/gifts-cp137/crow-caw.gif": {
+      "sha256": "f6a9a9e1f8758fdd79c0048b8bc49d3b2689ba80f7c8b24eb672b16735a1f427",
+      "bytes": 199601
+    },
+    "assets/gifts-cp137/barking-dog.webp": {
+      "sha256": "ba9f9025f2aea31545745cf8e7d704a2765aacebcde1ba5c650bf7ff6435c646",
+      "bytes": 13110
+    },
+    "assets/gifts-cp137/barking-dog.gif": {
+      "sha256": "eb5ffcc7718ebc8e9ea099eeda137c059edf40ed56d12df4319323dd59eb96a6",
+      "bytes": 313509
+    },
+    "assets/gifts-cp137/funny-donkey.gif": {
+      "sha256": "090344b122f2519e7dc434232274f4e0f851777fc8db12ae5ec80efc4ce2c7a6",
+      "bytes": 248846
+    },
+    "assets/gifts-cp137/funny-donkey.webp": {
+      "sha256": "1557211c81197e0b5f42cab3f655dc9dc5e41e04c93cd5c28aea0082d83becb3",
+      "bytes": 11144
+    },
+    "assets/dragon147/crimson.mp3": {
+      "sha256": "adfd356cf177337f4fef72e3f1165d91b44b0c03878c12690eb2c73086ba2523",
+      "bytes": 129193
+    },
+    "assets/dragon147/emerald-poses.png": {
+      "sha256": "7664a320569d54f88c6f012622d6b6f895d089d6032aca1a986c2c1018367311",
+      "bytes": 3434134
+    },
+    "assets/dragon147/ivory-poses.png": {
+      "sha256": "dc17c661b865e969654f626b8fa242000a181aecfcf989f5c03843f778e27c22",
+      "bytes": 3266508
+    },
+    "assets/dragon147/emerald.mp3": {
+      "sha256": "1339928a8e2c862b8eb47344ce52af0d5b3421feacf51ddbf9c7854e72d17277",
+      "bytes": 129193
+    },
+    "assets/dragon147/ivory.mp3": {
+      "sha256": "23df0d99d5dfd90ac9426840c60541268abf66fa7a5388f5aa0ea317106cd5a0",
+      "bytes": 129193
+    },
+    "assets/dragon147/crimson-poses.png": {
+      "sha256": "68c2c0dfdeb73bbe85b8daaf31624401ba4a90aa17caec7a419551428446b465",
+      "bytes": 3362252
+    },
+    "assets/gifts/cp146/relation-sister.webp": {
+      "sha256": "e0e17d051b041e72ebf1fb4faf7f9082745dbaaf9464b2ad5df147f2a2d97c56",
+      "bytes": 274176
+    },
+    "assets/gifts/cp146/relation-brother.webp": {
+      "sha256": "119ab11b348e33ba96fa2eeca046599c527ca4dd83b597fa078e771dc1de8ef4",
+      "bytes": 281474
+    },
+    "assets/gifts/cp146/relation-friend.webp": {
+      "sha256": "8c234d4673aeace4a077050d00c54c24eb7a21f672a1517d7b4c6e14c68594df",
+      "bytes": 298230
+    },
+    "assets/gifts/cp146/relation-cp.webp": {
+      "sha256": "f782d4cc4b3d2aa841e028303d19a926f79efd0f65feec105d30c5e16bcc2a31",
+      "bytes": 278800
+    },
+    "assets/gifts/cp146/relation-bestie.webp": {
+      "sha256": "a46b0c9484963316d2e76c89a43ae7b0711e893c369ba577b68e387e586158a1",
+      "bytes": 302018
+    },
+    "assets/audio/cp142/love.mp3": {
+      "sha256": "1df906a03f328180518d9a3455d4e3a8e3e0e90373b1e80cb62c951c8ea7b2ce",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/boxing.mp3": {
+      "sha256": "6acfff0b7695002cc3f93bbe4081a9080dc66c27b20f74fd8738cca11f7b3c63",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/crow.mp3": {
+      "sha256": "4504503c695feb1f6e57436a0434d67987720645fbe7db8be366de6bdb4de721",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/dragon.mp3": {
+      "sha256": "f215858409c82183ba7d215536002a5344450e7b244654a7a4a780eab13a0b3a",
+      "bytes": 129193
+    },
+    "assets/audio/cp142/funny.mp3": {
+      "sha256": "b4a171625c56e25d1bf596fc477085254796fa4ebdf23fa71dd9c5ec8158e17d",
+      "bytes": 129193
+    },
+    "assets/audio/cp142/greeting.mp3": {
+      "sha256": "ce96653096444ba5efcd6eb8ace3398f1aaae3e7e5d34985aa66ae21a16144a3",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/coin.mp3": {
+      "sha256": "a7c1aa8cdb6f28c7ef371abc8d09f0b5b930acd2794169afa8dd9ee894aa5a4d",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/laugh.mp3": {
+      "sha256": "d1f1685c31c77df9ac1d8d59ddf5967d3cc3ddd5ce4d3b2dc7cfa83ec35251fd",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/ghost.mp3": {
+      "sha256": "4068104f8f87d44242a15f743da7f2b05c611baac82985846248eb5929e7bf86",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/fart.mp3": {
+      "sha256": "a7dbdf4e7e4c9ac3ef57ac913ff3f8b6a917bfb735320bf6c1e9d761ed0624e6",
+      "bytes": 33062
+    },
+    "assets/audio/cp142/clap.mp3": {
+      "sha256": "66637c40a3bc178381d1c5939a30d8f8eb0b00dfc4d6fd0b772dd9c6e4b1abe3",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/happy.mp3": {
+      "sha256": "5a1ba5b2e0aafb94fd61ea953611d54a84be09a0c0a2b9ae359177b3d3897afd",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/bell.mp3": {
+      "sha256": "424c33eb09088e2b08c6589a8e07af5b5395b7d18cfea79fab5369c70742a620",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/drum.mp3": {
+      "sha256": "91bfc90f8155077123106e538291cd7b37ee7fd4118a9a9ca5a3baa9e49656f8",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/horse.mp3": {
+      "sha256": "2a344932b243c3d31a63b609130d2e4183a5b63d3b9d4fc1a89406c31c1101f0",
+      "bytes": 129193
+    },
+    "assets/audio/cp142/pop.mp3": {
+      "sha256": "ce0d1a05865d78f5fd76fb87c1492cf3c61b2792b703f951dd2eb8e323e7017c",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/eagle.mp3": {
+      "sha256": "9f7eeefb81c9a639d917a2a18183701fb7c474950fed91657e6bef8419fbe67f",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/kiss.mp3": {
+      "sha256": "030bdae67a5617fafc726005086251d488af590205c4ba08697b6f07b88b42e3",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/couple.mp3": {
+      "sha256": "edc645ca6155f82abeca471987644729d7f166ccba250d9aff4069b595432629",
+      "bytes": 129193
+    },
+    "assets/audio/cp142/jet.mp3": {
+      "sha256": "b4da8989553c41c1a47903c909e5ee47241d9875ead90712e3a964d2b389c1fc",
+      "bytes": 112893
+    },
+    "assets/audio/cp142/slipper.mp3": {
+      "sha256": "7020c61f082120757b6bb348a379bcd28b538e247a5d54bde199b7f6fed0feb1",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/professional.mp3": {
+      "sha256": "a17eb37977b2feedb1637890f346f2b1f2f7736ed9b577de8129a4fe4377d9e2",
+      "bytes": 97010
+    },
+    "assets/audio/cp142/fire.mp3": {
+      "sha256": "0fa29ac75d38ed58e6e1c02fdd8e454196091f6f3612abd6337494200ebaad10",
+      "bytes": 97010
+    },
+    "assets/audio/cp142/cry.mp3": {
+      "sha256": "203e1bd9b5eabd0b9124c11b5dfc52884e2cb20c4f61700ff621feda20528fcc",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/angry.mp3": {
+      "sha256": "3b90393430019a951e66f1476ce440053e8dba8cec6c6b24a9fc5f44628939cc",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/royal.mp3": {
+      "sha256": "97e258f8803547ab3d8cdef4daed76566a9b9b12c4e36b9aa84d62feb6c8d53c",
+      "bytes": 129193
+    },
+    "assets/audio/cp142/football.mp3": {
+      "sha256": "ebe33e138e55f06a41f0a389d971d04a8ab245e89228ab4f0f1fc18f40b28760",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/peacock.mp3": {
+      "sha256": "7841d1ee92152d39c4187f70372abb5c2e02e79ba68c5425a8dd40edcdf8fbd8",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/surprise.mp3": {
+      "sha256": "2128e62ea403215f9e4cd7753aa5287b1f11832c62196c77d7b56b21682189f9",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/sleep.mp3": {
+      "sha256": "282269b0ca5c53e37d5f01ea8e0e73fd12880b7ca1a5c3bd50e703d2d9444737",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/elephant.mp3": {
+      "sha256": "6d93403a395291a032add6de0754b8cfd1b6a4f14e68588af42304084dce5e17",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/birthday.mp3": {
+      "sha256": "68dff3512e713a2bec90863df9745e447baf9a845c209993720cd9f7a1bf5e58",
+      "bytes": 129193
+    },
+    "assets/audio/cp142/dog.mp3": {
+      "sha256": "ec9a0936848876281be4668512fe5a5979a87b6433dcc0df57b33235e51a92b7",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/tractor.mp3": {
+      "sha256": "f19fb3814ebca1a854aa8bb698704ebaf5c10e711fb1c63c521798250fb2535d",
+      "bytes": 97010
+    },
+    "assets/audio/cp142/thinking.mp3": {
+      "sha256": "e00896d03c5fc1f11b6ff9cdf14b81ce7f32beb1e2a88b3179266d8f0695f9e6",
+      "bytes": 65245
+    },
+    "assets/audio/cp142/donkey.mp3": {
+      "sha256": "c5763eb225724c8ad3c20c6171e8cae3c4efbb40b68f83a2740738d76e06715e",
+      "bytes": 81128
+    },
+    "assets/audio/cp142/orbit.mp3": {
+      "sha256": "fa386aa84f70f51fabce55241d1c1eaf72a973d13693864afd7a0bb57dd071be",
+      "bytes": 129193
+    },
+    "assets/audio/cp155/marry-me.mp3": {
+      "sha256": "988a8cc9e1f5a7fc302d8c4e2c180581d25cbd77f47db7b33b6742eb112cdbf1",
+      "bytes": 18852
+    }
+  }
+}

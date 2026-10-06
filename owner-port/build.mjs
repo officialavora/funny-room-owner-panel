@@ -1,0 +1,5 @@
+import esbuild from 'esbuild';
+import path from 'node:path';
+const root=process.cwd();
+const aliases={'react-native':path.join(root,'web/native.js'),'@react-native-async-storage/async-storage':path.join(root,'web/storage.js'),'expo-document-picker':path.join(root,'web/media.js'),'expo-file-system':path.join(root,'web/media.js'),'expo-image-picker':path.join(root,'web/media.js'),'expo-clipboard':path.join(root,'web/clipboard.js'),'expo-audio':path.join(root,'web/audio.js'),'react-native-safe-area-context':path.join(root,'web/safe-area.js')};
+await esbuild.build({entryPoints:['web/controls.jsx'],outdir:'dist',entryNames:'full-controls',bundle:true,format:'esm',platform:'browser',minify:true,splitting:true,chunkNames:'chunks/[name]-[hash]',assetNames:'media/[name]-[hash]',alias:aliases,loader:{'.js':'jsx','.png':'file','.webp':'file','.gif':'file','.jpg':'file','.wav':'file','.mp3':'file','.ogg':'file','.m4a':'file'},define:{'process.env.NODE_ENV':'"production"','__DEV__':'false'},metafile:true,write:true}).then(async r=>{const fs=await import('node:fs/promises');await fs.writeFile('build-meta.json',JSON.stringify(r.metafile,null,2));});

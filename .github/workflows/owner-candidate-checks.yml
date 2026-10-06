@@ -1,0 +1,42 @@
+name: Owner candidate checks
+on:
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'owner-port/**'
+      - 'media/**'
+      - 'full-controls.js'
+      - 'scripts/check-owner-destination.cjs'
+      - 'AGENTS.md'
+      - '.github/workflows/owner-candidate-checks.yml'
+permissions:
+  contents: read
+jobs:
+  verify-owner-port:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: owner-port/package-lock.json
+      - name: Approved Owner destination guard
+        run: node scripts/check-owner-destination.cjs
+      - name: Install exact web dependencies
+        working-directory: owner-port
+        run: npm ci --ignore-scripts
+      - name: Restore verified original application artwork
+        working-directory: owner-port
+        run: node restore-assets-from-media.mjs
+      - name: Build and verify compiled source
+        working-directory: owner-port
+        run: |
+          npm run build
+          node verify-built-output.mjs
+      - name: Auth, controls, metadata and media regressions
+        working-directory: owner-port
+        run: |
+          npm test
+          npm run test:browser

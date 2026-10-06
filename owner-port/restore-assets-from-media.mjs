@@ -1,0 +1,4 @@
+import fs from 'node:fs/promises';import path from 'node:path';import crypto from 'node:crypto';
+const manifest=JSON.parse(await fs.readFile('assets-manifest.json','utf8')),media=process.argv[2]||'../media',byHash=new Map();
+for(const name of await fs.readdir(media)){const file=path.join(media,name),data=await fs.readFile(file);byHash.set(crypto.createHash('sha256').update(data).digest('hex'),{file,size:data.length});}
+let count=0;for(const [name,expected] of Object.entries(manifest.assets)){const entry=byHash.get(expected.sha256);if(!entry||entry.size!==expected.bytes)throw Error('Missing original compiled media: '+name);await fs.mkdir(path.dirname(name),{recursive:true});await fs.copyFile(entry.file,name);count++;}console.log('Verified and restored '+count+' original assets from compiled media');

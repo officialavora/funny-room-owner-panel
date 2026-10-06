@@ -1,0 +1,551 @@
+[
+  {
+    "code": "ai140_frame_amethyst",
+    "kind": "frame",
+    "name": "Amethyst Sovereign",
+    "tier": "standard",
+    "visual": {
+      "ai_asset_key": "frame-amethyst",
+      "border": "#B699FF",
+      "motion": "breath"
+    },
+    "price_coins": 1000000,
+    "duration_days": 30,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_frame_rose",
+    "kind": "frame",
+    "name": "Rose Kiss Wings",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "frame-rose",
+      "border": "#FF8CB8",
+      "motion": "breath"
+    },
+    "price_coins": 2000000,
+    "duration_days": 60,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_frame_lunar",
+    "kind": "frame",
+    "name": "Lunar Sapphire",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "frame-lunar",
+      "border": "#5FE5FF",
+      "motion": "breath"
+    },
+    "price_coins": 3000000,
+    "duration_days": 90,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_frame_bloom",
+    "kind": "frame",
+    "name": "Butterfly Bloom",
+    "tier": "vip",
+    "visual": {
+      "ai_asset_key": "frame-bloom",
+      "border": "#A5E9D8",
+      "motion": "breath"
+    },
+    "price_coins": 4000000,
+    "duration_days": 60,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_frame_solar",
+    "kind": "frame",
+    "name": "Solar Majesty",
+    "tier": "vip",
+    "visual": {
+      "ai_asset_key": "frame-solar",
+      "border": "#FFD76D",
+      "motion": "breath"
+    },
+    "price_coins": 5000000,
+    "duration_days": 90,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_entry_wink",
+    "kind": "entry",
+    "name": "Funny Room Kiss Pop",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "entry-wink",
+      "duration_ms": 6000,
+      "motion": "ai_poses_native_crossfade",
+      "scene": "wink"
+    },
+    "price_coins": 1000000,
+    "duration_days": 30,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_entry_couple",
+    "kind": "entry",
+    "name": "Midnight Romance",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "entry-couple",
+      "duration_ms": 6000,
+      "motion": "ai_poses_native_crossfade",
+      "scene": "couple"
+    },
+    "price_coins": 2000000,
+    "duration_days": 60,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_entry_horse",
+    "kind": "entry",
+    "name": "Royal Rider",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "entry-horse",
+      "duration_ms": 6000,
+      "motion": "ai_poses_native_crossfade",
+      "scene": "horse"
+    },
+    "price_coins": 3000000,
+    "duration_days": 90,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_entry_orbit",
+    "kind": "entry",
+    "name": "Orbit Reveal",
+    "tier": "vip",
+    "visual": {
+      "ai_asset_key": "entry-orbit",
+      "duration_ms": 6000,
+      "motion": "ai_poses_native_crossfade",
+      "scene": "orbit"
+    },
+    "price_coins": 4000000,
+    "duration_days": 60,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_entry_portal",
+    "kind": "entry",
+    "name": "Palace Arrival",
+    "tier": "vip",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "duration_ms": 6000,
+      "motion": "ai_poses_native_crossfade",
+      "scene": "portal"
+    },
+    "price_coins": 5000000,
+    "duration_days": 90,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_bubble_royal",
+    "kind": "bubble",
+    "name": "Royal Voice",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "bubble-royal",
+      "background": "#21162F",
+      "accent": "#FFD76D"
+    },
+    "price_coins": 1000000,
+    "duration_days": 30,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_bubble_love",
+    "kind": "bubble",
+    "name": "Love Notes",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "bubble-love",
+      "background": "#21162F",
+      "accent": "#FFD76D"
+    },
+    "price_coins": 2000000,
+    "duration_days": 60,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_bubble_funny",
+    "kind": "bubble",
+    "name": "Funny Spark",
+    "tier": "standard",
+    "visual": {
+      "ai_asset_key": "bubble-funny",
+      "background": "#21162F",
+      "accent": "#FFD76D"
+    },
+    "price_coins": 3000000,
+    "duration_days": 90,
+    "purchasable": true
+  },
+  {
+    "code": "ai140_medal_star",
+    "kind": "medal",
+    "name": "Luxury Star Medal",
+    "tier": "premium",
+    "visual": {
+      "ai_asset_key": "medal",
+      "label": "Luxury Star Medal"
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_badge_official",
+    "kind": "badge",
+    "name": "Funny Room Official",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "badge",
+      "label": "Funny Room Official"
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_root_founder",
+    "kind": "entry",
+    "name": "Root Founder Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "root_founder",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_co_owner",
+    "kind": "entry",
+    "name": "Co Owner Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "co_owner",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_country_manager",
+    "kind": "entry",
+    "name": "Country Manager Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "country_manager",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_manager",
+    "kind": "entry",
+    "name": "Manager Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "manager",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_super_admin",
+    "kind": "entry",
+    "name": "Super Admin Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "super_admin",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_admin",
+    "kind": "entry",
+    "name": "Admin Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "admin",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_bd_leader",
+    "kind": "entry",
+    "name": "Bd Leader Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "bd_leader",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_bd",
+    "kind": "entry",
+    "name": "Bd Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "bd",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_agency_owner",
+    "kind": "entry",
+    "name": "Agency Owner Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "agency_owner",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_host",
+    "kind": "entry",
+    "name": "Host Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "host",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_merchant",
+    "kind": "entry",
+    "name": "Merchant Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "merchant",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_coin_seller",
+    "kind": "entry",
+    "name": "Coin Seller Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "coin_seller",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_moderator",
+    "kind": "entry",
+    "name": "Moderator Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "moderator",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_event_manager",
+    "kind": "entry",
+    "name": "Event Manager Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "event_manager",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_cs_leader",
+    "kind": "entry",
+    "name": "Cs Leader Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "cs_leader",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_cs",
+    "kind": "entry",
+    "name": "Cs Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "cs",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai140_role_entry_user",
+    "kind": "entry",
+    "name": "User Arrival",
+    "tier": "official",
+    "visual": {
+      "ai_asset_key": "entry-portal",
+      "role_key": "user",
+      "duration_ms": 6000,
+      "scene": "portal",
+      "presentation_only": true
+    },
+    "price_coins": 0,
+    "duration_days": 30,
+    "purchasable": false
+  },
+  {
+    "code": "ai147_entry_dragon_ivory",
+    "kind": "entry",
+    "name": "Ivory Celestial Dragon",
+    "tier": "standard",
+    "visual": {
+      "ai_dragon_variant": "ivory",
+      "ai_set_art": "dragon-ivory",
+      "duration_ms": 8100,
+      "gradient": [
+        "#FFD76D",
+        "#67407C"
+      ]
+    },
+    "sound_key": "dragon_ivory",
+    "price_coins": 1000000,
+    "duration_days": 30,
+    "purchasable": true,
+    "active": true,
+    "sort_order": 1470
+  },
+  {
+    "code": "ai147_entry_dragon_crimson",
+    "kind": "entry",
+    "name": "Crimson Inferno Dragon",
+    "tier": "standard",
+    "visual": {
+      "ai_dragon_variant": "crimson",
+      "ai_set_art": "dragon-crimson",
+      "duration_ms": 8100,
+      "gradient": [
+        "#FFD76D",
+        "#67407C"
+      ]
+    },
+    "sound_key": "dragon_crimson",
+    "price_coins": 1000000,
+    "duration_days": 30,
+    "purchasable": true,
+    "active": true,
+    "sort_order": 1471
+  },
+  {
+    "code": "ai147_entry_dragon_emerald",
+    "kind": "entry",
+    "name": "Emerald Serpent Dragon",
+    "tier": "standard",
+    "visual": {
+      "ai_dragon_variant": "emerald",
+      "ai_set_art": "dragon-emerald",
+      "duration_ms": 8100,
+      "gradient": [
+        "#FFD76D",
+        "#67407C"
+      ]
+    },
+    "sound_key": "dragon_emerald",
+    "price_coins": 1000000,
+    "duration_days": 30,
+    "purchasable": true,
+    "active": true,
+    "sort_order": 1472
+  }
+]
+

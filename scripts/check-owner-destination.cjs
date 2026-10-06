@@ -1,0 +1,7 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const approved='https://officialavora.github.io/funny-room-owner-panel/';
+const instructions=fs.readFileSync('AGENTS.md','utf8');assert(instructions.includes(approved),'Approved Owner destination must remain recorded');assert(instructions.includes('officialavora7@gmail.com'),'Approved work identity must remain recorded');
+assert(!fs.existsSync('.openai/hosting.json'),'Owner repository must not contain a Sites hosting deployment configuration');
+const isRejected=url=>/^https?:\/\/[^/]*\.chatgpt\.site(?:\/|$)/i.test(url)&&/owner|admin/i.test(url.split('/')[2]);
+assert(isRejected('https://blocked-owner.example.chatgpt.site/'));assert(!isRejected(approved));assert(!isRejected('https://public-policy.example.chatgpt.site/'));
+let checked=0;for(const name of ['app.js','App.js','src','lib','owner-port/src','owner-port/lib','owner-port/web']){if(!fs.existsSync(name))continue;function scan(p){if(fs.statSync(p).isDirectory()){for(const child of fs.readdirSync(p))scan(path.join(p,child));return}if(!/\.(?:js|jsx|ts|tsx|json)$/.test(p))return;const text=fs.readFileSync(p,'utf8');for(const url of text.match(/https?:\/\/[^\s'"`<>]+/g)||[])assert(!isRejected(url),'Rejected Owner host in '+p);checked++;}scan(name)}console.log('PASS: approved Owner host/work identity and active configuration guard; '+checked+' source files checked');
