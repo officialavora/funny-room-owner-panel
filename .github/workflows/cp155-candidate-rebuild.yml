@@ -1,4 +1,4 @@
-name: CP155 paired Owner candidate rebuild
+name: CP156 paired isolated Owner preview verification
 on:
   push:
     branches: [checkpoint153-owner-consolidation]
@@ -27,7 +27,9 @@ jobs:
           npm ci --ignore-scripts
           node restore-assets-from-media.mjs
           node marry-me-test.cjs
+          node --check ../preview-app.js
           npm run build
+          cp dist/full-controls.js ../preview-full-controls.js
           cp -a dist/. ../
           node verify-built-output.mjs
           npm test
@@ -37,8 +39,8 @@ jobs:
           test "$(git branch --show-current)" = "checkpoint153-owner-consolidation"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add full-controls.js media/
+          git add full-controls.js preview-full-controls.js media/
           if ! git diff --cached --quiet; then
-            git commit -m "CP155: rebuild verified paired proposal voice candidate [skip ci]"
+            git commit -m "CP156: rebuild verified isolated Owner preview [skip ci]"
             git push origin HEAD:checkpoint153-owner-consolidation
           fi
