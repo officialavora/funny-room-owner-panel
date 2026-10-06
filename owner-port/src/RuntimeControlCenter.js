@@ -1,0 +1,77 @@
+import TextInput from './DraftTextInput';
+import {parseRocketEditor,ROCKET_DEFAULTS} from './rocketPolicy';
+import React,{useEffect,useMemo,useState} from 'react';
+import {ActivityIndicator,Alert,KeyboardAvoidingView,Modal,Platform,Pressable,ScrollView,StyleSheet,Switch,Text,View} from 'react-native';
+import {supabase} from '../lib/supabase';
+import {loadRuntimeFlags,ownerSetRuntimeFlag} from './runtimeConfig';
+import {PREMIUM} from './designSystem';
+
+const C=PREMIUM.colors;
+const SERVICES=[
+  ['global_maintenance','🛠️','App maintenance','Full-app maintenance gate and public countdown.'],
+  ['server_runtime','🟢','Server / API','Database, API and realtime health status.'],
+  ['voice_provider_ready','🎙️','Real voice engine','RTC provider switch. Keep OFF during demo-only testing.'],
+  ['private_audio_calls','📞','1-to-1 audio call','Prepared independent switch for private audio calling.'],
+  ['audio_live','🎧','Audio live','Current audio-first live mode.'],
+  ['single_live','🎙️','Single live','Prepared switch for single-host live mode.'],
+  ['team_live','👥','Team live','Prepared switch for team live mode.'],
+  ['gifts','🎁','Gifting','Gift sending and celebration availability.'],
+  ['lucky_gifts','🍀','Lucky Gifts','Random demo bonus layer. Server-enforced and Test Coin only.'],
+  ['lucky_pocket','🧧','Lucky Pocket / LP','Room red-pocket feature. Test Coin only until live-economy approval.'],
+  ['premium_cosmetics','👑','Frames & entries','VIP frames, entries, badges and premium decoration.'],
+  ['room_rocket','🚀','Room Rocket','Rocket blast only: five targets, top senders and sending-weighted reward pools.'],
+  ['emotion_social','💞','Emotion / CP','Relationship, affinity and emotional social layer.'],
+  ['payments_live','💳','Real-money payments','Real recharge switch. Keep OFF until billing is production-ready.'],
+  ['demo_economy','🧪','Demo economy','Test coins with no real-money value.'],
+  ['video_live','📹','Video live','Future-ready video live switch.'],
+  ['private_video_calls','🎥','Private video','Future private video call switch.'],
+  ['video_pk','⚔️','Video PK','Future video battle switch.'],
+  ['audio_pk','🎤','Audio PK','Prepared switch for audio battle mode.'],
+  ['single_pk','1️⃣','Single PK','Prepared independent single battle switch.'],
+  ['team_pk','👥','Team PK','Prepared independent team battle switch.'],
+  ['global_pk','🌍','Global PK','Prepared independent global matching switch.'],
+  ['friend_pk','🤝','Friend PK','Prepared independent friend battle switch.'],
+  ['invite_pk','✉️','Invite PK','Prepared independent invite battle switch.'],
+  ['reels','▶️','Reels / feed','Future short-video feed switch.'],
+];
+const STATUSES=['healthy','setup','testing','maintenance','degraded','disabled','future'];
+const critical=new Set(['global_maintenance','server_runtime','voice_provider_ready','payments_live']);
+
+
+
+export default function RuntimeControlCenter(){
+  const [access,setAccess]=useState(null),[flags,setFlags]=useState({}),[busy,setBusy]=useState(false),[editing,setEditing]=useState(null);
+  const refresh=async()=>{const [staff,runtime]=await Promise.all([supabase.rpc('current_staff_access'),loadRuntimeFlags({force:true})]);setAccess(staff.data||null);setFlags(runtime.flags||{});};
+  useEffect(()=>{refresh()},[]);
+  const canControl=access?.role==='owner'||access?.role==='co_owner';
+  const selected=useMemo(()=>editing?flags[editing.key]||{enabled:false,config:{}}:null,[editing,flags]);
+
+  const toggle=async(key,next)=>{
+    if(!canControl)return Alert.alert('Protected','Only Owner and Co-Owner can change technical runtime controls.');
+    setBusy(true);const current=flags[key]||{config:{}};const notify=critical.has(key);
+    const {error}=await ownerSetRuntimeFlag(key,next,{...current.config,status:next?(current.config?.status==='disabled'?'healthy':current.config?.status||'healthy'):'disabled'},notify);
+    setBusy(false);if(error)return Alert.alert('Runtime control',error.message);await refresh();
+  };
+  const save=async()=>{
+    if(!editing||!canControl)return;
+    const minutes=Math.max(0,Math.floor(Number(editing.minutes||0)));
+    const endsAt=editing.countdown&&minutes?new Date(Date.now()+minutes*60000).toISOString():null;
+    const numberList=value=>String(value||'').split(',').map(x=>Math.floor(Number(x.trim()))).filter(x=>Number.isFinite(x)&&x>0);
+    let rocket={};if(editing.key==='room_rocket'){try{rocket=parseRocketEditor(editing);}catch(error){return Alert.alert('Rocket settings',error.message);}}
+    const config={...(selected?.config||{}),status:editing.status||'healthy',public_message:String(editing.publicMessage||'').trim(),internal_message:String(editing.internalMessage||'').trim(),countdown_enabled:Boolean(editing.countdown&&endsAt),ends_at:endsAt,auto_recover:Boolean(editing.autoRecover),...rocket};
+    setBusy(true);const notify=critical.has(editing.key)&&(config.status!=='healthy'||editing.enabled===false);
+    const {error}=await ownerSetRuntimeFlag(editing.key,editing.enabled,config,notify);setBusy(false);
+    if(error)return Alert.alert('Runtime control',error.message);const savedLabel=editing.label;setEditing(null);await refresh();Alert.alert('Runtime control',`${savedLabel} updated successfully.`);
+  };
+  const openEditor=(key,label)=>{const item=flags[key]||{enabled:false,config:{}};const cfg=item.config||{};setEditing({key,label,enabled:Boolean(item.enabled),status:cfg.status||'healthy',publicMessage:cfg.public_message||'',internalMessage:cfg.internal_message||'',countdown:Boolean(cfg.countdown_enabled),minutes:'15',autoRecover:cfg.auto_recover!==false,thresholds:(cfg.thresholds||cfg.levels||ROCKET_DEFAULTS.thresholds).join(','),rewardPercentages:(cfg.reward_percentages||ROCKET_DEFAULTS.reward_percentages).join(','),winnerCounts:(cfg.winner_counts||ROCKET_DEFAULTS.winner_counts).join(','),uniqueWinnerCap:String(cfg.unique_winner_cap||10),contributionOptions:(cfg.contribution_options||[100,500,1000,5000]).join(','),maxContribution:String(cfg.max_contribution||1000000)});};
+
+  if(access===null)return <View style={s.loading}><ActivityIndicator color={C.cyan}/><Text style={s.help}>Checking protected runtime access…</Text></View>;
+  return <View style={s.wrap}><View style={s.head}><View style={{flex:1}}><Text style={s.kicker}>OWNER + CO-OWNER ONLY</Text><Text style={s.title}>Runtime & Service Control</Text><Text style={s.help}>Sensitive technical alerts stay with Owner/Co-Owner. Users only see simple service messages.</Text></View><Pressable onPress={refresh} style={s.refresh}><Text style={s.refreshText}>↻</Text></Pressable></View>
+    {!canControl?<View style={s.locked}><Text style={s.lockIcon}>🔒</Text><View style={{flex:1}}><Text style={s.cardTitle}>Technical controls hidden</Text><Text style={s.help}>Managers, Super Admins and other roles do not receive provider/minute/server controls.</Text></View></View>:null}
+    <View style={s.grid}>{SERVICES.map(([key,icon,label,desc])=>{const item=flags[key]||{enabled:false,config:{}};const status=item.config?.status||'unknown';return <View key={key} style={[s.card,!item.enabled&&s.cardOff]}><View style={s.cardTop}><Text style={s.icon}>{icon}</Text><View style={{flex:1}}><Text style={s.cardTitle}>{label}</Text><Text style={s.status}>{String(status).toUpperCase()}</Text></View>{canControl?<Switch value={Boolean(item.enabled)} disabled={busy} onValueChange={next=>toggle(key,next)} trackColor={{false:'#353B4E',true:'#5740C7'}} thumbColor={item.enabled?C.gold:'#A4ACBC'}/>:null}</View><Text style={s.desc}>{desc}</Text><Text style={s.publicMsg} numberOfLines={2}>{item.config?.public_message||'No public message set.'}</Text>{canControl?<Pressable onPress={()=>openEditor(key,label)} style={s.editButton}><Text style={s.editText}>{key==='room_rocket'?'EDIT ROCKET BLAST REWARDS':'EDIT MESSAGE / TIMER'}</Text></Pressable>:null}</View>})}</View>
+    {editing&&selected?<Modal visible transparent animationType="fade" statusBarTranslucent onRequestClose={()=>setEditing(null)}><KeyboardAvoidingView style={s.modalRoot} behavior={Platform.OS==='ios'?'padding':undefined}><Pressable style={s.modalBackdrop} onPress={()=>setEditing(null)}/><View style={s.modalCard}><ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} contentContainerStyle={s.modalScroll}><View style={s.editor}><Text style={s.kicker}>EDIT RUNTIME POLICY</Text><Text style={s.editorTitle}>{editing.label}</Text><View style={s.statusRail}>{STATUSES.map(x=><Pressable key={x} onPress={()=>setEditing(v=>({...v,status:x}))} style={[s.statusChip,editing.status===x&&s.statusChipOn]}><Text style={s.statusChipText}>{x.toUpperCase()}</Text></Pressable>)}</View><Text style={s.label}>PUBLIC MESSAGE</Text><TextInput value={editing.publicMessage} onChangeText={x=>setEditing(v=>({...v,publicMessage:x}))} maxLength={240} placeholder="Short, simple message shown to users" placeholderTextColor="#727C92" style={s.input}/><Text style={s.label}>OWNER / CO-OWNER DETAIL</Text><TextInput value={editing.internalMessage} onChangeText={x=>setEditing(v=>({...v,internalMessage:x}))} maxLength={500} placeholder="Provider, balance, incident or technical note" placeholderTextColor="#727C92" style={[s.input,{minHeight:72,textAlignVertical:'top'}]} multiline/>{editing.key==='room_rocket'?<View><Text style={s.help}>Rocket blast rewards only. Room rewards remain separate. Pool = level target × percentage. Top senders share the pool in proportion to their sending; never an equal split. Saved settings apply to new rounds; active rounds keep their policy.</Text><Text style={s.label}>LEVEL TARGETS • 5 VALUES</Text><TextInput value={editing.thresholds} onChangeText={x=>setEditing(v=>({...v,thresholds:x}))} keyboardType="numbers-and-punctuation" placeholder="10000000,20000000,30000000,40000000,50000000" placeholderTextColor="#727C92" style={s.input}/><Text style={s.label}>ROCKET POOL PERCENTAGES • 5 VALUES</Text><TextInput value={editing.rewardPercentages} onChangeText={x=>setEditing(v=>({...v,rewardPercentages:x}))} keyboardType="numbers-and-punctuation" placeholder="5,5,5,5,5" placeholderTextColor="#727C92" style={s.input}/><Text style={s.label}>MAXIMUM DISTINCT WINNERS PER ROCKET ROUND</Text><TextInput accessibilityLabel="Rocket distinct winner limit" value={editing.uniqueWinnerCap} onChangeText={x=>setEditing(v=>({...v,uniqueWinnerCap:x}))} keyboardType="number-pad" placeholder="10" placeholderTextColor="#727C92" style={s.input}/><Text style={s.label}>TOP SENDERS • 5 WINNER COUNTS</Text><TextInput accessibilityLabel="Rocket winner counts" value={editing.winnerCounts} onChangeText={x=>setEditing(v=>({...v,winnerCounts:x}))} keyboardType="numbers-and-punctuation" placeholder="3,5,7,9,10" placeholderTextColor="#727C92" style={s.input}/><Text style={s.help}>Enter one value for each level. Fewer contributors means fewer winners. Equal sending may yield equal rewards; ties use first sending time then user ID. Once the distinct round limit is reached, later stages rank already rewarded winners only.</Text></View>:null}<View style={s.optionRow}><View style={{flex:1}}><Text style={s.cardTitle}>Countdown</Text><Text style={s.help}>Use only when the recovery time is known.</Text></View><Switch value={editing.countdown} onValueChange={x=>setEditing(v=>({...v,countdown:x}))}/></View>{editing.countdown?<TextInput value={editing.minutes} onChangeText={x=>setEditing(v=>({...v,minutes:x.replace(/\D/g,'')}))} keyboardType="number-pad" placeholder="Minutes" placeholderTextColor="#727C92" style={s.input}/>:null}<View style={s.optionRow}><View style={{flex:1}}><Text style={s.cardTitle}>Auto recovery</Text><Text style={s.help}>Keep prepared for provider/server health automation.</Text></View><Switch value={editing.autoRecover} onValueChange={x=>setEditing(v=>({...v,autoRecover:x}))}/></View><View style={s.actions}><Pressable onPress={()=>setEditing(null)} style={s.cancel}><Text style={s.cancelText}>CANCEL</Text></Pressable><Pressable disabled={busy} onPress={save} style={s.save}><Text style={s.saveText}>{busy?'SAVING…':'SAVE & APPLY'}</Text></Pressable></View></View></ScrollView></View></KeyboardAvoidingView></Modal>:null}
+  </View>;
+}
+
+const s=StyleSheet.create({modalRoot:{flex:1,justifyContent:'center',paddingHorizontal:14,paddingVertical:28},modalBackdrop:{...StyleSheet.absoluteFillObject,backgroundColor:'rgba(3,5,12,.82)'},modalCard:{maxHeight:'88%',borderRadius:22,overflow:'hidden',backgroundColor:'#17132D',borderWidth:1,borderColor:'#6B55D9',elevation:28},modalScroll:{padding:2},gamePolicy:{marginTop:10,minHeight:76,borderRadius:18,padding:12,backgroundColor:'#161B29',borderWidth:1,borderColor:C.gold,flexDirection:'row',alignItems:'center',gap:12},wrap:{marginTop:14,borderRadius:24,borderWidth:1,borderColor:C.line,backgroundColor:'#0D111B',padding:12},loading:{minHeight:90,alignItems:'center',justifyContent:'center',gap:8},head:{flexDirection:'row',alignItems:'flex-start',gap:10},kicker:{color:C.cyan,fontSize:7,fontWeight:'900',letterSpacing:1.2},title:{color:C.text,fontSize:19,fontWeight:'900',marginTop:4},help:{color:C.muted,fontSize:8,lineHeight:13,marginTop:4},refresh:{width:38,height:38,borderRadius:13,backgroundColor:C.panelSoft,alignItems:'center',justifyContent:'center'},refreshText:{color:C.cyan,fontSize:20,fontWeight:'900'},locked:{marginTop:10,borderRadius:17,padding:10,backgroundColor:'#261D31',borderWidth:1,borderColor:'#55314B',flexDirection:'row',gap:9,alignItems:'center'},lockIcon:{fontSize:24},grid:{marginTop:10,flexDirection:'row',flexWrap:'wrap',gap:8},card:{width:'48.5%',minHeight:155,borderRadius:18,padding:10,backgroundColor:C.panel,borderWidth:1,borderColor:'#3A4055'},cardOff:{opacity:.7,backgroundColor:'#111520'},cardTop:{flexDirection:'row',alignItems:'center',gap:7},icon:{fontSize:24},cardTitle:{color:C.text,fontSize:10,fontWeight:'900'},status:{color:C.gold,fontSize:6,fontWeight:'900',marginTop:3,letterSpacing:.8},desc:{color:C.muted,fontSize:7,lineHeight:11,marginTop:8},publicMsg:{color:C.textSoft,fontSize:7,lineHeight:11,marginTop:7},editButton:{marginTop:'auto',minHeight:32,borderRadius:10,backgroundColor:'#252B3D',alignItems:'center',justifyContent:'center'},editText:{color:C.cyan,fontSize:6,fontWeight:'900'},editor:{marginTop:12,borderRadius:20,padding:12,backgroundColor:'#17132D',borderWidth:1,borderColor:'#5444A9'},editorTitle:{color:C.text,fontSize:17,fontWeight:'900',marginTop:4},statusRail:{flexDirection:'row',flexWrap:'wrap',gap:5,marginTop:10},statusChip:{paddingHorizontal:8,paddingVertical:7,borderRadius:999,backgroundColor:C.panelSoft,borderWidth:1,borderColor:C.line},statusChipOn:{backgroundColor:C.violetDeep,borderColor:C.gold},statusChipText:{color:C.text,fontSize:6,fontWeight:'900'},label:{color:C.muted,fontSize:7,fontWeight:'900',letterSpacing:.8,marginTop:11,marginBottom:5},input:{minHeight:43,borderRadius:12,backgroundColor:'#0D1019',borderWidth:1,borderColor:'#30384C',color:C.text,paddingHorizontal:11,paddingVertical:10,fontSize:10},optionRow:{minHeight:58,flexDirection:'row',alignItems:'center',gap:10,borderBottomWidth:1,borderBottomColor:C.lineSoft,marginTop:7},actions:{flexDirection:'row',gap:8,marginTop:12},cancel:{flex:1,minHeight:44,borderRadius:12,backgroundColor:C.panelSoft,alignItems:'center',justifyContent:'center'},cancelText:{color:C.cyan,fontSize:8,fontWeight:'900'},save:{flex:1,minHeight:44,borderRadius:12,backgroundColor:C.violet,alignItems:'center',justifyContent:'center'},saveText:{color:'#fff',fontSize:8,fontWeight:'900'}});
+

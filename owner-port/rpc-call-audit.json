@@ -1,0 +1,394 @@
+{
+  "checked": 191,
+  "opaque": [
+    {
+      "file": "owner-port/src/OwnerDailyCoinGrantCenter.js",
+      "line": 14,
+      "name": "owner_load_daily_coin_policy_v1",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerProfileManage.js",
+      "line": 20,
+      "name": "owner_mutate_vip",
+      "keys": [
+        "p_request_id",
+        "p_preview"
+      ],
+      "spread": true
+    },
+    {
+      "file": "owner-port/src/OwnerProfileManage.js",
+      "line": 21,
+      "name": "owner_mutate_vip",
+      "keys": [
+        "p_request_id",
+        "p_preview"
+      ],
+      "spread": true
+    },
+    {
+      "file": "owner-port/src/OwnerRoomLocks.js",
+      "line": 20,
+      "name": "owner_set_room_controls_v149",
+      "keys": [
+        "p_room",
+        "p_frozen",
+        "p_expected_revision",
+        "p_reason"
+      ],
+      "spread": true
+    },
+    {
+      "file": "owner-port/src/OwnerSvipManage.js",
+      "line": 29,
+      "name": "owner_mutate_svip",
+      "keys": [
+        "p_request_id",
+        "p_preview"
+      ],
+      "spread": true
+    },
+    {
+      "file": "owner-port/src/OwnerSvipManage.js",
+      "line": 32,
+      "name": "owner_mutate_svip",
+      "keys": [
+        "p_request_id",
+        "p_preview"
+      ],
+      "spread": true
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 8,
+      "name": "owner_grant_reward_v2",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 9,
+      "name": "owner_reverse_reward_grant",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 10,
+      "name": "owner_upsert_reward_campaign",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 11,
+      "name": "owner_set_reward_campaign_state",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 12,
+      "name": "owner_replace_campaign_tiers",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 13,
+      "name": "owner_duplicate_reward_campaign",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 15,
+      "name": "owner_upsert_campaign_banner",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 16,
+      "name": "owner_set_campaign_banner_state",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 17,
+      "name": "owner_snapshot_campaign_top3",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 18,
+      "name": "owner_approve_campaign_top3",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 19,
+      "name": "owner_manage_vanity",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 22,
+      "name": "owner_load_reward_campaigns",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 25,
+      "name": "owner_upsert_daily_benefit",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 27,
+      "name": "owner_load_vanity_inventory",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 28,
+      "name": "owner_execute_vanity_operation",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 29,
+      "name": "owner_import_vanity_inventory_v2",
+      "keys": null,
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/rechargeRewards.js",
+      "line": 30,
+      "name": "owner_load_banners",
+      "keys": null,
+      "spread": false
+    }
+  ],
+  "missing": [
+    {
+      "file": "owner-port/src/OwnerDailyCoinGrantCenter.js",
+      "line": 30,
+      "name": "owner_save_daily_coin_policy_v1",
+      "keys": [
+        "p_config",
+        "p_expected_updated_at",
+        "p_reason"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerEmojiCatalog.js",
+      "line": 18,
+      "name": "owner_list_room_emoji_catalog_v3",
+      "keys": [],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerEmojiCatalog.js",
+      "line": 33,
+      "name": "owner_upsert_room_emoji_catalog_v3",
+      "keys": [
+        "p_reaction_key",
+        "p_display_label",
+        "p_emoji",
+        "p_sound_url",
+        "p_sort_order",
+        "p_active",
+        "p_media_url",
+        "p_poster_url",
+        "p_duration_ms",
+        "p_expected_updated_at",
+        "p_is_new"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerFinanceCenter.js",
+      "line": 44,
+      "name": "owner_update_diamond_economy_rate",
+      "keys": [
+        "p_diamonds_per_usd"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerFinanceCenter.js",
+      "line": 46,
+      "name": "get_merchant_transfer_policy",
+      "keys": [],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerFinanceCenter.js",
+      "line": 47,
+      "name": "owner_set_merchant_transfer_policy",
+      "keys": [
+        "p_enabled"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerFinanceCenter.js",
+      "line": 48,
+      "name": "owner_set_seller_transfer_policy",
+      "keys": [
+        "p_enabled"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerGiftCatalog.js",
+      "line": 48,
+      "name": "owner_save_gift_v3",
+      "keys": [
+        "p_gift",
+        "p_values",
+        "p_expected_version"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerIdentityCenter.js",
+      "line": 115,
+      "name": "owner_update_user_identity_v1",
+      "keys": [
+        "p_public_id",
+        "p_display_name",
+        "p_bio",
+        "p_avatar_url",
+        "p_cover_url",
+        "p_country_code",
+        "p_audio_url",
+        "p_expected_updated_at"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerIdentityCenter.js",
+      "line": 122,
+      "name": "owner_update_room_audio",
+      "keys": [
+        "p_room_public_id",
+        "p_audio_url"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerPolicyCenter.js",
+      "line": 842,
+      "name": "owner_save_notice_v85",
+      "keys": [
+        "p_delivery",
+        "p_pin_system",
+        "p_pin_room",
+        "p_action",
+        "p_notice",
+        "p_title",
+        "p_body",
+        "p_country_code",
+        "p_starts_at",
+        "p_expires_at"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerSettlementDesk.js",
+      "line": 12,
+      "name": "load_withdrawal_policy",
+      "keys": [],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/OwnerSettlementDesk.js",
+      "line": 14,
+      "name": "owner_update_withdrawal_policy",
+      "keys": [
+        "p_mode",
+        "p_min_units",
+        "p_max_units",
+        "p_allow_diamonds",
+        "p_allow_seller",
+        "p_official_enabled",
+        "p_merchant_enabled"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/effectPreferences.js",
+      "line": 56,
+      "name": "save_my_effect_preferences",
+      "keys": [
+        "cinematic",
+        "entry_sound",
+        "gift_sound",
+        "emoji_sound",
+        "reduce"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/social.js",
+      "line": 9,
+      "name": "record_room_visit",
+      "keys": [
+        "target_room"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/social.js",
+      "line": 15,
+      "name": "get_leaderboard",
+      "keys": [
+        "board",
+        "period",
+        "limit_count"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/social.js",
+      "line": 351,
+      "name": "load_public_profile_levels",
+      "keys": [
+        "p_target"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/social.js",
+      "line": 352,
+      "name": "load_public_profile_posts_v1",
+      "keys": [
+        "p_target"
+      ],
+      "spread": false
+    },
+    {
+      "file": "owner-port/src/social.js",
+      "line": 361,
+      "name": "load_notice_feed_v85",
+      "keys": [
+        "p_room"
+      ],
+      "spread": false
+    }
+  ],
+  "mismatched": []
+}

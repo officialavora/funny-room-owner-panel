@@ -1,0 +1,27 @@
+{
+  "name": "funny-room-owner-web-port",
+  "version": "1.0.0",
+  "description": "Original application Owner controls on approved existing panel",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node gift-contract-test.cjs && node access-test.mjs && node web-smoke.cjs",
+    "test:browser": "node browser-smoke.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "2.56.0",
+    "esbuild": "0.25.12",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native-web": "0.21.1"
+  },
+  "devDependencies": {
+    "@sparticuz/chromium": "138.0.2",
+    "jsdom": "26.1.0",
+    "playwright": "1.62.1"
+  }
+}

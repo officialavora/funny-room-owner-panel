@@ -1,0 +1,58 @@
+BEGIN;
+DO $$
+DECLARE f uuid:=gen_random_uuid(); child uuid:=gen_random_uuid(); parent uuid:=gen_random_uuid(); leaf uuid:=gen_random_uuid(); illegal uuid:=gen_random_uuid(); outsider uuid:=gen_random_uuid();u uuid;agency_parent uuid:=gen_random_uuid();agency_leaf uuid:=gen_random_uuid();agency_id uuid:=gen_random_uuid();upper_assignment uuid;denied boolean;body jsonb;mode text;
+BEGIN
+ FOREACH u IN ARRAY ARRAY[f,child,parent,leaf,illegal,outsider,agency_parent,agency_leaf] LOOP
+  INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES(u,'cp153-staff-'||u||'@example.invalid','{"display_name":"CP153 rollback staff"}');
+  INSERT INTO public.profiles(id,display_name,country_code) VALUES(u,'CP153 rollback staff','IN') ON CONFLICT(id) DO UPDATE SET country_code='IN';
+ END LOOP;
+ INSERT INTO private.role_assignments(user_id,role_key,context_type,context_id,status,granted_by) VALUES(f,'root_founder','global','*','active',null);
+ UPDATE auth.users SET raw_app_meta_data=jsonb_build_object('created_by',f,'panel_login_id','cp153-test') WHERE id IN(child,parent);
+ PERFORM set_config('request.jwt.claim.sub',f::text,true);
+ body:=public.panel_create_explicit_staff_authority(child,'admin',ARRAY['users.view'],'country','IN',null);
+ IF body->>'permission_mode'<>'explicit' OR NOT private.has_permission('users.view','country','IN',child) THEN RAISE EXCEPTION 'EXPLICIT_SELECTED_POWER_MISSING';END IF;
+ IF EXISTS(SELECT 1 FROM private.permission_definitions p WHERE p.permission_key<>'users.view' AND private.has_permission(p.permission_key,'country','IN',child)) THEN RAISE EXCEPTION 'UNSELECTED_ROLE_PRESET_ESCALATION';END IF;
+ IF private.has_permission('users.view','country','PK',child) OR private.has_permission('users.view','global','*',child) THEN RAISE EXCEPTION 'EXPLICIT_SCOPE_ESCAPED';END IF;
+ denied:=false;BEGIN PERFORM public.panel_create_explicit_staff_authority(outsider,'admin',ARRAY['users.view'],'country','IN',null);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%authenticated parent%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'UNOWNED_ID_REPLACED';END IF;
+ PERFORM public.panel_create_explicit_staff_authority(parent,'country_manager',ARRAY['users.view','roles.assign','roles.remove','permissions.assign'],'country','IN',null);
+ UPDATE auth.users SET raw_app_meta_data=jsonb_build_object('created_by',parent,'panel_login_id','cp153-leaf') WHERE id IN(leaf,illegal);
+ PERFORM set_config('request.jwt.claim.sub',parent::text,true);
+ PERFORM public.panel_create_explicit_staff_authority(leaf,'admin',ARRAY['users.view'],'country','IN',null);
+ IF NOT private.is_authority_descendant(parent,leaf) OR private.is_authority_descendant(child,leaf) THEN RAISE EXCEPTION 'EXPLICIT_PARENT_LINK_WRONG';END IF;
+ denied:=false;BEGIN PERFORM public.panel_create_explicit_staff_authority(illegal,'co_owner',ARRAY['users.view'],'country','IN',null);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%below your own%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'DELEGATE_HIGHER_RANK';END IF;
+ denied:=false;BEGIN PERFORM public.panel_create_explicit_staff_authority(illegal,'admin',ARRAY['wallet.adjust'],'country','IN',null);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%cannot be delegated%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'DELEGATE_FINANCE_POWER';END IF;
+ denied:=false;BEGIN PERFORM public.panel_create_explicit_staff_authority(illegal,'admin',ARRAY['users.view'],'country','PK',null);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%selected scope%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'DELEGATE_OTHER_COUNTRY';END IF;
+ IF EXISTS(SELECT 1 FROM private.role_assignments WHERE user_id=illegal) THEN RAISE EXCEPTION 'FAILED_CREATION_LEFT_ROLE';END IF;
+ PERFORM set_config('request.jwt.claim.sub',f::text,true);
+ upper_assignment:=public.owner_assign_multi_role(leaf,'co_owner','country','IN',null,'CP153 suspended upper post',false);
+ PERFORM public.owner_set_role_state(upper_assignment,'suspended','CP153 suspend upper post');
+ PERFORM set_config('request.jwt.claim.sub',parent::text,true);
+ denied:=false;BEGIN PERFORM public.owner_set_role_state(upper_assignment,'active','try restore higher post');EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%posts below%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'RESTORE_HIGHER_RANK_ESCALATION';END IF;
+ IF EXISTS(SELECT 1 FROM public.panel_staff_tree() WHERE assignment_id=upper_assignment) THEN RAISE EXCEPTION 'UPPER_POST_METADATA_VISIBLE';END IF;
+ denied:=false;BEGIN PERFORM public.owner_assign_multi_role(leaf,'bd','country','IN',null,'Try lower role on upper protected ID',false);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%higher protected post%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'EXISTING_UPPER_ID_ROLE_ESCALATION';END IF;
+ denied:=false;BEGIN PERFORM public.owner_set_permission_override((SELECT public_id FROM public.profiles WHERE id=leaf),'users.view',true,'country','IN',null,'Try upper protected ID power');EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%higher protected post%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'EXISTING_UPPER_ID_PERMISSION_ESCALATION';END IF;
+ PERFORM set_config('request.jwt.claim.sub',f::text,true);
+ upper_assignment:=public.owner_assign_multi_role(outsider,'admin','country','IN',null,'Other branch',false);
+ PERFORM public.owner_set_role_state(upper_assignment,'suspended','Other branch suspended');
+ PERFORM set_config('request.jwt.claim.sub',parent::text,true);
+ denied:=false;BEGIN PERFORM public.owner_assign_multi_role(outsider,'admin','country','IN',null,'Try taking suspended other branch',false);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%another protected staff branch%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'SUSPENDED_OTHER_BRANCH_STOLEN';END IF;
+ PERFORM set_config('request.jwt.claim.sub',f::text,true);
+ INSERT INTO public.organizations(id,kind,name,owner_id) VALUES(agency_id,'agency','CP153 fixture agency',f);
+ UPDATE auth.users SET raw_app_meta_data=jsonb_build_object('created_by',f,'panel_login_id','cp153-agency') WHERE id=agency_parent;
+ PERFORM public.panel_create_explicit_staff_authority(agency_parent,'manager',ARRAY['users.view','roles.assign','permissions.assign'],'agency',agency_id::text,null);
+ UPDATE auth.users SET raw_app_meta_data=jsonb_build_object('created_by',agency_parent,'panel_login_id','cp153-agency-leaf') WHERE id=agency_leaf;
+ PERFORM set_config('request.jwt.claim.sub',agency_parent::text,true);
+ PERFORM public.panel_create_explicit_staff_authority(agency_leaf,'admin',ARRAY['users.view'],'agency',agency_id::text,null);
+ IF NOT private.can_view_user(agency_leaf,agency_parent) OR private.can_view_user(child,agency_parent) THEN RAISE EXCEPTION 'AGENCY_STAFF_BRANCH_SCOPE_FAIL';END IF;
+ RAISE NOTICE 'CP153 EXACT STAFF POWERS PASS';
+END $$;
+
+ROLLBACK;

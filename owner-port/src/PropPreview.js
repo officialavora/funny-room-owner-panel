@@ -1,0 +1,19 @@
+import React,{useEffect,useState} from 'react';
+import {AppState,Modal,Pressable,StyleSheet,Text,View,useWindowDimensions} from 'react-native';
+import PropArtwork,{GeneratedEntryScene} from './PropArtwork';
+import {usePlaybackEffectPreferences,useEffectPreferences} from './effectPreferences';
+import {startCatalogEntryAudio} from './catalogEntryAudio';
+import {startOriginalEffectAudio} from './originalEffectAudio';
+import {emotionalEntryKey} from './emotionalSoundRouting';
+
+export default function PropPreview({item,user,owned,equipped,saving,onEquip,onBuy,onClose,previewOnly=false}){
+ const {width,height}=useWindowDimensions(),{budget,prefs}=usePlaybackEffectPreferences(),{update}=useEffectPreferences();const [foreground,setForeground]=useState(AppState.currentState==='active');
+ const soundHandle=React.useRef(null);useEffect(()=>()=>soundHandle.current?.stop?.(),[]);
+ const size=Math.min(380,width-48,height*.5),duration=Math.max(5000,Math.min(10000,Number(item?.visual?.duration_ms)||8100));
+ useEffect(()=>{const sub=AppState.addEventListener('change',state=>setForeground(state==='active'));return()=>sub.remove();},[]);
+ useEffect(()=>{if(!item||item.kind!=='entry'||!foreground)return;const sound=startCatalogEntryAudio(item.sound_url,duration,item);return()=>sound.stop();},[item,foreground,duration,prefs?.entrySounds]);
+ if(!item)return null;
+ return <Modal transparent animationType="fade" onRequestClose={onClose}><View style={s.shade}><View style={s.sheet}><Text style={s.title}>{item.name}</Text>{item.kind==='entry'&&foreground?<GeneratedEntryScene item={item} profile={user} size={size} duration={duration} animate={budget.level==='full'||budget.level==='lite'}/>:<PropArtwork item={item} profile={user} size={Math.min(size,230)}/>}<Text style={s.info}>{String(item.tier||'standard').toUpperCase()} • {item.duration_days||30} DAYS</Text><Text style={s.price}>{item.purchasable?`${Number(item.price_coins).toLocaleString()} COINS`:'BENEFIT / OWNER ASSIGNMENT'}</Text><View style={{flexDirection:'row',gap:10}}>{['original','soft','off'].map(mode=><Pressable key={mode} onPress={()=>update({[(item.kind==='entry'?'entry':'frame')+'SoundStyle']:mode,[(item.kind==='entry'?'entry':'frame')+'Sounds']:mode!=='off'})}><Text style={{color:'#E2CBEF',fontSize:10}}>{mode.toUpperCase()}</Text></Pressable>)}</View>{item.kind!=='entry'?<Pressable accessibilityLabel='Preview matching sound' onPress={()=>{soundHandle.current?.stop?.();soundHandle.current=startOriginalEffectAudio(emotionalEntryKey(item),{category:'frame',url:item.sound_url});}}><Text style={{color:'#80E5EC',fontSize:12}}>PREVIEW SOUND</Text></Pressable>:null}<View style={s.actions}>{!previewOnly&&owned?<Pressable disabled={Boolean(saving)} onPress={()=>onEquip(item)} style={s.button}><Text style={s.text}>{saving?'SAVING…':equipped?'REMOVE':'SAVE / EQUIP'}</Text></Pressable>:!previewOnly&&item.purchasable?<Pressable disabled={Boolean(saving)} onPress={()=>onBuy(item)} style={s.button}><Text style={s.text}>{saving?'BUYING…':'BUY & EQUIP'}</Text></Pressable>:null}<Pressable disabled={Boolean(saving)} onPress={onClose} style={[s.button,s.close]}><Text style={s.text}>CLOSE</Text></Pressable></View></View></View></Modal>;
+}
+const s=StyleSheet.create({shade:{flex:1,backgroundColor:'#000B',justifyContent:'center',alignItems:'center',padding:16},sheet:{maxWidth:480,width:'100%',borderRadius:24,borderWidth:1,borderColor:'#B89A56',backgroundColor:'#100C1F',padding:16,gap:12,alignItems:'center'},title:{color:'#FFE8AD',fontSize:19,fontWeight:'900',textAlign:'center'},info:{color:'#C6B9DD',fontSize:12,fontWeight:'800'},price:{color:'#FFD76D',fontSize:12,fontWeight:'800'},actions:{flexDirection:'row',gap:8,width:'100%'},button:{flex:1,minHeight:46,borderRadius:14,backgroundColor:'#6142B5',alignItems:'center',justifyContent:'center',paddingHorizontal:8},close:{backgroundColor:'#292036'},text:{color:'#FFE8AD',fontWeight:'900',fontSize:12}});
+
