@@ -1,5 +1,6 @@
 // Original neural generated audio; provenance in docs/checkpoint142-recovered-audio.json.
 export const ORIGINAL_AUDIO={
+ marryMe:require('../assets/audio/cp155/marry-me.mp3'),
  glassWater:require('../assets/brand152/water-glass-pour.mp3'),
  glassMilk:require('../assets/brand152/milk-glass-pour.mp3'),
  glassJuice:require('../assets/brand152/juice-glass-pour.mp3'),
@@ -52,5 +53,6 @@ export const ORIGINAL_AUDIO={
  dragon:require('../assets/audio/cp142/dragon.mp3'),
  kiss:require('../assets/audio/cp142/kiss.mp3'),
 };
-export const ORIGINAL_AUDIO_DURATION={"glassWater":2038,"glassMilk":2038,"glassJuice":2038,"glassCheers":2038,"brandPerfume":2038,"brandFunny":2038,"brandWater":2038,"brandJuice":2038,"brandMilk":2038,"brandCheers":2038,"dragon_ivory":8046,"dragon_crimson":8046,"dragon_emerald":8046,"fart":2038,"laugh": 5042, "cry": 5042, "happy": 4049, "love": 5042, "surprise": 4049, "angry": 4049, "ghost": 5042, "clap": 5042, "pop": 4049, "fire": 6034, "royal": 8046, "couple": 8046, "horse": 8046, "orbit": 8046, "funny": 8046, "birthday": 8046, "dog": 4049, "crow": 4049, "donkey": 5042, "peacock": 4049, "elephant": 5042, "eagle": 4049, "drum": 5042, "bell": 4049, "boxing": 4049, "football": 4049, "jet": 7027, "tractor": 6034, "slipper": 4049, "coin": 4049, "professional": 6034, "thinking": 4049, "sleep": 5042, "greeting": 4049, "dragon": 8046, "kiss": 5042};
+export const ORIGINAL_AUDIO_DURATION={
+ "marryMe":1150,"glassWater":2038,"glassMilk":2038,"glassJuice":2038,"glassCheers":2038,"brandPerfume":2038,"brandFunny":2038,"brandWater":2038,"brandJuice":2038,"brandMilk":2038,"brandCheers":2038,"dragon_ivory":8046,"dragon_crimson":8046,"dragon_emerald":8046,"fart":2038,"laugh": 5042, "cry": 5042, "happy": 4049, "love": 5042, "surprise": 4049, "angry": 4049, "ghost": 5042, "clap": 5042, "pop": 4049, "fire": 6034, "royal": 8046, "couple": 8046, "horse": 8046, "orbit": 8046, "funny": 8046, "birthday": 8046, "dog": 4049, "crow": 4049, "donkey": 5042, "peacock": 4049, "elephant": 5042, "eagle": 4049, "drum": 5042, "bell": 4049, "boxing": 4049, "football": 4049, "jet": 7027, "tractor": 6034, "slipper": 4049, "coin": 4049, "professional": 6034, "thinking": 4049, "sleep": 5042, "greeting": 4049, "dragon": 8046, "kiss": 5042};
 

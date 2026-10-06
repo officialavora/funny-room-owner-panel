@@ -1457,6 +1457,10 @@
     "assets/audio/cp142/orbit.mp3": {
       "sha256": "fa386aa84f70f51fabce55241d1c1eaf72a973d13693864afd7a0bb57dd071be",
       "bytes": 129193
+    },
+    "assets/audio/cp155/marry-me.mp3": {
+      "sha256": "988a8cc9e1f5a7fc302d8c4e2c180581d25cbd77f47db7b33b6742eb112cdbf1",
+      "bytes": 18852
     }
   }
 }

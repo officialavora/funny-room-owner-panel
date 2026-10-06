@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict'),crypto=require('crypto');
+const routing=fs.readFileSync('src/emotionalSoundRouting.js','utf8');
+const load=s=>{const c={};vm.runInNewContext(s.replace(/export /g,'' )+';this.route=emotionalGiftKey;',c);return c.route;};
+const route=load(routing),old=load(routing.replace(/if\(gift.slug==='room-marry-me'.*?return 'marryMe';\n/,''));
+for(const gift of [{slug:'room-marry-me'},{id:'11db24f1-9f67-48fd-9db5-5324b37cd6ab'},{name:'Marry Me'}])assert.equal(route(gift),'marryMe');
+for(const name of ['Love','Kiss','Rocket','Tractor','Dragon','Marry Me Again','Birthday','Crow','Boxing','Coin','Jet','Happy',''])assert.equal(route({slug:'other',name}),old({slug:'other',name}),name);
+const assets=fs.readFileSync('src/originalAudioAssets.js','utf8');
+assert(assets.includes("marryMe:require('../assets/audio/cp155/marry-me.mp3')"));
+assert(assets.includes('"marryMe":1150'));
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync('assets/audio/cp155/marry-me.mp3')).digest('hex'),'988a8cc9e1f5a7fc302d8c4e2c180581d25cbd77f47db7b33b6742eb112cdbf1');
+console.log('CP155 Marry Me exact gift route, other gift routes and original voice integrity PASS');
