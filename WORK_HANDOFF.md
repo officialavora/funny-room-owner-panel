@@ -1,0 +1,7 @@
+# Owner recovery continuity — CP161, INCOMPLETE
+
+Read AGENTS.md and CHECKPOINT161_HANDOFF.md. Original Owner main remains56443d6c9450773abf8b5872dd6eaf8ae649f309 at the sole approved host. Candidateapp.js source628142cb3cd2374d03139936e01606384284f5d2 and routing testafcff8bf3ac336d5fc8a9fb8a505711859b6cc50 restore three dangling control routes with lifecycle cleanup and original LIVE client. Actual source routing/syntax tests PASS; no Owner deployment or staff grant.
+
+Matching app's verified source29255343de5078d6d0f8ad7ba885a9a032d8cf1a passed full CI37547154138:121 checks, Doctor18/18, export1692. App documentation checkpoint2a54efb7e2eeb0d59368038054c86975d794fccd preserves the entire master and177 recovered record versions/5549 indexed statements. Those are recovered history, not complete semantic acceptance. All previous Owner rules and migration-reference history remain unchanged in this repository.
+
+LIVE lacks the exact-power staff SQL/Edge workflow, new catalog contracts and verified preview-only server scope. Staging finance/brand recovery is separate; keep original LIVE accounts and do not replace the installed app with empty staging. No CP161 OTA/native build/Store deployment; the complete combined recovery remains unaccepted. Necessary CI/test OTA/build permission is already granted within preserved test-only scope. Continue all26 app ledger areas, unavailable349484.mp4/reference parity, matching Owner/backend/device checks; no partial100% claim.
