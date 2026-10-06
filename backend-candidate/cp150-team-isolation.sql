@@ -1,3 +1,10 @@
+CREATE OR REPLACE FUNCTION private.authority_assignment_in_branch_v153(p_actor uuid,p_user uuid,p_grantor uuid)
+RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path TO '' AS $function$
+ select p_actor is not null and (private.is_founder(p_actor) or p_user=p_actor or
+  (private.active_role_rank(p_actor)>0 and (p_grantor=p_actor or (private.is_authority_descendant(p_actor,p_grantor) and private.can_view_user(p_grantor,p_actor)))));
+$function$;
+REVOKE ALL ON FUNCTION private.authority_assignment_in_branch_v153(uuid,uuid,uuid) FROM PUBLIC,anon,authenticated;
+
 CREATE OR REPLACE FUNCTION private.active_role_rank(p_user uuid)
  RETURNS integer
  LANGUAGE sql
@@ -138,6 +145,7 @@ AS $function$
   left join public.profiles parent on parent.id=ra.granted_by
   where auth.uid() is not null
     and ra.status in ('active','temporary','suspended','under_review')
+    and private.authority_assignment_in_branch_v153(auth.uid(),ra.user_id,ra.granted_by)
     and (private.is_founder(auth.uid()) or (private.is_authority_descendant(auth.uid(),ra.user_id) and private.can_view_user(ra.user_id,auth.uid()) and (ra.user_id=auth.uid() or rd.rank<private.active_role_rank(auth.uid()))))
   order by rd.rank desc,ra.created_at,p.public_id;
 $function$;
@@ -153,11 +161,11 @@ CREATE OR REPLACE FUNCTION public.owner_set_role_state(p_assignment uuid, p_stat
  SECURITY DEFINER
  SET search_path TO ''
 AS $function$
-declare actor uuid:=auth.uid(); target uuid; role_name text; scope_type text; scope_id text; assigned_rank integer; actor_rank integer; actor_ceiling integer;
+declare actor uuid:=auth.uid(); target uuid; role_name text; scope_type text; scope_id text; assignment_parent uuid; assigned_rank integer; actor_rank integer; actor_ceiling integer;
 begin
  if actor is null then raise exception 'Authentication required'; end if;
  if p_status not in ('active','suspended','under_review','revoked') then raise exception 'Invalid status'; end if;
- select user_id,role_key,context_type,context_id into target,role_name,scope_type,scope_id
+ select user_id,role_key,context_type,context_id,granted_by into target,role_name,scope_type,scope_id,assignment_parent
  from private.role_assignments where id=p_assignment for update;
  if target is null then raise exception 'Assignment not found'; end if;
  if role_name='root_founder' then raise exception 'Founder role is protected'; end if;
@@ -171,6 +179,7 @@ begin
     if assigned_rank>actor_ceiling then raise exception 'Role restoration exceeds delegation ceiling';end if;
    end if;
    if not private.is_authority_descendant(actor,target) then raise exception 'Target is outside your staff tree'; end if;
+   if not private.authority_assignment_in_branch_v153(actor,target,assignment_parent) then raise exception 'Assignment belongs to another authority branch';end if;
    if not private.has_permission('roles.remove',scope_type,scope_id,actor) then raise exception 'Role removal permission required for this scope'; end if;
  end if;
  update private.role_assignments set status=p_status,is_primary=false,
@@ -204,9 +213,9 @@ begin
   select jsonb_build_object(
     'profile',(select jsonb_build_object('id',p.id,'public_id',p.public_id,'display_name',p.display_name,'avatar_url',p.avatar_url,'country_code',p.country_code,'status',p.status,'level',p.level,'vip_level',p.vip_level) from public.profiles p where p.id=target),
     'actor_rank',actor_rank,'delegation_ceiling',actor_ceiling,
-    'roles',coalesce((select jsonb_agg(jsonb_build_object('assignment_id',ra.id,'role_key',ra.role_key,'title',rd.display_name,'rank',rd.rank,'context_type',ra.context_type,'context_id',ra.context_id,'status',ra.status,'expires_at',ra.expires_at) order by rd.rank desc,ra.created_at desc) from private.role_assignments ra join private.role_definitions rd on rd.role_key=ra.role_key where ra.user_id=target and ra.status in ('active','temporary','under_review','suspended') and (private.is_founder(actor) or target=actor or rd.rank<actor_rank)),'[]'::jsonb),
-    'role_permissions',coalesce((select jsonb_agg(jsonb_build_object('role_key',ra.role_key,'permission_key',rp.permission_key,'context_type',ra.context_type,'context_id',ra.context_id,'expires_at',ra.expires_at) order by ra.created_at desc,rp.permission_key) from private.role_assignments ra join private.role_permissions rp on rp.role_key=ra.role_key join private.role_definitions scope_definition on scope_definition.role_key=ra.role_key where ra.user_id=target and (private.is_founder(actor) or target=actor or scope_definition.rank<actor_rank) and ra.status in ('active','temporary') and (ra.expires_at is null or ra.expires_at>now())),'[]'::jsonb),
-    'permission_overrides',coalesce((select jsonb_agg(jsonb_build_object('id',po.id,'permission_key',po.permission_key,'allowed',po.allowed,'context_type',po.context_type,'context_id',po.context_id,'status',po.status,'expires_at',po.expires_at,'reason',po.reason) order by po.created_at desc) from private.permission_overrides po where po.user_id=target and po.status='active' and (po.expires_at is null or po.expires_at>now())),'[]'::jsonb),
+    'roles',coalesce((select jsonb_agg(jsonb_build_object('assignment_id',ra.id,'role_key',ra.role_key,'title',rd.display_name,'rank',rd.rank,'context_type',ra.context_type,'context_id',ra.context_id,'status',ra.status,'expires_at',ra.expires_at) order by rd.rank desc,ra.created_at desc) from private.role_assignments ra join private.role_definitions rd on rd.role_key=ra.role_key where ra.user_id=target and ra.status in ('active','temporary','under_review','suspended') and private.authority_assignment_in_branch_v153(actor,ra.user_id,ra.granted_by) and (private.is_founder(actor) or target=actor or rd.rank<actor_rank)),'[]'::jsonb),
+    'role_permissions',coalesce((select jsonb_agg(jsonb_build_object('role_key',ra.role_key,'permission_key',rp.permission_key,'context_type',ra.context_type,'context_id',ra.context_id,'expires_at',ra.expires_at) order by ra.created_at desc,rp.permission_key) from private.role_assignments ra join private.role_permissions rp on rp.role_key=ra.role_key join private.role_definitions scope_definition on scope_definition.role_key=ra.role_key where ra.user_id=target and private.authority_assignment_in_branch_v153(actor,ra.user_id,ra.granted_by) and (private.is_founder(actor) or target=actor or scope_definition.rank<actor_rank) and ra.status in ('active','temporary') and (ra.expires_at is null or ra.expires_at>now())),'[]'::jsonb),
+    'permission_overrides',coalesce((select jsonb_agg(jsonb_build_object('id',po.id,'permission_key',po.permission_key,'allowed',po.allowed,'context_type',po.context_type,'context_id',po.context_id,'status',po.status,'expires_at',po.expires_at,'reason',po.reason) order by po.created_at desc) from private.permission_overrides po where po.user_id=target and private.authority_assignment_in_branch_v153(actor,po.user_id,po.granted_by) and po.status='active' and (po.expires_at is null or po.expires_at>now())),'[]'::jsonb),
     'available_permissions',coalesce((select jsonb_agg(jsonb_build_object('permission_key',pd.permission_key,'description',pd.description,'sensitive',pd.sensitive) order by pd.permission_key) from private.permission_definitions pd),'[]'::jsonb),
     'available_roles',coalesce((select jsonb_agg(jsonb_build_object('role_key',rd.role_key,'display_name',rd.display_name,'rank',rd.rank,'sensitive',rd.is_sensitive) order by rd.rank desc) from private.role_definitions rd where rd.active and rd.role_key<>'root_founder' and rd.rank<actor_rank and rd.rank<=actor_ceiling),'[]'::jsonb)
   ) into result;

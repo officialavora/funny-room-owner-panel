@@ -29,6 +29,7 @@ begin
    and not private.is_authority_descendant(actor,p_user) then
    raise exception 'Target already belongs to another protected staff branch';
  end if;
+ if not private.is_founder(actor) and exists(select 1 from private.role_assignments x where x.user_id=p_user and x.role_key=p_role and x.context_type=p_context_type and x.context_id=case when p_context_type='country' then upper(p_context_id) else p_context_id end and x.status in ('active','temporary','under_review','suspended') and not private.authority_assignment_in_branch_v153(actor,x.user_id,x.granted_by)) then raise exception 'Existing assignment belongs to another authority branch';end if;
  select coalesce(max(rd.delegation_ceiling),0) into actor_ceiling
  from private.role_assignments ra join private.role_definitions rd on rd.role_key=ra.role_key
  where ra.user_id=actor and ra.status in ('active','temporary') and (ra.starts_at is null or ra.starts_at<=now()) and exists(select 1 from private.role_definitions effective_definition where effective_definition.role_key=ra.role_key and effective_definition.active) and (ra.expires_at is null or ra.expires_at>now());
@@ -83,6 +84,7 @@ begin
  select id into override_id from private.permission_overrides
  where user_id=target and permission_key=p_permission and context_type=p_context_type
    and context_id=normalized_context_id and status='active' order by created_at desc limit 1;
+ if override_id is not null and not private.is_founder(actor) and exists(select 1 from private.permission_overrides po where po.id=override_id and not private.authority_assignment_in_branch_v153(actor,po.user_id,po.granted_by)) then raise exception 'Permission belongs to another authority branch';end if;
  if override_id is null then
    insert into private.permission_overrides(user_id,permission_key,allowed,context_type,context_id,status,expires_at,granted_by,reason)
    values(target,p_permission,p_allowed,p_context_type,normalized_context_id,'active',p_expires_at,actor,left(coalesce(p_reason,''),500))

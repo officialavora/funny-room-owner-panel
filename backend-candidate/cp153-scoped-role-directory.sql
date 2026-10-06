@@ -7,6 +7,7 @@ LANGUAGE sql STABLE SECURITY DEFINER SET search_path TO '' AS $function$
  left join private.role_assignments ra on ra.role_key=rd.role_key
   and ra.status in ('active','temporary') and (ra.starts_at is null or ra.starts_at<=now())
   and (ra.expires_at is null or ra.expires_at>now())
+  and private.authority_assignment_in_branch_v153(auth.uid(),ra.user_id,ra.granted_by)
   and (private.is_founder(auth.uid()) or
    (private.is_authority_descendant(auth.uid(),ra.user_id) and private.can_view_user(ra.user_id,auth.uid())
     and (ra.user_id=auth.uid() or rd.rank<private.active_role_rank(auth.uid()))))
@@ -20,7 +21,7 @@ LANGUAGE sql STABLE SECURITY DEFINER SET search_path TO '' AS $function$
  select ra.id,p.id,p.public_id,p.display_name,ra.role_key,ra.context_type,ra.context_id,ra.status,ra.expires_at
  from private.role_assignments ra join public.profiles p on p.id=ra.user_id
  join private.role_definitions rd on rd.role_key=ra.role_key
- where auth.uid() is not null and ra.role_key=p_role and
+ where auth.uid() is not null and ra.role_key=p_role and private.authority_assignment_in_branch_v153(auth.uid(),ra.user_id,ra.granted_by) and
  (private.is_founder(auth.uid()) or
   (private.active_role_rank(auth.uid())>0 and ra.status in ('active','temporary','suspended','under_review')
    and private.is_authority_descendant(auth.uid(),ra.user_id) and private.can_view_user(ra.user_id,auth.uid())

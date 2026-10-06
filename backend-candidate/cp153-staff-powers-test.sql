@@ -1,6 +1,6 @@
 BEGIN;
 DO $$
-DECLARE f uuid:=gen_random_uuid(); child uuid:=gen_random_uuid(); parent uuid:=gen_random_uuid(); leaf uuid:=gen_random_uuid(); illegal uuid:=gen_random_uuid(); outsider uuid:=gen_random_uuid();u uuid;agency_parent uuid:=gen_random_uuid();agency_leaf uuid:=gen_random_uuid();agency_id uuid:=gen_random_uuid();upper_assignment uuid;denied boolean;body jsonb;mode text;
+DECLARE f uuid:=gen_random_uuid(); child uuid:=gen_random_uuid(); parent uuid:=gen_random_uuid(); leaf uuid:=gen_random_uuid(); illegal uuid:=gen_random_uuid(); outsider uuid:=gen_random_uuid();u uuid;agency_parent uuid:=gen_random_uuid();agency_leaf uuid:=gen_random_uuid();agency_id uuid:=gen_random_uuid();upper_assignment uuid;foreign_assignment uuid;denied boolean;body jsonb;mode text;
 BEGIN
  FOREACH u IN ARRAY ARRAY[f,child,parent,leaf,illegal,outsider,agency_parent,agency_leaf] LOOP
   INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES(u,'cp153-staff-'||u||'@example.invalid','{"display_name":"CP153 rollback staff"}');
@@ -27,6 +27,20 @@ BEGIN
  denied:=false;BEGIN PERFORM public.panel_create_explicit_staff_authority(illegal,'admin',ARRAY['users.view'],'country','PK',null);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%selected scope%';END;
  IF NOT denied THEN RAISE EXCEPTION 'DELEGATE_OTHER_COUNTRY';END IF;
  IF EXISTS(SELECT 1 FROM private.role_assignments WHERE user_id=illegal) THEN RAISE EXCEPTION 'FAILED_CREATION_LEFT_ROLE';END IF;
+ PERFORM set_config('request.jwt.claim.sub',f::text,true);
+ foreign_assignment:=public.owner_assign_multi_role(leaf,'moderator','country','IN',null,'CP153 separately assigned Root post',false);
+ PERFORM public.owner_set_permission_override((SELECT public_id FROM public.profiles WHERE id=leaf),'profiles.manage',true,'country','IN',null,'Foreign branch Root-only note');
+ PERFORM set_config('request.jwt.claim.sub',parent::text,true);
+ IF EXISTS(SELECT 1 FROM public.panel_staff_tree() WHERE assignment_id=foreign_assignment) THEN RAISE EXCEPTION 'CHILD_SECOND_POST_LEAKS_UPPER_PARENT';END IF;
+ IF EXISTS(SELECT 1 FROM public.owner_role_members('moderator') WHERE user_id=leaf) THEN RAISE EXCEPTION 'CHILD_FOREIGN_POST_DIRECTORY_LEAK';END IF;
+ body:=public.owner_authority_dashboard((SELECT public_id FROM public.profiles WHERE id=leaf));
+ IF EXISTS(SELECT 1 FROM jsonb_array_elements(body->'roles') r WHERE r->>'assignment_id'=foreign_assignment::text) OR body::text LIKE '%Foreign branch Root-only note%' THEN RAISE EXCEPTION 'CHILD_FOREIGN_POWER_METADATA_LEAK';END IF;
+ denied:=false;BEGIN PERFORM public.owner_set_role_state(foreign_assignment,'suspended','Try another branch post on own child');EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%another authority branch%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'CHILD_FOREIGN_POST_MANAGED';END IF;
+ denied:=false;BEGIN PERFORM public.owner_assign_multi_role(leaf,'moderator','country','IN',null,'Try foreign post upsert',false);EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%another authority branch%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'CHILD_FOREIGN_POST_UPSERT_TAKEOVER';END IF;
+ denied:=false;BEGIN PERFORM public.owner_set_permission_override((SELECT public_id FROM public.profiles WHERE id=leaf),'profiles.manage',false,'country','IN',null,'Try foreign permission edit');EXCEPTION WHEN OTHERS THEN denied:=sqlerrm LIKE '%another authority branch%';END;
+ IF NOT denied THEN RAISE EXCEPTION 'CHILD_FOREIGN_PERMISSION_EDIT';END IF;
  PERFORM set_config('request.jwt.claim.sub',f::text,true);
  upper_assignment:=public.owner_assign_multi_role(leaf,'co_owner','country','IN',null,'CP153 suspended upper post',false);
  PERFORM public.owner_set_role_state(upper_assignment,'suspended','CP153 suspend upper post');
