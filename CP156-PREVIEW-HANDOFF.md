@@ -1,3 +1,13 @@
+# CP156 final combined test delivery — 6 October 2026
+
+Android preview/runtime0.10.65 published at2026-10-06T16:43:35.124Z from canonical native e7350887f0577852505350a7c5cb1b89d186b58c. Group4bea6096-bb3b-4246-9d93-e8d8abe1b456; update01a11219-5f54-7382-9857-859799dca549. Full canonical publisher37497342397/job112385164968 PASS: all original required guards,73 authentication/isolation cases, Doctor18/18 and1666-module Android export. Normal manifestHTTP200 delivered exact ID/453assets; CP131 production isolation before/after PASS; no native build/Play/production OTA/channel remap. EAS actual installs0 at audit; phone acceptance is NOT TESTED.
+
+Paired Owner preview publication342c1029e51ff839ed9bcb186a90ce813521dedb/Pages37496934775 PASS; public previewHTTP200 verified. Main accepted Owner app/index/styles and prior media unchanged. Whole live Owner backend migration is not claimed: preview uses staged data and main uses existing accepted live backend. Root work identity unchanged. Stage Root email now reserved to exact protected UUID; wrong UUID denial passed. Temporary API probe retired410 and all2 test users/history/room cleaned.
+
+Final complete native WORK_HANDOFF.md and AGENTS.md checkpoint c8718332a348fe42cd11e641a7965fe1504f5d49. Same saved report updated with full prior history. One-shot publisher retired; manual source-only default restored, no documentation push OTA. Worldwide translations, neural entry music, cosmetic integrations, SMS and physical A–Z checks remain explicit; never label source/server delivery full100percent.
+
+Prior checkpoint retained below; this final section supersedes its pending OTA status:
+
 # CP156 isolated Owner preview
 
 Approved host: https://officialavora.github.io/funny-room-owner-panel/preview.html
