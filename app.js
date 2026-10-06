@@ -47,24 +47,7 @@ const ACTIONS={
 };
 
 const STAFF_POWERS=["users.view","profiles.manage","roles.assign","events.manage","users.suspend","wallet.adjust","moderation.manage","room_emoji_catalog.manage","reports.view","support.manage","audit.view","finance.view"];
-async function openStaffCreation(){
- $('#dialogTitle').textContent='Create staff login';
- $('#dialogFields').innerHTML='<label>Panel Login ID</label><input id="staffLogin" autocomplete="off" autocapitalize="none"><label>Temporary password (10+ characters)</label><input id="staffPassword" type="password" autocomplete="new-password"><label>Role</label><select id="staffRole">'+['co_owner','country_manager','manager','super_admin','admin','bd_leader','bd','moderator','cs','event_manager','coin_seller','agency_owner','host'].map(r=>'<option value="'+r+'"'+(r==='admin'?' selected':'')+'>'+r.replaceAll('_',' ')+'</option>').join('')+'</select><fieldset><legend>Granted permissions</legend>'+STAFF_POWERS.map(p=>'<label><input type="checkbox" data-staff-power="'+p+'"'+(p==='users.view'?' checked':'')+'> '+p+'</label>').join('')+'</fieldset>';
- $('#dialogSubmit').onclick=async()=>{
-  const login=$('#staffLogin').value.trim(),password=$('#staffPassword').value,role=$('#staffRole').value,permissions=[...document.querySelectorAll('[data-staff-power]:checked')].map(e=>e.dataset.staffPower);
-  if(!/^[a-z][a-z0-9._-]{2,31}$/.test(login))return toast('Login ID must be 3–32 lowercase letters/numbers, starting with a letter.',true);
-  if(password.length<10)return toast('Temporary password must contain at least 10 characters.',true);
-  if(!confirm('Create '+login+' as '+role+' with '+permissions.length+' permissions?'))return;
-  $('#dialogSubmit').disabled=true;
-  try{
-   const {data:{session},error:sessionError}=await supabase.auth.getSession();
-   if(sessionError||!session)throw new Error('Please sign in again');
-   const response=await fetch('https://zspcgyhchaqpiyujyxqp.supabase.co/functions/v1/panel-admin',{method:'POST',headers:{'Content-Type':'application/json',apikey:'sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ',Authorization:'Bearer '+session.access_token},body:JSON.stringify({action:'create_staff',login_id:login,password,role,permissions})});
-   const result=await response.json();if(!response.ok)throw new Error(result.message||'Staff creation failed');
-   $('#staffPassword').value='';$('#actionDialog').close();toast('Staff login '+result.login_id+' created. ID: '+result.public_id);await go(page);
-  }catch(e){toast(e.message,true)}finally{$('#dialogSubmit').disabled=false}
- };$('#actionDialog').showModal();
-}
+async function openStaffCreation(){toast('Staff login creation is paused until the verified exact-permissions workflow is released. Existing staff and permanent-ID controls remain available.',true)}
 
 function wire(){document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>openAction(b.dataset.action,b.dataset.id))}
 function openAction(key,id){if(key==='createStaff')return openStaffCreation();let a=ACTIONS[key];if(!a)return toast('This advanced control opens after its safe preview contract is selected.',true);$('#dialogTitle').textContent=a.title;$('#dialogFields').innerHTML=a.fields.map(([n,l,t='text',opts])=>`<label>${l}</label>${t==='select'?`<select data-field="${n}">${opts.split(',').map(x=>`<option value="${x}">${x}</option>`).join('')}</select>`:`<input data-field="${n}" type="${t}">`}`).join('');$('#dialogSubmit').onclick=async()=>{let args={...(a.defaults||{})};document.querySelectorAll('[data-field]').forEach(el=>{let v=el.value;if(el.type==='number')v=v===''?null:Number(v);if(v==='true'||v==='false')v=v==='true';if(el.dataset.field==='p_categories')v=v.split(',').map(x=>x.trim()).filter(Boolean);args[el.dataset.field]=v});if(a.idKey)args[a.idKey]=id;try{$('#dialogSubmit').disabled=true;let d=await rpc(a.rpc,args);$('#actionDialog').close();toast('Action completed and audit recorded');await go(page);console.info('Operation result',d)}catch(e){toast(e.message,true)}finally{$('#dialogSubmit').disabled=false}};$('#actionDialog').showModal()}
