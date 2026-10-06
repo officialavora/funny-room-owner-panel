@@ -1,0 +1,1538 @@
+{
+  "checkpoint": 153,
+  "approved_panel": "https://officialavora.github.io/funny-room-owner-panel/",
+  "work_email": "officialavora7@gmail.com",
+  "native_source_baseline": "67fdf040f7856ca1058674404ad525ab3cf59319",
+  "native_implementation": "8bea60b690a823e24854010658bd337d4517f96f",
+  "web_implementation": "7d60a47c828985c75fd103e81431789bf94e7fee",
+  "selectable_controls": 31,
+  "original_assets": 364,
+  "modules": [
+    {
+      "module": "src/OwnerAffinityPolicyCenter.js",
+      "sha256": "7681188f0a8f4548dcd72aca5397cedb28911fd5a8fd423ce08a410b2f3f32d4",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "load_affinity_restore_policy",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_affinity_restore_cost",
+          "argument_keys": [
+            "p_coin_cost",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerApplicationCenter.js",
+      "sha256": "2880894f0d8cc1450a5aad2e6d8485385e57e8a7d95190422ddbf6a3c45aeb2e",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_unban_account_by_public_id",
+          "argument_keys": [
+            "p_public_id",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerAuditHistory.js",
+      "sha256": "83ebb51a24fd4da844e726b1314e046602e5da12f5dcf86ec6c0c90d5baa495c",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_finance_activity_report",
+          "argument_keys": [
+            "p_asset",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_withdrawal_history",
+          "argument_keys": [
+            "p_status",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerAuthorityCenter.js",
+      "sha256": "4578f38ef16d7683e1231d9ce247a453014a4b1b009b4ec191717f0a719954b3",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_authority_dashboard",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_assign_multi_role",
+          "argument_keys": [
+            "p_user",
+            "p_role",
+            "p_context_type",
+            "p_context_id",
+            "p_expires_at",
+            "p_reason",
+            "p_primary"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_role_state",
+          "argument_keys": [
+            "p_assignment",
+            "p_status",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_permission_override",
+          "argument_keys": [
+            "p_public_id",
+            "p_permission",
+            "p_allowed",
+            "p_context_type",
+            "p_context_id",
+            "p_expires_at",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerBanCenter.js",
+      "sha256": "2157a7838818cf61228115a8bd97b323bf26a2e3eab35ad52a16baf3938a94ad",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_active_bans",
+          "argument_keys": [
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_ban_timeline_v2",
+          "argument_keys": [
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "lookup_transaction_recipient",
+          "argument_keys": [
+            "p_public_id",
+            "p_require_seller"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_lookup_room",
+          "argument_keys": [
+            "p_room_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_create_access_ban",
+          "argument_keys": [
+            "p_target_type",
+            "p_target_value",
+            "p_duration_hours",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_revoke_access_ban",
+          "argument_keys": [
+            "p_ban",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerBannerManagementScreen.js",
+      "sha256": "d6fc82c6ccbdc02f7abe39966343e3cbec99946c89fd1427c72466f2b2bba5a8",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": []
+    },
+    {
+      "module": "src/OwnerCampaignRewardsCenter.js",
+      "sha256": "8a5801d1684865d6870d459cc2a6ddc537f77550153b6ad9b5a3e7e903aae391",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": []
+    },
+    {
+      "module": "src/OwnerCaptureCenter.js",
+      "sha256": "5a252f409fb741c3aece33764fd94665c0fb09f6c14efdd3135cad3098ca5e60",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "current_staff_access",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_capture_overrides",
+          "argument_keys": [
+            "p_capture_type"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_capture_override",
+          "argument_keys": [
+            "p_capture_type",
+            "p_scope_type",
+            "p_scope_value",
+            "p_enabled",
+            "p_duration_minutes"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerCatalogMedia.js",
+      "sha256": "aa814da86cb879d92fc2d7081d4b8f8a4f81a37ae403f6d557a7d25f37f99ff9",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": []
+    },
+    {
+      "module": "src/OwnerCoinAuthorityLimits.js",
+      "sha256": "b0496e8d99f65c0aaf5bca99ebc626078fb5eeec10326fba399f8c0d3f2af5dd",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_load_coin_authority_limit_v149",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_coin_authority_limit_v149",
+          "argument_keys": [
+            "p_public_id",
+            "p_per_action",
+            "p_total_budget",
+            "p_enabled",
+            "p_reason",
+            "p_expected_revision",
+            "p_action",
+            "p_term",
+            "p_manual_months"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerCosmeticCatalog.js",
+      "sha256": "dbf4098c47ccbe24d28f644bca5a2bdc9ef9c357de4d5774b0c1995f84eb8764",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_upsert_cosmetic_product",
+          "argument_keys": [
+            "p_original_code",
+            "p_code",
+            "p_name",
+            "p_kind",
+            "p_tier",
+            "p_visual",
+            "p_asset_url",
+            "p_sound_key",
+            "p_sound_url",
+            "p_price_coins",
+            "p_duration_days",
+            "p_purchasable",
+            "p_active",
+            "p_sort_order"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_cosmetic_grants",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_grant_cosmetic",
+          "argument_keys": [
+            "target_public_id",
+            "asset_code",
+            "duration_days",
+            "reason_text"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_cosmetic_grant",
+          "argument_keys": [
+            "grant_id",
+            "new_state",
+            "reason_text"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerDailyBenefitsScreen.js",
+      "sha256": "f6203b27523208e2e723d4a4401357b389998f2f05c2e9ebfab9e9b5c3e50074",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": []
+    },
+    {
+      "module": "src/OwnerDailyCoinGrantCenter.js",
+      "sha256": "a7ece3e1b7de2a57fceb58d3fa17e79c1add318cfc68ab75a7a59856dfb3999b",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_load_daily_coin_policy_v1",
+          "argument_keys": null,
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_save_daily_coin_policy_v1",
+          "argument_keys": [
+            "p_config",
+            "p_expected_updated_at",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerDailySignInRewards.js",
+      "sha256": "d234953ed8bb10ab76ca4d07f8b07cd026ad3742628fbce41cd377312f59c4a0",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_load_daily_signin_v149",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_save_daily_signin_v149",
+          "argument_keys": [
+            "p_config",
+            "p_revision",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerEmojiCatalog.js",
+      "sha256": "94bf8b05b37f59fac67edac4fe9fd08caa08dd539250a6e9ec7fe4ac30e015f7",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_list_room_emoji_catalog_v3",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_upsert_room_emoji_catalog_v3",
+          "argument_keys": [
+            "p_reaction_key",
+            "p_display_label",
+            "p_emoji",
+            "p_sound_url",
+            "p_sort_order",
+            "p_active",
+            "p_media_url",
+            "p_poster_url",
+            "p_duration_ms",
+            "p_expected_updated_at",
+            "p_is_new"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerEvidenceVault.js",
+      "sha256": "7405a4ea9c470901c8e06bb13157eb5fb2e913efaeeb1a019ba55492ffcbd54b",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_evidence_search",
+          "argument_keys": [
+            "p_source",
+            "p_query",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerFinanceCenter.js",
+      "sha256": "62ffe71825006dd5065b466428b141a5dfd83a4b1dac196c945fcaae4bad078c",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "get_coin_economy_config",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_coin_economy_config",
+          "argument_keys": [
+            "p_coins_per_usd",
+            "p_quick_amounts"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_diamond_economy_rate",
+          "argument_keys": [
+            "p_diamonds_per_usd"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "get_merchant_transfer_policy",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_merchant_transfer_policy",
+          "argument_keys": [
+            "p_enabled"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_seller_transfer_policy",
+          "argument_keys": [
+            "p_enabled"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_adjust_wallet_asset",
+          "argument_keys": [
+            "p_public_id",
+            "p_asset",
+            "p_amount",
+            "p_note"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "transfer_seller_balance",
+          "argument_keys": [
+            "p_seller_public_id",
+            "p_amount",
+            "p_note"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerGiftCatalog.js",
+      "sha256": "572380d003f02e5cbac7225a4c96f01e97dcb2f1eaf5b5f815dec5086f5cf49d",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_save_gift_v3",
+          "argument_keys": [
+            "p_gift",
+            "p_values",
+            "p_expected_version"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerIdProtection.js",
+      "sha256": "70810fd20bf643494019561b4eb44b59cee6a0559b3bb634adddf3a6c5bf3d69",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_load_id_protection_v152",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_id_protection_v152",
+          "argument_keys": [
+            "p_public_id",
+            "p_protections",
+            "p_action",
+            "p_months",
+            "p_expires_at",
+            "p_expected_revision",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerIdentityCenter.js",
+      "sha256": "77da59ef26251e8cbc26a97184a5bb7ccd6788bc1caf9ed4e246cbba03c6eb33",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_authority_dashboard",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_lookup_room",
+          "argument_keys": [
+            "p_room_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_user_identity_v1",
+          "argument_keys": [
+            "p_public_id",
+            "p_display_name",
+            "p_bio",
+            "p_avatar_url",
+            "p_cover_url",
+            "p_country_code",
+            "p_audio_url",
+            "p_expected_updated_at"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_room_profile",
+          "argument_keys": [
+            "p_room_public_id",
+            "p_name",
+            "p_announcement",
+            "p_avatar_url",
+            "p_background_url"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_room_audio",
+          "argument_keys": [
+            "p_room_public_id",
+            "p_audio_url"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerLuckyGiftReversalCenter.js",
+      "sha256": "8d1553f0d83ace34e6070c42c02920d7cf641b15905d3bf4b4e2f68fb3a03c05",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_lucky_gift_reversal_history_v1",
+          "argument_keys": [
+            "p_request_id",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "load_my_lucky_gift_reversal_capability_v1",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_preview_lucky_gift_reversal_v1",
+          "argument_keys": [
+            "p_original_request_id",
+            "p_preview_id",
+            "p_expected_reversal_version"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_execute_lucky_gift_reversal_v1",
+          "argument_keys": [
+            "p_reversal_operation_id",
+            "p_original_request_id",
+            "p_preview_id",
+            "p_snapshot_hash",
+            "p_reason",
+            "p_execution_request_id",
+            "p_confirmation",
+            "p_expected_reversal_version"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerModerationCenter.js",
+      "sha256": "bf5c0e17279dff1c1192d7e551286d2cbf33679f03f83bf64af34d4f84645511",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_moderation_queue",
+          "argument_keys": [
+            "p_status",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_resolve_report",
+          "argument_keys": [
+            "p_report",
+            "p_resolution",
+            "p_note"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerOpsReferenceCenter.js",
+      "sha256": "7984bc182198007ae432c8a488b134de47a1719fce687cfcf65818484adda994",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_ops_dashboard",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_ops_banners",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_upsert_banner",
+          "argument_keys": [
+            "p_id",
+            "p_placement",
+            "p_title",
+            "p_subtitle",
+            "p_image_url",
+            "p_action_type",
+            "p_action_value",
+            "p_country_code",
+            "p_starts_at",
+            "p_ends_at",
+            "p_sort_order",
+            "p_active"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_banner_state",
+          "argument_keys": [
+            "p_id",
+            "p_active"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_ops_campaigns",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_upsert_campaign",
+          "argument_keys": [
+            "p_id",
+            "p_kind",
+            "p_title",
+            "p_description",
+            "p_country_code",
+            "p_starts_at",
+            "p_ends_at",
+            "p_reward_asset",
+            "p_reward_value",
+            "p_config",
+            "p_active"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_campaign_state",
+          "argument_keys": [
+            "p_id",
+            "p_active"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_grant_award_by_public_id",
+          "argument_keys": [
+            "p_public_id",
+            "p_asset",
+            "p_amount",
+            "p_cosmetic_code",
+            "p_duration_days",
+            "p_note"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_cosmetic_product",
+          "argument_keys": [
+            "p_code",
+            "p_name",
+            "p_tier",
+            "p_active",
+            "p_visual",
+            "p_sound_key"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerPolicyCenter.js",
+      "sha256": "2f010a1258f3d298bc839a249800ca99be6cabf377d14b2a5589eefab6c32d03",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "load_my_lucky_gift_reversal_capability_v1",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_lookup_room",
+          "argument_keys": [
+            "p_room_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_room_action",
+          "argument_keys": [
+            "p_room_public_id",
+            "p_action",
+            "p_target_public_id",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_room_access_action",
+          "argument_keys": [
+            "p_room_public_id",
+            "p_action",
+            "p_target_public_id",
+            "p_duration_hours",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_active_bans",
+          "argument_keys": [
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_create_access_ban",
+          "argument_keys": [
+            "p_target_type",
+            "p_target_value",
+            "p_duration_hours",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_revoke_access_ban",
+          "argument_keys": [
+            "p_ban",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_role_applications",
+          "argument_keys": [
+            "p_status",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_review_role_application",
+          "argument_keys": [
+            "p_application",
+            "p_approve",
+            "p_review_note",
+            "p_expires_at"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_salary_policies",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_upsert_salary_policy",
+          "argument_keys": [
+            "p_role",
+            "p_target_units",
+            "p_salary_percent",
+            "p_advance_percent",
+            "p_cycle",
+            "p_active"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_gift",
+          "argument_keys": [
+            "p_gift",
+            "p_name",
+            "p_coin_price",
+            "p_diamond_value",
+            "p_category",
+            "p_combo_quantities",
+            "p_allow_custom_combo",
+            "p_custom_combo_max",
+            "p_active",
+            "p_featured",
+            "p_asset_key",
+            "p_effect_kind",
+            "p_effect_asset_url",
+            "p_sound_url",
+            "p_sort_order",
+            "p_min_vip_level"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_system_notice_history",
+          "argument_keys": [
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_delete_system_notice",
+          "argument_keys": [
+            "p_notice"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_save_notice_v85",
+          "argument_keys": [
+            "p_delivery",
+            "p_pin_system",
+            "p_pin_room",
+            "p_action",
+            "p_notice",
+            "p_title",
+            "p_body",
+            "p_country_code",
+            "p_starts_at",
+            "p_expires_at"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_manage_system_notice",
+          "argument_keys": [
+            "p_action",
+            "p_notice"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerProfileManage.js",
+      "sha256": "c625ee41b6f2bfc7a490c303473d33c56bb4acc07b75e74f0afcad810fa1a47a",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_authority_dashboard",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_mutate_vip",
+          "argument_keys": [
+            "p_request_id",
+            "p_preview"
+          ],
+          "opaque_spread": true
+        },
+        {
+          "name": "owner_adjust_user_level_by_public_id",
+          "argument_keys": [
+            "p_public_id",
+            "p_delta",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_adjust_user_level_by_public_id",
+          "argument_keys": [
+            "p_public_id",
+            "p_delta",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_mutate_vip",
+          "argument_keys": [
+            "p_request_id",
+            "p_preview"
+          ],
+          "opaque_spread": true
+        },
+        {
+          "name": "owner_set_wallet_freeze",
+          "argument_keys": [
+            "p_public_id",
+            "p_active",
+            "p_duration_hours",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerProgressionOperationsCenter.js",
+      "sha256": "0d5ccc1d54085bd5b96ec304c5d1266bc33306f793c82ef3db131b3e473c20f4",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_progression_operation_history_v2",
+          "argument_keys": [
+            "p_public_id",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_prepare_progression_operation",
+          "argument_keys": [
+            "p_public_id",
+            "p_system",
+            "p_action",
+            "p_value",
+            "p_value_kind",
+            "p_reason",
+            "p_request_id",
+            "p_preview_ttl_minutes"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_execute_progression_operation",
+          "argument_keys": [
+            "p_operation_id",
+            "p_snapshot_hash",
+            "p_confirmation"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_progression_freeze_v2",
+          "argument_keys": [
+            "p_public_id",
+            "p_system",
+            "p_frozen",
+            "p_reason",
+            "p_request_id",
+            "p_confirmation",
+            "p_expires_at"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_reverse_progression_operation",
+          "argument_keys": [
+            "p_operation_id",
+            "p_reason",
+            "p_request_id",
+            "p_confirmation"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerRechargeLimits.js",
+      "sha256": "e20be9272b475a49c79d230db9db0e6e2be7c9c9fa32ecc84463413230c8de23",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "load_recharge_limits",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_recharge_limits",
+          "argument_keys": [
+            "p_seller_recharge_max",
+            "p_merchant_inventory_max"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerRewardOperationsCenter.js",
+      "sha256": "20d7514a477dcd6cb4dfd9241919d83b750165f6840c775dc868fe3a54fe05c8",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": []
+    },
+    {
+      "module": "src/OwnerRoomInspector.js",
+      "sha256": "cbbf8b6250b03043b92ace29741f194db6c8b91c69f31d918138e47386c4ab09",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_lookup_room",
+          "argument_keys": [
+            "p_room_public_id"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerRoomLocks.js",
+      "sha256": "a87099472604fc4559dcfaf72984bd5d75d25ca524d965026e44588758e01f4b",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "load_owner_room_controls_v149",
+          "argument_keys": [
+            "p_room"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_room_controls_v149",
+          "argument_keys": [
+            "p_room",
+            "p_frozen",
+            "p_expected_revision",
+            "p_reason"
+          ],
+          "opaque_spread": true
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerSafeResetV3Center.js",
+      "sha256": "930adb5b9597dba19f624c421ba439af94e1fbb57b8a0deb9c8785334eca9db2",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_prepare_safe_reset_v3_complete",
+          "argument_keys": [
+            "p_public_id",
+            "p_categories",
+            "p_reason",
+            "p_request_id",
+            "p_preview_ttl_minutes"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_prepare_safe_reset_v3_batch",
+          "argument_keys": [
+            "p_scope_type",
+            "p_selected_public_ids",
+            "p_country_code",
+            "p_categories",
+            "p_reason",
+            "p_request_id",
+            "p_max_targets"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_execute_safe_reset_v3_complete",
+          "argument_keys": [
+            "p_operation_id",
+            "p_snapshot_hash",
+            "p_confirmation",
+            "p_red_zone_confirmation"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_confirm_safe_reset_v3_batch",
+          "argument_keys": [
+            "p_job_id",
+            "p_snapshot_hash",
+            "p_confirmation",
+            "p_second_confirmation"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_safe_reset_v3_complete_history",
+          "argument_keys": [
+            "p_public_id",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_reverse_safe_reset_v3_complete",
+          "argument_keys": [
+            "p_operation_id",
+            "p_reason",
+            "p_request_id",
+            "p_confirmation"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_prepare_entity_lifecycle",
+          "argument_keys": [
+            "p_entity_type",
+            "p_entity_id",
+            "p_action",
+            "p_target_owner_public_id",
+            "p_reason",
+            "p_request_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_execute_entity_lifecycle",
+          "argument_keys": [
+            "p_operation_id",
+            "p_snapshot_hash",
+            "p_confirmation"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerSafetyCenter.js",
+      "sha256": "fc67e588102d4facabbc5f1c625641cd74497b89b56af4c573410796b48033d5",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_wallet_freezes",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_wallet_freeze",
+          "argument_keys": [
+            "p_public_id",
+            "p_active",
+            "p_duration_hours",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_incident_cases",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_create_incident",
+          "argument_keys": [
+            "p_type",
+            "p_severity",
+            "p_title",
+            "p_description",
+            "p_scope"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_incident",
+          "argument_keys": [
+            "p_incident",
+            "p_status",
+            "p_note"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_account_deletion_requests",
+          "argument_keys": [
+            "p_status"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_review_account_deletion",
+          "argument_keys": [
+            "p_request",
+            "p_action",
+            "p_note"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerSalaryDesk.js",
+      "sha256": "855f31344ffb705d241916bd1d28274820a0cc3ef0dacc3aa90a7f9032301e77",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_salary_user_report",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_salary_progress",
+          "argument_keys": [
+            "p_public_id",
+            "p_role",
+            "p_period_key",
+            "p_eligible_units",
+            "p_earned_amount",
+            "p_status"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_settle_salary_record",
+          "argument_keys": [
+            "p_salary_record",
+            "p_note"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerSettlementDesk.js",
+      "sha256": "8161c5450d5a0b4df2208cc62e28c1c7f11e0e463b21de6546145e0f38504fcd",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "load_withdrawal_policy",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_update_withdrawal_policy",
+          "argument_keys": [
+            "p_mode",
+            "p_min_units",
+            "p_max_units",
+            "p_allow_diamonds",
+            "p_allow_seller",
+            "p_official_enabled",
+            "p_merchant_enabled"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerSvipManage.js",
+      "sha256": "f7c856ef58101657bc134fb8da424cc8513a730f644d3eaf1cb3dcad4f993bf1",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "load_svip_owner_history",
+          "argument_keys": [
+            "p_public_id",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_mutate_svip",
+          "argument_keys": [
+            "p_request_id",
+            "p_preview"
+          ],
+          "opaque_spread": true
+        },
+        {
+          "name": "owner_mutate_svip",
+          "argument_keys": [
+            "p_request_id",
+            "p_preview"
+          ],
+          "opaque_spread": true
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerTop3ReviewScreen.js",
+      "sha256": "afd041176c6481cde5c967e2bbef3e9267b29614fefc002b96d4549bf1316461",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": []
+    },
+    {
+      "module": "src/OwnerUserAnalyticsCenter.js",
+      "sha256": "154ab678dbf5e05f60bc1b36c5c710154f7b06a195d4ef40ce53e447019afcf6",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_analytics_overview",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_analytics_overview",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_user_analytics",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_session_audit",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_device_trust",
+          "argument_keys": [
+            "p_device_id",
+            "p_status"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_record_account_security_review",
+          "argument_keys": [
+            "p_public_id",
+            "p_status",
+            "p_note"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerUserResetCenter.js",
+      "sha256": "208517d445998cb6e2de224796935a05fd2d9afe68f5118b9f8794fffb8967c0",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_list_user_reset_countries",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_preview_user_test_reset",
+          "argument_keys": [
+            "p_public_id"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_preview_user_test_reset_scope",
+          "argument_keys": [
+            "p_scope",
+            "p_country_code"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_reset_user_test_data",
+          "argument_keys": [
+            "p_public_id",
+            "p_confirmation",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_reset_user_test_data_scope",
+          "argument_keys": [
+            "p_scope",
+            "p_country_code",
+            "p_confirmation",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/OwnerVanityIdScreen.js",
+      "sha256": "9f7db5ff1054931c4149a73c70e1db65d2279c36c1cdf00a7337f1d5e7188c44",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": []
+    },
+    {
+      "module": "src/payments/OwnerPaymentControl.js",
+      "sha256": "258eb4a1858a660c234f46de014604f904c5b369c86e35ad7d7c6eab7e85c553",
+      "status": "source port; render/error-state tests; authenticated/device acceptance pending",
+      "literal_rpc_calls": [
+        {
+          "name": "owner_load_payment_controls",
+          "argument_keys": [],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_online_coin_purchase",
+          "argument_keys": [
+            "p_enabled",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_create_google_play_package_version",
+          "argument_keys": [
+            "p_internal_code",
+            "p_product_id",
+            "p_coin_amount",
+            "p_version",
+            "p_display_order",
+            "p_active",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "owner_set_google_play_package_state",
+          "argument_keys": [
+            "p_package_id",
+            "p_active",
+            "p_display_order",
+            "p_reason"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "src/SupportCenter.js",
+      "sha256": "82e5d6c7e45a48ee4b1f217a7874a035041ce0449f0c07b556ba7722b474a2f3",
+      "status": "Original shared support export / permission-driven web mount",
+      "literal_rpc_calls": [
+        {
+          "name": "load_my_support_tickets",
+          "argument_keys": [
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "create_support_ticket_v2",
+          "argument_keys": [
+            "p_subject",
+            "p_message",
+            "p_attachment_url"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "reply_support_ticket",
+          "argument_keys": [
+            "p_ticket",
+            "p_body",
+            "p_status"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "load_staff_support_tickets",
+          "argument_keys": [
+            "p_status",
+            "p_limit"
+          ],
+          "opaque_spread": false
+        },
+        {
+          "name": "reply_support_ticket",
+          "argument_keys": [
+            "p_ticket",
+            "p_body",
+            "p_status"
+          ],
+          "opaque_spread": false
+        }
+      ]
+    },
+    {
+      "module": "web/controls.jsx",
+      "sha256": "eafe45e7a555589bdedcfc1cb301eeb8873205da08256a9491aa96a82dbbb20d",
+      "status": "Original shared support export / permission-driven web mount",
+      "literal_rpc_calls": []
+    }
+  ],
+  "test_evidence": {
+    "clean_panel_ci": "37399570350 PASS on617f9abc (matching backend2cef; unchanged compiled UI7d60)",
+    "native_source_ci": "37400648349 / job112067179363 PASS on71a210565a89d36cf0cf679323fb8c560c90f03a",
+    "staging_hierarchy_exact_powers": "PASS rollback fixtures",
+    "CP149_CP152_backend_regressions": "PASS rollback fixtures",
+    "CP124": "local full original fixture PASS; source CI 37395028500 PASS",
+    "CP137_audio": "83 original catalog/provenance and current playback PASS in source CI 37395333807",
+    "CP137_art": "full local five original artwork fixture PASS with visual activity context",
+    "CP138_RPC_history": "PASS original immutable CP138 and accepted immutable CP152 fingerprint comparison; exact source bytes preserved",
+    "CP139": "seven original RPC proofs unchanged; actual current entry wrapper/core targeted test PASS",
+    "CP138": "Full cinematic/lifecycle source CI PASS in37396439500",
+    "CP139_CP140": "Complete source CI PASS in37396770027; CP140 shared PostgreSQL PASS",
+    "future_explicit_permissions": "Hosted staging PASS: new preset permission does not expand selected staff powers; explicit scoped grant and revoke validated; legacy behavior retained; rollback left zero fixtures",
+    "CP127": "Full source CI 37399517517 PASS",
+    "CP128_CP135": "Complete source CI37399793437 PASS",
+    "CP132_CP136": "Complete source CI37399793437 PASS",
+    "CP110_CP111": "Source CI37399793437 PASS sound/canvas/math/wallet/consents",
+    "CP99": "Complete source CI37400648349 PASS public-pair privacy/geometry/targets and daily lifecycle/sign-in precedence",
+    "CP100_CP101": "Complete source CI37400648349 PASS9/9 and15/15, immutable legacy0768 and accepted CP15267f git-history proofs preserved",
+    "CP105": "Complete source CI37400648349 PASS all four exact Lucky receipt/retry/timeout groups",
+    "source_quality": "Full selected GitLab source job PASS, shipping graph, Expo Doctor18/18, Android JS export1663modules"
+  },
+  "release_state": "SOURCE/STAGING verified candidate; full live release withheld under canonical integration, authenticated Owner, APK-only isolation and device acceptance gates",
+  "native_source_candidate": "71a210565a89d36cf0cf679323fb8c560c90f03a",
+  "web_backend_candidate": "2cef2785018029ed27460b88445da5478ac0b20d",
+  "rpc_inventory_scope": "Static literal calls and argument keys, not authenticated behavior certification; shared helpers and opaque/dynamic dispatch are separately audited in checkpoint153-panel-rpc-audit.json."
+}
