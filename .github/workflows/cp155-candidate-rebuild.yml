@@ -28,6 +28,7 @@ jobs:
           node restore-assets-from-media.mjs
           node marry-me-test.cjs
           node --check ../preview-app.js
+          node preview-policy-test.cjs
           npm run build
           cp dist/full-controls.js ../preview-full-controls.js
           cp -a dist/. ../
