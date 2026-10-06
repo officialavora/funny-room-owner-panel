@@ -31,6 +31,8 @@ jobs:
           npm run build
           cp dist/full-controls.js ../preview-full-controls.js
           cp -a dist/. ../
+          cp dist/full-controls.js ../full-controls.js
+          sha256sum dist/full-controls.js ../full-controls.js
           node verify-built-output.mjs
           npm test
           npm run test:browser
