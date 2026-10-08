@@ -1,3 +1,13 @@
+# CP169 verified LIVE backend and recovered source — 9 October 2026, Asia/Riyadh
+
+Connection recovered. Actual LIVE public owner_load_props_v169 / owner_save_prop_v169 / owner_save_prop_set_v169 were absent when re-read, then applied by successful checkpoint169_owner_props_verified_controls migration. Authenticated Owner eleven-kind create/edit/archive/category/matching-set, stale revisions, stranger and anon denial rollback checks PASS in staging and LIVE. Fixtures were rolled back; existing memberships, wallets and history retained. Durable SQL and tests are in GitLab app source checkpoint169-combined-recovery-20261009, latest275a1fbe1b5547856b6949a23beba770702349ed. Previous unknown/blocked statements below are historical and superseded here.
+
+Owner runtime b86d52a12775f6316ec97df44b1cbfb976c55171 passed source CI37842386582; later e2a264e only added historical documentation. Nineteen module checks re-ran PASS with actual module source. This branch implements metadata/media URL edits and catalogue/matching-set controls, not a new upload converter or automatic reward/grant engine. Existing native Owner grant/media controls remain; complete phone acceptance is still pending. Approved Owner panel host remains officialavora.github.io/funny-room-owner-panel/.
+
+App CP169 source is separately reconciled with newer Entry/Gift worker a5cbd450; full exact source CI37855161353 is queued, not PASS. Original AI recharge banner is integrated in source, Profile verified Today/Weekly/Monthly recharge read-only views implemented, actual blast exhaust enabled, discovery/notification/gift/category/layout fixes and six independent Test Coin game server routes are in candidate. LIVE game and recharge migrations and authenticated rollback tests PASS. Recordings419177/419178 were visually sampled, not post-fix device acceptance. No CP169 OTA, native build, Play release or balance reset yet. Other worker OTA37854533604 was in progress; never treat its success as publication of CP169.
+
+---
+
 # CP169 recovery receipt — 9 October 2026, Asia/Riyadh
 
 This receipt supersedes status claims below while retaining historical handoffs.
