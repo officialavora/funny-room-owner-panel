@@ -1,0 +1,34 @@
+# CP166 latest Owner/source audit handoff — 8 October 2026
+
+Current instruction: NO CI, NO BUILD/export/Doctor, NO OTA. No live Owner deployment, staff creation/grant or backend write occurred.
+
+Owner runtime correction commit: 807e37fb8a559a565951ce72cca13c58510458ad. App matching correction commit: acc5890d5cf4b9fc55b23586a7270ae43b183b17 in GitLab project86955143, branch checkpoint166-a2z-audit-fixes-20261008. Both changes are isolated source checkpoints; main and the sole approved host https://officialavora.github.io/funny-room-owner-panel/ remain unchanged.
+
+Owner app.js now validates whole-number financial inputs, displays large integer strings exactly, fences stale responses on all12pages/session/logout, locks dialog submits, and describes preview-only results accurately.14local mocked web checks PASS. Combined new checks51PASS (app30/Play7/web14), React19.1.0 mocks, not hosted/device/real financial acceptance. No application dependency or native identity change.
+
+Current backend findings:21client RPCs absent LIVE/all present staging; gift key differences25stage-only/10LIVE-only; cosmetics1,588stage-only/20LIVE-only.41LIVE emoji active with media URLs. LIVE legacy panel-admin v2 does not equal staging exact-selected-power workflow. Staff creation stays paused. Main advanced controls remain incomplete; CP161/CP162 candidate compiled full-controls module is preserved as separate work and is not this fixed standalone main-source app.js. No build to regenerate that bundle was run.
+
+Full Hindi report and durable history/evidence:
+https://gitlab.com/officialavora-apps/funny-room/-/blob/acc5890d5cf4b9fc55b23586a7270ae43b183b17/docs/CHECKPOINT166_AUDIT_CORRECTIONS_HANDOFF_HI.md
+
+Available177historical document versions/5,549records retained.309GitLabbranches and14recent worker deltas inspected/reconciled structurally; this is not full semantic/device acceptance. Firebase/Codemagic/CircleCI sign-in and Cloudflare verification walls limit fresh hosted-provider audit. Play account-bound recovery, missing LIVE contracts/catalogues, provider/media/game/reference/device acceptance remain open. Do not label the app100% complete.
+
+Prior recovered Owner CP162 handoff is preserved verbatim below; old release permissions are superseded by current no-CI/no-build/no-OTA instruction.
+
+# CP161 latest verified source checkpoint — 7 October 2026
+App source47cce0b652522b04766909f6b3046eabd0952cd6 passed full CI37588205780/job112683182863:122 unique source checks, Doctor18/18, Android export1692. Publisher112684724139 skipped. Documentation-only app checkpoint90f2d55b9e3660f08f7cf07faf9f88bd6e0f1e19 preserves full prior history, exact gate hashes, fresh OTA audit, recovered later CP159 final handoff, callback test receipt and screenshot. Post-CI delta verified to contain only reviewed docs/evidence/allowlist; runtime source unchanged.
+Owner runtime correction da325bb11678c9276e7695c45e6518216d21a582 and actual bundle regression1a11c9597afdcd9833b44fd5ef641d53c349c21f remain candidate-only. Permission denial/scope/expiry and confirmed native action tests PASS. Main and sole approved host unchanged; no staff grant.
+TOTAL A–Z remains INCOMPLETE. No new CP161 OTA/native build/live Owner release/Store remap/LIVE finance or catalog mutation. Fresh EAS audit confirms compatible preview0.10.65 still servesCP160. Missing LIVE contracts/catalog, preview-only server isolation, unfinished game/reference/media/provider/language/salary precision work, unavailable349484.mp4/full37-finding original report/TikTok materializationHTTP403 and authenticated phone acceptance remain recorded. Existing CI/OTA/build permission persists; do not re-ask or label this checkpoint a100% final delivery.
+
+# CP161 current Owner recovery — 7 October 2026, authority regression correction
+App candidate 880dd5027ce1c296a0a03a0c817370f90f09f422 includes five-OTA actual-artifact audit plus native explicit-denial/expiry correction. Matching Owner bundle correction da325bb11678c9276e7695c45e6518216d21a582 and executable bundle checks 1a11c9597afdcd9833b44fd5ef641d53c349c21f are on checkpoint161-owner-recovery-20261007; main/approved host unchanged. Tests executed against exact native and web callbacks PASS: boolean false is DENIED, only boolean true grants; revoked, expired, invalid expiry and wrong permission/context/room are ignored. Native confirmed Grant/Revoke RPC semantics tested without real grants. Owner tests/checkpoint161-authority-overrides.cjs requires @babel/parser (the app's existing test environment supplies it); no new runtime dependency.
+GitHub full-source run 37587563396 is pending at this documentation time. Preceding run37586731997 failed only the document hash gate; no OTA executed. Native/runtime source itself is unchanged between4bf65dc and880dd502; exact master/handoff/report hashes corrected without removing baseline safeguards.
+Full A–Z acceptance, matching live backend and authenticated physical-device/reference checks remain incomplete. No CP161 OTA/native build, live Owner deployment, new staff permissions or LIVE financial mutation. The five-OTA chain includes CP157 republishing actual CP141 old artifact; correct later source must be recovered, not presumed present on phone. No blanket37-findings completion: the original cross-chat full audit file was not available; actual source revealed still-unfixed salary numeric-precision concerns. Preserve all earlier records below.
+
+# Owner recovery continuity — CP161, INCOMPLETE
+
+Read AGENTS.md and CHECKPOINT161_HANDOFF.md. Original Owner main remains56443d6c9450773abf8b5872dd6eaf8ae649f309 at the sole approved host. Candidateapp.js source628142cb3cd2374d03139936e01606384284f5d2 and routing testafcff8bf3ac336d5fc8a9fb8a505711859b6cc50 restore three dangling control routes with lifecycle cleanup and original LIVE client. Actual source routing/syntax tests PASS; no Owner deployment or staff grant.
+
+Matching app's verified source29255343de5078d6d0f8ad7ba885a9a032d8cf1a passed full CI37547154138:121 checks, Doctor18/18, export1692. App documentation checkpoint2a54efb7e2eeb0d59368038054c86975d794fccd preserves the entire master and177 recovered record versions/5549 indexed statements. Those are recovered history, not complete semantic acceptance. All previous Owner rules and migration-reference history remain unchanged in this repository.
+
+LIVE lacks the exact-power staff SQL/Edge workflow, new catalog contracts and verified preview-only server scope. Staging finance/brand recovery is separate; keep original LIVE accounts and do not replace the installed app with empty staging. No CP161 OTA/native build/Store deployment; the complete combined recovery remains unaccepted. Necessary CI/test OTA/build permission is already granted within preserved test-only scope. Continue all26 app ledger areas, unavailable349484.mp4/reference parity, matching Owner/backend/device checks; no partial100% claim.
