@@ -1,8 +1,5 @@
-name: CP167 Owner source verification
+name: Owner source verification
 on:
-  push:
-    branches:
-      - checkpoint167-owner-ci-integration-20261008
   pull_request:
     branches: [main]
 permissions:
@@ -15,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check app.js
+      - run: node --check app.js && node --check props-control.js
       - run: npm ci --prefix scripts/checkpoint166 --ignore-scripts --no-audit --no-fund
       - run: node scripts/checkpoint166/owner-web.cjs
+      - run: node scripts/checkpoint169/props-control-test.cjs
