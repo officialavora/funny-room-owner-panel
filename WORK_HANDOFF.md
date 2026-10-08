@@ -1,3 +1,37 @@
+# CP169 recovery receipt — 9 October 2026, Asia/Riyadh
+
+This receipt supersedes status claims below while retaining historical handoffs.
+
+## Verified completion and limits
+
+- CP168 previously recovered 21 missing LIVE RPCs and appended 172 matching sets / 1,548 catalogue items and memberships. Existing balances, accounts and purchase history were retained. Rollback permission/retry/expiry checks passed; this does not certify complete phone acceptance.
+- CP169 Owner candidate source b86d52a12775f6316ec97df44b1cbfb976c55171 is on this branch, PR #3. It adds eleven-kind catalogue add/edit/archive, matching-set/category controls, integer validation, audit reasons and stale-revision protection. Fourteen existing Owner checks plus nineteen new module checks passed locally; authenticated Owner, stranger and anon staging rollback checks passed.
+- GitHub CI run https://github.com/officialavora/funny-room-owner-panel/actions/runs/37842386582 was freshly inspected in the browser: Success. PR #3 remains open and not deployed. CI passing is not LIVE or phone acceptance.
+- Correction to the older paragraph: CP169 SQL drafts and tests were saved under scratch cp169; no GitLab commit receipt was obtained. Do not assume those drafts are durably committed to GitLab.
+- The last LIVE migration request was interrupted without a returned receipt. LIVE CP169 application status is UNKNOWN. Read actual function definitions and migration history before retrying; do not blindly reapply or deploy the Owner candidate.
+- An original AI recharge banner was generated and a WebP project asset prepared. It has not been integrated into the application.
+- Rocket source root cause found: actual RoomRocketBlast uses RocketStageArt without the exhaust prop, while the preview enables it. This app correction is NOT yet applied.
+- Existing recharge program has a legacy recharge_weekly key but monthly configuration. LIVE reward campaigns were empty. Today/Weekly/Monthly profile and Owner integration remains unfinished; do not invent bonus percentages or overwrite existing slabs.
+- Mentor currently exists as a cosmetic matching-set category. This alone does not prove an enabled mentor relationship or administrative role.
+
+## Remaining requested work — all pending unless separately evidenced
+
+1. Verify CP169 LIVE state, durably checkpoint SQL/tests, finish Owner grant/revoke, media management and automatic category/reward mapping; deploy only after backend compatibility is proved.
+2. Integrate the original official recharge banner and verified recharge coins/rewards with Today/Weekly/Monthly views and backend controls.
+3. Apply and verify the actual rocket blast exhaust/flame behavior against the supplied reference.
+4. New and returning account startup must land on Popular; notification details open only after an explicit click, without automatic startup navigation or repeated replay.
+5. Rank active Popular rooms using gathering plus sending with a defined, verified server ordering.
+6. Gift horizontal paging must advance through category pages including CP, Lucky and SVIP; retain correct vertical scrolling and button behavior.
+7. Room wide/narrow toggle beside My Room / Real Activity must retain independent state per My Tab, Popular, Games and Video instead of changing every tab.
+8. Cross-check Greedy, Greedy Line 2, Forest Party, Big Eater, Harvest Wheel and Speed Racing against working Greedy Line and Ferris Wheel. Verify actual play, result, retry and settlement behavior rather than marking screens alone as functional.
+9. Audit unresolved prior worker/provider/media/game/permission gaps and record each with evidence. Preserve previous PASS work and history.
+10. Run meaningful checks and combined app CI after actual fixes; compatible OTA only for verified remaining app changes. Do not publish a new native build or Store release merely to repeat previous work.
+11. Play Console / policy / existing build readiness and actual phone acceptance remain incomplete; no new production approval is asserted.
+
+New recordings 419177.mp4 and 419178.mp4 were supplied, but were not successfully decoded/viewed during this recovery. Do not claim video acceptance. Terminal/API orchestration repeatedly failed to return even pwd; browser GitHub inspection remained available. No new app CI, OTA, native build, Store publication, balance reset or purchase was executed during this blocked recovery. This documentation update records evidence and scope, not completion of the pending fixes.
+
+---
+
 # CP169 Owner My Props controls — candidate, 8 October 2026
 
 Owner requested all My Props add/edit/archive and category/set controls. Main previously had a dangling Cosmetics action; LIVE legacy item upsert only accepted four kinds. Candidate adds a paginated eleven-kind catalogue (nine My Props plus emoji_pack/gift_theme), exact integer validation, artwork/sound URL and visual settings, matching-set membership/category/archive controls, audit reasons and stale revision rejection. Existing item code/kind cannot be changed; referenced purchased items are archived rather than hard-deleted. Existing grants/history remain retained. Actual authenticated Owner and stranger/anon stage rollback tests PASS; nineteen local module and fourteen prior Owner checks PASS. These are not browser/phone/release acceptance. Backend draft/tests are in GitLab CP169; staging migration applied, LIVE not yet applied. Gift/staff/game advanced controls and automated reward mapping remain separate pending gaps. Latest new references require original official recharge banner, actual rocket exhaust and recharge ranking/rewards Today/Weekly/Monthly; preserved as active follow-up, not completed by this panel alone. No app CI/build/OTA/Store/purchase/reset executed in this checkpoint yet.
