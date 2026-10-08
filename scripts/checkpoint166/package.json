@@ -1,0 +1,7 @@
+{
+  "name": "funny-room-owner-cp166-local-audit",
+  "private": true,
+  "dependencies": {
+    "@babel/parser": "7.28.5"
+  }
+}
