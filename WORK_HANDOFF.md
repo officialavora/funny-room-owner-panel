@@ -1,3 +1,7 @@
+# CP169 Owner My Props controls — candidate, 8 October 2026
+
+Owner requested all My Props add/edit/archive and category/set controls. Main previously had a dangling Cosmetics action; LIVE legacy item upsert only accepted four kinds. Candidate adds a paginated eleven-kind catalogue (nine My Props plus emoji_pack/gift_theme), exact integer validation, artwork/sound URL and visual settings, matching-set membership/category/archive controls, audit reasons and stale revision rejection. Existing item code/kind cannot be changed; referenced purchased items are archived rather than hard-deleted. Existing grants/history remain retained. Actual authenticated Owner and stranger/anon stage rollback tests PASS; nineteen local module and fourteen prior Owner checks PASS. These are not browser/phone/release acceptance. Backend draft/tests are in GitLab CP169; staging migration applied, LIVE not yet applied. Gift/staff/game advanced controls and automated reward mapping remain separate pending gaps. Latest new references require original official recharge banner, actual rocket exhaust and recharge ranking/rewards Today/Weekly/Monthly; preserved as active follow-up, not completed by this panel alone. No app CI/build/OTA/Store/purchase/reset executed in this checkpoint yet.
+
 # CP166 latest Owner/source audit handoff — 8 October 2026
 
 Current instruction: NO CI, NO BUILD/export/Doctor, NO OTA. No live Owner deployment, staff creation/grant or backend write occurred.
