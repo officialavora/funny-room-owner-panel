@@ -1,3 +1,9 @@
+# Combined app/Owner recovery — 9 October 2026
+
+Paired app candidate MR188 source21165126e09ab3ef614526ea8f53e540a8a764e3; mandatory full CI37969124290 running. Exact GitHub runner is now available; previous dispatch/quota blocker is historical. Connected Expo Owner/Free verified9Oct: Android0/15 used, OTA36/1000 users; no build or update issued. Play fresh browser credential resumption blocked and known Google Play credential absent in independent runner, so native build has NOT started. Staging visibility rollback reverified all six kinds/permissions/expiry/delegation; source SQL bodies match actual staging functions; no live props release. Preserve original PR5 runtime and current main CP172 receipt, resolve documentation conflict with a real two-parent merge. Phone performance and genuine10second video remain unverified.
+
+---
+
 # Final paired props checkpoint — 9 October 2026
 
 Owner runtime86e6aad4ae460d450f317383c76bc55bb6e382c3: complete source CI37948363551 SUCCESS (prior37948101610/job113879535340 also PASS). Approved Owner PR5 remains Draft, not deployed. Matching app MR185 final source7d33d2a2e893b1d3df94f98c201da4e60d3589cc; app full CI is BLOCKED, not PASS. GitLab2931043583/job17063947603 failed before a runner started due ci_quota_exceeded on prior8980901c. Full final source must be dispatched through the existing manual CP134 GitHub runner; current connector cannot dispatch and browser credential resumption remains blocked. No native build/OTA/merge/LIVE mutation.
@@ -9,6 +15,18 @@ Final staging rollback PASS covers other viewer, entry/frame/bubble/badge/medal/
 # All-user props visibility candidate — 9 October 2026
 
 App paired MR185: GitLab project86955143, props-visibility-entry-hydration-20261009. Shared contract implemented and staging-only migration props_visibility_v1_role_mapping_guards applied; LIVE unchanged. Native My Props and this panel now have explicit hide/show, manual grants, Founder-only grant power/revoke/target visibility. Official posts remain server-authoritative; powers do not give post eligibility. New module validates public IDs/duration, confirmation, duplicate-click lock and navigation fencing. Module checks PASS; full Owner PR CI pending. GitLab exact app CI2931043583/job17063947603 failed before runner starts with ci_quota_exceeded; not a test failure. Existing manual GitHub exact-source runner is available but connector has no dispatch method and browser credential-resumption is blocked. No CI bypass, native build, OTA, Owner deploy or LIVE mutation. Native actual room/profile/device acceptance and distribution of the restricted original4s-retimed video remain pending. Preserve CP172 gift-editor main e738a7ed and other workers. Full completion must not be claimed before both source suites, backend integration, accepted release and actual device checks.
+
+---
+
+# CP172 gift editor deployment — verified receipt
+
+App source: GitLab canonical 0c2c870413b2f1e691f4b2b44bf28672ed79c687, preserving CP171 and merged MR184. Candidate full CI37934456743 PASS; canonical release verification37953582599 PASS, publisher still running at this checkpoint.
+
+Owner source: PR4 tested d1c6bfdb3bf90049f63adec0c2bdb4a778706453; merged e738a7ed7fc536d4bf035341d3b010b0dfb4d37e. CI37934166390 all required steps PASS. Pages37934493990 build/deploy/report SUCCESS on exact merge SHA. Approved host remains https://officialavora.github.io/funny-room-owner-panel/ .
+
+Completed gift navigation and Founder boundary, existing owner_save_gift_v3 payload/version contract, archive/restore, busy duplicate-save guard, failed draft retry and navigation race checks. Existing catalogue/prices/IDs were not edited to demonstrate tests. This is editor source/deployment completion; signed-in runtime acceptance remains blocked by login. Recharge/Festival web control parity, CP171 shared-LIVE monetary/Edge/gift recovery and provider/device verification remain unfinished.
+
+Fresh Play audit blocked by browser automatic review citing google.play versus play.google.com origin mismatch. No Store upload or promotion, native build, LIVE ID renumbering or financial migration occurred. No whole-system 100% completion claim.
 
 ---
 
