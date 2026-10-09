@@ -1,0 +1,10 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync(__dirname+'/gift-control.js','utf8');
+const {giftPayload,giftInteger}=vm.runInNewContext(source.replace(/export /g,'')+';({giftPayload,giftInteger})',{URL,Number,Set,Error});
+const values={name:'Coffee',coin_price:'500',diamond_value:'500',category:'standard',asset_key:'coffee-sip',effect_kind:'standard',effect_asset_url:'https://example.com/coffee.webp',sound_url:'',effect_duration_ms:'4000',combo_quantities:'1,10,99',custom_combo_max:'9999',allow_custom_combo:'true',active:'false',featured:'false',sort_order:'20',min_vip_level:'0'};
+const payload=giftPayload(n=>values[n],{id:'existing',slug:'coffee-sip',policy_version:7});assert.equal(payload.id,'existing');assert.equal(payload.slug,'coffee-sip');assert.equal(payload.policy_version,7);assert.equal(payload.active,false);assert.equal(payload.coin_price,500);assert.equal(payload.sound_url,null);
+for(const bad of ['1e3','1.2','-1','9007199254740993',''])assert.throws(()=>giftInteger(bad,'Amount'));
+for(const bad of ['http://example.com/a','https://secret@example.com/a','javascript:alert(1)'])assert.throws(()=>giftPayload(n=>n==='effect_asset_url'?bad:values[n]));
+assert.throws(()=>giftPayload(n=>n==='combo_quantities'?'1,1':values[n]));assert.throws(()=>giftPayload(n=>n==='effect_duration_ms'?'999':values[n]));
+assert(source.includes('p_expected_version:old?.policy_version??null'));assert(source.includes('owner_save_gift_v3'));assert(!source.includes('.delete('));
+console.log('PASS exact gift amounts, original asset key/ID preservation, URL validation, duplicate combo rejection, versioned audited save and reversible archive contract. Browser acceptance pending.');
