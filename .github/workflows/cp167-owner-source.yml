@@ -12,8 +12,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check app.js && node --check props-control.js && node --check gift-control.js
+      - run: node --check app.js && node --check props-control.js && node --check gift-control.js && node --check prop-visibility.js
       - run: npm ci --prefix scripts/checkpoint166 --ignore-scripts --no-audit --no-fund
       - run: node scripts/checkpoint166/owner-web.cjs
       - run: node scripts/checkpoint169/props-control-test.cjs
+      - run: node prop-visibility.test.cjs
       - run: node gift-control.test.cjs && node gift-browser.test.cjs
