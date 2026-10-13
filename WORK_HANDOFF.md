@@ -1,3 +1,7 @@
+## 2026-10-13 — Public download link
+
+Added isolated /download/ static consumer download page. Android button points to official com.funnyroomdev.funnyroom Google Play listing; iPhone/iPad displays an availability notice, with no invented iOS or web application. Uses officialavora7@gmail.com. Existing Owner panel, authentication, backend and app releases are unchanged. Source checks: 10 device classification cases and static links/content PASS; physical mobile visual acceptance remains pending. Public Pages deployment and browser verification must be recorded after publication. Rollback: remove download directory or revert this isolated commit. No native build or Expo OTA is involved.
+
 # Gift editor pending-save pagination repair — 9 October2026
 
 Next previously started a catalog read during pending versioned gift save, replacing the edited draft. Guard it using the same busy/current checks as Previous/Search/Edit. Actual-handler regression now supplies100rows, opens/saves a gift and presses Next while the RPC is unresolved; verifies no additional read/draft replacement. Original ID/version payload, duplicate-submit, denied/conflict retry and stale navigation checks retained. Local test PASS; exact PR CI required before merge/deployment. No app source/build/OTA or LIVE catalog transaction. Main baseline022b8aa52c00ad769b7dbf8f4966296b8d934796. Play official-URL retry was blocked again by automatic review with reported google.play origin; no bypass.
