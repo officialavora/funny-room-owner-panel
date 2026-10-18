@@ -1,3 +1,19 @@
+## 2026-10-18 - Room Reward / Recharge reference correction counterpart - UNDEPLOYED
+
+App candidate9c3f01aada2dbe0bc551a3e305e644f2b8beaab1 in canonical GitLab profile-reference-contact-20261018 inherits earlier Profile/Store/Bag/WhatsApp work. This panel adds matching room_reward_appearance controls: HTTPS banner/backdrop URLs, title and colors. Existing protected owner_set_runtime_flag reused with readback; unknown save locks further writes. No appearance backend seed, rate/balance/permission/schema mutation or real transaction. Native/public app reads use bundled original AI defaults if missing/disabled/invalid. Existing contribution tier/program editor unchanged.
+
+Actual web module fixture tests PASS for default load, invalid URL, normalized protected patch save/readback and denied/unknown lock preserved after refresh. App local layout/11 parses, original7 Room Reward groups and prior Profile/contact tests PASS. Native rendering, authenticated Owner E2E, full exact-source gate reconciliation/hosted export and panel deployment remain pending. Existing publisher is pinned to previous7225 source; no new OTA or old workflow retry. Do not call all tasks complete or deployed. Prior handoff preserved below.
+
+---
+
+## 2026-10-18 - Editable official WhatsApp contact - UNDEPLOYED
+
+App source candidate f99cbfc21dd0040d67262270fb0fe7398d9eb719 in canonical GitLab project86955143 / profile-reference-contact-20261018. This matching panel branch adds Contact Official settings using existing protected owner_set_runtime_flag, single-key config patch and readback verification. User explicitly authorized WhatsApp +966537475484. Existing backend feature_flags official_contact is enabled with config.whatsapp_number=966537475484; public read and unauthenticated mutation rejection verified. No schema/permission/financial change or WhatsApp message.
+
+Local JS parse and mocked-DOM editor validation/save/readback/denial tests PASS. Source candidate not deployed; real authenticated Owner E2E and browser/phone visual checks pending. Existing setter remains last-write-wins for concurrent same-field edits. App's complete integration gates, checksum reconciliation and preview OTA remain pending; no native build or Play action. Existing panel/public-download files unaffected outside app.js navigation, three new contact files and this handoff. Previous handoff preserved below.
+
+---
+
 ## 2026-10-13 — Public download link
 
 Added isolated /download/ static consumer download page. Android button points to official com.funnyroomdev.funnyroom Google Play listing; iPhone/iPad displays an availability notice, with no invented iOS or web application. Uses officialavora7@gmail.com. Existing Owner panel, authentication, backend and app releases are unchanged. Source checks: 10 device classification cases and static links/content PASS; physical mobile visual acceptance remains pending. Public Pages deployment and browser verification must be recorded after publication. Rollback: remove download directory or revert this isolated commit. No native build or Expo OTA is involved.
