@@ -5,6 +5,27 @@ source=source.split('\n').slice(2).join('\n');const nodes=new Map();const node=s
 const older=get("go('overview')");await get("go('rooms')");const current=node('#content').innerHTML;overviewResolve({data:{users:123},error:null});await older;check(node('#content').innerHTML===current,'old page cannot replace current page');
 const stale=get("go('overview')");get('showLogin()');overviewResolve({data:{users:123},error:null});await stale;check(node('#content').innerHTML==='','logout clears and fences stale data');
 await get("go('rooms')");fields=[['p_public_id','1000','number'],['p_asset','coins','select'],['p_amount','1e3','number'],['p_note','audit','text']].map(([field,value,type])=>({dataset:{field},value,type}));get("openAction('walletAdjust')");const before=calls.length;await node('#dialogSubmit').onclick();check(calls.length===before,'invalid wallet numeric input makes no RPC');fields[2].value='-25';await Promise.all([node('#dialogSubmit').onclick(),node('#dialogSubmit').onclick()]);check(calls.filter(c=>c.name==='owner_adjust_wallet_asset').length===1,'double wallet submit sends one RPC');check(calls.find(c=>c.name==='owner_adjust_wallet_asset').args.p_amount===-25,'signed wallet preserved');
-check((source.match(/:async\(token\)=>/g)||[]).length===14,'all 14 pages use navigation revision');console.log(JSON.stringify({checks,result:'PASS',scope:'Mocked approved-host Owner web source only; no publish or live operations'},null,2));})().catch(e=>{console.error(e);process.exitCode=1});
+const originalPages=['gifts','props','overview','hierarchy','users','rooms','organizations','moderation','finance','commerce','premium','recovery','audit','settings'];
+function finitePages(candidate){
+ const ast=parser.parse(candidate,{sourceType:'module'});let definition;
+ function visit(n){if(!n||typeof n!=='object')return;if(n.type==='VariableDeclarator'&&n.id?.name==='PAGES')definition=n.init;for(const value of Object.values(n)){if(Array.isArray(value))value.forEach(visit);else if(value&&typeof value==='object')visit(value)}}visit(ast);
+ assert.ok(definition?.type==='ObjectExpression','PAGES definition exists');
+ const routes=new Map(definition.properties.map(p=>[p.key.name,p.value]));
+ assert.deepEqual([...routes.keys()].sort(),[...originalPages,'contact','roomRewardAppearance'].sort(),'exact original14 plus two approved Owner modules');
+ for(const name of originalPages){const handler=routes.get(name);assert.ok(handler.async&&handler.params.length===1&&handler.params[0].name==='token',name+' preserves navigation token');}
+ for(const [name,module,renderer] of [['contact','./official-contact.js','showOfficialContact'],['roomRewardAppearance','./room-reward-appearance.js','showRoomRewardAppearance']]){
+  const handler=routes.get(name),body=candidate.slice(handler.body.start,handler.body.end);
+  assert.ok(handler.async&&handler.params.length===1&&handler.params[0].name==='token',name+' token');
+  assert.ok(body.includes("if(!authority.is_founder&&access.role!=='co_owner')throw Error('Owner access required')"),name+' explicit authority guard');
+  const imported=body.indexOf("await import('"+module+"')"),fenced=body.indexOf('if(token!==navigationRevision)return'),shown=body.indexOf('await '+renderer+'(');
+  assert.ok(imported>=0&&fenced>imported&&shown>fenced,name+' import completion fenced before render');
+  assert.ok(body.includes('isCurrent:()=>token===navigationRevision'),name+' child lifecycle fence');
+ }
+ assert.equal((candidate.match(/:async\(token\)=>/g)||[]).length,16,'all 16 exact pages use navigation revision');
+}
+finitePages(source);checks++;
+for(const [before,after] of [["contact:async(token)","missingContact:async(token)"],["gifts:async(token)","removedGift:async(token)"],["if(token!==navigationRevision)return;await showRoomRewardAppearance","await showRoomRewardAppearance"],["isCurrent:()=>token===navigationRevision","isCurrent:()=>true"]]){assert.ok(source.includes(before));assert.throws(()=>finitePages(source.replace(before,after)));checks++;}
+console.log(JSON.stringify({checks,result:'PASS',scope:'Mocked approved-host Owner web source only; no publish or live operations'},null,2));})().catch(e=>{console.error(e);process.exitCode=1});
+
 
 
