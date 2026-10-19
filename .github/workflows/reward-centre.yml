@@ -1,0 +1,16 @@
+name: Reward centre controls
+on:
+  pull_request:
+    paths: [reward-centre.js, reward-centre.test.cjs, reward-program-templates.json, app.js]
+permissions:
+  contents: read
+jobs:
+  reward-controls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.19.0'
+      - run: npm install --prefix /tmp/reward-control-tests --ignore-scripts --no-audit --no-fund jsdom@26.1.0 @babel/core@7.28.5 @babel/plugin-transform-modules-commonjs@7.27.1
+      - run: NODE_PATH=/tmp/reward-control-tests/node_modules node reward-centre.test.cjs
