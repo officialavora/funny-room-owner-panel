@@ -1,3 +1,11 @@
+# 2026-10-19 — Funny Rewards paired candidate, NOT DEPLOYED
+
+From main095e5ed9, branch invite-spin-rewards-20261019. Native paired source begins at2ffa8412. Added protected Funny Rewards route, programme/calendar/wheel/task/item/rank settings with revision-checked save/readback, unknown-result lock, audit reason, stale-navigation fencing and monthly settlement controls. Matching programme templates are byte-identical to native. Existing production client, Owner controls and protected identities remain intact. Web DOM8 assertions PASS; native SQL59/client55/UI35 scoped checks PASS; actual staging transaction rollback PASS. Backend only installed inertly on supaxsiylqysvzutwjrw, no programmes or test balances persisted. LIVE/backend host and approved Pages deployment unchanged.
+
+Pending full hosted CI, full app preservation registration/export, authenticated Owner/browser/device, concurrency/performance, policy reconciliation and isolated rollout. No deployed panel, live reward programme, native build or OTA claimed. See paired app docs/INVITE_REWARDS_20261019.md and final Library checkpoint for exact commits/provider outcomes. All older records below preserved.
+
+---
+
 ## 2026-10-18 - Room Reward / Recharge reference correction counterpart - UNDEPLOYED
 
 App candidate9c3f01aada2dbe0bc551a3e305e644f2b8beaab1 in canonical GitLab profile-reference-contact-20261018 inherits earlier Profile/Store/Bag/WhatsApp work. This panel adds matching room_reward_appearance controls: HTTPS banner/backdrop URLs, title and colors. Existing protected owner_set_runtime_flag reused with readback; unknown save locks further writes. No appearance backend seed, rate/balance/permission/schema mutation or real transaction. Native/public app reads use bundled original AI defaults if missing/disabled/invalid. Existing contribution tier/program editor unchanged.
@@ -141,3 +149,4 @@ LIVE lacks the exact-power staff SQL/Edge workflow, new catalog contracts and ve
 ## CP167 — 2026-10-08 verified integration
 
 User authorized completion and necessary CI/delivery after CP166's source-only checkpoint. CP166 input precision, duplicate submission, navigation and logout guards passed syntax and all14 mocked checks in GitHub Actions run37811384084 at89ea99bd6f1d822f295306c9556cc1c168b7c0ee. PR2 merged as22bcbf089d8e2b877974e0b676256f748bcef079. Approved-host Pages deployment run37811500473 SUCCESS; anonymous app.js readback exactly matches merged source SHA256c43873547da46963e3f828ea9f868fd8011993313ba8a86242092e2131198a94. Isolated test lock and read-only CI retained. No financial RPC executed, no new access granted, no authenticated browser acceptance claimed. Advanced CP153/CP161/CP162 controls remain separate and must preserve these guards on later integration. App CP167 integration MR178 is merged; actual exact-source CI37811114267 PASS. Public legal Edge funny-room-legal v4 corrected and verified; Play purchase-history Data Safety saved as draft. Alpha113 not reviewed/published; FGS requires actual113 background-playback demo.21 named LIVE contracts remain missing on fresh read; no shared LIVE financial/catalog migration applied.
+

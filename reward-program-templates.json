@@ -1,0 +1,982 @@
+{
+  "orbit": {
+    "enabled": false,
+    "title": "Lucky Orbit",
+    "timezone": "Asia/Riyadh",
+    "starts_at": "2026-10-19T00:00:00+03:00",
+    "ends_at": null,
+    "max_coins_per_day": "1000000",
+    "invite_window_days": 3,
+    "rules": "Complete verified tasks to earn free spins. One reward per listed period. Coins stay in the Funny Room wallet. Item validity begins at receipt. No purchase or cash-out is required for a spin.",
+    "tasks": [
+      {
+        "id": "friend_mic",
+        "title": "Friend speaks on mic for 15 minutes",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "mic_seconds",
+            "target": "900"
+          }
+        ],
+        "reward": {
+          "coins": "0",
+          "spins": 1,
+          "items": []
+        }
+      },
+      {
+        "id": "friend_recharge",
+        "title": "Friend recharges 100,000 coins",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "0",
+          "spins": 1,
+          "items": []
+        }
+      },
+      {
+        "id": "friend_gift",
+        "title": "Friend sends gifts worth 100,000 coins",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "0",
+          "spins": 1,
+          "items": []
+        }
+      },
+      {
+        "id": "friend_game",
+        "title": "Friend completes game stakes worth 5,000,000 coins",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "5000000"
+          }
+        ],
+        "reward": {
+          "coins": "0",
+          "spins": 1,
+          "items": []
+        }
+      }
+    ],
+    "calendar": [
+      {
+        "coins": "1000",
+        "items": []
+      },
+      {
+        "coins": "1000",
+        "items": []
+      },
+      {
+        "coins": "3000",
+        "items": []
+      },
+      {
+        "coins": "1000",
+        "items": []
+      },
+      {
+        "coins": "1000",
+        "items": []
+      },
+      {
+        "coins": "2000",
+        "items": []
+      },
+      {
+        "coins": "3000",
+        "items": []
+      }
+    ],
+    "wheel": [
+      {
+        "weight": 40,
+        "reward": {
+          "coins": "100",
+          "items": []
+        }
+      },
+      {
+        "weight": 25,
+        "reward": {
+          "coins": "200",
+          "items": []
+        }
+      },
+      {
+        "weight": 15,
+        "reward": {
+          "coins": "500",
+          "items": []
+        }
+      },
+      {
+        "weight": 10,
+        "reward": {
+          "coins": "1000",
+          "items": []
+        }
+      },
+      {
+        "weight": 5,
+        "reward": {
+          "coins": "2000",
+          "items": []
+        }
+      },
+      {
+        "weight": 3,
+        "reward": {
+          "coins": "3000",
+          "items": []
+        }
+      },
+      {
+        "weight": 1,
+        "reward": {
+          "coins": "5000",
+          "items": []
+        }
+      },
+      {
+        "weight": 1,
+        "reward": {
+          "coins": "10000",
+          "items": []
+        }
+      }
+    ],
+    "rank_rules": {},
+    "rank_rewards": {}
+  },
+  "invite-rise": {
+    "enabled": false,
+    "title": "Invite & Rise",
+    "timezone": "Asia/Riyadh",
+    "starts_at": "2026-10-19T00:00:00+03:00",
+    "ends_at": null,
+    "max_coins_per_day": "10000000",
+    "invite_window_days": 30,
+    "rules": "Invite real new members. Qualifying activity must occur within 30 days of registration. Rankings count distinct qualified people, not repeat transactions. Only verified settled activity counts. Rewards are in Funny Room coins.",
+    "tasks": [
+      {
+        "id": "post",
+        "title": "Post one Moment",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "moments_published",
+            "target": "1"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "likes",
+        "title": "Like three different members\u2019 Moments",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "likes_given",
+            "target": "3"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "comments",
+        "title": "Comment on three different members\u2019 Moments",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "comments_given",
+            "target": "3"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "messages",
+        "title": "Send messages in 10 different rooms",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "room_message_rooms",
+            "target": "10"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "pk",
+        "title": "Complete three room PK matches",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "pk_completed",
+            "target": "3"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "bio",
+        "title": "Complete your bio",
+        "enabled": true,
+        "subject": "self",
+        "period": "once",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "profile_bio",
+            "target": "1"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "mic_hour",
+        "title": "Speak on mic for one hour and receive gifts worth 100,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "mic_seconds",
+            "target": "3600"
+          },
+          {
+            "metric": "gift_received_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "gifts_1000000",
+        "title": "Receive gifts worth 1,000,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "gift_received_coins",
+            "target": "1000000"
+          }
+        ],
+        "reward": {
+          "coins": "1000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "gifts_10000000",
+        "title": "Receive gifts worth 10,000,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "gift_received_coins",
+            "target": "10000000"
+          }
+        ],
+        "reward": {
+          "coins": "10000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "recharge_100000",
+        "title": "Recharge 100,000 verified coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "10",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "recharge_1000000",
+        "title": "Recharge 1,000,000 verified coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "1000000"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "lucky_100000",
+        "title": "Lucky gift returns 100,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "lucky_return_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "lucky_1000000",
+        "title": "Lucky gift returns 1,000,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "lucky_return_coins",
+            "target": "1000000"
+          }
+        ],
+        "reward": {
+          "coins": "1000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "lucky_5000000",
+        "title": "Lucky gift returns 5,000,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "lucky_return_coins",
+            "target": "5000000"
+          }
+        ],
+        "reward": {
+          "coins": "10000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "lucky_10000000",
+        "title": "Lucky gift returns 10,000,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "lucky_return_coins",
+            "target": "10000000"
+          }
+        ],
+        "reward": {
+          "coins": "100000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "game_100000",
+        "title": "Complete game stakes worth 100,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "10",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "game_1000000",
+        "title": "Complete game stakes worth 1,000,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "1000000"
+          }
+        ],
+        "reward": {
+          "coins": "100",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "game_10000000",
+        "title": "Complete game stakes worth 10,000,000 coins",
+        "enabled": true,
+        "subject": "self",
+        "period": "day",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "10000000"
+          }
+        ],
+        "reward": {
+          "coins": "1000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_1",
+        "title": "1 qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "1",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "10000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_3",
+        "title": "3 qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "3",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "60000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_5",
+        "title": "5 qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "5",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "80000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_10",
+        "title": "10 qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "10",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "100000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_20",
+        "title": "20 qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "20",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "300000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_30",
+        "title": "30 qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "30",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "600000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_60",
+        "title": "60 qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "60",
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "1200000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_lucky_5",
+        "title": "5 qualified lucky friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "5",
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "50000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_lucky_10",
+        "title": "10 qualified lucky friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "10",
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "100000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_lucky_20",
+        "title": "20 qualified lucky friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "20",
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "200000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_lucky_50",
+        "title": "50 qualified lucky friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "50",
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "500000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_lucky_80",
+        "title": "80 qualified lucky friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "80",
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "800000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_lucky_100",
+        "title": "100 qualified lucky friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "100",
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "1200000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_games_3",
+        "title": "3 qualified games friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "3",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "200000"
+          }
+        ],
+        "reward": {
+          "coins": "60000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_games_5",
+        "title": "5 qualified games friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "5",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "200000"
+          }
+        ],
+        "reward": {
+          "coins": "120000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_games_10",
+        "title": "10 qualified games friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "10",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "200000"
+          }
+        ],
+        "reward": {
+          "coins": "200000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_games_20",
+        "title": "20 qualified games friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "20",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "200000"
+          }
+        ],
+        "reward": {
+          "coins": "440000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_games_30",
+        "title": "30 qualified games friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "30",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "200000"
+          }
+        ],
+        "reward": {
+          "coins": "750000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_games_50",
+        "title": "50 qualified games friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "50",
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "200000"
+          }
+        ],
+        "reward": {
+          "coins": "1500000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_recharge_repeat",
+        "title": "Every 5 more qualified recharge friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "65",
+        "repeat_every": 5,
+        "requirements": [
+          {
+            "metric": "recharge_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "100000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_lucky_repeat",
+        "title": "Every 10 more qualified lucky friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "110",
+        "repeat_every": 10,
+        "requirements": [
+          {
+            "metric": "gift_sent_coins",
+            "target": "100000"
+          }
+        ],
+        "reward": {
+          "coins": "100000",
+          "spins": 0,
+          "items": []
+        }
+      },
+      {
+        "id": "invite_games_repeat",
+        "title": "Every 1 more qualified games friends",
+        "enabled": true,
+        "subject": "invitees",
+        "period": "month",
+        "target": "51",
+        "repeat_every": 1,
+        "requirements": [
+          {
+            "metric": "game_stake:all",
+            "target": "200000"
+          }
+        ],
+        "reward": {
+          "coins": "30000",
+          "spins": 0,
+          "items": []
+        }
+      }
+    ],
+    "calendar": [],
+    "wheel": [],
+    "rank_rules": {
+      "recharge": [
+        {
+          "metric": "recharge_coins",
+          "target": "100000"
+        }
+      ],
+      "lucky": [
+        {
+          "metric": "gift_sent_coins",
+          "target": "100000"
+        }
+      ],
+      "games": [
+        {
+          "metric": "game_stake:all",
+          "target": "200000"
+        }
+      ]
+    },
+    "rank_rewards": {}
+  }
+}
