@@ -675,7 +675,7 @@
         "target": "5",
         "requirements": [
           {
-            "metric": "gift_sent_coins",
+            "metric": "lucky_gift_coins",
             "target": "100000"
           }
         ],
@@ -694,7 +694,7 @@
         "target": "10",
         "requirements": [
           {
-            "metric": "gift_sent_coins",
+            "metric": "lucky_gift_coins",
             "target": "100000"
           }
         ],
@@ -713,7 +713,7 @@
         "target": "20",
         "requirements": [
           {
-            "metric": "gift_sent_coins",
+            "metric": "lucky_gift_coins",
             "target": "100000"
           }
         ],
@@ -732,7 +732,7 @@
         "target": "50",
         "requirements": [
           {
-            "metric": "gift_sent_coins",
+            "metric": "lucky_gift_coins",
             "target": "100000"
           }
         ],
@@ -751,7 +751,7 @@
         "target": "80",
         "requirements": [
           {
-            "metric": "gift_sent_coins",
+            "metric": "lucky_gift_coins",
             "target": "100000"
           }
         ],
@@ -770,7 +770,7 @@
         "target": "100",
         "requirements": [
           {
-            "metric": "gift_sent_coins",
+            "metric": "lucky_gift_coins",
             "target": "100000"
           }
         ],
@@ -924,7 +924,7 @@
         "repeat_every": 10,
         "requirements": [
           {
-            "metric": "gift_sent_coins",
+            "metric": "lucky_gift_coins",
             "target": "100000"
           }
         ],
@@ -966,7 +966,7 @@
       ],
       "lucky": [
         {
-          "metric": "gift_sent_coins",
+          "metric": "lucky_gift_coins",
           "target": "100000"
         }
       ],
