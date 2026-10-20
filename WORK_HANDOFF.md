@@ -1,3 +1,13 @@
+# Host / Agency salary controls — 20 October 2026
+
+New source candidate: Founder-only salary-policy.js uses the same live versioned Host/Agency backend as the current application. Includes automatic closed-period release toggle/status, global operation pause, future country/global daily/weekly/monthly policy scheduling, exact JSON tier/qualification editing and future-only removal. Current/paid history is retained. Session token pinned per RPC; navigation/actor changes, duplicate clicks and uncertain writes fenced. No salary/wallet or policy change is executed by loading the page.
+
+Production backend is live: Global monthly Riyadh; no current time or host-count gate. Normal gifts100%, Lucky10%;20 salary tiers and completed5B extensions. Automatic wallet release every5minutes after period close, not a cash withdrawal. Staging auto/integration rollback tests passed, including duplicate, paused/open period and freeze hold. App source and SQL checkpoint are in the paired GitLab combined candidate; final refs recorded after save. No web deployment inferred here.
+
+Local source checks:6 actual module handler groups PASS; original web behavioral suite extended from17 to18 exact routed pages, retaining every prior case and adding new Founder/navigation predicates;19 checks PASS. Props visibility/gift editor/browser/19 props module checks PASS. Hosted PR CI and Pages deployment remain to be recorded. Original history preserved below.
+
+---
+
 ## 2026-10-18 - Room Reward / Recharge reference correction counterpart - UNDEPLOYED
 
 App candidate9c3f01aada2dbe0bc551a3e305e644f2b8beaab1 in canonical GitLab profile-reference-contact-20261018 inherits earlier Profile/Store/Bag/WhatsApp work. This panel adds matching room_reward_appearance controls: HTTPS banner/backdrop URLs, title and colors. Existing protected owner_set_runtime_flag reused with readback; unknown save locks further writes. No appearance backend seed, rate/balance/permission/schema mutation or real transaction. Native/public app reads use bundled original AI defaults if missing/disabled/invalid. Existing contribution tier/program editor unchanged.
