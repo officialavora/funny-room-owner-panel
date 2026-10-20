@@ -23,7 +23,10 @@ titles.contact='Contact Official';
 NAV.push(['contact','◈','Contact Official']);
 titles.roomRecommendations='Recommended rooms';
 NAV.splice(NAV.findIndex(x=>x[0]==='rooms')+1,0,['roomRecommendations','◉','Recommended rooms']);
+titles.salaryPolicy='Host & Agency Salary';
+NAV.splice(NAV.findIndex(x=>x[0]==='finance')+1,0,['salaryPolicy','◫','Host & Agency Salary']);
 const PAGES={
+ salaryPolicy:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showSalaryPolicy}=await import('./salary-policy.js');if(token!==navigationRevision)return;await showSalaryPolicy({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  roomRecommendations:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showRoomRecommendations}=await import('./room-recommendations.js');if(token!==navigationRevision)return;await showRoomRecommendations({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  roomRewardAppearance:async(token)=>{if(!authority.is_founder&&access.role!=='co_owner')throw Error('Owner access required');const {showRoomRewardAppearance}=await import('./room-reward-appearance.js');if(token!==navigationRevision)return;await showRoomRewardAppearance({root:$('#content'),client:supabase,rpc,isCurrent:()=>token===navigationRevision,toast});},
  contact:async(token)=>{if(!authority.is_founder&&access.role!=='co_owner')throw Error('Owner access required');const {showOfficialContact}=await import('./official-contact.js');if(token!==navigationRevision)return;await showOfficialContact({root:$('#content'),client:supabase,rpc,isCurrent:()=>token===navigationRevision,toast});},
