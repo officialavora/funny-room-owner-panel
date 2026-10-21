@@ -12,6 +12,8 @@ const fs=require('fs'),assert=require('node:assert/strict');
  const before=h.calls.length;await h.q('salaryRemove').onclick();assert.equal(h.calls.length,before);assert(h.q('salaryStatus').textContent.includes('Only future programs'));count++;
  h=fixture();await h.run();h.setActor('other');const n=h.calls.length;await h.q('salaryAuto').onclick();assert.equal(h.calls.length,n);assert.equal(h.q('salarySave').disabled,true);count++;
  h=fixture();await h.run();let release;h.setHold(new Promise(r=>release=r));const pending=h.q('salaryAuto').onclick();await Promise.resolve();await Promise.resolve();const duplicate=h.q('salaryAuto').onclick();release();await pending;await duplicate;assert.equal(h.calls.filter(x=>x.args.p_enabled!==undefined).length,1);count++;
+ h=fixture();await h.run();const noWrite=h.calls.length;h.q('salaryJson').value=JSON.stringify(p.policy);h.q('salaryCommission100').onclick();const proposed=JSON.parse(h.q('salaryJson').value);assert.equal(proposed.agency_volume_basis,'agency_commission');assert.equal(proposed.minimum_agency_volume_usd,100);assert.equal(proposed.agency_qualification_mode,'volume_usd');assert.equal(proposed.minimum_hosts_enabled,false);assert.deepEqual(proposed.tiers,p.policy.tiers);assert.equal(h.calls.length,noWrite,'Choosing a condition must not silently save or activate it');count++;
  h=fixture();h.setCurrent(false);await h.run();assert.equal(h.root.innerHTML,'');assert.equal(h.calls.length,0);count++;
  delete global.document;console.log(JSON.stringify({passed:count,scope:'Actual module handlers; synthetic session/RPC/DOM; toggle, readback, duplicate, actor and navigation containment. No live financial call.'}));
 })().catch(e=>{console.error(e);process.exitCode=1});
+
