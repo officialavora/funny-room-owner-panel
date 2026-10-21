@@ -1,0 +1,28 @@
+const fs=require('fs'),assert=require('node:assert/strict'),{DOMParser,XMLSerializer}=require('./scripts/checkpoint166/node_modules/@xmldom/xmldom');
+function dom(){const doc=new DOMParser().parseFromString('<html><body><div id="root"></div></body></html>','text/html'),wrappers=new WeakMap();
+ const matches=(node,selector)=>selector.split(',').some(s=>{s=s.trim();if(s.startsWith('#'))return node.getAttribute('id')===s.slice(1);if(s.startsWith('[')){const m=s.match(/^\[([^=\]]+)(?:="([^"]*)")?\]$/);return m&&node.hasAttribute(m[1])&&(m[2]===undefined||node.getAttribute(m[1])===m[2]);}return node.nodeName.toLowerCase()===s;});
+ const all=(node,selector)=>{const out=[];function walk(p){for(let c=p.firstChild;c;c=c.nextSibling)if(c.nodeType===1){if(matches(c,selector))out.push(wrap(c));walk(c);}}walk(node);return out;};
+ function wrap(node){if(wrappers.has(node))return wrappers.get(node);const state={};const w={_node:node,isConnected:true,disabled:false,querySelector:s=>all(node,s)[0]||null,querySelectorAll:s=>all(node,s),append:child=>node.appendChild(child._node),replaceChildren(){while(node.firstChild)node.removeChild(node.firstChild);}};for(const key of ['innerHTML','textContent','value','checked'])Object.defineProperty(w,key,{get:()=>key==='innerHTML'?Array.from(node.childNodes).map(x=>new XMLSerializer().serializeToString(x)).join(''):key==='textContent'?node.textContent:key==='value'?state.value??node.getAttribute('value')??'':state.checked??node.hasAttribute('checked'),set:value=>{if(key==='innerHTML'){w.replaceChildren();const parsed=new DOMParser().parseFromString('<html><body>'+value+'</body></html>','text/html').getElementsByTagName('body')[0];while(parsed.firstChild)node.appendChild(doc.importNode(parsed.removeChild(parsed.firstChild),true));}else if(key==='textContent')node.textContent=value;else state[key]=value;}});wrappers.set(node,w);return w;}
+ return {root:wrap(doc.getElementById('root')),document:{createElement:name=>wrap(doc.createElement(name))}};}
+(async()=>{const contract=fs.readFileSync(__dirname+'/ranking-event-reward-contract.js','utf8'),url='data:text/javascript;base64,'+Buffer.from(contract).toString('base64'),source=fs.readFileSync(__dirname+'/ranking-event-rewards.js','utf8').replace("'./ranking-event-reward-contract.js'",JSON.stringify(url)),mod=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+ function fixture(){const d=dom();let actor='owner',current=true,calls=[],held=null;const categories={actor_id:'owner',owner:true,categories:['room','family','agency','pk','bd'].map(category=>({category,display_name:category==='agency'?'<img onerror="unsafe">':category,visible:category==='family',version:'0'}))},catalog={actor_id:'owner',owner:true,category:'agency',period:'weekly',version:'0',minimum_source_score:'0',published:false,coin_policy_source:'catalogue',rewards:[]};const client={
+ auth:{getSession:async()=>({data:{session:{user:{id:actor},access_token:'fixture-'+actor}}})},
+ rpc(name,args){
+  return {setHeader(k,v){
+   assert.equal(k,'Authorization');assert(v.startsWith('Bearer fixture-'));
+   return {abortSignal:async()=>{
+    calls.push({name,args});if(name.startsWith('owner_')&&held)await held;
+    if(name==='owner_save_ranking_category_control_v2'){const r=categories.categories.find(x=>x.category===args.p_category);r.rules=args.p_rules;r.display_name=args.p_display_name;r.visible=args.p_visible;r.version='1';return {data:categories};}
+    if(name==='owner_save_ranking_event_rewards_v1'){Object.assign(catalog,{rewards:args.p_rewards,minimum_source_score:args.p_minimum_source_score,published:args.p_published,version:'1'});return {data:catalog};}
+    return {data:name==='load_ranking_category_controls_v1'?categories:catalog};
+   }};
+  }};
+ }
+};return {...d,calls,run:()=>{global.document=d.document;return mod.showRankingEventRewards({root:d.root,client,isCurrent:()=>current,toast(){}});},q:id=>d.root.querySelector('#'+id),setActor:x=>actor=x,setCurrent:x=>current=x,setHold:x=>held=x};}
+ let f=fixture();await f.run();assert.equal(f.q('eventVisible').checked,false);assert.equal(f.root.querySelectorAll('img').length,0,'Names are escaped');assert.equal(f.q('eventName').value,'<img onerror="unsafe">');assert.equal(f.q('eventSave').disabled,false);f.q('eventName').value='Partners';f.q('eventRules').value='Verified sending only.\nNo fake transactions.';f.q('eventVisible').checked=true;await f.q('eventCategorySave').onclick();assert.equal(f.calls.find(x=>x.name==='owner_save_ranking_category_control_v2').args.p_display_name,'Partners');
+ assert.deepEqual(f.calls.find(x=>x.name==='owner_save_ranking_category_control_v2').args.p_rules,['Verified sending only.','No fake transactions.']);
+ const coin=f.root.querySelector('[data-field="coin_reward"]');coin.value='500';await f.q('eventSave').onclick();assert.equal(f.calls.find(x=>x.name==='owner_save_ranking_event_rewards_v1').args.p_rewards[0].coin_reward,'500');
+ f=fixture();await f.run();f.setActor('other');const n=f.calls.length;await f.q('eventSave').onclick();assert.equal(f.calls.length,n,'Actor change makes no RPC');assert.equal(f.q('eventSave').disabled,false); // exact same nonce can be retried safely, not a new editable request
+ f=fixture();f.setCurrent(false);await f.run();assert.equal(f.root.innerHTML,'');assert.equal(f.calls.length,0);delete global.document;console.log('PASS: actual Owner web reward editor load, escaped names, visibility rename, exact coin payload, actor fence and navigation denial; synthetic DOM/session only.');
+})().catch(e=>{console.error(e);process.exitCode=1});
+

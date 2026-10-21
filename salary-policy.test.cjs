@@ -1,8 +1,9 @@
 const fs=require('fs'),assert=require('node:assert/strict');
 (async()=>{
- const src=fs.readFileSync(__dirname+'/salary-policy.js','utf8'),mod=await import('data:text/javascript;base64,'+Buffer.from(src).toString('base64'));
+ const partnerURL='data:text/javascript;base64,'+Buffer.from(fs.readFileSync(__dirname+'/partner-salary-controls.js','utf8')).toString('base64');
+ const src=fs.readFileSync(__dirname+'/salary-policy.js','utf8').replace("'./partner-salary-controls.js'",JSON.stringify(partnerURL)),mod=await import('data:text/javascript;base64,'+Buffer.from(src).toString('base64'));
  const p={id:'program-1',country_scope:'*',cycle:'monthly',timezone:'Asia/Riyadh',effective_at:'2026-10-01T00:00:00Z',active:true,policy:{tiers:[{n:20,target:5000000000,host_usd:2762.5,agent_usd:487.5}]}};
- function fixture(){let current=true,actor='owner',auto=true,calls=[],hold=null;const controls=new Map(),root={isConnected:true,innerHTML:'',querySelector(sel){if(!controls.has(sel))controls.set(sel,{value:'',disabled:false,textContent:'',children:[],replaceChildren(){this.children=[];},append(x){this.children.push(x);}});return controls.get(sel);}};
+ function fixture(){let current=true,actor='owner',auto=true,calls=[],hold=null;const controls=new Map(),root={isConnected:true,innerHTML:'',querySelector(sel){if(!controls.has(sel))controls.set(sel,{value:'',disabled:false,textContent:'',children:[],replaceChildren(){this.children=[];},append(x){this.children.push(x);}});const child=controls.get(sel);child.isConnected=true;child.querySelector=root.querySelector.bind(root);return child;}};
   const client={auth:{getSession:async()=>({data:{session:{user:{id:actor},access_token:'synthetic-session-'+actor}}})},rpc(name,args){return {setHeader:async(key,value)=>{assert.equal(key,'Authorization');assert(value.startsWith('Bearer synthetic-session-'));calls.push({name,args});if(hold&&args.p_enabled!==undefined)await hold;if(name==='owner_salary_auto_release_v1'){if(args.p_enabled!==undefined)auto=args.p_enabled;return {data:{enabled:auto,interval_minutes:5,completed:0,errors:0}};}return {data:name==='owner_salary_programs_v1'?[p]:{enabled:true}};}};}};
   return{root,controls,calls,run:()=>mod.showSalaryPolicy({root,client,isCurrent:()=>current,toast(){}}),setCurrent:v=>current=v,setActor:v=>actor=v,setHold:v=>hold=v,q:id=>root.querySelector('#'+id)};
  }
@@ -12,6 +13,8 @@ const fs=require('fs'),assert=require('node:assert/strict');
  const before=h.calls.length;await h.q('salaryRemove').onclick();assert.equal(h.calls.length,before);assert(h.q('salaryStatus').textContent.includes('Only future programs'));count++;
  h=fixture();await h.run();h.setActor('other');const n=h.calls.length;await h.q('salaryAuto').onclick();assert.equal(h.calls.length,n);assert.equal(h.q('salarySave').disabled,true);count++;
  h=fixture();await h.run();let release;h.setHold(new Promise(r=>release=r));const pending=h.q('salaryAuto').onclick();await Promise.resolve();await Promise.resolve();const duplicate=h.q('salaryAuto').onclick();release();await pending;await duplicate;assert.equal(h.calls.filter(x=>x.args.p_enabled!==undefined).length,1);count++;
+ h=fixture();await h.run();const noWrite=h.calls.length;h.q('salaryJson').value=JSON.stringify(p.policy);h.q('salaryCommission100').onclick();const proposed=JSON.parse(h.q('salaryJson').value);assert.equal(proposed.agency_volume_basis,'agency_commission');assert.equal(proposed.minimum_agency_volume_usd,100);assert.equal(proposed.agency_qualification_mode,'volume_usd');assert.equal(proposed.minimum_hosts_enabled,false);assert.deepEqual(proposed.tiers,p.policy.tiers);assert.equal(h.calls.length,noWrite,'Choosing a condition must not silently save or activate it');count++;
  h=fixture();h.setCurrent(false);await h.run();assert.equal(h.root.innerHTML,'');assert.equal(h.calls.length,0);count++;
  delete global.document;console.log(JSON.stringify({passed:count,scope:'Actual module handlers; synthetic session/RPC/DOM; toggle, readback, duplicate, actor and navigation containment. No live financial call.'}));
 })().catch(e=>{console.error(e);process.exitCode=1});
+
