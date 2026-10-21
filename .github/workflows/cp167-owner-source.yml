@@ -19,3 +19,6 @@ jobs:
       - run: node --check salary-policy.js && node salary-policy.test.cjs
       - run: node prop-visibility.test.cjs
       - run: node gift-control.test.cjs && node gift-browser.test.cjs
+
+      - run: node --check partner-salary-controls.js && node partner-salary-controls.test.cjs
+      - run: node ranking-event-rewards.test.cjs

@@ -1,4 +1,4 @@
-const fs=require('fs'),assert=require('node:assert/strict'),{DOMParser,XMLSerializer}=require('/workspace/scratch/21f004e2be6f/audit/combined/node_modules/@xmldom/xmldom');
+const fs=require('fs'),assert=require('node:assert/strict'),{DOMParser,XMLSerializer}=require('./scripts/checkpoint166/node_modules/@xmldom/xmldom');
 function dom(){const doc=new DOMParser().parseFromString('<html><body><div id="root"></div></body></html>','text/html'),wrappers=new WeakMap();
  const matches=(node,selector)=>selector.split(',').some(s=>{s=s.trim();if(s.startsWith('#'))return node.getAttribute('id')===s.slice(1);if(s.startsWith('[')){const m=s.match(/^\[([^=\]]+)(?:="([^"]*)")?\]$/);return m&&node.hasAttribute(m[1])&&(m[2]===undefined||node.getAttribute(m[1])===m[2]);}return node.nodeName.toLowerCase()===s;});
  const all=(node,selector)=>{const out=[];function walk(p){for(let c=p.firstChild;c;c=c.nextSibling)if(c.nodeType===1){if(matches(c,selector))out.push(wrap(c));walk(c);}}walk(node);return out;};
@@ -25,3 +25,4 @@ function dom(){const doc=new DOMParser().parseFromString('<html><body><div id="r
  f=fixture();await f.run();f.setActor('other');const n=f.calls.length;await f.q('eventSave').onclick();assert.equal(f.calls.length,n,'Actor change makes no RPC');assert.equal(f.q('eventSave').disabled,false); // exact same nonce can be retried safely, not a new editable request
  f=fixture();f.setCurrent(false);await f.run();assert.equal(f.root.innerHTML,'');assert.equal(f.calls.length,0);delete global.document;console.log('PASS: actual Owner web reward editor load, escaped names, visibility rename, exact coin payload, actor fence and navigation denial; synthetic DOM/session only.');
 })().catch(e=>{console.error(e);process.exitCode=1});
+

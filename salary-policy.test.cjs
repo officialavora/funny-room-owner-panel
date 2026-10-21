@@ -1,8 +1,9 @@
 const fs=require('fs'),assert=require('node:assert/strict');
 (async()=>{
- const src=fs.readFileSync(__dirname+'/salary-policy.js','utf8'),mod=await import('data:text/javascript;base64,'+Buffer.from(src).toString('base64'));
+ const partnerURL='data:text/javascript;base64,'+Buffer.from(fs.readFileSync(__dirname+'/partner-salary-controls.js','utf8')).toString('base64');
+ const src=fs.readFileSync(__dirname+'/salary-policy.js','utf8').replace("'./partner-salary-controls.js'",JSON.stringify(partnerURL)),mod=await import('data:text/javascript;base64,'+Buffer.from(src).toString('base64'));
  const p={id:'program-1',country_scope:'*',cycle:'monthly',timezone:'Asia/Riyadh',effective_at:'2026-10-01T00:00:00Z',active:true,policy:{tiers:[{n:20,target:5000000000,host_usd:2762.5,agent_usd:487.5}]}};
- function fixture(){let current=true,actor='owner',auto=true,calls=[],hold=null;const controls=new Map(),root={isConnected:true,innerHTML:'',querySelector(sel){if(!controls.has(sel))controls.set(sel,{value:'',disabled:false,textContent:'',children:[],replaceChildren(){this.children=[];},append(x){this.children.push(x);}});return controls.get(sel);}};
+ function fixture(){let current=true,actor='owner',auto=true,calls=[],hold=null;const controls=new Map(),root={isConnected:true,innerHTML:'',querySelector(sel){if(!controls.has(sel))controls.set(sel,{value:'',disabled:false,textContent:'',children:[],replaceChildren(){this.children=[];},append(x){this.children.push(x);}});const child=controls.get(sel);child.isConnected=true;child.querySelector=root.querySelector.bind(root);return child;}};
   const client={auth:{getSession:async()=>({data:{session:{user:{id:actor},access_token:'synthetic-session-'+actor}}})},rpc(name,args){return {setHeader:async(key,value)=>{assert.equal(key,'Authorization');assert(value.startsWith('Bearer synthetic-session-'));calls.push({name,args});if(hold&&args.p_enabled!==undefined)await hold;if(name==='owner_salary_auto_release_v1'){if(args.p_enabled!==undefined)auto=args.p_enabled;return {data:{enabled:auto,interval_minutes:5,completed:0,errors:0}};}return {data:name==='owner_salary_programs_v1'?[p]:{enabled:true}};}};}};
   return{root,controls,calls,run:()=>mod.showSalaryPolicy({root,client,isCurrent:()=>current,toast(){}}),setCurrent:v=>current=v,setActor:v=>actor=v,setHold:v=>hold=v,q:id=>root.querySelector('#'+id)};
  }
