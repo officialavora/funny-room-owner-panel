@@ -1,3 +1,15 @@
+# Combined SVIP / Control Center source checkpoint — 22 October 2026
+
+Paired app GitLab86955143 source83fd61ff94d46410facb5125f2b5d2323d528b5f on combined-svip-control-preview-20261022. GitLab source pipeline2976077318 failed before any runner started: all3 jobs ci_quota_exceeded. No new APK/AAB/OTA or backend/Owner/Play deployment.
+
+This branch combines exact d3051 SVIP source and55f8 Control Center work against unchanged8e7c main, with local reviewed SVIP capability editor updates. Assistant Manager after Manager and User after Host; counts require optional reviewed backend directory RPC, currently not installed. Missing counts remain unknown, not fake0. Permanent IDs are not counts and are not reset/reused. Founder-only SVIP route and navigation fencing retained. Existing main and sole approved host unchanged.
+
+Actual combined source checks: all19 original Owner checks PASS after extending its exact page inventory to19 (the original18 plus SVIP); two explicit SVIP Founder/navigation guards added. App40 focused groups and9room-card groups PASS; Hermes Android export2006modules/588assets PASS. Expo Doctor17/18: live compatibility recommendation requests expo-asset~12.0.14 while exact installed SDK54.0.37 ships~12.0.13. No pin/lock/native guard was weakened or package replaced. Full CI, native, backend and phone acceptance remain incomplete.
+
+Pre-build Play read-only inspection: production115/0.10.74 full rollout; testing114/0.10.73; latest uploaded115; managed publishing ON; no unpublished changes; no policy issues found. No Store promotion. Financial/reversal and five SVIP consumer gaps, unavailable clean lion-entry export, independent accepted407/Wallet integration and AI-OFF bindings remain explicit in paired app handoff.
+
+---
+
 # SVIP Club checkpoint — 22 October 2026 — SOURCE ONLY, INCOMPLETE
 
 Base application: canonical GitLab86955143, f533c22cc0d3eaa6fad67d6c8800494bb7e7f86e / combined-roadmap-recovery-v10-20261021. Three modified runtime originals independently match the latest Library owner3294196-file manifest. This isolated successor does not replace that combined packet or MR220.
