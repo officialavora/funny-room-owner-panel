@@ -1,3 +1,16 @@
+## Control Center source/staging continuation — 22 October 2026
+
+Source base 97118c09986b5b7f59791f5bd429d4b77a894414; separate draft, preserve the accepted combined packet v18r2 and concurrent SVIP work. Manager -> Assistant Manager -> Super Admin; Host -> User. User means profiles with no current active non-user role, including legacy administrative positions. Counts use distinct people and server visibility; expired/suspended/future roles do not masquerade as active positions. Ordinary-user member rows are read-only. Missing Assistant Manager authority is displayed as pending; this change grants no rank, permissions or delegation ceiling.
+
+Production READ-ONLY audit: 131 profiles and auth accounts, 131 distinct public IDs, range100000..100562, sequence last100562/cache1; 121 profiles have no current non-user assignment (legacy owner overlaps Root). Counts are not permanent IDs. PostgreSQL nextval consumes numbers on failed/conflicting inserts; isolated ON CONFLICT fixture reproduces gaps. Exact historical allocation events are unavailable; do not assert that every gap came from a specific cause. No ID renumber, sequence reset, ID reuse, key rewrite or security-trigger bypass. The existing protect_profile_identity function forbids changing public_id.
+
+Weekly organization metric is gift volume in Coins, UTC calendar week starting Monday. Unique gift transactions are counted once when either participant is a current member. Existing code joined both participants and could duplicate a transaction; read-only production comparison currently finds0 affected organizations. This metric is not salary/contribution/reward eligibility. Existing current-membership attribution is preserved, not historical membership backfill. New code excludes future timestamps, keeps scoped visibility/search/limits and adds explicit unit label.
+
+Files: src/controlDirectoryModel.js (identical Owner control-directory.js), src/social.js, App.js; supabase/drafts/owner_control_directory_v1.sql. Existing approved Owner app.js hierarchy updated. Actual mounted Control Center/Owner renderer client groups14 PASS (mocked transport); isolated staging SQL tests PASS and schemas rolled back. Parse5modules PASS. Full final combined integration, CI/export/APK/device and live function deployment are not established. No production write, publish, OTA or balance/permission change.
+
+
+Paired app commit:9577372d1c08feb6344a789c7b50a9e0c5996678. Existing Owner19-check regression retained and passed; bootstrap strips module imports by parsed syntax rather than assuming two fixed header lines. New14 client groups include actual Owner hierarchy renderer. No deployment.
+
 # Host / Agency salary controls — 20 October 2026
 
 New source candidate: Founder-only salary-policy.js uses the same live versioned Host/Agency backend as the current application. Includes automatic closed-period release toggle/status, global operation pause, future country/global daily/weekly/monthly policy scheduling, exact JSON tier/qualification editing and future-only removal. Current/paid history is retained. Session token pinned per RPC; navigation/actor changes, duplicate clicks and uncertain writes fenced. No salary/wallet or policy change is executed by loading the page.
