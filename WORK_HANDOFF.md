@@ -1,3 +1,57 @@
+# Combined Top Gift / SVIP / Control Owner source —23 October2026
+
+Paired app37e1f115784ca4d9a168d48547a42cb761d9975d / Draft MR227. Preserve sole approved Owner host; no deployment claimed. Current Owner app contains both Founder-gated SVIP and Top Gift routes with the same revision fences.
+
+# Top Gift five-level Owner candidate —23 October2026
+
+Paired GitLab branch top-gift-five-levels-20261023 / implementation f8ea0900; Owner implementation80de625e / draft PR16. Five Founder limits/durations with pinned-session request, expected revision, reason and confirmed save; uncertain writes require reload.8 actual DOM groups PASS. Isolated staging SQL9 groups PASS/rollback; live backend and panel not deployed. Native app/geometry/source tests in paired handoff. Full CI, authenticated HTTP/concurrency/phone/release gates remain pending. No wallet/gift transaction writes, financial diagnostic replay, APK/OTA/Play. Preserve all previous source and history.
+
+--- Previous handoff retained ---
+
+# Combined SVIP / Control Center source checkpoint — 22 October 2026
+
+Paired app GitLab86955143 source83fd61ff94d46410facb5125f2b5d2323d528b5f on combined-svip-control-preview-20261022. GitLab source pipeline2976077318 failed before any runner started: all3 jobs ci_quota_exceeded. No new APK/AAB/OTA or backend/Owner/Play deployment.
+
+This branch combines exact d3051 SVIP source and55f8 Control Center work against unchanged8e7c main, with local reviewed SVIP capability editor updates. Assistant Manager after Manager and User after Host; counts require optional reviewed backend directory RPC, currently not installed. Missing counts remain unknown, not fake0. Permanent IDs are not counts and are not reset/reused. Founder-only SVIP route and navigation fencing retained. Existing main and sole approved host unchanged.
+
+Actual combined source checks: all19 original Owner checks PASS after extending its exact page inventory to19 (the original18 plus SVIP); two explicit SVIP Founder/navigation guards added. App40 focused groups and9room-card groups PASS; Hermes Android export2006modules/588assets PASS. Expo Doctor17/18: live compatibility recommendation requests expo-asset~12.0.14 while exact installed SDK54.0.37 ships~12.0.13. No pin/lock/native guard was weakened or package replaced. Full CI, native, backend and phone acceptance remain incomplete.
+
+Pre-build Play read-only inspection: production115/0.10.74 full rollout; testing114/0.10.73; latest uploaded115; managed publishing ON; no unpublished changes; no policy issues found. No Store promotion. Financial/reversal and five SVIP consumer gaps, unavailable clean lion-entry export, independent accepted407/Wallet integration and AI-OFF bindings remain explicit in paired app handoff.
+
+---
+
+# SVIP Club checkpoint — 22 October 2026 — SOURCE ONLY, INCOMPLETE
+
+Base application: canonical GitLab86955143, f533c22cc0d3eaa6fad67d6c8800494bb7e7f86e / combined-roadmap-recovery-v10-20261021. Three modified runtime originals independently match the latest Library owner3294196-file manifest. This isolated successor does not replace that combined packet or MR220.
+Owner base: officialavora/funny-room-owner-panel main8e7c1bb66c9a4b6d825033a232d0ce9c87da0a43. Preserve its existing site and Supabase project.
+
+Implemented candidate
+- Original static AI10-crest atlas and15-icon atlas. Lossless WebP conversion preserves alpha and visible RGB; transparent RGB may be canonicalized. These are static illustrations, NOT generated character video/entrance movies. Provenance and exact hashes in svip-club-art-provenance.json.
+- Existing SVIP screen gains tier artwork and three-column benefit cards/detail sheets. Profile/social SVIP badge renderers use the tier-specific new crest when no Owner HTTPS override exists. Existing frames, VIP recharge0–100, room password entry and one-time activation package remain distinct.
+- Protected server policy per tier: title, USD cents price, duration, purchasability, daily bonus basis points, media URLs, benefit labels/descriptions/visibility. Default price remains $100/$200/.../$1000 =100M/200M/.../1B coins,30days. Existing deployed tier rows were read without mutation. No reference qualification-points table was converted into a debit schedule.
+- Daily extra check-in candidate:275bps=2.75% of configured coin price, once per user per UTC calendar day, no missed-day accumulation; unique user/day and request receipts, membership/expiry/freeze checks, wallet+ledger+claim atomic transaction. Active manual/permanent grants are eligible under this candidate policy. Daily rewards are separate from one-time activation packages.
+- Preserved exact deployed v1 purchase/read function bodies except hardcoded tier-price expressions now resolve the configured USD cents at10,000coins/cent. New v2 purchase checks the accepted coin quote under a tier lock; original completed receipts replay before quote comparison. Existing unknown-purchase storage/recovery is preserved. Existing legacy Owner tier edits invalidate the new policy revision.
+- New Founder-only editor in existing approved Owner panel: concrete before/after review; reason; expected version; request receipt and history; duplicate/navigation/account/uncertain-save fencing. Badge/frame disabled settings update actual existing cosmetic consumer catalogues; asset_url changes use existing consumer precedence. Null badge/frame override restores bundled art. No hard deletion of grants/history.
+
+Honest feature inventory
+Available implemented consumers in this source candidate: identity badge, profile frame, extra daily check-in. Existing badge/frame consumers predate this work; daily bonus is new and UNDEPLOYED.
+Other12 features have original icon art and editable descriptive/preparation settings, but actual consumers are NOT implemented here: colorful nickname, profile card, entrance effect, colorful chat font, chat bubble, faster level progress, exclusive gifts, mount, ghost visit, anti-tracking, direct message without mutual follow, room chat/mic without room membership. Server rejects enabling these consumers. Client labels them COMING SOON. They are NOT completed, live or implicitly granted. No arbitrary tier1–10 permission progression is invented from the five-tier reference. Source is not a complete15-benefit implementation.
+
+Actual checks
+-14 local groups PASS: eight app/Owner JS/JSX modules parse; ten-tier/amount normalization; malformed, duplicate and unsafe data denial; honest planned/locked states; actual mounted benefit grid/detail handlers; duplicate claim tap sends one request; wallet refresh; account change clears state; optional missing backend fallback retains verified legacy benefits; Owner before/after review, exact revision and duplicate click, stale navigation denial, changed reason invalidation, uncertain save fence. Transport is mocked, not real user acceptance.
+- Real Postgres tests on Funny Room STAGING in two isolated temporary schemas, all rolled back: ten exact price quotes/150 benefit projections; auth and Founder rejection; actual fixture wallet credit/ledger link; duplicate same-day requests; frozen/expired/incorrect day/incorrect amount rejected; actual consumer/asset edit; stale Owner revision rejected; unsafe URL/unimplemented consumer rejected; configuration replay; configured-price v1 debit and replay; v2 stale-quote rejection and completed receipt replay; legacy price edit revision invalidation; authenticated table-write privilege denied. Follow-up schema inventory returned[]; no fixture schemas remain. No real users or balances touched. Independent concurrent-session contention is NOT TESTED.
+
+Release blockers / next work
+1. Implement and verify the remaining12 real consumers and the reviewed tier progression; keep lock/password, blocks and moderation authoritative.
+2. Daily-reward refund/reversal attribution and spent-reward debt recovery require dedicated integration with existing payment/refund/coin-order lifecycle BEFORE financial release. Current claim creation is atomic; this checkpoint does not assert complete refund lifecycle parity.
+3. Full combined source/Owner CI, approved-change metadata reconciliation, real authenticated E2E, native rendering/visual/audio/performance/expiry and two-phone checks are NOT TESTED. Sparse targeted source is not a complete build checkout. Existing combined CI blockers are not resolved by this patch.
+4. Backend file is a DRAFT outside automatic migrations; no persistent schema/catalog activation occurred in staging or production. A reviewed migration/install and device acceptance are still required.
+5. No new APK/AAB/OTA, no Owner deployment, no Store testing/production. Owner's sequence remains APK/device review first, testing/production after acceptance. Do not claim a complete release from the static art or these tests.
+
+Continuation files: app/src/SvipClubBenefits.js, SvipClubArt.js, svipClubModel.js; VipSvipCenter.js, CosmeticIdentityIcon.js, PremiumIdentity.js; app/supabase/drafts/svip_club_v1.sql; owner/svip-club.js and app.js; check-svip-club.cjs, build-sql-test.py, sql-test.sql and evidence logs. Preserve original A/B/C video IDs in the shared roadmap37 and later versions.
+
+---
+
 # Host / Agency salary controls — 20 October 2026
 
 New source candidate: Founder-only salary-policy.js uses the same live versioned Host/Agency backend as the current application. Includes automatic closed-period release toggle/status, global operation pause, future country/global daily/weekly/monthly policy scheduling, exact JSON tier/qualification editing and future-only removal. Current/paid history is retained. Session token pinned per RPC; navigation/actor changes, duplicate clicks and uncertain writes fenced. No salary/wallet or policy change is executed by loading the page.
@@ -151,3 +205,4 @@ LIVE lacks the exact-power staff SQL/Edge workflow, new catalog contracts and ve
 ## CP167 — 2026-10-08 verified integration
 
 User authorized completion and necessary CI/delivery after CP166's source-only checkpoint. CP166 input precision, duplicate submission, navigation and logout guards passed syntax and all14 mocked checks in GitHub Actions run37811384084 at89ea99bd6f1d822f295306c9556cc1c168b7c0ee. PR2 merged as22bcbf089d8e2b877974e0b676256f748bcef079. Approved-host Pages deployment run37811500473 SUCCESS; anonymous app.js readback exactly matches merged source SHA256c43873547da46963e3f828ea9f868fd8011993313ba8a86242092e2131198a94. Isolated test lock and read-only CI retained. No financial RPC executed, no new access granted, no authenticated browser acceptance claimed. Advanced CP153/CP161/CP162 controls remain separate and must preserve these guards on later integration. App CP167 integration MR178 is merged; actual exact-source CI37811114267 PASS. Public legal Edge funny-room-legal v4 corrected and verified; Play purchase-history Data Safety saved as draft. Alpha113 not reviewed/published; FGS requires actual113 background-playback demo.21 named LIVE contracts remain missing on fresh read; no shared LIVE financial/catalog migration applied.
+
