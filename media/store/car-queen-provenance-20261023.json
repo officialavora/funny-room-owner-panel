@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-23",
+  "model": "seedance1_5",
+  "credits": {
+    "initial": 10,
+    "car": 4.8,
+    "queen": 4.8,
+    "remaining": 0.4
+  },
+  "sports_car": {
+    "job_id": "86124155-e613-47df-a8d9-5734969b7f08",
+    "params": {
+      "model": "seedance1_5",
+      "duration": 4,
+      "resolution": "720p",
+      "generate_audio": true,
+      "aspect_ratio": "9:16",
+      "prompt": "ONE original premium cinematic social voice-room entrance, FOUR seconds, vertical 9:16. Photoreal Hollywood VFX, continuous single shot, not a slideshow or zoom on a still. A coherent unbranded obsidian-black/platinum hypercar is ALREADY MOVING through a huge gold-lit palace gateway onto wet black marble. Camera low at three-quarter front tracks backward. First 2 seconds: visibly rotating wheels, realistic suspension and water spray, a shallow controlled power slide that brakes naturally to a commanding stop near camera. Final 2 seconds: BOTH scissor doors rise smoothly, warm gold palace light sweeps across mirrorlike body, headlights flare gently and a powerful hero pose settles cleanly. Keep car fully readable, physically grounded, no deformation, no cuts, no people, no text, no logos, no UI. Rich gold/silver luxury, cinematic volumetric beams, realistic reflections. ORIGINAL SYNCHRONIZED AUDIO: fierce deep engine acceleration and one gearshift, short tire skid on the stop, strong final bass impact and subtle mechanical door hiss. No music, no voices. Finish all motion and sound within four seconds. Final-use production asset.",
+      "count": 1
+    }
+  },
+  "silver_queen": {
+    "failed_job_id": "0ef84533-4e5a-49b4-98a6-1fdfb695f0c2",
+    "failed_reason": "not provided",
+    "completed_job_id": "d6ecf4b5-3dbc-4ca2-9f53-86b174572ae5",
+    "params": {
+      "model": "seedance1_5",
+      "duration": 4,
+      "resolution": "720p",
+      "generate_audio": true,
+      "aspect_ratio": "9:16",
+      "prompt": "Create ONE finished cinematic royal entrance, FOUR seconds, vertical 9:16, realistic moving video, one continuous shot. An adult fictional Silver Queen in a magnificent platinum crown and fully covering silver royal gown walks naturally toward camera through huge moonlit palace doors. Her long pearlescent cape flows behind her. A large elegant silver phoenix behind her slowly opens both wings. At the end she raises one hand gracefully and a few bright silver crystals orbit her crown, then settles in a majestic hero stance. Actual walking, cloth and wing motion; coherent anatomy and identity; no slideshow, no photo zoom, no cuts. Hollywood fantasy realism, luxurious silver and pale blue light with warm gold accents, marble reflections. No text, logos or UI. Original synchronized audio: two royal footsteps, fabric and wing whoosh, crystalline magical chime and final deep cinematic impact. No speech or music. Clean four-second ending.",
+      "count": 1
+    },
+    "audio_gain_db": 7,
+    "video_stream_unchanged": true
+  },
+  "files": [
+    {
+      "file": "FunnyRoom-Obsidian-Sports-Car-Entry-v1.mp4",
+      "bytes": 5348280,
+      "sha256": "6c930933f7ea826520bcd303da08ac036db6020b4813e9f3a61177b802d887da"
+    },
+    {
+      "file": "FunnyRoom-Silver-Queen-Entry-v1.mp4",
+      "bytes": 5684549,
+      "sha256": "e0068c70cc399d522fdfffa42aa4e8579b25f0e0dc6fc56feff5359747f6e901"
+    },
+    {
+      "file": "obsidian-sports-car-poster.jpg",
+      "bytes": 109608,
+      "sha256": "c71e6b8d646749f4ca82d57f3600443fd4e94de732b3cd45b3b6927f412280f2"
+    },
+    {
+      "file": "silver-queen-poster.jpg",
+      "bytes": 116888,
+      "sha256": "819c3b46ae434a53056efed341ead0fda9eaa8b773f40600d7c9d0df3ba0817b"
+    },
+    {
+      "file": "Silver-Queen-Generated-Original.mp4",
+      "bytes": 5651072,
+      "sha256": "645fdd59fe393032d7aedda3e55242f3795f29edd0c426b3ff0b1276043f88db"
+    }
+  ]
+}
