@@ -1,0 +1,31 @@
+{
+  "source_heygen_video_id": "0dc598d9f43d45698343a3ad9a84f93d",
+  "source_duration_seconds": 5.258344,
+  "source_size": [
+    768,
+    768
+  ],
+  "gif_frames": 82,
+  "unique_frames": 82,
+  "gif_duration_ms": 5250,
+  "size": [
+    448,
+    448
+  ],
+  "portrait_scale": 0.28,
+  "portrait_center_y": 0.6,
+  "audio": "GIF silent; no repeated sound",
+  "processing": "Existing original neural video motion sampled20fps; connected black background removed; fixed DP aperture; letterboxed to existing renderer geometry. No new generation; no synthetic wing motion; original video ring movement retained. Final448px16fps global palette, aperture rechecked.",
+  "files": [
+    {
+      "name": "FunnyRoom-SVIP1-Original-Video-Motion-Transparent-v3.gif",
+      "bytes": 6971021,
+      "sha256": "78efd20d88bada87ed4a5ec3ae521fbcfc2e8e71348852d384778eeb1a204533"
+    },
+    {
+      "name": "svip1-video-motion-poster-v3.png",
+      "bytes": 237339,
+      "sha256": "375ea51d7c4470df3465bcfe4d150e36331b9a7f90c8557784ff343deaaf1ef1"
+    }
+  ]
+}
