@@ -25,7 +25,10 @@ titles.roomRecommendations='Recommended rooms';
 NAV.splice(NAV.findIndex(x=>x[0]==='rooms')+1,0,['roomRecommendations','◉','Recommended rooms']);
 titles.salaryPolicy='Host & Agency Salary';
 NAV.splice(NAV.findIndex(x=>x[0]==='finance')+1,0,['salaryPolicy','◫','Host & Agency Salary']);
+titles.topGift='Global Top Gift';
+NAV.push(['topGift','✦','Global Top Gift']);
 const PAGES={
+ topGift:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showTopGift}=await import('./top-gift.js');if(token!==navigationRevision)return;await showTopGift({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  salaryPolicy:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showSalaryPolicy}=await import('./salary-policy.js');if(token!==navigationRevision)return;await showSalaryPolicy({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  roomRecommendations:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showRoomRecommendations}=await import('./room-recommendations.js');if(token!==navigationRevision)return;await showRoomRecommendations({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  roomRewardAppearance:async(token)=>{if(!authority.is_founder&&access.role!=='co_owner')throw Error('Owner access required');const {showRoomRewardAppearance}=await import('./room-reward-appearance.js');if(token!==navigationRevision)return;await showRoomRewardAppearance({root:$('#content'),client:supabase,rpc,isCurrent:()=>token===navigationRevision,toast});},
@@ -71,6 +74,7 @@ function openAction(key,id){if(key==='gift')return go('gifts');if(key==='cosmeti
 $('#loginForm').onsubmit=async e=>{e.preventDefault();let b=e.submitter;b.disabled=true;b.textContent='Verifying authority…';try{let response=await fetch('https://zspcgyhchaqpiyujyxqp.supabase.co/functions/v1/panel-login',{method:'POST',headers:{'Content-Type':'application/json','apikey':'sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ'},body:JSON.stringify({login_id:$('#email').value.trim(),password:$('#password').value})});let result=await response.json();if(!response.ok||!result.session)throw new Error(result.message||'Login failed');let{error}=await supabase.auth.setSession({access_token:result.session.access_token,refresh_token:result.session.refresh_token});if(error)throw error;$('#password').value='';await boot()}catch(error){toast(error.message,true)}finally{b.disabled=false;b.textContent='Enter command center'}};
 $('#resetPassword').onclick=async()=>{let email=$('#email').value.trim();if(!email)return toast('Enter official email first',true);let{error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});toast(error?error.message:'Password recovery email sent',!!error)};
 $('#logout').onclick=async()=>{await supabase.auth.signOut({scope:'local'});showLogin();toast('Signed out securely')};$('#menu').onclick=()=>$('.sidebar').classList.toggle('open');supabase.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT')showLogin()});boot();
+
 
 
 
