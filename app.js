@@ -28,7 +28,10 @@ titles.salaryPolicy='Host & Agency Salary';
 NAV.splice(NAV.findIndex(x=>x[0]==='finance')+1,0,['salaryPolicy','◫','Host & Agency Salary']);
 titles.svipClub='SVIP Club';
 NAV.splice(NAV.findIndex(x=>x[0]==='premium')+1,0,['svipClub','✦','SVIP Club']);
+titles.topGift='Global Top Gift';
+NAV.push(['topGift','✦','Global Top Gift']);
 const PAGES={
+ topGift:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showTopGift}=await import('./top-gift.js');if(token!==navigationRevision)return;await showTopGift({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  svipClub:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showSvipClub}=await import('./svip-club.js');if(token!==navigationRevision)return;await showSvipClub({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  salaryPolicy:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showSalaryPolicy}=await import('./salary-policy.js');if(token!==navigationRevision)return;await showSalaryPolicy({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  roomRecommendations:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showRoomRecommendations}=await import('./room-recommendations.js');if(token!==navigationRevision)return;await showRoomRecommendations({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},

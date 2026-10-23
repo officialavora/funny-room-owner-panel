@@ -1,3 +1,13 @@
+# Combined Top Gift / SVIP / Control Owner source —23 October2026
+
+Paired app37e1f115784ca4d9a168d48547a42cb761d9975d / Draft MR227. Preserve sole approved Owner host; no deployment claimed. Current Owner app contains both Founder-gated SVIP and Top Gift routes with the same revision fences.
+
+# Top Gift five-level Owner candidate —23 October2026
+
+Paired GitLab branch top-gift-five-levels-20261023 / implementation f8ea0900; Owner implementation80de625e / draft PR16. Five Founder limits/durations with pinned-session request, expected revision, reason and confirmed save; uncertain writes require reload.8 actual DOM groups PASS. Isolated staging SQL9 groups PASS/rollback; live backend and panel not deployed. Native app/geometry/source tests in paired handoff. Full CI, authenticated HTTP/concurrency/phone/release gates remain pending. No wallet/gift transaction writes, financial diagnostic replay, APK/OTA/Play. Preserve all previous source and history.
+
+--- Previous handoff retained ---
+
 # Combined SVIP / Control Center source checkpoint — 22 October 2026
 
 Paired app GitLab86955143 source83fd61ff94d46410facb5125f2b5d2323d528b5f on combined-svip-control-preview-20261022. GitLab source pipeline2976077318 failed before any runner started: all3 jobs ci_quota_exceeded. No new APK/AAB/OTA or backend/Owner/Play deployment.
@@ -195,3 +205,4 @@ LIVE lacks the exact-power staff SQL/Edge workflow, new catalog contracts and ve
 ## CP167 — 2026-10-08 verified integration
 
 User authorized completion and necessary CI/delivery after CP166's source-only checkpoint. CP166 input precision, duplicate submission, navigation and logout guards passed syntax and all14 mocked checks in GitHub Actions run37811384084 at89ea99bd6f1d822f295306c9556cc1c168b7c0ee. PR2 merged as22bcbf089d8e2b877974e0b676256f748bcef079. Approved-host Pages deployment run37811500473 SUCCESS; anonymous app.js readback exactly matches merged source SHA256c43873547da46963e3f828ea9f868fd8011993313ba8a86242092e2131198a94. Isolated test lock and read-only CI retained. No financial RPC executed, no new access granted, no authenticated browser acceptance claimed. Advanced CP153/CP161/CP162 controls remain separate and must preserve these guards on later integration. App CP167 integration MR178 is merged; actual exact-source CI37811114267 PASS. Public legal Edge funny-room-legal v4 corrected and verified; Play purchase-history Data Safety saved as draft. Alpha113 not reviewed/published; FGS requires actual113 background-playback demo.21 named LIVE contracts remain missing on fresh read; no shared LIVE financial/catalog migration applied.
+
