@@ -1,3 +1,15 @@
+# Media uploads — LIVE verified receipt (27 October 2026)
+
+PR #18 merged, tested source cff213545836f80728870ecf3175cee0247b3d6e; main merge 66418cdee76254489e9c77f87168f46bd1ad6a3b. Complete source CI run 40429776061 PASS including existing regressions and 16 new DOM/storage groups. Pages build/deploy run 40429819142 PASS. Both live editors show video/image and optional sound file selectors; select then Save; embedded video audio by default; separate soundtrack and sound-only updates supported. MP4 gift uploads set effect_kind=video to match the existing application audio consumer. Gift duration remains editable (1–30 seconds).
+
+Live existing Store entry167_14 / Crystal Dragon Empress · 10s Preview saved through approved authenticated panel; received Saved with audit history and reopened same row. Independent before/after readback changed only asset_url among checked catalogue fields including sanitized visual metadata, name/kind/tier, sound URL/key, price/days/order/sale/active. New object: owner-catalog/<existing actor>/props/4125937c-7cd5-4ca6-ac25-b47e45f315ee.mp4. Public download SHA256 exactly 004be03bf179b9005b2bf0b753246e82f6363a550b962eebea6931c1d29ae7d9; complete ffmpeg decode PASS. 10 seconds/300frames/360x640; decoded original soundtrack hash preserved. Moving MP4 watermark lettering reconstructed; small local texture differences possible. Existing poster/provenance and preview scope retained.
+
+Live gift editor inspected in unsaved draft; no gift row changed. Real separate-audio saves covered by DOM/storage mocks, not a live gift mutation. Phone playback/audio output remains NOT TESTED. Existing EntryMovie uses absent sound_url => movie URL; GiftCinematicScene uses embedded audio with video kind and no separate sound. No app JS/OTA/native/Play release. Earlier Best CP candidate remains separate/unreleased (app repo PR169 e6577dc3143d5485f413bc667766c638764fc773); no CP publication inferred.
+
+Durable handoff: Owner-Media-Upload-Handoff.txt; clean Dragon handoff packet updated to include actual receipt, source refs, hashes, controls screenshots and rollback. Existing free tooling/hosting/storage/CI used; no paid generation/new service/account. Rollback panel by reverting PR18; rollback this Store pointer to original Funny-Room-Dragon-Slow-Motion-10s-Preview.mp4 through latest versioned record, preserving concurrent fields. No bucket/RLS/schema/grant or financial changes.
+
+---
+
 # Catalogue media file uploads — 27 October 2026
 
 Owner-requested update: both My Props (including entries) and Founder gift editor now have video/image and optional sound file selectors. Choosing files does not upload immediately. Save validates the complete draft and selected media, uploads immutable files through the existing authenticated storage client/RLS, fills media URLs, then calls the existing versioned audited save RPC. Video selection defaults to its embedded soundtrack; optional separate audio, sound-only updates and existing URL input remain supported.
