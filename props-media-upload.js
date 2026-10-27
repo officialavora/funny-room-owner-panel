@@ -4,10 +4,11 @@ const TYPES={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp
 export const PROP_MEDIA_ACCEPT={artwork:'.png,.jpg,.jpeg,.webp,.gif,.mp4',sound:'.mp3,.m4a,.aac,.ogg,.wav'};
 const text=(bytes,start,end)=>String.fromCharCode(...bytes.slice(start,end));
 export async function validatePropMedia(file,slot){
- if(!['artwork','sound'].includes(slot))throw Error('Unknown media field');
+ if(!['artwork','sound','image','poster'].includes(slot))throw Error('Unknown media field');
  if(!file||!Number.isSafeInteger(file.size)||file.size<=0)throw Error('Choose a non-empty media file');
  const ext=String(file.name||'').split('.').pop().toLowerCase(),type=TYPES[ext];
  if(!type||!(slot==='sound'?type.startsWith('audio/'):type.startsWith('image/')||ext==='mp4'))throw Error('Unsupported file type for this field');
+ if((slot==='image'||slot==='poster')&&(!type.startsWith('image/')||slot==='poster'&&ext==='gif'))throw Error(slot==='poster'?'Still preview must be PNG, JPEG or WebP':'Choose an image or animated GIF');
  const limit=(slot==='sound'?20:ext==='mp4'?50:10)*1024*1024;
  if(file.size>limit)throw Error('File too large: maximum '+limit/1024/1024+' MB');
  const aliases={'audio/x-m4a':'audio/mp4','audio/x-wav':'audio/wav'};

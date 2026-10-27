@@ -1,3 +1,15 @@
+# Frame and Room Emoji file uploads — 27 October 2026
+
+Frame, room_frame and emoji_pack use the existing props uploader; targeted choose-file + Save tests cover image/GIF only, image/GIF plus optional audio, sound-only and video rejection without upload. Artwork file types and embedded-sound checkbox now follow the selected prop kind; entry and gift MP4 workflows remain intact. Existing catalogue IDs, price, grants and revisions retained.
+
+Added Room Emoji navigation and emoji-control.js for the actual room_emoji_catalog, not only emoji packs. Uses existing protected owner_list_room_emoji_catalog_v3 / owner_upsert_room_emoji_catalog_v3 and auth-token-pinned requests. One Save validates the draft and all files, uploads image/GIF, optional still preview and optional sound via the existing immutable actor-scoped helper, then saves the same stable key with expected updated_at. Existing permission/RLS/schema unchanged. MP4 is rejected for this image/GIF consumer. Conflict and unknown write outcomes block unsafe retry; matching newer authoritative refresh can reconcile a pending save. New emoji drafts are inactive by default.
+
+Local verification: 28 media groups (including 12 targeted frame/room_frame/emoji_pack groups) PASS; 15 real-module Room Emoji DOM/auth/storage/RPC groups PASS; original 19 props checks and gift payload/editor tests PASS; JS parse PASS. Hosted complete Owner CI and approved Pages deploy must pass before declaring live. No catalogue media, test rows, grants, permissions or financial values changed for this UI feature.
+
+Application parity: existing canonical GitLab project86955143/profile-reference-contact-20261018 OwnerEmojiCatalog.js and RoomReactionArt.js read/write the same v3 fields and consume image/GIF plus optional sound and poster, with motion/fallback behavior preserved. No app source/OTA/native build needed to add controls to the approved web panel. Physical-device playback and live media save remain unverified at this source checkpoint. Keep these distinct from CI/UI evidence.
+
+---
+
 # Media uploads — LIVE verified receipt (27 October 2026)
 
 PR #18 merged, tested source cff213545836f80728870ecf3175cee0247b3d6e; main merge 66418cdee76254489e9c77f87168f46bd1ad6a3b. Complete source CI run 40429776061 PASS including existing regressions and 16 new DOM/storage groups. Pages build/deploy run 40429819142 PASS. Both live editors show video/image and optional sound file selectors; select then Save; embedded video audio by default; separate soundtrack and sound-only updates supported. MP4 gift uploads set effect_kind=video to match the existing application audio consumer. Gift duration remains editable (1–30 seconds).
@@ -175,4 +187,3 @@ LIVE lacks the exact-power staff SQL/Edge workflow, new catalog contracts and ve
 ## CP167 — 2026-10-08 verified integration
 
 User authorized completion and necessary CI/delivery after CP166's source-only checkpoint. CP166 input precision, duplicate submission, navigation and logout guards passed syntax and all14 mocked checks in GitHub Actions run37811384084 at89ea99bd6f1d822f295306c9556cc1c168b7c0ee. PR2 merged as22bcbf089d8e2b877974e0b676256f748bcef079. Approved-host Pages deployment run37811500473 SUCCESS; anonymous app.js readback exactly matches merged source SHA256c43873547da46963e3f828ea9f868fd8011993313ba8a86242092e2131198a94. Isolated test lock and read-only CI retained. No financial RPC executed, no new access granted, no authenticated browser acceptance claimed. Advanced CP153/CP161/CP162 controls remain separate and must preserve these guards on later integration. App CP167 integration MR178 is merged; actual exact-source CI37811114267 PASS. Public legal Edge funny-room-legal v4 corrected and verified; Play purchase-history Data Safety saved as draft. Alpha113 not reviewed/published; FGS requires actual113 background-playback demo.21 named LIVE contracts remain missing on fresh read; no shared LIVE financial/catalog migration applied.
-
