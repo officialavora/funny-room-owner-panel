@@ -1,3 +1,25 @@
+# Banner media workspace and polished couple download — 27 October 2026
+
+Owner requested all current/future banners get choose-file + Save and configurable coins/catalogue prop rewards without routine native rebuilds, plus polished couple and lotus/diya videos. This checkpoint does not claim the entire request complete.
+
+New Founder-only Banners & rewards page supports existing Official/Popular, Birthday, ops Home/Room/Activity/Profile, campaign banners, and reward campaign drafts. Image/GIF and optional sound (only existing music-capable Popular/Birthday consumers) use the existing immutable actor-scoped uploader/RLS. Existing target identities, schedules, permissions, state and history are retained. New rows are inactive/draft; activation is explicit. MP4 is rejected because these consumers render images/GIFs. New Birthday creation remains the existing event workflow, while existing Birthday media can be edited here.
+
+Additive backend/banner_workspace_v1.sql: Founder authorization, row lock + entire snapshot revision, request-bound receipt/replay conflict, immutable public IDs, before/after audit. Reward metadata + tiers save in one transaction. Coins and existing cosmetic entitlements (entry/frame/noble/bubble/emoji packs etc.) use existing canonical grants. Claimed campaigns cannot have tiers replaced. No existing balance, claim, rate, publisher or catalogue content was changed. SVIP membership and sendable Gift campaign delivery are NOT implemented; do not present them as enabled.
+
+Critical parity finding: LIVE claim_recharge_reward/load_my_recharge_reward_state still sum legacy recharge events, and LIVE load_recharge_campaigns omits config/variant. The CP171 money/invite/sending source in canonical app branch is NOT installed on LIVE. New USD/Festival publication is therefore fail-closed with CAMPAIGN_METRIC_CONTRACT_NOT_INSTALLED. Do not enable an offer by labelling legacy coin units USD or bypass this guard. This deeper financial bridge needs its own scoped reviewed integration and acceptance; the upload workspace alone is not that engine. Existing safe media editing is independent.
+
+Tests: 15 actual DOM handler banner groups PASS; existing 21 Owner navigation/action checks, 19 Props groups, salary/grant/gift, 29 upload and16 Room Emoji groups PASS locally. The navigation page allowlist extended from19 to20 and explicitly checks Founder/navigation guards; existing assertions retained. Staging transactional tests PASS: five families, inactive creates, preservation, audio, atomic coins draft, request replay/conflict, stale revision, explicit Popular activation, unsupported reward rollback, video rejection, ordinary/anonymous denial. All test catalogue/campaign rows rolled back. Receipt table intentionally denies direct authenticated reads and has RLS without client policies; definer RPC access is intentional and Founder checked. No schema or search_path advisor issue on these functions.
+
+Couple file: gift-delivery/Diwali-Couple-Dance-Gallery.mp4, 10.000s,720x1280,H.264/yuv420p,AAC,300frames,fast-start. Removed source phone-room intro/outro, refined crop, cinematic retiming and short fade. Original source soundtrack is trimmed and retimed without pitch shift; no new music or new AI footage. SHA256 a164e7edd9badfa3c5e40d20ca60e3d21578f977ec1c78c632e916a21972cb75,7705560bytes. Full decode and first/middle/last frame checks PASS. Direct listening/physical phone gallery save NOT OBSERVED. Updated same Library item libfile_37fe526eac0081918b92f27b08712453 version1. Source and prior version preserved. Reconstruction softness may remain.
+
+Lotus/diya: only accepted AI artwork exists. Genuine AI video+music remains blocked by recorded exhausted free quotas and the earlier automatic approval rejection; no paid approval, trial, purchase or substitute still-image animation. Do not claim two rendered videos exist.
+
+Application consumer source inspected at GitLab86955143/profile-reference-contact-20261018 aadae1297263c9169b796a264ee86c8ffbf3bdf3: rechargeRewards, RechargeCampaignBanner/Center, Owner campaign editors and CP171 bridge; app code unchanged. Installed binary/version and complete physical phone acceptance remain unverified. No native build, OTA or Play release for this workspace.
+
+Deployment/CI receipts will be appended after exact candidate checks. Earlier history preserved below.
+
+---
+
 # Consolidated media handoff / Diwali and supplied-video review — 27 October 2026 (Asia/Riyadh)
 
 Created Funny-Room-Media-Master-Handoff-2026-10-27.txt consolidating this conversation's Entry/Gift uploader, live cleaned Dragon receipt, Frame/Room Emoji controls, unreleased Best CP status, Diwali artwork/render blockers and the three user reference videos. Current full Frame/Emoji and Diwali reports read; current repository Entry/Gift/Dragon receipt read. Earlier separate Owner/Dragon Library archive access was not revalidated; no loss inferred. Prior history remains below.

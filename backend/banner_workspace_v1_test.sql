@@ -1,0 +1,33 @@
+BEGIN;
+SELECT set_config('request.jwt.claim.sub','63ae00f7-4c27-4b3f-918c-6231605fbde6',true);
+SELECT set_config('request.jwt.claims','{"sub":"63ae00f7-4c27-4b3f-918c-6231605fbde6","role":"authenticated"}',true);
+DO $$
+DECLARE r jsonb;r2 jsonb;n int;req uuid:=gen_random_uuid();payload jsonb:=jsonb_build_object('title','Rollback banner test','image_url','https://example.com/original.png');oldrev text;id uuid;c jsonb;tiers jsonb:='[{"name":"Test milestone","required_recharge":"100","items":[{"kind":"coins","quantity":"1000","permanent":true}]}]';
+BEGIN
+ IF NOT private.is_founder(auth.uid()) THEN RAISE EXCEPTION 'Fixture is not Founder'; END IF;
+ FOR n IN 1..5 LOOP PERFORM public.owner_banner_workspace_list_v1((ARRAY['popular','birthday','ops','campaign','reward'])[n],50,0); END LOOP;
+ r:=public.owner_banner_workspace_save_v1('popular',NULL,NULL,payload,NULL,'Rollback test create',req);id:=(r->'row'->>'id')::uuid;
+ IF (r->'row'->>'active')::boolean OR r->'row'->>'image_url'<>'https://example.com/original.png' THEN RAISE EXCEPTION 'Unsafe create'; END IF;
+ r2:=public.owner_banner_workspace_save_v1('popular',NULL,NULL,payload,NULL,'Rollback test create',req);IF r<>r2 THEN RAISE EXCEPTION 'Replay mismatch'; END IF;
+ BEGIN PERFORM public.owner_banner_workspace_save_v1('popular',NULL,NULL,payload||'{"title":"Different"}',NULL,'Rollback test create',req);RAISE EXCEPTION 'Expected conflict'; EXCEPTION WHEN raise_exception THEN IF SQLERRM<>'REQUEST_ID_CONFLICT' THEN RAISE; END IF;END;
+ oldrev:=r->'row'->>'revision';
+ r:=public.owner_banner_workspace_save_v1('popular',id,oldrev,payload||'{"image_url":"https://example.com/changed.gif","music_url":"https://example.com/music.mp3","music_enabled":true}',NULL,'Rollback edit soundtrack',gen_random_uuid());
+ IF (r->'row'->>'active')::boolean OR r->'row'->>'music_url'<>'https://example.com/music.mp3' THEN RAISE EXCEPTION 'Edit did not retain state'; END IF;
+ BEGIN PERFORM public.owner_banner_workspace_save_v1('popular',id,oldrev,payload,NULL,'Rollback stale test',gen_random_uuid());RAISE EXCEPTION 'Expected stale'; EXCEPTION WHEN serialization_failure THEN NULL; END;
+ r:=public.owner_banner_workspace_save_v1('popular',id,r->'row'->>'revision','{"operation":"activate"}',NULL,'Rollback explicit activation',gen_random_uuid());IF NOT (r->'row'->>'active')::boolean THEN RAISE EXCEPTION 'Activation failed'; END IF;
+ r:=public.owner_banner_workspace_save_v1('ops',NULL,NULL,payload||'{"placement":"home"}',NULL,'Rollback ops creation',gen_random_uuid());IF r->'row'->>'placement'<>'home' OR (r->'row'->>'active')::boolean THEN RAISE EXCEPTION 'Ops invalid'; END IF;
+ payload:=payload||jsonb_build_object('kind','custom','starts_at',now(),'ends_at',now()+interval '1 day','config',jsonb_build_object('variant','recharge','eligibility_mode','usd_recharge','threshold_unit','usd_cents','usd_fx_rates',jsonb_build_object('USD',1)));
+ c:=public.owner_banner_workspace_save_v1('reward',NULL,NULL,payload,tiers,'Rollback atomic reward draft',gen_random_uuid());
+ IF c->'row'->>'status'<>'draft' OR c->'row'->'tiers'->0->'items'->0->>'quantity'<>'1000' THEN RAISE EXCEPTION 'Atomic tiers missing'; END IF;
+ SELECT count(*) INTO n FROM public.reward_campaigns;
+ BEGIN PERFORM public.owner_banner_workspace_save_v1('reward',NULL,NULL,payload,replace(tiers::text,'coins','svip')::jsonb,'Rollback unsupported test',gen_random_uuid());RAISE EXCEPTION 'Expected unsupported';EXCEPTION WHEN raise_exception THEN IF SQLERRM<>'REWARD_TYPE_NOT_SUPPORTED' THEN RAISE; END IF;END;
+ IF (SELECT count(*) FROM public.reward_campaigns)<>n THEN RAISE EXCEPTION 'Partial campaign persisted'; END IF;
+ BEGIN PERFORM public.owner_banner_workspace_save_v1('popular',NULL,NULL,payload||'{"image_url":"https://example.com/video.mp4"}',NULL,'Rollback video test',gen_random_uuid());RAISE EXCEPTION 'Expected image rejection';EXCEPTION WHEN raise_exception THEN IF SQLERRM<>'BANNER_IMAGE_HTTPS_REQUIRED' THEN RAISE; END IF;END;
+ PERFORM set_config('request.jwt.claim.sub',gen_random_uuid()::text,true);PERFORM set_config('request.jwt.claims','{"role":"authenticated"}',true);
+ BEGIN PERFORM public.owner_banner_workspace_list_v1('popular');RAISE EXCEPTION 'Ordinary access leaked';EXCEPTION WHEN insufficient_privilege THEN NULL;END;
+ BEGIN PERFORM public.owner_banner_workspace_save_v1('popular',NULL,NULL,payload,NULL,'Rollback denial test',gen_random_uuid());RAISE EXCEPTION 'Ordinary write leaked';EXCEPTION WHEN insufficient_privilege THEN NULL;END;
+ PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claims','{"role":"anon"}',true);
+ BEGIN PERFORM public.owner_banner_workspace_list_v1('popular');RAISE EXCEPTION 'Anonymous access leaked';EXCEPTION WHEN insufficient_privilege THEN NULL;END;
+END $$;
+SELECT 'PASS: 5 families, inactive creation, media/audio preservation, atomic coins draft, exact replay, request conflict, stale revision, explicit activation, video rejection, unsupported reward rollback, ordinary/anonymous denials; all changes rolled back' AS result;
+ROLLBACK;
