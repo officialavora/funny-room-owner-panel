@@ -30,7 +30,7 @@ NAV.push(['banners','▧','Banners & rewards']);
 titles.emoji='Room Emoji';
 NAV.splice(NAV.findIndex(x=>x[0]==='props')+1,0,['emoji','☺','Room Emoji']);
 const PAGES={
- banners:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showBannerWorkspace}=await import('./banner-workspace.js?v=20261027-1');if(token!==navigationRevision)return;await showBannerWorkspace({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
+ banners:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showBannerWorkspace}=await import('./banner-workspace.js?v=20261027-2');if(token!==navigationRevision)return;await showBannerWorkspace({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  emoji:async(token)=>{const {showEmojiControl}=await import('./emoji-control.js?v=20261027-2');if(token!==navigationRevision)return;await showEmojiControl({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  salaryPolicy:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showSalaryPolicy}=await import('./salary-policy.js');if(token!==navigationRevision)return;await showSalaryPolicy({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
  roomRecommendations:async(token)=>{if(!authority.is_founder)throw Error('Founder access required');const {showRoomRecommendations}=await import('./room-recommendations.js');if(token!==navigationRevision)return;await showRoomRecommendations({root:$('#content'),client:supabase,isCurrent:()=>token===navigationRevision,toast});},
