@@ -38,7 +38,7 @@ export async function showGiftControl({root,rpc,client,isCurrent,toast}){
    if(!current())throw Error('Editor changed; reopen this item.');
    for(const [slot,file,input,target] of [['artwork',artFile,art,asset],['sound',soundFile,sound,soundURL]]){
     if(!file)continue;const status=form.querySelector('[data-upload-status="'+slot+'"]');status.textContent='Uploading…';
-    try{const result=await uploadPropMedia({client,file,slot,isCurrent:current});if(!current())throw Error('Editor changed; reopen this item.');target.value=result.url;input.value='';status.textContent='Uploaded; saving catalogue changes…';}
+    try{const result=await uploadPropMedia({client,file,slot,isCurrent:current});if(!current())throw Error('Editor changed; reopen this item.');target.value=result.url;if(slot==='artwork'){const effect=form.elements.namedItem('effect_kind');if(/\.mp4$/i.test(file.name))effect.value='video';else if(effect.value==='video')effect.value='standard';}input.value='';status.textContent='Uploaded; saving catalogue changes…';}
     catch(error){if(current())status.textContent=error.message;throw error;}
    }
   }
