@@ -1,3 +1,19 @@
+# Frame / Room Emoji uploads — final live verification, 27 October 2026 (Asia/Riyadh)
+
+Feature PR19 source6c0739abc4b93187290fd4e390274de8a700a6fe, merge e65e2029727c0d884a20f427743c342bf1f8058a, complete CI40557175273 PASS, Pages40557259982 PASS. Loader PR20 source2952b6b14e5b15ed3b99dfc0021a167c4d3ae362 / CI40557610459 PASS / merge5a2f2e6ac4d8cb6a0e70228cd2524c7a5364e330. Live verification exposed cached app.js and a legacy null-price grant-only frame, both corrected rather than reporting source-only completion.
+
+Final corrective PR21: source bca7c37c8cf91e6bd895f2d33f7fbaf7851102b8, merge c98484c2e32f2be25507a1d8c4fc11dd472693c6; complete exact-code CI40558492320 PASS, including 29 media groups and 16 Room Emoji module groups plus all existing Owner regressions. Final loader-only version bump539d3300aa6fb3bb06a261aceb61a189f3faf795; final Pages40558732905 PASS. Application JS did not change after the final exact-code CI.
+
+Authenticated live UI PASS: Root Founder session verified; new Room Emoji route loads 41 records through protected v3 RPC; existing thank_you editor shows image/GIF, optional still preview, optional sound and Save emoji. Frame svip_frame_10 editor shows Upload image/GIF and optional sound, hidden embedded-video control and coin price0 so Save validation is not blocked. For legacy null prices this display matches the existing backend coalesce(price,0) rule on an intentional save; purchasable remains false. No catalogue row was saved/changed during these inspections.
+
+Before/after read-only fingerprints match: room_emoji41 rows942a7a34cfe34b5b0124ebfdc481666f; frame+room_frame389 rows419ac79b5e581b5a0331fd9b087a4cd6. No schema/RLS/grant/financial changes, no replacement media, no new fake/test catalogue entries. Artwork/sound-only/combined Save, denial, conflict, account/navigation and unknown-outcome behavior is verified through module DOM/auth/storage/RPC tests; actual newly uploaded frame/emoji saves and physical-device playback remain NOT OBSERVED. Entry/gift MP4 regressions pass. Do not claim full device E2E from source/UI evidence.
+
+Same application v3 contract reviewed in canonical GitLab86955143/profile-reference-contact-20261018 OwnerEmojiCatalog.js and RoomReactionArt.js; image/GIF+optional sound/poster consumer remains unchanged. No app JS/OTA/native/Play release required or performed for these web controls. Room Emoji is the actual room catalogue, distinct from emoji_pack cosmetics.
+
+Report: Frame-Room-Emoji-Upload-Handoff.txt. UI proof captured for both real editors. Existing tools/hosting/storage/CI used; no paid generation/new accounts/services. Rollback the reviewed feature/corrections and loader version while preserving unrelated source; no catalogue rollback is needed because this checkpoint did not mutate catalogue data. Original history retained below.
+
+---
+
 # Frame and Room Emoji file uploads — 27 October 2026
 
 Frame, room_frame and emoji_pack use the existing props uploader; targeted choose-file + Save tests cover image/GIF only, image/GIF plus optional audio, sound-only and video rejection without upload. Artwork file types and embedded-sound checkbox now follow the selected prop kind; entry and gift MP4 workflows remain intact. Existing catalogue IDs, price, grants and revisions retained.
