@@ -5,7 +5,7 @@ const audioAccept='audio/mpeg,audio/mp4,audio/aac,audio/ogg,audio/wav,audio/x-m4
 function https(v){const text=String(v||'').trim();if(!text)return null;let u;try{u=new URL(text);}catch{throw Error('Media links must use HTTPS');}if(u.protocol!=='https:'||u.username||u.password||text.length>2000||/\s/.test(text))throw Error('Media links must use HTTPS');return text;}
 export function emojiPayload(form,old=null){
  const v=n=>form.elements.namedItem(n).value,key=old?.reaction_key||v('reaction_key').trim(),label=v('display_label').trim(),emoji=v('emoji').trim();
- const seconds=v('seconds').trim(),order=v('sort_order').trim(),ms=Number(seconds)*1000;
+ const seconds=v('seconds').trim(),order=v('sort_order').trim(),ms=Math.round(Number(seconds)*1000);
  if(!/^[a-z][a-z0-9_]{1,63}$/.test(key))throw Error('Key: 2–64 lowercase letters, numbers or underscores; start with a letter');
  if(!label||label.length>40)throw Error('Enter a display name of 1–40 characters');
  if(!emoji||emoji.length>16)throw Error('Enter a short fallback emoji');
