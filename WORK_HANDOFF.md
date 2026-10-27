@@ -1,3 +1,9 @@
+# Final deployment receipt - banner/Room media checkpoint, 27 October 2026
+
+Final Room upload PR24 source b3bacc9c2de014b8e41298efd01420c7783bec93; complete Owner CI40573929992 PASS; merge19f523ba246090c40de4866aac8cfef386418885; Pages40574204543 PASS. Earlier PR22/23 receipts and limitations below retained. Canonical app documentation-only checkpoint d597c8517072044e2693a0c110d2abb8c3d965c3 includes this scope and atomically updates only the WORK_HANDOFF after-hash in the existing approved-changes manifest. App JS remains aadae1297263c9169b796a264ee86c8ffbf3bdf3; no OTA/native/Play release. Live Founder read and guarded rollback tests passed, current Popular/Birthday/Campaign/Reward content fingerprints unchanged. New USD/Festival activation remains explicitly blocked by the missing LIVE metric/read contract; SVIP/sendable Gift campaign adapters and genuine free AI Lotus/Diya video remain incomplete. Couple file and full user checkpoint remain in the named master report; do not claim all requested work finished.
+
+---
+
 # Additional Room Reward banner uploader — 27 October 2026
 
 Live audit found the separate Room Reward appearance controls still had URL-only banner/backdrop fields. Added both image/GIF file selectors with the same existing immutable uploader and one Save appearance. Preserved title/colors/other URL, existing Owner/co-owner route and protected runtime-flag RPC; actor-verified token pinned, preflight all files before upload, duplicate/navigation/account guards and unknown/readback mismatch fencing. No reward thresholds/rates/balance are edited.9 actual DOM groups PASS; physical device and real new Room artwork Save remain NOT OBSERVED.
