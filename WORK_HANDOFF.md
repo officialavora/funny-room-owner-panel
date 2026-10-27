@@ -1,3 +1,15 @@
+# Catalogue media file uploads — 27 October 2026
+
+Owner-requested update: both My Props (including entries) and Founder gift editor now have video/image and optional sound file selectors. Choosing files does not upload immediately. Save validates the complete draft and selected media, uploads immutable files through the existing authenticated storage client/RLS, fills media URLs, then calls the existing versioned audited save RPC. Video selection defaults to its embedded soundtrack; optional separate audio, sound-only updates and existing URL input remain supported.
+
+Shared helper props-media-upload.js uses existing owner-catalog and owner-catalog-audio buckets, actor-scoped UUID paths and no overwrite. Extension, MIME, nonempty signature and size checks run before upload (video 50 MiB, image 10 MiB, audio 20 MiB). Controls lock during Save; duplicate submissions and stale navigation/account changes are fenced. Failed catalogue saves retain uploaded URLs in the draft for retry; uploaded immutable files may remain after abandoned drafts. No bucket/RLS/schema/grant changes.
+
+Validation: 16 DOM/storage mock groups PASS, original 19 prop payload/navigation checks PASS, original gift payload and gift editor conflict/retry/duplicate/navigation tests PASS, original 19 Owner web checks PASS; edited JS syntax PASS. New DOM tests run via npm ci --prefix tests/media-upload && node tests/media-upload.test.cjs. Hosted CI adds this same command. Live browser upload/readback and deployment receipt will be recorded after publication. Device Store playback is a separate check.
+
+Target Store replacement: existing entry167_14, Crystal Dragon Empress · 10s Preview, with cleaned 10-second MP4 SHA256 004be03bf179b9005b2bf0b753246e82f6363a550b962eebea6931c1d29ae7d9. Original decoded soundtrack is preserved. Pending live save at this source checkpoint; do not infer it from source publication. Existing item identity, placement, price, grants and provenance are retained.
+
+---
+
 # Host / Agency salary controls — 20 October 2026
 
 New source candidate: Founder-only salary-policy.js uses the same live versioned Host/Agency backend as the current application. Includes automatic closed-period release toggle/status, global operation pause, future country/global daily/weekly/monthly policy scheduling, exact JSON tier/qualification editing and future-only removal. Current/paid history is retained. Session token pinned per RPC; navigation/actor changes, duplicate clicks and uncertain writes fenced. No salary/wallet or policy change is executed by loading the page.
@@ -151,3 +163,4 @@ LIVE lacks the exact-power staff SQL/Edge workflow, new catalog contracts and ve
 ## CP167 — 2026-10-08 verified integration
 
 User authorized completion and necessary CI/delivery after CP166's source-only checkpoint. CP166 input precision, duplicate submission, navigation and logout guards passed syntax and all14 mocked checks in GitHub Actions run37811384084 at89ea99bd6f1d822f295306c9556cc1c168b7c0ee. PR2 merged as22bcbf089d8e2b877974e0b676256f748bcef079. Approved-host Pages deployment run37811500473 SUCCESS; anonymous app.js readback exactly matches merged source SHA256c43873547da46963e3f828ea9f868fd8011993313ba8a86242092e2131198a94. Isolated test lock and read-only CI retained. No financial RPC executed, no new access granted, no authenticated browser acceptance claimed. Advanced CP153/CP161/CP162 controls remain separate and must preserve these guards on later integration. App CP167 integration MR178 is merged; actual exact-source CI37811114267 PASS. Public legal Edge funny-room-legal v4 corrected and verified; Play purchase-history Data Safety saved as draft. Alpha113 not reviewed/published; FGS requires actual113 background-playback demo.21 named LIVE contracts remain missing on fresh read; no shared LIVE financial/catalog migration applied.
+

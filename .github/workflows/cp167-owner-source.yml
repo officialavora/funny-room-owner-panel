@@ -19,3 +19,5 @@ jobs:
       - run: node --check salary-policy.js && node salary-policy.test.cjs
       - run: node prop-visibility.test.cjs
       - run: node gift-control.test.cjs && node gift-browser.test.cjs
+      - run: npm ci --prefix tests/media-upload --ignore-scripts --no-audit --no-fund
+      - run: node --check props-media-upload.js && node tests/media-upload.test.cjs
