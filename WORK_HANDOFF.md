@@ -1,3 +1,17 @@
+# Consolidated media handoff / Diwali and supplied-video review — 27 October 2026 (Asia/Riyadh)
+
+Created Funny-Room-Media-Master-Handoff-2026-10-27.txt consolidating this conversation's Entry/Gift uploader, live cleaned Dragon receipt, Frame/Room Emoji controls, unreleased Best CP status, Diwali artwork/render blockers and the three user reference videos. Current full Frame/Emoji and Diwali reports read; current repository Entry/Gift/Dragon receipt read. Earlier separate Owner/Dragon Library archive access was not revalidated; no loss inferred. Prior history remains below.
+
+Best CP app PR169 re-read: draft/open/unmerged, head e6577dc3143d5485f413bc667766c638764fc773. Do not claim CP/OTA/native/Play publication. Frame/Room Emoji controls and CI remain recorded live, while new asset live saves/device playback remain unobserved.
+
+Diwali: original catalogue and clean first-frame AI images created, but no completed video/music MP4. Free connected quotas exhausted or unavailable; HeyGen402; open LTX model/server failures. Automatic approval review rejected Pika create_video before submission due potential credit/cost use under free-only authorization. No paid run, purchase, trial activation, subscription or catalogue change. Paid permission/budget remains absent; a handoff question is not approval. Retain the actual error/ready prompt report.
+
+User supplied438524.mp4 (~8.085s, AAC stereo48kHz non-silent),438523.mp4 (10s,no audio stream),438522.mp4 (10s,no audio stream). All392x850; complete decode PASS and chronological frame sheets inspected.438524 is dancing couple/pink lotus finale;438523 couple/diya/romantic glow/water diyas;438522 palace/fireworks/red-yellow woman/diya circle. Direct auditory listening was unavailable: do not claim melody/instruments/voices heard. No edits/crop/watermark removal/audio addition or upload of these originals. Latest cinematic-character references are recorded; the earlier diya-only prompt is not a new locked final brief.
+
+Documentation only: no new app code, backend/media mutation, CI rerun, OTA or native build in this handoff task. Exact refs, original file IDs/hashes, completed vs pending status, limitations, rollback and next actions are in the consolidated report.
+
+---
+
 # Frame / Room Emoji uploads — final live verification, 27 October 2026 (Asia/Riyadh)
 
 Feature PR19 source6c0739abc4b93187290fd4e390274de8a700a6fe, merge e65e2029727c0d884a20f427743c342bf1f8058a, complete CI40557175273 PASS, Pages40557259982 PASS. Loader PR20 source2952b6b14e5b15ed3b99dfc0021a167c4d3ae362 / CI40557610459 PASS / merge5a2f2e6ac4d8cb6a0e70228cd2524c7a5364e330. Live verification exposed cached app.js and a legacy null-price grant-only frame, both corrected rather than reporting source-only completion.
