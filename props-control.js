@@ -10,7 +10,7 @@ export function itemPayload(form,old=null){
 const select=(name,values,current)=>'<select name="'+name+'">'+values.map(v=>'<option '+(String(v)===String(current)?'selected ':'')+'value="'+esc(v)+'">'+esc(v)+'</option>').join('')+'</select>';
 const input=(name,value='',type='text',readonly=false)=>'<input name="'+name+'" type="'+type+'" value="'+esc(value)+'" '+(readonly?'readonly':'')+'>';
 const label=(title,field)=>'<label>'+esc(title)+'</label>'+field;
-export async function showPropsControl({root,rpc,isCurrent,toast}){
+export async function showPropsControl({root,rpc,client,isCurrent,toast}){
  let offset=0,items=[],sets=[],busy=false,request=0,search='',kind='';
  const safe=()=>isCurrent()&&root.isConnected;
  async function load(){const token=++request;const data=await rpc('owner_load_props_v169',{p_search:search,p_kind:kind,p_offset:offset});if(!safe()||token!==request)return;items=data.items||[];sets=data.sets||[];render()}
@@ -23,17 +23,45 @@ export async function showPropsControl({root,rpc,isCurrent,toast}){
  const controlsRoot=root.querySelector('#propVisibility');if(controlsRoot)import('./prop-visibility.js?v=20261009').then(({showPropVisibility})=>safe()&&controlsRoot.isConnected&&showPropVisibility({root:controlsRoot,rpc,isCurrent:()=>safe()&&controlsRoot.isConnected,toast,kinds:KINDS})).catch(e=>safe()&&toast(e.message,true));
  }
  function editItem(old){
+ if(busy||!safe())return;
  const r=old||{kind:'frame',tier:'standard',visual:{},duration_days:30,sort_order:100,price_exact:'0',active:true,purchasable:false};
  const editor=root.querySelector('#propEditor');
- editor.innerHTML='<form class="card section" id="itemForm"><h3>'+esc(old?'Edit prop':'Add prop')+'</h3>'+label('Stable code',input('code',r.code,'text',!!old))+label('Name',input('name',r.name))+label('Kind',old?input('kind',r.kind,'text',true):select('kind',KINDS,r.kind))+label('Tier',select('tier',['standard','premium','vip','official'],r.tier))+label('Original artwork HTTPS URL',input('asset_url',r.asset_url))+label('Original sound HTTPS URL',input('sound_url',r.sound_url))+label('Bundled sound key',input('sound_key',r.sound_key))+label('Visual JSON (preserve existing artwork / set metadata)','<textarea name="visual" rows="8" style="width:100%">'+esc(JSON.stringify(r.visual||{},null,2))+'</textarea>')+label('Coin price',input('price_coins',r.price_exact,'number'))+label('Duration in days',input('duration_days',r.duration_days,'number'))+label('Order',input('sort_order',r.sort_order,'number'))+label('Available for sale',select('purchasable',['false','true'],r.purchasable))+label('Active (false archives)',select('active',['true','false'],r.active))+label('Required audit reason',input('reason'))+'<button class="primary" type="submit">Save prop</button><p>Existing code and kind are fixed to preserve purchases. To replace a kind, archive this item and create a new code.</p></form>';
- const form=editor.querySelector('form');form.onsubmit=e=>{e.preventDefault();submit(form,()=>rpc('owner_save_prop_v169',{p_item:itemPayload(form,old),p_revision:old?.revision||null,p_reason:form.elements.reason.value.trim()}))};editor.scrollIntoView({block:'start'});
+ editor.innerHTML='<form class="card section" id="itemForm"><h3>'+esc(old?'Edit prop':'Add prop')+'</h3>'+label('Stable code',input('code',r.code,'text',!!old))+label('Name',input('name',r.name))+label('Kind',old?input('kind',r.kind,'text',true):select('kind',KINDS,r.kind))+label('Tier',select('tier',['standard','premium','vip','official'],r.tier))+label('Original artwork HTTPS URL',input('asset_url',r.asset_url))+mediaUploadField('artwork','Artwork / video file','image/png,image/jpeg,image/webp,image/gif,video/mp4')+label('Original sound HTTPS URL',input('sound_url',r.sound_url))+mediaUploadField('sound','Sound file','audio/mpeg,audio/mp4,audio/aac,audio/ogg,audio/wav,audio/x-m4a,audio/x-wav')+'<label><input name="video_embedded_sound" type="checkbox" '+(!r.sound_url&&/[.]mp4(?:[?#]|$)/i.test(r.asset_url||'')?'checked':'')+'>Use video’s own sound</label><p>Choose a file, then Save. Separate sound is optional.</p>'+label('Bundled sound key',input('sound_key',r.sound_key))+label('Visual JSON (preserve existing artwork / set metadata)','<textarea name="visual" rows="8" style="width:100%">'+esc(JSON.stringify(r.visual||{},null,2))+'</textarea>')+label('Coin price',input('price_coins',r.price_exact,'number'))+label('Duration in days',input('duration_days',r.duration_days,'number'))+label('Order',input('sort_order',r.sort_order,'number'))+label('Available for sale',select('purchasable',['false','true'],r.purchasable))+label('Active (false archives)',select('active',['true','false'],r.active))+label('Required audit reason',input('reason'))+'<button class="primary" type="submit">Save prop</button><p>Existing code and kind are fixed to preserve purchases. To replace a kind, archive this item and create a new code.</p></form>';
+ const form=editor.querySelector('form');wireMediaUploads(form);form.onsubmit=e=>{e.preventDefault();return submit(form,()=>rpc('owner_save_prop_v169',{p_item:itemPayload(form,old),p_revision:old?.revision||null,p_reason:form.elements.reason.value.trim()}))};editor.scrollIntoView({block:'start'});
  }
  function editSet(old){
  const r=old?.set||{category:'normal',active:false,official:false,sort_order:0};
  const editor=root.querySelector('#propEditor');
  editor.innerHTML='<form class="card section" id="setForm"><h3>Matching set</h3>'+label('Stable set code',input('code',r.code,'text',!!old))+label('Name',input('name',r.name))+label('Placement category',select('category',CATEGORIES,r.category))+label('Official protection',select('official',['false','true'],r.official))+label('Active',select('active',['false','true'],r.active))+label('Order',input('sort_order',r.sort_order,'number'))+label('Item codes, one per line','<textarea name="items" rows="11" style="width:100%">'+esc((old?.items||[]).join('\n'))+'</textarea>')+label('Required audit reason',input('reason'))+'<button class="primary" type="submit">Save set</button><p>An active set needs all nine My Props kinds. Create its items first, then paste their codes. Archive preserves existing grants. Official items cannot be sold.</p></form>';
- const form=editor.querySelector('form');form.onsubmit=e=>{e.preventDefault();submit(form,()=>rpc('owner_save_prop_set_v169',{p_set:{code:old?.set.code||form.elements.code.value.trim(),name:form.elements.name.value.trim(),category:form.elements.category.value,official:form.elements.official.value==='true',active:form.elements.active.value==='true',sort_order:integer(form.elements.sort_order.value,'Order')},p_items:form.elements.items.value.split(/\s+/).filter(Boolean),p_revision:old?.revision||null,p_reason:form.elements.reason.value.trim()}))};editor.scrollIntoView({block:'start'});
+ const form=editor.querySelector('form');form.onsubmit=e=>{e.preventDefault();return submit(form,()=>rpc('owner_save_prop_set_v169',{p_set:{code:old?.set.code||form.elements.code.value.trim(),name:form.elements.name.value.trim(),category:form.elements.category.value,official:form.elements.official.value==='true',active:form.elements.active.value==='true',sort_order:integer(form.elements.sort_order.value,'Order')},p_items:form.elements.items.value.split(/\s+/).filter(Boolean),p_revision:old?.revision||null,p_reason:form.elements.reason.value.trim()}))};editor.scrollIntoView({block:'start'});
  }
- async function submit(form,action){if(busy||!safe())return;busy=true;form.querySelector('button').disabled=true;try{await action();if(!safe())return;toast('Saved with audit history');await load()}catch(e){if(safe())toast(e.message,true)}finally{busy=false;if(safe()&&form.isConnected)form.querySelector('button').disabled=false}}
+ function mediaUploadField(slot,title,accept){return '<div class="section"><label for="catalogue-'+slot+'-file">'+(slot==='artwork'?'Upload video / image':'Upload sound (optional)')+'</label><input id="catalogue-'+slot+'-file" name="'+slot+'_file" type="file" accept="'+accept+'"><p role="status" aria-live="polite" data-upload-status="'+slot+'"></p></div>';}
+ function lockForm(form){const fields=[...form.querySelectorAll('input,select,textarea,button')].map(el=>[el,el.disabled]);fields.forEach(([el])=>{el.disabled=true});return()=>fields.forEach(([el,disabled])=>{el.disabled=disabled});}
+ function wireMediaUploads(form){
+  const art=form.elements.namedItem('artwork_file'),sound=form.elements.namedItem('sound_file');
+  const note=slot=>form.querySelector('[data-upload-status="'+slot+'"]');
+  art.onchange=()=>{const file=art.files?.[0];note('artwork').textContent=file?'Selected. Save will upload and apply this file.':'';if(file&&/\.mp4$/i.test(file.name)&&!sound.files?.length){form.elements.namedItem('video_embedded_sound').checked=true;note('sound').textContent="Video's own sound selected. A separate soundtrack is optional.";}};
+  sound.onchange=()=>{if(sound.files?.length){form.elements.namedItem('video_embedded_sound').checked=false;note('sound').textContent='Separate soundtrack selected. Save will upload and apply it.';}};
+  form.elements.namedItem('sound_url').oninput=()=>{form.elements.namedItem('video_embedded_sound').checked=false;};
+ }
+ async function prepareFormMedia(form){
+  const current=()=>safe()&&form.isConnected;
+  const art=form.elements.namedItem('artwork_file'),sound=form.elements.namedItem('sound_file');if(!art||!sound)return;const artFile=art.files?.[0],soundFile=sound.files?.[0];
+  const asset=form.elements.namedItem('asset_url'),soundURL=form.elements.namedItem('sound_url'),embedded=form.elements.namedItem('video_embedded_sound').checked&&!soundFile;
+  if(artFile||soundFile){
+   if(!client)throw Error('Upload unavailable. Reload the panel.');
+   const {uploadPropMedia,validatePropMedia}=await import('./props-media-upload.js?v=20261027');
+   if(artFile)await validatePropMedia(artFile,'artwork');if(soundFile)await validatePropMedia(soundFile,'sound');
+   if(!current())throw Error('Editor changed; reopen this item.');
+   for(const [slot,file,input,target] of [['artwork',artFile,art,asset],['sound',soundFile,sound,soundURL]]){
+    if(!file)continue;const status=form.querySelector('[data-upload-status="'+slot+'"]');status.textContent='Uploading…';
+    try{const result=await uploadPropMedia({client,file,slot,isCurrent:current});if(!current())throw Error('Editor changed; reopen this item.');target.value=result.url;input.value='';status.textContent='Uploaded; saving catalogue changes…';}
+    catch(error){if(current())status.textContent=error.message;throw error;}
+   }
+  }
+  if(embedded&&/\.mp4(?:[?#]|$)/i.test(asset.value))soundURL.value='';
+ }
+ async function submit(form,action){if(busy||!safe())return;busy=true;const unlock=lockForm(form);try{if(form.id==='itemForm'){itemPayload(form);if(!form.elements.reason.value.trim())throw Error('Audit reason required');}await prepareFormMedia(form);if(!safe()||!form.isConnected)return;await action();if(!safe())return;toast('Saved with audit history');await load()}catch(e){if(safe())toast(e.message,true)}finally{busy=false;if(safe()&&form.isConnected)unlock()}}
  await load();
 }
+
