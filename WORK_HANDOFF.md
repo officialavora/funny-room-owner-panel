@@ -1,3 +1,15 @@
+# Additional Room Reward banner uploader — 27 October 2026
+
+Live audit found the separate Room Reward appearance controls still had URL-only banner/backdrop fields. Added both image/GIF file selectors with the same existing immutable uploader and one Save appearance. Preserved title/colors/other URL, existing Owner/co-owner route and protected runtime-flag RPC; actor-verified token pinned, preflight all files before upload, duplicate/navigation/account guards and unknown/readback mismatch fencing. No reward thresholds/rates/balance are edited.9 actual DOM groups PASS; physical device and real new Room artwork Save remain NOT OBSERVED.
+
+Prior feature PR22 source92468a309332df4877bbcaf3094978d10ce95265, CI40572688220 PASS, merge9308ccecbe2ef5db044419b9ca4e2441d4552ec0, Pages40572829444 PASS. Additive Founder workspace installed on staging and existing LIVE backend. Full rollback tests passed on BOTH; new USD activation explicitly rejected with CAMPAIGN_METRIC_CONTRACT_NOT_INSTALLED on LIVE. Exact before/after Popular/Birthday/Campaign/Reward content hashes matched. No real offers, claims, wallets or grants changed. Security advisors reviewed: receipt table intentionally has no direct client policies; explicitly authenticated definer RPCs require Founder and empty search_path. Existing unrelated advisor backlog remains.
+
+PR23 source7c46abc32583f32eb6a713c5264cbf37572e7503, CI40573248231 PASS, mergead8b738a36942296ac7d0338218cae5548805859. Live DOM review exposed pagination controls being wrongly re-enabled by loading cleanup; fixed by retaining each control's disabled state, with boundary assertions and cache bumps. Current follow-up preserves that fix. Real RootFounder browser opened6 Popular records and the active record's image/optional audio file controls. No browser Save/activation was performed.
+
+Only existing remote fields can update without app delivery. New unsupported reward/consumer types need matching reviewed backend/compatible app integration; never guarantee every future kind works forever. Genuine lotus/diya AI video remains BLOCKED by prior free-generation limits and auto-review cost rejection. Polished couple MP4 complete as documented below; no paid run.
+
+---
+
 # Banner media workspace and polished couple download — 27 October 2026
 
 Owner requested all current/future banners get choose-file + Save and configurable coins/catalogue prop rewards without routine native rebuilds, plus polished couple and lotus/diya videos. This checkpoint does not claim the entire request complete.
