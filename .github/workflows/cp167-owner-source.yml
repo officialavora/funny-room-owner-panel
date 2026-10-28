@@ -21,6 +21,7 @@ jobs:
       - run: node gift-control.test.cjs && node gift-browser.test.cjs
       - run: npm ci --prefix tests/media-upload --ignore-scripts --no-audit --no-fund
       - run: node --check props-media-upload.js && node tests/media-upload.test.cjs
+      - run: node --check gift-sections.js && node tests/gift-sections.test.cjs
       - run: node --check emoji-control.js && node tests/emoji-upload.test.cjs
       - run: node --check banner-workspace.js && node tests/banner-workspace.test.cjs
       - run: node --check room-reward-appearance.js && node tests/room-banner-upload.test.cjs

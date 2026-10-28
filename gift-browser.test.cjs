@@ -1,5 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync(__dirname+'/gift-control.js','utf8');
+const source=fs.readFileSync(__dirname+'/gift-control.js','utf8').replace(/^import .*;\n/,'');
+const sections=vm.runInNewContext(fs.readFileSync(__dirname+'/gift-sections.js','utf8').replace(/export /g,'')+';({GIFT_SECTIONS,giftSection,giftDisplayId})',{Error});
 const app=fs.readFileSync(__dirname+'/app.js','utf8');
 const events={preventDefault(){}};
 class Node {
@@ -8,8 +9,8 @@ class Node {
  get innerHTML(){return this.html;}
  querySelector(q){return this.nodes[q];}querySelectorAll(q){return q==='input,select,textarea,button'&&this.nodes.button?[this.nodes.button]:(this.edits||[]);}scrollIntoView(){}
 }
-const {showGiftControl}=vm.runInNewContext(source.replace(/export /g,'')+';({showGiftControl})',{URL,Number,Set,Error});
-(async()=>{let active=true,fail=true,calls=[],toast=[],resolve,queries=0;const root=new Node(),gift={id:'id-1',slug:'coffee-sip',name:'Coffee',category:'standard',asset_key:'brand:coffee-sip',coin_price:500,diamond_value:500,effect_duration_ms:4000,combo_quantities:[1,10,99],custom_combo_max:9999,sort_order:20,min_vip_level:0,active:true,policy_version:7};
+const {showGiftControl}=vm.runInNewContext(source.replace(/export /g,'')+';({showGiftControl})',{URL,Number,Set,Error,...sections});
+(async()=>{let active=true,fail=true,calls=[],toast=[],resolve,queries=0;const root=new Node(),gift={id:'id-1',slug:'coffee-sip',name:'Coffee',category:'standard',catalog_section:'Gift',display_id:'01',asset_key:'brand:coffee-sip',coin_price:500,diamond_value:500,effect_duration_ms:4000,combo_quantities:[1,10,99],custom_combo_max:9999,sort_order:20,min_vip_level:0,active:true,policy_version:7};
  const chain={select(){return this},order(){return this},range(){queries++;return this},ilike(){return this},then(fn){return Promise.resolve({data:Array.from({length:100},(_,i)=>({...gift,id:i===0?gift.id:"id-"+(i+1)}))}).then(fn)}};
  await showGiftControl({root,client:{from:()=>chain},isCurrent:()=>active,toast:(m,b)=>toast.push([m,b]),rpc:(name,args)=>{calls.push({name,args});return new Promise((ok,bad)=>resolve=()=>fail?bad(Error('conflict')):ok(gift))}});
  root.edits[0].onclick();const form=root.querySelector('#giftEditor').querySelector('form');form.elements.namedItem('name').value='Coffee updated';
