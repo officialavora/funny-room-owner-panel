@@ -1,0 +1,74 @@
+Funny Room — Gift Sections / IDs / Sending Order
+Checkpoint: 28 October 2026, Asia/Riyadh
+Status: SOURCE + STAGING VERIFIED; NOT LIVE / PHONE PENDING.
+
+USER SCOPE
+Use the existing Funny Room app and approved Owner panel. Configure artwork/file, app section, gift display ID and coin value. Existing AND future gifts rank within their section by the total successfully sent quantity, including old committed history.
+
+OWNER PATH (candidate, not yet deployed)
+Approved Owner panel → VIP / SVIP → Gift catalogue → Edit / archive, or Add original gift.
+Choose App section → optional Gift display ID → coin price / diamond value → Upload video/image/GIF → optional sound → Save with version check.
+New drafts remain inactive; activate intentionally after preview. Existing UUID and slug remain unchanged. Display ID is a separate unique text label, not a user ID assignment; 01 preserves its leading zero. No invented labels were assigned to existing gifts.
+
+SECTION MAP
+Gift = existing combined catalogue / Gift tab; all eligible categories remain accessible.
+CP = CP tab. Existing relationship/consent rules remain authoritative.
+Lucky = Lucky tab and the existing Lucky engine; visual placement cannot turn a normal gift into a payout-enabled Lucky gift.
+SVIP = SVIP tab; placement alone never grants SVIP membership or new eligibility.
+Flag = Flag tab.
+Exclusive = Exclusive tab, including custom artwork/portrait gifts; a display ID does not automatically link a user profile.
+Funny = Funny tab.
+Normal gifts can change presentation section without altering their financial category. Lucky section/category consistency is checked on the server.
+
+SENDING ORDER
+Server sums public.gift_transactions.quantity, not coin expenditure, button taps, phone-local counters or only newly added gifts. A combo of 99 counts as 99 delivered units per recipient. Multi-recipient transaction rows count once each; Lucky result rows are used only to exclude nonfinal/reversed outcomes, not added again. Reversal/manual-review markers are excluded. Equal quantities retain featured → configured order → coin price → stable UUID ordering. Zero-send gifts remain in the catalogue. Lists refresh on open/resume and after every confirmed send. This is refreshed server truth, not a continuous WebSocket feed of all other users' sends.
+
+WHAT CHANGED / WHERE
+Owner repository officialavora/funny-room-owner-panel, draft PR25:
+https://github.com/officialavora/funny-room-owner-panel/pull/25
+Exact tested Owner code commit: 581cda37398be681e5e1ae9400732fa886ea5702.
+Files: gift-control.js, gift-sections.js, app.js and index.html cache keys; existing gift/media tests, new tests/gift-sections.test.cjs, Owner verification workflow; additive SQL and rollback tests in backend/.
+CI: https://github.com/officialavora/funny-room-owner-panel/actions/runs/40606758564 — SUCCESS.
+
+App source MUST restore the current published Loading preview, not old GitLab source or GitHub main app root. Verified reconstruction: R02 original 4761 files → R13 single Harvest delta → R18 12 Loading deltas. Every stage matched its exact manifest.
+Base source manifest: 7af48749535f08553cc9e7dcda0e85a37ae96ae57d4b072ee3d869623230687b.
+Candidate source manifest: ce7d4538f5ee8ebed2b63c9f3c793508c9a809464f4aa934334b9e6a45beb073.
+4761 files: only src/GiftPickerModal.js, src/giftCategories.js and scripts/gift-picker-read-independence-20261011.cjs changed. Other 4758 exact files, including native inputs, package/lock/config, loading, Harvest, payment and existing artwork, are unchanged.
+Private review packet destination:
+https://github.com/officialavora/funny-room/tree/review/gift-sections-20261028/review-archives/gift-sections-20261028
+This is a review/source-recovery branch, NOT a published app, full editable application root or OTA.
+
+App adds display-ID labels; maps the seven sections; loads authenticated load_gift_catalog_ranked_v1; retains selected gift identity on refresh; refreshes the catalogue after ordinary confirmed sends as well as Lucky sends. Cards without display IDs retain their prior layout.
+
+SERVER
+Existing Funny Room Staging: additive gift_sections_popularity_v1 installed.
+public.gift_catalog: nullable catalog_section and display_id, supported-section/format/Lucky consistency checks, case-insensitive unique display-ID index.
+Founder-only owner_save_gift_v4 calls existing v3 under its row/version lock; stores extra metadata and before/after audit atomically. Existing v3 remains available.
+Authenticated load_gift_catalog_ranked_v1 returns only active catalogue plus aggregate sent_quantity; no sender/receiver/room identities. Anonymous execute denied. No financial rates, odds, payouts, wallets, grants or sending engines changed.
+LIVE server was read only. These new columns/RPCs have NOT been installed on LIVE. Owner PR is draft/unmerged; no new panel deployment, OTA, native build, Play testing/production, payment activation or reset.
+
+VERIFICATION
+- Complete Owner local regression set PASS: existing navigation/props/salary/grant/gift/upload/emoji/banner/room-banner checks; media29, emoji16, new gift-section/ID actual-DOM11 groups.
+- Complete hosted Owner CI SUCCESS on exact581cda3.
+- Staging11 simulated-actor/catalogue/audit/history groups PASS: anonymous/non-Founder denial, valid versioned save, stale revision, duplicate case-insensitive ID, invalid ID, invalid Lucky placement, preservation and all active catalogue historical totals/order. Claims are simulated SQL actors, not real JWT acceptance.
+- Staging rollback quantity fixtures PASS: old combo quantities, quantity over spend/configured order, reversal exclusion and an existing gift rising after a later ledger row. Gift transaction USER triggers disabled only inside that staging fixture transaction; no wallets/rewards/notifications executed; all fixtures and trigger state rolled back. First fixture attempt lacked asset_key; corrected, rerun PASS. No retained fake catalogue or transactions.
+- Actual mounted React picker41/41 PASS on final candidate: all prior39 read/session/quantity/lifecycle cases plus server-order-per-section and leading-zero ID/coin display. SDK/native/storage mocked.
+- CP171 category/paging/artwork source regression PASS; approved gift quantity contract PASS; changed files JSX parse PASS.
+- Initial historical read suite exposed two existing baseline failures (37/39). Candidate confirmed-send refresh intentionally fixes these; final41/41 PASS.
+- Separate old regular-gift-receipt-ui-20261019.cjs still fails its receipt-panel expectation on BOTH current published baseline and candidate. It was not weakened or reported green. This is inherited test/UI contract drift, not proof of full-suite acceptance.
+- Android export final PASS:2127 modules;616 output files,128643464 bytes;614 accepted assets all byte-identical to R18. HBC SHA256805ec7c17fa1e2d3c8edca94f9929cf79102fd73077b19b948ddba18c679a4e3. First export attempt correctly stopped at missing exact auth initialization patch; approved install hook applied/verified and export rerun. No native dependency/configuration changed.
+- Staging security advisors checked; unrelated existing backlog remains. No claim that the whole project is advisor-clean or all source tests green.
+
+PENDING / RELEASE GATES
+Actual Founder and ordinary-user JWT checks of the new RPCs; full staging media Save → reopen → authoritative readback; phone artwork/video/audio, ID label and sending/order acceptance; current full source/release guards (including inherited raw test dispositions); reviewed coordinated LIVE backend + Owner deployment and separately authorized compatible preview OTA. Do not deploy the new client before its LIVE ranked-catalogue RPC exists, or its catalogue read will fail closed. Keep existing production/closed-testing heads and the latest loading preview unchanged until those gates pass.
+Old receipt test drift and current preview phone acceptance cannot be silently declared resolved by these41 local tests. A local export is not an installed phone update.
+
+ROLLBACK
+Before any LIVE release, retain current exact function/schema/catalogue and source manifests. Revert the Owner PR and app delta together if needed. Existing v3 writes and original app query remain the compatibility baseline. Do not drop new metadata columns after real labels are saved without preserving those labels/audit. Staging extension can remain inert pending release; no LIVE row rollback is needed because LIVE was not changed.
+
+NEXT WORKER MESSAGE
+Read this checkpoint and latest START HERE libfile_0e0dea60701c819182cd473ce5afcb66. Preserve R18 Loading preview and Harvest. Review PR25 and the private gift-sections packet. Restore exact4761 base7af487, apply only three reviewed app paths, require candidate manifestce7d4538..., preserve all4758 others. New web/backend code and41 mounted groups are ready; hosted Owner CI40606758564 passed; new backend installed only on staging. Finish actual JWT/Save/readback/device and release checks before coordinated LIVE installation/Owner publish/compatible designated-preview OTA. No native build/Play/payment/reset is part of this task.
+
+DURABLE SOURCE RECEIPT
+Private app candidate commit: ed002d2f0f250fa9206f030e5a7e4103f67813f7.
+https://github.com/officialavora/funny-room/tree/ed002d2f0f250fa9206f030e5a7e4103f67813f7/review-archives/gift-sections-20261028

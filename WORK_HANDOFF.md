@@ -1,3 +1,11 @@
+# Gift section / ID / historical sending order — 28 October 2026
+
+SOURCE + STAGING VERIFIED; NOT LIVE. User requires the same upload flow for the existing app's seven gift tabs, optional display ID and coin value, and most-sent-first order for ALL old and future gifts. Owner draft PR25 application source581cda37398be681e5e1ae9400732fa886ea5702 passed complete CI40606758564. New section/ID actual-DOM11 groups and existing regressions pass. Additive v4 writer/ranked reader installed ONLY on staging;11 simulated-actor/catalogue/audit/history rollback groups and separate historical-combo/reversal/promotion rollback fixtures pass. No LIVE rows or balances changed.
+
+Latest R18 Loading source restored byte-for-byte (4761 files/base7af487...). Candidate ce7d4538f5ee8ebed2b63c9f3c793508c9a809464f4aa934334b9e6a45beb073 changes only GiftPickerModal.js, giftCategories.js and one mounted test;4758 other files unchanged. Final mounted41/41 and Android2127-module export pass; all614 accepted assets identical. App packet saved privately at officialavora/funny-room commit ed002d2f0f250fa9206f030e5a7e4103f67813f7, path review-archives/gift-sections-20261028 (review/gift-sections-20261028). Historical receipt-panel test still fails identically on published baseline and candidate; do not claim full-suite green. Final HBC805ec7c17fa1e2d3c8edca94f9929cf79102fd73077b19b948ddba18c679a4e3. Actual JWT, media Save/reopen/readback, phone and coordinated release gates remain. No Owner publication, LIVE schema install, OTA/native/Play/payment/reset. Do not deploy client before its ranked reader exists on the target. See docs/GIFT_SECTIONS_20261028.txt and private packet README for WHERE/WHY/HOW/WHAT/NEXT/rollback. Preserve previous histories below.
+
+---
+
 # Nine My Props upload audit and Unique ID gap — 28 October 2026 (Asia/Riyadh)
 
 User supplied438647.jpg and explicitly named Frame, Entry, Bubble, Badge, Medal, Room Frame, Room Theme, Nameplate and Noble, then added Unique ID.
