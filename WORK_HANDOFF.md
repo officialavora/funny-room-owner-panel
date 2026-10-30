@@ -1,3 +1,9 @@
+# Owner login eye and Remember me — 30 October 2026
+
+Scoped change over main2201320: same approved login page gains an accessible show/hide eye and persistent/tab-only SDK session choice, standard browser autofill, no raw password storage. Server authority/RPC/financial behaviour and native source unchanged. See docs/LOGIN_CONTROLS_20261030.md for evidence, limitations and rollback. Seven focused cases and all existing Owner source workflow suites pass locally. Remote CI/publication IDs belong in the final delivery evidence; no browser or phone PASS inferred from source tests. This web-only change requires no Expo OTA/build. Previous unrelated v151/full-app release gates remain open.
+
+---
+
 # Gift section / ID / historical sending order — 28 October 2026
 
 SOURCE + STAGING VERIFIED; NOT LIVE. User requires the same upload flow for the existing app's seven gift tabs, optional display ID and coin value, and most-sent-first order for ALL old and future gifts. Owner draft PR25 application source581cda37398be681e5e1ae9400732fa886ea5702 passed complete CI40606758564. New section/ID actual-DOM11 groups and existing regressions pass. Additive v4 writer/ranked reader installed ONLY on staging;11 simulated-actor/catalogue/audit/history rollback groups and separate historical-combo/reversal/promotion rollback fixtures pass. No LIVE rows or balances changed.

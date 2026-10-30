@@ -24,3 +24,4 @@ jobs:
       - run: node --check emoji-control.js && node tests/emoji-upload.test.cjs
       - run: node --check banner-workspace.js && node tests/banner-workspace.test.cjs
       - run: node --check room-reward-appearance.js && node tests/room-banner-upload.test.cjs
+      - run: node --check login-preferences.js && node tests/login-preferences.test.cjs

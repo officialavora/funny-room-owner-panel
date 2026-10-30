@@ -1,0 +1,11 @@
+# Owner login controls — 30 October 2026
+
+User requested the existing login page have a password visibility eye and a save/remember option, without extra pages, with checks, publication and a checkpoint handoff.
+
+Scope: approved Owner web repository only. Base main 2201320ab877c1fef3bc29e4851e64820fc5a7d1. Native application, backend contracts, financial controls, permissions, and approved native v9 source are unaffected; no native source patch, build or Expo OTA is needed for these web-only controls. Canonical START HERE v151 was read; its unrelated outstanding gates remain open.
+
+Changes: accessible 44px password eye inside the existing field; reveal/hide preserves input and never submits; re-hide on tab background and successful login. Remember me selects persistent SDK session storage or tab-only session storage. Existing persisted sessions keep the SDK's original key and prior default. Sign out removes both storage locations. Browser-blocked storage falls back to memory. Password input keeps standard password-manager autofill names/attributes. Browser password-manager prompts depend on user/browser settings and cannot be forced. No raw password is stored by this implementation. Server staff/authority checks remain unchanged. Checkbox is only login persistence, never an authority grant.
+
+Validation: syntax/diff checks and 7 focused tests pass. All existing Owner source workflow suites pass locally: Owner web21, props19, salary6, grant visibility, gift payload/editor, media29, emoji16, banners15 and room banners9 groups. Synthetic auth/storage/RPC/DOM evidence only; not real credentials, JWT/backend or phone acceptance. Local browser check initially unavailable because Chromium was absent; browser download returned an invalid archive. These attempts are not browser PASS. Cloud CI and hosted readback are recorded in the delivery report after execution.
+
+Rollback: revert the scoped login-controls commit through a reviewed Git revert; deploy the prior Owner page and source. No database migration or native rollback required. Previous WORK_HANDOFF history is retained below its new entry. No paid resource, real login, financial action, Store change or native release is part of this change.
