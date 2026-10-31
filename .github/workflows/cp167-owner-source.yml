@@ -27,3 +27,7 @@ jobs:
       - run: node --check login-preferences.js && node tests/login-preferences.test.cjs
       - run: node tests/dialog-lifecycle.test.cjs app.js && node tests/dialog-lifecycle-independent.test.cjs app.js
 
+      - run: node --check coin-seller-control.js && node --check coin-seller-catalog.mjs && node --check coin-seller-qr.mjs
+      - run: npm ci --prefix tests/coin-seller --ignore-scripts --no-audit --no-fund
+      - run: node --test tests/coin-seller/owner-dom.test.mjs
+
