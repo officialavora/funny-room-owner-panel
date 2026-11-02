@@ -1,3 +1,31 @@
+## 2 November 2026 — isolated cosmetic reset module review (not installed)
+
+Additive continuation of PR29 audit at e0ebd4c324f924c8b68e5e8e2b5843bea1946bb3.
+The deployed apply helper omits purchased/permanent cosmetics and v142 selections.
+Fresh read-only inspection also found UPDATE cosmetic_code=NULL is rejected by
+the BEFORE INSERT/UPDATE cosmetic_post_guard_v1 trigger: eligible(NULL)=false.
+New temporary SECURITY INVOKER fixture functions preview and apply one explicit
+cosmetic policy: revoke active/suspended grants irrespective of purchase/expiry,
+retain historical rows, remove all four authoritative selections, clear five
+profile selections. No live DDL or reset was executed. Source is review-only;
+the fixture marker is NOT actor authorization or a production readiness gate.
+Actual local PGlite0.3.16/PG17.5WASM:23 synthetic checks PASS, including real
+SQL mutations in synthetic tables, NULL-trigger negative, protected UUID/public
+aliases, stale snapshots, history/content preservation, empty replay and exact
+transaction rollback. One initial harness run failed because an expected error
+aborted its enclosing transaction; added a savepoint around that negative test.
+No assertion or production guard was relaxed. Not full native34/device proof.
+Original native34 PASS remains per newer central receipt; older NOTRUN text below
+is historical and superseded for that bounded synthetic gate only.
+Still OPEN: production integration/ACL/actor/audit, phantom/concurrent writers,
+SVIP and birthday re-grants, public reward/financial records and all other reset
+categories, DB+Storage backup/isolated restore, settlement fence, whole Owner
+and render fallback checks. live_reset_ready=false. Existing app/runtime/Owner
+panel/payment/permissions/relationships/catalog/live state preserved.
+Source rollback: revert only this additive source commit; no live rollback used.
+Private media exports are excluded from this repository and CI. A separately
+running authorized public-byte capture is incomplete and not release evidence.
+
 ## 2 November 2026 — bounded IPv6 catalogue compatibility fix (draft only)
 
 Validator parent44e290c26b40038eaed578a8c64469ce961b9948; rebased onto concurrent

@@ -1,0 +1,26 @@
+name: Reset scope audit synthetic review
+on:
+  pull_request:
+    branches: [delivery/coin-seller-catalog-20261031]
+    paths:
+      - 'tests/reset-scope-audit/**'
+      - '.github/workflows/reset-scope-audit.yml'
+permissions:
+  contents: read
+jobs:
+  readonly-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install exact synthetic-only dependency without hooks
+        run: npm ci --prefix tests/reset-scope-audit --ignore-scripts --no-audit --no-fund
+      - name: Verify actual read-only SQL and failure controls
+        run: node tests/reset-scope-audit/test-reset-scope.mjs
+      - name: Verify isolated cosmetic coverage candidate and rollback
+        run: node tests/reset-scope-audit/test-candidate.mjs
