@@ -1,3 +1,79 @@
+## 3 November 2026 — peer b944 and cross-user policy integrated
+
+Immutable peer b944a044c5bedbdf1b2360833c39bce57d93354e was discovered after
+the earlier expected-head update failed. That branch was not force-moved.
+Its protected incoming grant AND membership guard, two old-code false-accept
+proofs, four protected/alias rollback cases and SVIP preservation tables are
+retained in this integrated source. Source merge conflicts were resolved by
+preserving its stronger protected-incoming guard first, then rejecting any
+other/unknown holder of the single target's cosmetic grant. The one peer
+unprotected-link success expectation was deliberately strengthened to rejection
+with exact rollback; this is not a full-batch authorization policy.
+Current local26read-only +36combined cosmetic checks PASS; pinned old SQL
+negative fails specifically on the Owner incoming-grant assertion. Duplicate
+baseline bytes deduplicated to peer candidate.pre-incoming.sql; SHA unchanged.
+Prior29 wording below is superseded only for the current combined fixture.
+No production install/reset or build/OTA. Existing private-byte signed-link
+auto-review rejection and DB/media/restore/settlement/writer blockers remain.
+
+## 3 November 2026 — integrated incoming Owner dependency protection (review only)
+
+Consolidates current delivery e70154ae38867511fecf59582596dac4b230d696,
+peer audit 8e17d37d889d16f34c04aee141a9ecd9ca5e051a and cosmetic review
+788f478f214617b41ce205130d49dbaf146d0614 without rewriting those histories.
+Current delivery's category NULL admission guard and runner remain byte-exact;
+peer incoming protected entitlement audit additions remain byte-exact.
+New temporary cosmetic snapshot/apply policy v2 blocks cross-user/unknown-user
+incoming SVIP references to a target-owned grant before preview and mutation.
+This closes an isolated preservation gap that target-only identity checks miss;
+no actual production dependency was changed. Read-only production count of
+cross-user cosmetic entitlement links was zero at21:19:12UTC, not future proof.
+Local PGlite0.3.16/PG17.5WASM:26 peer audit controls and29 cosmetic-module
+controls PASS; pinned prior SQL expected-fails specifically on incoming Owner
+preservation. Initial negative-harness error annotation used a precomputed
+AssertionError stack; wrapped the cause in a named Error so the exact invariant
+is visible. The old-SQL rejection assertion was not relaxed. One meaningful
+scoped CI will run after the final combined source is published; no rerun195 or
+native34/full-app/device claim. See tests/reset-scope-audit/COSMETIC-MODULE-REVIEW.md.
+Public-byte backup536objects/727895833verifiedbytes remains saved separately;
+private4bytes/DBdump/isolatedrestore/writer/settlement/fullintegration remain open.
+Official private-file ordinary downloads failed in the previous continuation.
+A proposed one-day signed retrieval link was blocked by automatic approval
+review as new bearer access requiring action-time confirmation. No link was
+created; no expiry/alternate-signing/permission/key workaround was attempted.
+Do not bypass that rejection. Unaffected source work continued.
+No schema/install/live balances/rewards/Owner/content/roles/relationships/crons/
+financial activation/native build/OTA/Store action by this continuation.
+Rollback: revert the isolated source changes; no live rollback was required.
+
+## 2 November 2026 — isolated cosmetic reset module review (not installed)
+
+Additive continuation of PR29 audit at e0ebd4c324f924c8b68e5e8e2b5843bea1946bb3.
+The deployed apply helper omits purchased/permanent cosmetics and v142 selections.
+Fresh read-only inspection also found UPDATE cosmetic_code=NULL is rejected by
+the BEFORE INSERT/UPDATE cosmetic_post_guard_v1 trigger: eligible(NULL)=false.
+New temporary SECURITY INVOKER fixture functions preview and apply one explicit
+cosmetic policy: revoke active/suspended grants irrespective of purchase/expiry,
+retain historical rows, remove all four authoritative selections, clear five
+profile selections. No live DDL or reset was executed. Source is review-only;
+the fixture marker is NOT actor authorization or a production readiness gate.
+Actual local PGlite0.3.16/PG17.5WASM:23 synthetic checks PASS, including real
+SQL mutations in synthetic tables, NULL-trigger negative, protected UUID/public
+aliases, stale snapshots, history/content preservation, empty replay and exact
+transaction rollback. One initial harness run failed because an expected error
+aborted its enclosing transaction; added a savepoint around that negative test.
+No assertion or production guard was relaxed. Not full native34/device proof.
+Original native34 PASS remains per newer central receipt; older NOTRUN text below
+is historical and superseded for that bounded synthetic gate only.
+Still OPEN: production integration/ACL/actor/audit, phantom/concurrent writers,
+SVIP and birthday re-grants, public reward/financial records and all other reset
+categories, DB+Storage backup/isolated restore, settlement fence, whole Owner
+and render fallback checks. live_reset_ready=false. Existing app/runtime/Owner
+panel/payment/permissions/relationships/catalog/live state preserved.
+Source rollback: revert only this additive source commit; no live rollback used.
+Private media exports are excluded from this repository and CI. A separately
+running authorized public-byte capture is incomplete and not release evidence.
+
 ## 2 November 2026 — bounded IPv6 catalogue compatibility fix (draft only)
 
 Validator parent44e290c26b40038eaed578a8c64469ce961b9948; rebased onto concurrent
