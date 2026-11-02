@@ -1,0 +1,9 @@
+{
+  "name": "funnyroom-coin-seller-sql-tests",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@electric-sql/pglite": "0.3.16"
+  }
+}

@@ -1,3 +1,22 @@
+# Coin Seller pure SQL validator review candidate - 2 November 2026
+
+Draft PR28 addition over fc330a87dbb697fa3312790855aaf89aa6ba5683.
+The actual root shared client is unchanged. Add a seed-free review-only SQL
+validator/helper and 459 finite acceptance comparisons in ephemeral PostgreSQL
+17.5 WASM, with the existing workflow steps preserved and two steps appended.
+The repository-relative local test passes after integration; hosted exact-source
+CI remains pending at source preparation. Results belong in the shared checkpoint
+and PR checks; local checks do not establish hosted completion.
+
+This does not install SQL, activate payments, merge PR28 or publish Pages.
+Native PostgreSQL17 auth/JWT/RLS/ACL/CAS/concurrency, full migration dependencies,
+backup/isolated restore/Owner-content preservation/writer cutover, the original
+34 reset cases, APK/AAB and device gates remain unresolved. Synthetic fixtures
+only; no original blocked reset job is retried or rerouted. See
+tests/coin-seller-sql/README.md and the PR checks for bounded evidence.
+
+--- PREVIOUS COMPLETE HANDOFF BELOW ---
+
 # Owner login eye and Remember me — 30 October 2026
 
 Scoped change over main2201320: same approved login page gains an accessible show/hide eye and persistent/tab-only SDK session choice, standard browser autofill, no raw password storage. Server authority/RPC/financial behaviour and native source unchanged. See docs/LOGIN_CONTROLS_20261030.md for evidence, limitations and rollback. Seven focused cases and all existing Owner source workflow suites pass locally. Remote CI/publication IDs belong in the final delivery evidence; no browser or phone PASS inferred from source tests. This web-only change requires no Expo OTA/build. Previous unrelated v151/full-app release gates remain open.
