@@ -20,13 +20,17 @@ docker inspect "$NAME" --format '{{json .HostConfig.NetworkMode}} {{json .HostCo
 [[ $(docker inspect "$NAME" --format '{{.HostConfig.NetworkMode}}') == none ]]
 [[ $(docker inspect "$NAME" --format '{{len .HostConfig.PortBindings}}') == 0 ]]
 [[ $(docker inspect "$NAME" --format '{{len .HostConfig.Binds}}') == 0 ]]
-[[ $(docker inspect "$NAME" --format '{{range .Mounts}}{{if eq .Destination "/var/lib/postgresql/data"}}{{.Type}}{{end}}{{end}}') == tmpfs ]]
+[[ $(docker inspect "$NAME" --format '{{index .HostConfig.Tmpfs "/var/lib/postgresql/data"}}') == "rw,size=256m" ]]
+echo ISOLATION_CONFIGURATION_VERIFIED
 ready=false
 for i in $(seq 1 60); do
   if [[ $(docker exec "$NAME" cat /proc/1/comm 2>/dev/null) == postgres ]] && docker exec "$NAME" pg_isready -U postgres -d "$DB" >/dev/null 2>&1; then ready=true; break; fi
   sleep 1
 done
 [[ "$ready" == true ]]
+fs_type=$(docker exec "$NAME" stat -f -c %T /var/lib/postgresql/data)
+printf 'PGDATA_FILESYSTEM=%s\n' "$fs_type"
+[[ "$fs_type" == tmpfs ]]
 docker exec "$NAME" psql -X -U postgres -d "$DB" -v ON_ERROR_STOP=1 -Atc 'select version();'
 [[ $(docker exec "$NAME" psql -X -U postgres -d "$DB" -Atc 'show listen_addresses') == '' ]]
 # Exact unmodified fixture enforces PG17, database name, emptiness,34 outcomes and ROLLBACK.
