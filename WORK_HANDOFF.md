@@ -1,3 +1,9 @@
+## 2026-11-02 — Draft SQL HTTPS port bound and retained regression corpus
+
+The review-only catalogue SQL accepted HTTPS destination ports 65536, 99999 and 00065536 while the unchanged actual client rejected them. Added one numeric port upper-bound guard (65535), retaining existing URL syntax, credentials, text, authority, amount and checkout gates. Sixteen boundary/leading-zero/long-digit cases extend the original asserted 459 to 475. A pinned exact pre-port fixture executes the three counterexamples before the candidate. Local PG17.5 WASM comparisons PASS with zero mismatches; hosted CI for this commit is pending at authoring. Other WHATWG URL semantics remain unproven; no full parity claim.
+
+Draft source only: no backend install, merge, publish, payment activation, reset or native APK/device acceptance. Original 34 native reset cases NOT RUN. Helper teardown between fixture and candidate is limited to the synthetic ephemeral test schema. All previous handoff history follows unchanged.
+
 # Coin Seller country controls — 2 November 2026
 
 Removing an eligible display country previously retained its eligibility code,

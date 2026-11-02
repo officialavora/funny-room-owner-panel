@@ -3,7 +3,7 @@
 Run `npm ci --prefix tests/coin-seller-sql --ignore-scripts --no-audit --no-fund`
 and `node tests/coin-seller-sql/validator-parity.test.mjs` from the repository root.
 
-This adds 459 finite client/SQL acceptance comparisons using the actual root
+This adds 475 finite client/SQL acceptance comparisons using the actual root
 `coin-seller-catalog.mjs` and a pinned, ephemeral PGlite PostgreSQL 17.5 engine.
 The draft SQL lives in `backend/review/coin-seller-catalog-validator.DRAFT.sql`.
 It is a pure validator and text helper, not a backend installer. The old SQL
@@ -12,6 +12,13 @@ All catalogue inputs are synthetic; no real payment destinations or personal
 database exports are included. Both the original 203 cases and the additional
 text cases remain in the corpus. The script requires PostgreSQL major 17 and
 asserts the client and SQL source pins.
+
+The original 459 cases are retained with a separate corpus-length assertion.
+Sixteen added HTTPS port cases cover 0..65535, out-of-range ports, leading zeros
+and long numeric strings. The pinned pre-port SQL fixture reproduces acceptance
+of 65536, 99999 and 00065536 while the actual client rejects them. A single SQL
+guard now rejects numeric ports above 65535. Other WHATWG URL/SQL regex behavior
+is not established as equivalent; this bounded fix is not full URL parity.
 
 The existing workflow's steps are retained. These additional steps have no
 Supabase credentials, URLs, production calls, deployment or reset instructions.

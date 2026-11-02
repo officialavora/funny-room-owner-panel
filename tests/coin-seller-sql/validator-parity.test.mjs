@@ -8,7 +8,8 @@ const hash = s => crypto.createHash('sha256').update(s).digest('hex');
 const pins = {
  '../../coin-seller-catalog.mjs':'e34e21c35d63973df4af3a273f8f775cf98781927e2f6717854a5640a2090d37',
  'fixtures/validator.after.sql':'309263e586d03a7fa4723e47cfb8e71ecb1fcc1493e5e939d34eb044d2185e30',
- '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'2fb090281512d18906c7f7c7b4b65d01a58c7204847af09a3cfb28209a70b64c'
+ 'fixtures/validator.pre-port.sql':'2fb090281512d18906c7f7c7b4b65d01a58c7204847af09a3cfb28209a70b64c',
+ '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'86e1357b14853959595760c71878602ebe0744e8c652a8727eaf62b6a3a793ca'
 };
 for(const [n,h] of Object.entries(pins)) assert.equal(hash(read(n)),h,n);
 const seed = JSON.parse(read('fixtures/synthetic-seed.json'));
@@ -51,6 +52,9 @@ for(const units of [1499,1500,1501])add('url-ascii-length:'+units,c=>{c.channels
 for(const count of [738,739])add('url-emoji-length:'+count,c=>{c.channels[1].paymentUrl=prefix+'😀'.repeat(count);});
 
 assert.equal(cases.length,459,'Finite corpus must remain complete');
+const ports=['0','1','80','443','65534','65535','65536','65537','99999','2147483647','00000','00080','00065535','00065536','9'.repeat(64),'9'.repeat(512)];
+for(const [i,port] of ports.entries())add('url-port:'+i,c=>{c.channels[1].paymentUrl='https://example.invalid:'+port+'/';});
+assert.equal(cases.length,475,'Retain 459 cases plus 16 port boundaries');
 const pg = new PGlite(); // ephemeral in-process engine; no URL, socket or persisted data directory
 const receipt={package:'@electric-sql/pglite@0.3.16',source_pins:pins,engine:null,preimage_counterexamples:[],cases:[],mismatches:[],native_reset_34_cases:'NOT RUN',production_connections:0,jwt_rls_concurrency:'NOT RUN'};
 try{
@@ -66,6 +70,14 @@ try{
  await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(duplicate)]);
  assert.throws(()=>validateCatalog(duplicate));receipt.preimage_counterexamples.push({case:'duplicate eligibility',sql:'accept',client:'reject'});
  await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
+ await pg.exec(read('fixtures/validator.pre-port.sql'));
+ for(const port of ['65536','99999','00065536']){
+  const c=fresh();c.channels[1].paymentUrl='https://example.invalid:'+port+'/';
+  await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);
+  assert.throws(()=>validateCatalog(c));receipt.preimage_counterexamples.push({case:'URL port '+port,sql:'accept',client:'reject'});
+ }
+ await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
+ await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
  await pg.exec(read('../../backend/review/coin-seller-catalog-validator.DRAFT.sql'));
  for(const {name,c,client} of cases){
   let sql='accept',sqlstate=null;

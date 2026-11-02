@@ -32,6 +32,7 @@ begin
   if coalesce(p->>'railId','')!~'^[a-z0-9-]{1,64}$'then raise exception 'Canonical rail required';end if;
   if p->>'kind' not in('crypto','manual','redirect') or nullif(p->>'provider','') is null or length(p->>'provider')>100 or length(p->>'recipient')>200 or length(p->>'paymentUrl')>1500 then raise exception 'Invalid payment type/provider';end if;
   if coalesce(p->>'paymentUrl','')<>'' and (p->>'paymentUrl'!~'^https://[^/@:]+(:[0-9]+)?(/|$)' or p->>'paymentUrl'~'[[:space:]]')then raise exception 'HTTPS payment URL required';end if;
+  if (substring(p->>'paymentUrl' from '^https://[^/@:]+:([0-9]+)(/|$)'))::numeric > 65535 then raise exception 'Invalid payment URL port';end if;
   if p->'enabled'='true'::jsonb and ((p->>'kind'='crypto' and (coalesce(p->>'address','')=''or coalesce(p->>'network','')=''))or(p->>'kind'='manual' and coalesce(p->>'recipient','')='')or(p->>'kind'='redirect' and coalesce(p->>'paymentUrl','')=''))then raise exception 'Enabled method requires complete destination';end if;
   if coalesce(p->>'address','')<>'' and p->>'network'='Tron (TRC20)' and p->>'address'!~'^T[1-9A-HJ-NP-Za-km-z]{33}$' then raise exception 'Invalid Tron address';end if;
  end loop;
