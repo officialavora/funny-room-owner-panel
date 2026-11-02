@@ -6,6 +6,7 @@ NAME="funnyroom-reset-admission-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
 DB='funnyroom_reset_admission_ci'
 SQL='tests/reset-admission/admission.sql'
 printf '%s  %s\n' dc72effe02cdfb0d949cd1048678a222e654a3a3af6617cb9287c02c7252efe6 "$SQL" | sha256sum -c -
+printf '%s  %s\n' 0c6f14a6e1c65ea85452b5b81152b3df41f45f734f3b752b241dd6f28d84bd00 tests/reset-admission/category-null-guard.sql | sha256sum -c -
 cleanup() { docker rm -fv "$NAME" >/dev/null 2>&1 || true; }
 trap cleanup EXIT
 # Image is fetched before the disconnected container is created. No repository secrets.
@@ -35,10 +36,11 @@ docker exec "$NAME" psql -X -U postgres -d "$DB" -v ON_ERROR_STOP=1 -Atc 'select
 [[ $(docker exec "$NAME" psql -X -U postgres -d "$DB" -Atc 'show listen_addresses') == '' ]]
 # Exact unmodified fixture enforces PG17, database name, emptiness,34 outcomes and ROLLBACK.
 docker exec -i "$NAME" psql -X -U postgres -d "$DB" -v ON_ERROR_STOP=1 < "$SQL"
+docker exec -i "$NAME" psql -X -U postgres -d "$DB" -v ON_ERROR_STOP=1 < tests/reset-admission/category-null-guard.sql
 # Separate connection verifies fixture rollback, not production backup/restore.
 left=$(docker exec "$NAME" psql -X -U postgres -d "$DB" -v ON_ERROR_STOP=1 -Atc "select (select count(*) from pg_namespace where nspname in ('auth','private','extensions')) + (select count(*) from information_schema.tables where table_schema='public');")
 [[ "$left" == 0 ]]
 docker rm -fv "$NAME" >/dev/null
 if docker inspect "$NAME" >/dev/null 2>&1; then echo 'CLEANUP_FAILED'; exit 1; fi
 trap - EXIT
-printf '%s\n' 'RESET_ADMISSION_34_PASS_AND_FIXTURE_ROLLBACK_ONLY; live_reset_ready=false'
+printf '%s\n' 'RESET_ADMISSION_34_AND_CATEGORY_38_PASS_AND_FIXTURE_ROLLBACK_ONLY; live_reset_ready=false'
