@@ -80,8 +80,29 @@ await db.exec("insert into private.owner_protected_targets values('room','unreso
 check('unknown/shared protection scope surfaced',()=>assert.deepEqual(a.unresolved_protected_target_types,['room']));
 await db.query('update public.wallets set coin_balance=-1 where user_id=$1',[user]);a=await get();
 check('negative balance is not zero',()=>{assert.equal(a.wallet_nonzero,1);assert.equal(a.wallet_negative,1)});
+// Protected-owner incoming links were invisible to the original target-owned link count.
+check('no incoming protected dependency in original fixture',()=>assert.deepEqual(a.protected_entitlement_target_links,{rows:0,target_cosmetic_grants:0,target_memberships:0}));
+const priorOutgoing=a.svip_cross_user_links;
+const ownerMembership='88888888-8888-4888-8888-888888888888';
+await db.query('insert into private.svip_memberships values($1,$2,$3,$4)',[ownerMembership,owner,'active',true]);
+await db.query('insert into private.svip_entitlement_grants values($1,$2,$3,$4)',['77777777-7777-4777-8777-777777777777',owner,ownerMembership,grant]);a=await get();
+check('Owner incoming target grant link detected while old outgoing metric stays unchanged',()=>{
+ assert.equal(a.svip_cross_user_links,priorOutgoing);
+ assert.deepEqual(a.protected_entitlement_target_links,{rows:1,target_cosmetic_grants:1,target_memberships:0});
+});
+await db.query('insert into private.svip_entitlement_grants values($1,$2,$3,$4)',['66666666-6666-4666-8666-666666666666',other,'ffffffff-ffff-4fff-8fff-ffffffffffff',null]);a=await get();
+check('explicitly protected public-ID alias incoming membership link detected',()=>{
+ assert.equal(a.svip_cross_user_links,priorOutgoing);
+ assert.deepEqual(a.protected_entitlement_target_links,{rows:2,target_cosmetic_grants:1,target_memberships:1});
+});
+check('incoming dependency output remains aggregate and reset remains blocked',()=>{
+ assert.deepEqual(Object.keys(a.protected_entitlement_target_links).sort(),['rows','target_cosmetic_grants','target_memberships']);
+ for(const id of [owner,other,grant,ownerMembership])assert(!JSON.stringify(a).includes(id));
+ assert.equal(a.live_reset_ready,false);
+});
 await db.exec('alter table private.cosmetic_equipped_v142 drop column cosmetic_code');
 await assert.rejects(get);checks.push('missing required schema fails rather than returning partial scope');
+assert.equal(checks.length,26,'Retain22 plus4 incoming protected-link controls');
 await db.close();
 const receipt={status:'PASS_SYNTHETIC_READONLY_AUDIT_ONLY',engine:'PGlite 0.3.16 / PostgreSQL 17.5 WASM',checks,check_count:checks.length,native34_rerun:false,live_reset_ready:false};
 writeFileSync(new URL('./test-receipt.json',import.meta.url),JSON.stringify(receipt,null,2)+'\n');
