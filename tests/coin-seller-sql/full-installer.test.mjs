@@ -9,8 +9,8 @@ assert.ok(installerPath&&clientPath&&seedPath,'Provide synthetic installer, pinn
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const source=fs.readFileSync(installerPath,'utf8');
 // Refuse stale fixture review when the current draft validator changes.
-assert.equal(hash(fs.readFileSync(new URL('../../backend/review/coin-seller-catalog-validator.DRAFT.sql',import.meta.url))),'d5355e1bd5b1abb47ff59190942287c0ef44bf5130c232dcb2a352ef4d82c04c','Exact reviewed 44e validator required');
-assert.equal(hash(source),'317c0408c65acc93ff88cf30185d95517f60d86aaac331021e3c57178862fa6c','Only exact sanitized synthetic installer may execute');
+assert.equal(hash(fs.readFileSync(new URL('../../backend/review/coin-seller-catalog-validator.DRAFT.sql',import.meta.url))),'fd91e16bb254e420f7ff3d17e7e65567107c90f3f291cab0c1ca7a5f1c48e8e9','Exact reviewed IPv6 successor validator required');
+assert.equal(hash(source),'031d1f8ff7dc513f8f5c89cd5d0874a2e66684e45dcee21806e5065ff756ed29','Only exact sanitized synthetic installer may execute');
 assert.equal(hash(fs.readFileSync(clientPath)),'e34e21c35d63973df4af3a273f8f775cf98781927e2f6717854a5640a2090d37');
 const {validateCatalog}=await import(pathToFileURL(path.resolve(clientPath)).href);
 const seed=JSON.parse(fs.readFileSync(seedPath));validateCatalog(seed);
@@ -75,6 +75,33 @@ try{
  }finally{await db.exec('ROLLBACK');await db.exec('reset role');}
  assert.deepEqual(await loadOwner(),seed);assert.deepEqual(await counts(),{edits:0,audit:0,quotes:0,proofs:0,deposits:0});
  check('successor transaction rollback restores seed and all fixture counts',true);
+
+ const ipv6InstalledCases=[
+  ['compressed port','https://[2001:db8::1]:443/',true],
+  ['uppercase empty port','HTTPS://[::1]:?x=y',true],
+  ['IPv4 mapped','https://[::ffff:192.0.2.1]:65535/',true],
+  ['backslash path',String.raw`https://[::1]:443\raw path`,true],
+  ['zone identifier','https://[fe80::1%25eth0]/',false],
+  ['credentials','https://user@[::1]/',false],
+  ['oversized port','https://[::1]:65536/',false],
+  ['malformed groups','https://[1::2::3]/',false]
+ ];
+ for(const [name,url,want]of ipv6InstalledCases){
+  const sample=structuredClone(seed);sample.channels[1].paymentUrl=url;
+  let client=true,sql=true;try{validateCatalog(sample);}catch{client=false;}
+  try{await db.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(sample)]);}catch{sql=false;}
+  assert.equal(client,want);check('installed IPv6 authority: '+name,sql===want);
+ }
+ const ipv6Doc=structuredClone(seed);ipv6Doc.channels[1].paymentUrl=String.raw`https://[2001:DB8::1]:000443\raw path?x=%zz`;
+ validateCatalog(ipv6Doc);await db.exec('set role authenticated');await db.exec('BEGIN');
+ try{
+  const got=await save(ipv6Doc,1,'abababab-abab-4bab-8bab-abababababab','Synthetic IPv6 successor');
+  assert.deepEqual(got,{...ipv6Doc,version:2});assert.deepEqual(await loadOwner(),got);
+  check('installed Owner IPv6 save/load preserves raw destination',got.channels[1].paymentUrl===ipv6Doc.channels[1].paymentUrl);
+ }finally{await db.exec('ROLLBACK');await db.exec('reset role');}
+ assert.deepEqual(await loadOwner(),seed);assert.deepEqual(await counts(),{edits:0,audit:0,quotes:0,proofs:0,deposits:0});
+ check('IPv6 transaction rollback restores catalogue/audit/financial rows',true);
+
  const c=structuredClone(seed);c.applicationOpen=false;c.rules[0].text='Synthetic integrated catalogue review';c.channels[1].paymentUrl='https://example.invalid/path space\u0085';validateCatalog(c);
  await db.exec('set role authenticated');
  const id='33333333-3333-4333-8333-333333333333';const after=await save(c,1,id);const expected={...c,version:2};assert.deepEqual(after,expected);
@@ -103,7 +130,7 @@ try{
  await db.exec('set role anon');await rejects('select public.load_coin_seller_catalog_v1()',[],'42501');check('anon wrapper execute denied',true);await db.exec('reset role');
  check('helper revoke effective through PUBLIC inheritance',await one("select not has_function_privilege('authenticated','coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean)','execute') and not has_function_privilege('anon','coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean)','execute') as value"));
  assert.deepEqual(await loadOwner(),expected);assert.deepEqual(await counts(),{edits:1,audit:1,quotes:0,proofs:0,deposits:0});check('final catalogue/audit/receipt/financial integrity',true);
- assert.equal(checks.length,35,'Retained25 plus targeted10 check count');
+ assert.equal(checks.length,45,'Retain35 plus8 installed IPv6 cases and2 save/rollback checks');
  const receipt={result:'PASS',engine,dependency:'@electric-sql/pglite@0.3.16',synthetic_installer_sha256:hash(source),check_count:checks.length,checks,private_seed_executed:false,production_connections:0,native_reset_34_cases:'NOT RUN',scope:'Complete exact integrated installer with synthetic seed, auth.uid/jwt/is_founder/apply prerequisites and small auth/profile/session/audit tables. Not genuine JWT/PostgREST/target role defaults/RLS, writer/concurrency, live install/payment/backup/reset/device acceptance.'};
  fs.writeFileSync(new URL('full-installer-receipt.json',import.meta.url),JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt));
 }finally{await db.close();}

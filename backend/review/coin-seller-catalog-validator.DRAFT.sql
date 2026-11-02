@@ -7,7 +7,7 @@ returns boolean language sql immutable strict set search_path='' as $$
 $$;
 
 create function coin_seller_api_v1.validate_coin_seller_catalog_v1(c jsonb) returns void language plpgsql immutable set search_path='' as $$
-declare p jsonb;k text;o jsonb;base numeric;total numeric;
+declare p jsonb;k text;o jsonb;base numeric;total numeric;url_authority text;ipv6_address text;ipv6_port text;
 begin
  -- JSON type parity with the existing shared client; preserve all amount/rate rules below.
  if exists(select 1 from unnest(array['schema','version','coinsPerUsd','checkoutMinutes','exitReviewHours','merchantDepositUsdCents']) as required(key) where jsonb_typeof(c->required.key) is distinct from 'number') then raise exception 'Numeric catalogue fields must be JSON numbers';end if;
@@ -31,10 +31,24 @@ begin
   if p->>'id'!~'^[a-z0-9-]{1,48}$' or jsonb_typeof(p->'enabled')<>'boolean' or (coalesce(p->>'address','')<>'' and p->>'address'!~'^[A-Za-z0-9:._-]{1,200}$') or nullif(p->>'asset','') is null  or nullif(p->>'label','') is null or length(p->>'asset')>200 or length(p->>'network')>200 or length(p->>'label')>200 or length(coalesce(p->>'memo',''))>200 or nullif(p->>'instructions','') is null or length(p->>'instructions')>800 or coalesce(p->>'assetUnitsPerUsd','')!~'^[0-9]+(\.[0-9]{1,8})?$' or (p->>'assetUnitsPerUsd')::numeric<=0 or (p->>'assetUnitsPerUsd')::numeric>1000000 then raise exception 'Invalid channel';end if;
   if coalesce(p->>'railId','')!~'^[a-z0-9-]{1,64}$'then raise exception 'Canonical rail required';end if;
   if p->>'kind' not in('crypto','manual','redirect') or nullif(p->>'provider','') is null or length(p->>'provider')>100 or length(p->>'recipient')>200 or length(p->>'paymentUrl')>1500 then raise exception 'Invalid payment type/provider';end if;
+  -- Bracketed IPv6 is a separate authority grammar; never reinterpret userinfo or rewrite the destination.
+  url_authority:=substring(replace(p->>'paymentUrl',chr(92),'/') from '(?i)^https://([^/?#]*)');
+  if strpos(url_authority,'[')>0 or strpos(url_authority,']')>0 then
+   ipv6_address:=substring(url_authority from '^\[([0-9A-Fa-f:.]+)\](:[0-9]*)?$');
+   if ipv6_address is null or strpos(ipv6_address,':')=0 then raise exception 'Malformed IPv6 payment URL host';end if;
+   -- inet accepts masks and other network syntax; the authority grammar above forbids them first.
+   begin
+    if family(ipv6_address::inet)<>6 then raise exception 'IPv6 payment URL host required';end if;
+   exception when invalid_text_representation then raise exception 'Malformed IPv6 payment URL address';
+   end;
+   ipv6_port:=substring(url_authority from '^\[[^]]+\]:([0-9]*)$');
+   if nullif(ipv6_port,'')::numeric>65535 then raise exception 'Invalid IPv6 payment URL port';end if;
+  else
   if coalesce(replace(p->>'paymentUrl',chr(92),'/'),'')<>'' and ((replace(p->>'paymentUrl',chr(92),'/')!~'^https://[^/@:]+(:[0-9]+)?(/|$)' AND NOT (replace(p->>'paymentUrl',chr(92),'/') ~* '^https://([A-Za-z0-9_-]+[.])+[A-Za-z_-][A-Za-z0-9_-]*[.]?(:[0-9]*)?([/?#]|$)' AND replace(p->>'paymentUrl',chr(92),'/') !~* '^https://([^/?#]*[.])?xn--' AND coalesce((nullif(substring(replace(p->>'paymentUrl',chr(92),'/') from '(?i)^https://[^/@:?#]+:([0-9]*)([/?#]|$)'),''))::numeric <=65535,true))) or substring(p->>'paymentUrl' from '(?i)^https://([^/?#\\]*)')~'[[:space:]]')then raise exception 'HTTPS payment URL required';end if;
   if (substring(replace(p->>'paymentUrl',chr(92),'/') from '^https://[^/@:]+:([0-9]+)(/|$)'))::numeric > 65535 then raise exception 'Invalid payment URL port';end if;
   if exists(select 1 from (values (substring(p->>'paymentUrl' from '(?i)^https://([^/?#\\]*)'))) as host(authority) where authority ~ '%(?![0-9A-Fa-f]{2})' or strpos(authority,'[')>0 or strpos(authority,']')>0) then raise exception 'Malformed payment URL host';end if;
   if exists(select 1 from (values (regexp_replace(substring(p->>'paymentUrl' from '(?i)^https://([^/?#\\]*)'),'%2e','.','gi'))) as host(authority) where case when authority ~ '^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.]?(:[0-9]*)?$' then exists(select 1 from unnest(string_to_array(rtrim(split_part(authority,':',1),'.'),'.')) as part(octet) where octet::numeric > 255) else false end) then raise exception 'Invalid dotted decimal IPv4 host';end if;
+  end if;
   if p->'enabled'='true'::jsonb and ((p->>'kind'='crypto' and (coalesce(p->>'address','')=''or coalesce(p->>'network','')=''))or(p->>'kind'='manual' and coalesce(p->>'recipient','')='')or(p->>'kind'='redirect' and coalesce(p->>'paymentUrl','')=''))then raise exception 'Enabled method requires complete destination';end if;
   if coalesce(p->>'address','')<>'' and p->>'network'='Tron (TRC20)' and p->>'address'!~'^T[1-9A-HJ-NP-Za-km-z]{33}$' then raise exception 'Invalid Tron address';end if;
  end loop;

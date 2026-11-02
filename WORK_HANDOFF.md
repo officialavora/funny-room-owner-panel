@@ -1,3 +1,43 @@
+## 2 November 2026 — bounded IPv6 catalogue compatibility fix (draft only)
+
+Validator parent44e290c26b40038eaed578a8c64469ce961b9948; rebased onto concurrent
+full-installer addition bb64f422ee873336cf42f1c3e06228b10e75f40c. Existing PR28/test branch retained;
+no merge, Pages, backend install, payment activation, native build, reset or OTA.
+The shared client accepts valid bracketed IPv6, while the parent SQL rejects all
+bracketed hosts. Added a separate complete IPv6-authority branch using restricted
+literal grammar plus PostgreSQL inet/family, strict optional port bounds, and no
+raw destination rewrite. The existing four unbracketed URL guards are preserved
+byte-for-byte. No client/editor/business-policy/permission/dependency/workflow edit.
+
+Actual local pinned PGlite0.3.16/PG17.5WASM:1038 explicit client/SQL comparisons PASS,
+zero mismatches, with all prior666 retained;338 exact old-SQL IPv6 rejection
+preimages reproduced. Separate deterministic8760-case bracketed-IPv6 audit PASS
+(586client accepts/8174rejects), zero mismatches/raw destination changes. Corpus
+sets may overlap; do not sum them or call them native reset acceptance. The prior
+34 native reset cases remain NOT RUN. SQL successor SHA256
+fd91e16bb254e420f7ff3d17e7e65567107c90f3f291cab0c1ca7a5f1c48e8e9.
+Old SQL and exact hashes retained in validator.pre-ipv6.sql; reverse only this
+source diff for rollback (no database install/rollback performed). No universal
+WHATWG/SSRF/network safety or production financial-readiness claim.
+
+Hosted exact-source CI receipt follows in session checkpoint after provider run;
+this entry does not assert future CI success. Concurrent bb64 synthetic installer
+was preserved and updated by exactly one validator-function replacement; exact
+inverse restores the complete317c0408 parent. New synthetic full-installer SHA256
+031d1f8ff7dc513f8f5c89cd5d0874a2e66684e45dcee21806e5065ff756ed29.
+Actual complete synthetic install and45checks PASS: retained35, eight installed
+IPv6 cases, and two authenticated Owner raw save/readback/transaction-rollback
+checks. No private seed/target URL/production connection. Legacy business functions,
+ACLs, seed, financial guards and concurrent workflow remain byte-preserved.
+Real JWT/session/RLS/ACL,
+concurrency, target authority/default-role review, settlement and actual backup+
+Storage/isolated restore/writer/preservation/rollback/device gates remain open.
+Native combined source0e01/runtime9a1 recovery and full CI are still prerequisites
+for a compatible test OTA/new binary; no old source substitution or provider-block
+bypass. Existing GitLab ticket765783 is separate; no duplicate ticket here.
+
+--- Previous full WORK_HANDOFF history, unchanged ---
+
 ## 2026-11-02 — Explicit-port backslash path compatibility in review-only SQL
 
 A client-valid HTTPS destination such as https://example.invalid:443\path was rejected by the SQL admission/port grammar. In exactly those two existing lines, evaluate backslashes as slash separators; retain raw stored text and the existing authority/whitespace/host/IPv4/credential guards. No client, financial/authorization, workflow or dependency change. Exact inverse of the two-line source edit restores pinned preimage304f0a4a...; new SQL SHA d5355e1bd5b1abb47ff59190942287c0ef44bf5130c232dcb2a352ef4d82c04c.
