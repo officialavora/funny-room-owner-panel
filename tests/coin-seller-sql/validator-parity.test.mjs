@@ -15,7 +15,8 @@ const pins = {
  'fixtures/validator.pre-ipv4-dot.sql':'3e8370bba75074e9b2320b171126394b67be116bbd2cd86d08a35ead6fdef55e',
  'fixtures/validator.pre-encoded-dot.sql':'2d4788a2e7bcbcecf229448742e926ba8c646de285873bc64d5323cd58645f66',
  'fixtures/validator.pre-path-whitespace.sql':'448ef78e0bd6b4a437ff46704e24e111b05c4fcd801dc8bbe4a174ecb7473597',
- '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'304f0a4a275fcf3fa2f75f9c525471cec19c9b0af930584220491e821526e409'
+ 'fixtures/validator.pre-backslash.sql':'304f0a4a275fcf3fa2f75f9c525471cec19c9b0af930584220491e821526e409',
+ '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'d5355e1bd5b1abb47ff59190942287c0ef44bf5130c232dcb2a352ef4d82c04c'
 };
 for(const [n,h] of Object.entries(pins)) assert.equal(hash(read(n)),h,n);
 const seed = JSON.parse(read('fixtures/synthetic-seed.json'));
@@ -144,6 +145,37 @@ for(const [i,[url,expected]]of pathWhitespaceCases.entries()){
 assert.equal(cases.length,636,'Retain610 plus26 path/authority/control cases');
 const pathKnownResiduals=encodedKnownResiduals.filter(r=>!['https://example.invalid/space here','https://example.invalid/\u0085'].includes(r.url));
 assert.equal(pathKnownResiduals.length,2);
+
+const backslashCases=[];
+for(const scheme of ['https','HTTPS'])for(const port of ['443','0','65535','000443','']){
+ backslashCases.push([scheme+'://example.invalid:'+port+'\\path','accept']);
+}
+for(const port of ['65536','99999','00065536'])for(const sep of ['\\','/'])backslashCases.push(['https://example.invalid:'+port+sep+'path','reject']);
+backslashCases.push(
+ ['https://user@example.invalid:443\\path','reject'],
+ ['https://user:pass@example.invalid:443\\path','reject'],
+ ['https://exa mple.invalid:443\\path','reject'],
+ ['https://foo%zz:443\\path','reject'],
+ ['https://foo[bar].invalid:443\\path','reject'],
+ ['http://example.invalid:443\\path','reject'],
+ ['https://256.1.2.3:443\\path','reject'],
+ ['https://1.2.3.999%2e:443\\path','reject'],
+ ['https://127.0.0.1:443\\path','accept'],
+ ['https://example.invalid:443\\user@another.invalid:65536','accept'],
+ ['https://example.invalid:443\\path%zz?next=bad[host]','accept'],
+ ['https://example.invalid:443\\a b','accept'],
+ ['https://example.invalid:443\\a\nb','reject'],
+ ['https://example.invalid:443\\a\tb','reject']
+);
+assert.equal(backslashCases.length,30);
+for(const [i,[url,expected]]of backslashCases.entries()){
+ add('url-port-backslash:'+i,c=>{c.channels[1].paymentUrl=url;});
+ assert.equal(cases.at(-1).client,expected,'Explicit port/backslash client expectation');
+}
+assert.equal(cases.length,666,'Retain636 plus30 bounded port/backslash cases');
+const backslashKnownResiduals=pathKnownResiduals.filter(r=>r.url!=='https://example.invalid:443\\path');
+assert.equal(backslashKnownResiduals.length,1);
+
 const pg = new PGlite(); // ephemeral in-process engine; no URL, socket or persisted data directory
 const receipt={package:'@electric-sql/pglite@0.3.16',source_pins:pins,engine:null,preimage_counterexamples:[],url_grammar_preimage:[],known_url_residuals:[],cases:[],mismatches:[],native_reset_34_cases:'NOT RUN',production_connections:0,jwt_rls_concurrency:'NOT RUN'};
 try{
@@ -225,6 +257,17 @@ try{
  assert.equal(receipt.path_whitespace_preimage.length,20);
  await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
  await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
+ await pg.exec(read('fixtures/validator.pre-backslash.sql'));
+ receipt.backslash_preimage=[];
+ for(const [url]of backslashCases.filter(x=>x[1]==='accept')){
+  const c=fresh();c.channels[1].paymentUrl=url;validateCatalog(c);
+  let rejected=false;try{await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);}catch{rejected=true;}
+  assert.equal(rejected,true,'Pinned preimage must reject client-valid port/backslash path');
+  receipt.backslash_preimage.push({url,client:'accept',sql:'reject'});
+ }
+ assert.equal(receipt.backslash_preimage.length,14);
+ await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
+ await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
  await pg.exec(read('../../backend/review/coin-seller-catalog-validator.DRAFT.sql'));
  for(const {name,c,client} of cases){
   let sql='accept',sqlstate=null;
@@ -232,7 +275,7 @@ try{
   const row={name,client,sql,sqlstate,match:client===sql};receipt.cases.push(row);
   if(!row.match)receipt.mismatches.push(row);
  }
- for(const expected of pathKnownResiduals){
+ for(const expected of backslashKnownResiduals){
   const c=fresh();c.channels[1].paymentUrl=expected.url;
   let client='accept',sql='accept';try{validateCatalog(c);}catch{client='reject';}
   try{await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);}catch{sql='reject';}
@@ -241,10 +284,10 @@ try{
   assert.notEqual(client,sql,'Residual must not be mislabeled parity success');
   receipt.known_url_residuals.push({...expected,status:'UNRESOLVED'});
  }
- receipt.full_whatwg_parity='NOT ESTABLISHED: 2 known URL residuals; other encoded/WHATWG host forms unproven';
+ receipt.full_whatwg_parity='NOT ESTABLISHED: 1 known URL residual; other encoded/WHATWG host forms unproven';
  receipt.case_count=receipt.cases.length;
  receipt.result=receipt.mismatches.length?'FAIL':'PASS';
  fs.writeFileSync(new URL('./text-runtime-receipt.json',import.meta.url),JSON.stringify(receipt,null,2)+'\n');
- console.log(JSON.stringify({engine:receipt.engine,cases:receipt.case_count,result:receipt.result,mismatches:receipt.mismatches,preimage_counterexamples:receipt.preimage_counterexamples,url_grammar_preimage_count:receipt.url_grammar_preimage.length,encoded_dot_preimage_count:receipt.encoded_dot_preimage.length,path_whitespace_preimage_count:receipt.path_whitespace_preimage.length,ipv4_guard_preimage_count:receipt.ipv4_guard_preimage.length,ipv4_dot_preimage_count:receipt.ipv4_dot_preimage.length,known_url_residuals:receipt.known_url_residuals,full_whatwg_parity:receipt.full_whatwg_parity,native_reset_34_cases:'NOT RUN'}));
+ console.log(JSON.stringify({engine:receipt.engine,cases:receipt.case_count,result:receipt.result,mismatches:receipt.mismatches,preimage_counterexamples:receipt.preimage_counterexamples,url_grammar_preimage_count:receipt.url_grammar_preimage.length,encoded_dot_preimage_count:receipt.encoded_dot_preimage.length,path_whitespace_preimage_count:receipt.path_whitespace_preimage.length,backslash_preimage_count:receipt.backslash_preimage.length,ipv4_guard_preimage_count:receipt.ipv4_guard_preimage.length,ipv4_dot_preimage_count:receipt.ipv4_dot_preimage.length,known_url_residuals:receipt.known_url_residuals,full_whatwg_parity:receipt.full_whatwg_parity,native_reset_34_cases:'NOT RUN'}));
  assert.equal(receipt.mismatches.length,0,'Client/SQL acceptance mismatch; receipt retained');
 } finally {await pg.close();}

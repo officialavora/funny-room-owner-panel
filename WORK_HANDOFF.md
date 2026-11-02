@@ -1,3 +1,11 @@
+## 2026-11-02 — Explicit-port backslash path compatibility in review-only SQL
+
+A client-valid HTTPS destination such as https://example.invalid:443\path was rejected by the SQL admission/port grammar. In exactly those two existing lines, evaluate backslashes as slash separators; retain raw stored text and the existing authority/whitespace/host/IPv4/credential guards. No client, financial/authorization, workflow or dependency change. Exact inverse of the two-line source edit restores pinned preimage304f0a4a...; new SQL SHA d5355e1bd5b1abb47ff59190942287c0ef44bf5130c232dcb2a352ef4d82c04c.
+
+Actual local pinned PGlite0.3.16/PostgreSQL17.5WASM:666 finite client/SQL comparisons PASS, zero mismatches;14 old-SQL client-valid rejections reproduced. Original636 cases retained plus30 explicit scheme/port/backslash/authority/path expectations. One known validIPv6 difference remains explicitly UNRESOLVED; general encoded/Unicode/WHATWG equivalence unproven. Hosted exact-source CI pending at authoring.
+
+Draft source only, no merge/Pages/SQL installation/payment/reset/OTA/native release. Full target/JWT/RLS/session/concurrency, complete installer synchronization/admission, real backup+Storage isolated restore/wholeOwner/content/writer/rollback and device gates remain. Original34 native reset cases NOT RUN. Previous handoff retained below unchanged.
+
 ## 2026-11-02 — Path whitespace compatibility in draft catalogue SQL
 
 The client accepts ASCII space and U+0085 inside HTTPS path/query/fragment text, while SQL applied its whitespace rejection to the entire URL. Limit that existing check to the already-delimited authority, preserving scheme/host admission, credential/port/IPv4 guards and ASCII-control rejection. Twenty pinned old-SQL rejections reproduce; six authority/credential/control negatives remain rejected. The retained 610 cases plus26 explicit client expectations give636 comparisons, local PG17.5WASM PASS/zero mismatches. The two resolved examples now enter the parity corpus; IPv6 and explicit-port backslash remain separately asserted UNRESOLVED. Other encoded/WHATWG forms remain unproven.
