@@ -22,3 +22,5 @@ jobs:
         run: npm ci --prefix tests/reset-scope-audit --ignore-scripts --no-audit --no-fund
       - name: Verify actual read-only SQL and failure controls
         run: node tests/reset-scope-audit/test-reset-scope.mjs
+      - name: Verify isolated cosmetic coverage candidate and rollback
+        run: node tests/reset-scope-audit/test-candidate.mjs
