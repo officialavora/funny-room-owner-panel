@@ -11,7 +11,8 @@ const pins = {
  'fixtures/validator.pre-port.sql':'2fb090281512d18906c7f7c7b4b65d01a58c7204847af09a3cfb28209a70b64c',
  'fixtures/validator.pre-url-grammar.sql':'86e1357b14853959595760c71878602ebe0744e8c652a8727eaf62b6a3a793ca',
  'fixtures/validator.pre-host-guards.sql':'afdf9f798330e75bddfb3a9e09094cbaa35b6895b97e5833f50e1226d1abf8e2',
- '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'60158b677125074ef4f2d6afe87e05ed97e1f675673d95c5565a79b606d7d46b'
+ 'fixtures/validator.pre-ipv4-guard.sql':'60158b677125074ef4f2d6afe87e05ed97e1f675673d95c5565a79b606d7d46b',
+ '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'3e8370bba75074e9b2320b171126394b67be116bbd2cd86d08a35ead6fdef55e'
 };
 for(const [n,h] of Object.entries(pins)) assert.equal(hash(read(n)),h,n);
 const seed = JSON.parse(read('fixtures/synthetic-seed.json'));
@@ -87,6 +88,19 @@ for(const [i,[url,expected]]of hostGuardCases.entries()){
  assert.equal(cases.at(-1).client,expected,'Explicit host/path client expectation');
 }
 assert.equal(cases.length,541,'Retain 527 plus 14 bounded host/path checks');
+// Keep the original541 generation unchanged. Bounded four-part decimalIPv4 only;
+// legacy/octal/hex/encoded forms are deliberately not reinterpreted by this guard.
+const ipv4Cases = [{"url": "https://999.999.999.999/", "client": "reject"}, {"url": "https://256.1.2.3/", "client": "reject"}, {"url": "https://1.256.2.3/", "client": "reject"}, {"url": "https://1.2.256.3/", "client": "reject"}, {"url": "https://1.2.3.256/", "client": "reject"}, {"url": "https://0.0.0.0/", "client": "accept"}, {"url": "https://255.255.255.255/", "client": "accept"}, {"url": "https://1.2.3.4/", "client": "accept"}, {"url": "https://0377.0.0.1/", "client": "accept"}, {"url": "https://0x7f.0.0.1/", "client": "accept"}, {"url": "https://127.1/", "client": "accept"}, {"url": "https://2130706433/", "client": "accept"}, {"url": "https://01.2.3.4/", "client": "accept"}, {"url": "https://1.2.3.999.example/", "client": "accept"}, {"url": "https://example.invalid/", "client": "accept"}, {"url": "https://999.999.999.999%2eexample/", "client": "accept"}, {"url": "https://999.999.999.999:443/?x=y", "client": "reject"}, {"url": "https://999.999.999.999?x=y", "client": "reject"}, {"url": "https://example.invalid/?u=999.999.999.999", "client": "accept"}, {"url": "https://example.invalid/#999.999.999.999", "client": "accept"}, {"url": "https://example.invalid/999.999.999.999", "client": "accept"}, {"url": "https://example.invalid\\999.999.999.999", "client": "accept"}, {"url": "https://user@999.999.999.999/", "client": "reject"}, {"url": "https://99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.1.2.3/", "client": "reject"}];
+const ipv4PreimageUrls = ["https://999.999.999.999/", "https://256.1.2.3/", "https://1.256.2.3/", "https://1.2.256.3/", "https://1.2.3.256/", "https://999.999.999.999:443/?x=y", "https://999.999.999.999?x=y", "https://99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.1.2.3/"];
+assert.equal(ipv4Cases.length,24);assert.equal(ipv4PreimageUrls.length,8);
+for(const [i,{url,client}] of ipv4Cases.entries()){
+ add('url-ipv4-guard:'+i,c=>{c.channels[1].paymentUrl=url;});
+ assert.equal(cases.at(-1).client,client,'Explicit IPv4/path client expectation');
+}
+assert.equal(cases.length,565,'Retain541 plus24 bounded IPv4/path comparisons');
+const ipv4KnownResiduals=unresolvedUrlResiduals.filter(r=>r.url!=='https://999.999.999.999/');
+assert.equal(ipv4KnownResiduals.length,4,'Four prior URL residuals remain unresolved');
+ipv4KnownResiduals.push({url:'https://1.2.3.999./',client:'reject',sql:'accept'});
 const pg = new PGlite(); // ephemeral in-process engine; no URL, socket or persisted data directory
 const receipt={package:'@electric-sql/pglite@0.3.16',source_pins:pins,engine:null,preimage_counterexamples:[],url_grammar_preimage:[],known_url_residuals:[],cases:[],mismatches:[],native_reset_34_cases:'NOT RUN',production_connections:0,jwt_rls_concurrency:'NOT RUN'};
 try{
@@ -129,6 +143,15 @@ try{
  }
  await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
  await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
+ await pg.exec(read('fixtures/validator.pre-ipv4-guard.sql'));
+ receipt.ipv4_guard_preimage=[];
+ for(const url of ipv4PreimageUrls){
+  const c=fresh();c.channels[1].paymentUrl=url;assert.throws(()=>validateCatalog(c));
+  await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);
+  receipt.ipv4_guard_preimage.push({url,client:'reject',sql:'accept'});
+ }
+ await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
+ await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
  await pg.exec(read('../../backend/review/coin-seller-catalog-validator.DRAFT.sql'));
  for(const {name,c,client} of cases){
   let sql='accept',sqlstate=null;
@@ -136,7 +159,7 @@ try{
   const row={name,client,sql,sqlstate,match:client===sql};receipt.cases.push(row);
   if(!row.match)receipt.mismatches.push(row);
  }
- for(const expected of unresolvedUrlResiduals){
+ for(const expected of ipv4KnownResiduals){
   const c=fresh();c.channels[1].paymentUrl=expected.url;
   let client='accept',sql='accept';try{validateCatalog(c);}catch{client='reject';}
   try{await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);}catch{sql='reject';}
@@ -145,10 +168,10 @@ try{
   assert.notEqual(client,sql,'Residual must not be mislabeled parity success');
   receipt.known_url_residuals.push({...expected,status:'UNRESOLVED'});
  }
- receipt.full_whatwg_parity='NOT ESTABLISHED: 5 known URL residuals';
+ receipt.full_whatwg_parity='NOT ESTABLISHED: 4 prior URL residuals plus newly documented trailing-dot IPv4 residual';
  receipt.case_count=receipt.cases.length;
  receipt.result=receipt.mismatches.length?'FAIL':'PASS';
  fs.writeFileSync(new URL('./text-runtime-receipt.json',import.meta.url),JSON.stringify(receipt,null,2)+'\n');
- console.log(JSON.stringify({engine:receipt.engine,cases:receipt.case_count,result:receipt.result,mismatches:receipt.mismatches,preimage_counterexamples:receipt.preimage_counterexamples,url_grammar_preimage_count:receipt.url_grammar_preimage.length,known_url_residuals:receipt.known_url_residuals,full_whatwg_parity:receipt.full_whatwg_parity,native_reset_34_cases:'NOT RUN'}));
+ console.log(JSON.stringify({engine:receipt.engine,cases:receipt.case_count,result:receipt.result,mismatches:receipt.mismatches,preimage_counterexamples:receipt.preimage_counterexamples,url_grammar_preimage_count:receipt.url_grammar_preimage.length,ipv4_guard_preimage_count:receipt.ipv4_guard_preimage.length,known_url_residuals:receipt.known_url_residuals,full_whatwg_parity:receipt.full_whatwg_parity,native_reset_34_cases:'NOT RUN'}));
  assert.equal(receipt.mismatches.length,0,'Client/SQL acceptance mismatch; receipt retained');
 } finally {await pg.close();}
