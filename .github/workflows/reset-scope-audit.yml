@@ -24,3 +24,5 @@ jobs:
         run: node tests/reset-scope-audit/test-reset-scope.mjs
       - name: Verify isolated cosmetic coverage candidate and rollback
         run: node tests/reset-scope-audit/test-candidate.mjs
+      - name: Prove old SQL fails the new shared Owner dependency invariant
+        run: node tests/reset-scope-audit/test-shared-dependency-negative.mjs

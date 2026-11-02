@@ -73,6 +73,17 @@ SELECT jsonb_build_object(
    LEFT JOIN private.svip_memberships m ON m.id=e.membership_id
    WHERE (e.cosmetic_grant_id IS NOT NULL AND (g.id IS NULL OR g.user_id IS DISTINCT FROM e.user_id))
       OR m.id IS NULL OR m.user_id IS DISTINCT FROM e.user_id),
+ -- Incoming protected dependencies must not disappear when target-owned grants are reset.
+ 'protected_entitlement_target_links',(SELECT jsonb_build_object(
+   'rows',count(*),
+   'target_cosmetic_grants',count(*) FILTER (WHERE gt.id IS NOT NULL),
+   'target_memberships',count(*) FILTER (WHERE mt.id IS NOT NULL))
+   FROM private.svip_entitlement_grants e JOIN protected p ON p.id=e.user_id
+   LEFT JOIN private.cosmetic_grants g ON g.id=e.cosmetic_grant_id
+   LEFT JOIN targets gt ON gt.id=g.user_id
+   LEFT JOIN private.svip_memberships m ON m.id=e.membership_id
+   LEFT JOIN targets mt ON mt.id=m.user_id
+   WHERE gt.id IS NOT NULL OR mt.id IS NOT NULL),
  'reward_grants',(SELECT coalesce(jsonb_agg(to_jsonb(q) ORDER BY q.state,q.permanent),'[]'::jsonb)
    FROM (SELECT state,permanent,count(*) AS rows FROM rewards GROUP BY state,permanent) q),
  'birthday_enabled_benefits',(SELECT count(*) FROM public.birthday_events b JOIN targets t ON t.id=b.user_id WHERE b.benefits_enabled),

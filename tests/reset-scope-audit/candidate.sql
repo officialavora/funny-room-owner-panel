@@ -21,7 +21,14 @@ BEGIN
  IF EXISTS(SELECT 1 FROM private.owner_protected_targets WHERE active
    AND (target_type IS NULL OR target_type NOT IN ('user','profile','account')))
  THEN RAISE EXCEPTION 'unresolved_protection_scope'; END IF;
- RETURN jsonb_build_object('policy','cosmetic-coverage-review-v1','user_id',p_user,
+ -- A target-owned grant can be referenced by a protected/other user's SVIP
+ -- entitlement. Revoking that grant would mutate the other user's dependency.
+ -- Reject malformed/shared references; never "repair" their owner here.
+ IF EXISTS(SELECT 1 FROM private.svip_entitlement_grants e
+   JOIN private.cosmetic_grants g ON g.id=e.cosmetic_grant_id
+   WHERE g.user_id=p_user AND e.user_id IS DISTINCT FROM p_user)
+ THEN RAISE EXCEPTION 'shared_cosmetic_dependency'; END IF;
+ RETURN jsonb_build_object('policy','cosmetic-coverage-review-v2','user_id',p_user,
  'profile',v_profile,
  'grants',coalesce((SELECT jsonb_agg(to_jsonb(g) ORDER BY g.id)
    FROM private.cosmetic_grants g WHERE g.user_id=p_user),'[]'::jsonb),

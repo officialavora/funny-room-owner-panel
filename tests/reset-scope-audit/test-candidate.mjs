@@ -6,7 +6,7 @@ const owner='11111111-1111-4111-8111-111111111111';
 const user='22222222-2222-4222-8222-222222222222';
 const other='33333333-3333-4333-8333-333333333333';
 const tests=[];
-async function test(name,fn){await fn();tests.push(name)}
+async function test(name,fn){try{await fn();tests.push(name)}catch(error){throw new Error(name+': '+error.message,{cause:error})}}
 await db.exec(`CREATE SCHEMA private;
 CREATE TABLE public.profiles(id uuid PRIMARY KEY,public_id bigint UNIQUE NOT NULL,
  display_name text,bio text,date_of_birth date,avatar_url text,cover_url text,
@@ -15,6 +15,7 @@ CREATE TABLE public.profiles(id uuid PRIMARY KEY,public_id bigint UNIQUE NOT NUL
 CREATE TABLE private.admin_roles(user_id uuid,role text,protected boolean);
 CREATE TABLE private.role_assignments(user_id uuid,role_key text,status text);
 CREATE TABLE private.owner_protected_targets(target_type text,target_id text,active boolean);
+CREATE TABLE private.svip_entitlement_grants(id uuid,user_id uuid,cosmetic_grant_id uuid);
 CREATE FUNCTION private.is_founder(u uuid) RETURNS boolean LANGUAGE sql AS
  'select exists(select 1 from private.admin_roles where user_id=u and role=''owner'' and protected)';
 CREATE TABLE public.cosmetic_catalog(code text PRIMARY KEY,active boolean);
@@ -67,7 +68,7 @@ await db.query('INSERT INTO public.organization_members VALUES($1,$2)',[user,own
 await db.query("INSERT INTO public.rooms VALUES($1,$2,'background')",[other,user]);
 await db.query("INSERT INTO public.reward_grants VALUES($1,$2,'active')",[other,user]);
 await db.query('INSERT INTO private.financial_ledger VALUES($1,$2,10)',[other,user]);
-await db.exec(readFileSync(new URL('./candidate.sql',import.meta.url),'utf8'));
+await db.exec(readFileSync(process.argv[2]||new URL('./candidate.sql',import.meta.url),'utf8'));
 const snap=async(id=user)=>(await db.query('SELECT pg_temp.cosmetic_reset_snapshot($1) AS s',[id])).rows[0].s;
 const apply=async(s,id=user)=>(await db.query('SELECT pg_temp.cosmetic_reset_apply($1,$2) AS s',[id,s])).rows[0].s;
 const protectedState=async()=>{
@@ -110,6 +111,33 @@ await test('missing resolved Owner blocks changes',async()=>{
  await db.exec('UPDATE private.admin_roles SET protected=false');
  await assert.rejects(()=>snap(),/owner_unresolved/);
  await db.exec('UPDATE private.admin_roles SET protected=true');
+});
+const targetGrant='aaaaaaaa-aaaa-4aaa-8aaa-000000000001';
+for(const [label,referencingUser] of [['Owner',owner],['other account',other],['unknown account',null]]){
+ await test(`incoming ${label} SVIP dependency blocks target reset`,async()=>{
+  await db.query('INSERT INTO private.svip_entitlement_grants VALUES($1,$2,$3)',[other,referencingUser,targetGrant]);
+  await assert.rejects(()=>snap(),/shared_cosmetic_dependency/);
+  await assert.rejects(()=>apply(initial),/shared_cosmetic_dependency/);
+  assert.equal((await db.query('SELECT status FROM private.cosmetic_grants WHERE id=$1',[targetGrant])).rows[0].status,'active');
+  await db.exec('DELETE FROM private.svip_entitlement_grants');
+ });
+}
+await test('same-user SVIP dependency is retained and permitted',async()=>{
+ await db.query('INSERT INTO private.svip_entitlement_grants VALUES($1,$2,$3)',[other,user,targetGrant]);
+ assert.deepEqual(await snap(),initial);
+ await db.exec('DELETE FROM private.svip_entitlement_grants');
+});
+await test('incoming dependency added after preview is rechecked before mutation',async()=>{
+ const s=await snap();
+ await db.query('INSERT INTO private.svip_entitlement_grants VALUES($1,$2,$3)',[other,owner,targetGrant]);
+ await assert.rejects(()=>apply(s),/shared_cosmetic_dependency/);
+ await db.exec('DELETE FROM private.svip_entitlement_grants');
+ assert.deepEqual(await snap(),s);
+});
+await test('missing dependency relation fails closed',async()=>{
+ await db.exec('ALTER TABLE private.svip_entitlement_grants RENAME TO missing_dependency_fixture');
+ await assert.rejects(()=>snap(),/svip_entitlement_grants/);
+ await db.exec('ALTER TABLE private.missing_dependency_fixture RENAME TO svip_entitlement_grants');
 });
 await test('null snapshot rejected',async()=>await assert.rejects(()=>apply(null),/snapshot_required/));
 await test('snapshot from another account rejected',async()=>await assert.rejects(async()=>apply(await snap(other)),/stale_snapshot/));
