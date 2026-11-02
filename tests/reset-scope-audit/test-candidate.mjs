@@ -1,6 +1,11 @@
 import {PGlite} from '@electric-sql/pglite';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync} from 'node:fs';
+for(const [name,expected] of [
+ ['candidate.pre-incoming.sql','80cdd09e1071468f5bce4aa58b25e2fef8842d6c23d3abe9aa82dd31dc20c8c5'],
+ ['candidate.sql','05716c0afe562e95db6b4a4ef046aea57908bb29edbd6ec34a3a98bd219913e8']])
+ assert.equal(createHash('sha256').update(readFileSync(new URL('./'+name,import.meta.url))).digest('hex'),expected);
 const db=new PGlite();
 const owner='11111111-1111-4111-8111-111111111111';
 const user='22222222-2222-4222-8222-222222222222';
@@ -37,6 +42,8 @@ BEGIN
 END $$;
 CREATE TRIGGER cosmetic_post_guard_v1 BEFORE INSERT OR UPDATE ON private.cosmetic_equipped_v142
 FOR EACH ROW EXECUTE FUNCTION private.enforce_cosmetic_post_v1();
+CREATE TABLE private.svip_memberships(id uuid PRIMARY KEY,user_id uuid);
+CREATE TABLE private.svip_entitlement_grants(id uuid PRIMARY KEY,user_id uuid,membership_id uuid,cosmetic_grant_id uuid);
 CREATE TABLE public.wallets(user_id uuid PRIMARY KEY,coin_balance bigint,earned_balance bigint);
 CREATE TABLE public.cp_relationships(user_a uuid,user_b uuid,status text);
 CREATE TABLE public.organization_members(user_id uuid,organization_id uuid);
@@ -67,12 +74,12 @@ await db.query('INSERT INTO public.organization_members VALUES($1,$2)',[user,own
 await db.query("INSERT INTO public.rooms VALUES($1,$2,'background')",[other,user]);
 await db.query("INSERT INTO public.reward_grants VALUES($1,$2,'active')",[other,user]);
 await db.query('INSERT INTO private.financial_ledger VALUES($1,$2,10)',[other,user]);
-await db.exec(readFileSync(new URL('./candidate.sql',import.meta.url),'utf8'));
+await db.exec(readFileSync(new URL('./candidate.pre-incoming.sql',import.meta.url),'utf8'));
 const snap=async(id=user)=>(await db.query('SELECT pg_temp.cosmetic_reset_snapshot($1) AS s',[id])).rows[0].s;
 const apply=async(s,id=user)=>(await db.query('SELECT pg_temp.cosmetic_reset_apply($1,$2) AS s',[id,s])).rows[0].s;
 const protectedState=async()=>{
  const result={};
- for(const table of ['public.wallets','public.cp_relationships','public.organization_members','public.rooms','public.reward_grants','private.financial_ledger','private.admin_roles','private.role_assignments','public.cosmetic_catalog'])
+ for(const table of ['private.svip_entitlement_grants','private.svip_memberships','public.wallets','public.cp_relationships','public.organization_members','public.rooms','public.reward_grants','private.financial_ledger','private.admin_roles','private.role_assignments','public.cosmetic_catalog'])
  result[table]=(await db.query(`SELECT coalesce(jsonb_agg(to_jsonb(x) ORDER BY to_jsonb(x)::text),'[]') AS s FROM ${table} x`)).rows[0].s;
  result.owner=(await db.query(`SELECT to_jsonb(p) AS s FROM public.profiles p WHERE id=$1`,[owner])).rows[0].s;
  result.other=(await db.query(`SELECT to_jsonb(p) AS s FROM public.profiles p WHERE id=$1`,[other])).rows[0].s;
@@ -80,6 +87,40 @@ const protectedState=async()=>{
  result.otherEquips=(await db.query(`SELECT jsonb_agg(to_jsonb(g) ORDER BY user_id,kind) AS s FROM private.cosmetic_equipped_v142 g WHERE user_id<>$1`,[user])).rows[0].s;
  return result;
 };
+// Baseline false-accept proofs use only synthetic rows and always roll back.
+const linkId='dddddddd-dddd-4ddd-8ddd-dddddddddddd';
+const memberId='eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee';
+const targetGrant='aaaaaaaa-aaaa-4aaa-8aaa-000000000001';
+async function addIncoming(protectedUser,kind){
+ await db.query('INSERT INTO private.svip_memberships VALUES($1,$2)',[memberId,kind==='membership'?user:protectedUser]);
+ await db.query('INSERT INTO private.svip_entitlement_grants VALUES($1,$2,$3,$4)',[linkId,protectedUser,memberId,kind==='grant'?targetGrant:null]);
+}
+await db.exec("SET funnyroom.isolated_fixture='true'");
+for(const kind of ['grant','membership'])await test(`baseline falsely accepts protected incoming ${kind}`,async()=>{
+ const saved=await snap();const protectedSaved=await protectedState();
+ await db.exec('BEGIN');await addIncoming(owner,kind);
+ const r=await apply(await snap());assert.equal(r.revoked_grants,3);
+ await db.exec('ROLLBACK');assert.deepEqual(await snap(),saved);assert.deepEqual(await protectedState(),protectedSaved);
+});
+await db.exec('DROP FUNCTION pg_temp.cosmetic_reset_apply(uuid,jsonb); DROP FUNCTION pg_temp.cosmetic_reset_snapshot(uuid);');
+await db.exec(readFileSync(new URL('./candidate.sql',import.meta.url),'utf8'));
+for(const [actor,label] of [[owner,'Owner'],[other,'public-ID alias']])for(const kind of ['grant','membership'])
+ await test(`protected incoming ${label} ${kind} blocks apply with exact rollback`,async()=>{
+ const expected=await snap();const protectedSaved=await protectedState();
+ await db.exec('BEGIN');
+ if(actor===other)await db.exec("INSERT INTO private.owner_protected_targets VALUES('account','3',true)");
+ await addIncoming(actor,kind);await db.exec('SAVEPOINT guard_reject');
+ await assert.rejects(()=>apply(expected),/protected_incoming_dependency/);
+ await db.exec('ROLLBACK TO SAVEPOINT guard_reject');
+ await db.exec('ROLLBACK');assert.deepEqual(await snap(),expected);assert.deepEqual(await protectedState(),protectedSaved);
+});
+await test('unprotected incoming link does not overblock scoped cosmetic reset',async()=>{
+ const expected=await snap();const protectedSaved=await protectedState();
+ await db.exec('BEGIN');await addIncoming(other,'grant');
+ const r=await apply(await snap());assert.equal(r.revoked_grants,3);
+ await db.exec('ROLLBACK');assert.deepEqual(await snap(),expected);assert.deepEqual(await protectedState(),protectedSaved);
+});
+await db.exec("SET funnyroom.isolated_fixture='false'");
 const initial=await snap();
 await test('cannot apply without explicit isolated fixture marker',async()=>await assert.rejects(()=>apply(initial),/isolated_review_only/));
 await db.exec("SET funnyroom.isolated_fixture='true'");
@@ -165,6 +206,7 @@ await test('missing required column fails closed',async()=>{
  await db.exec('ALTER TABLE private.cosmetic_grants DROP COLUMN status');
  await assert.rejects(async()=>apply(await snap()),/status/);
 });
+assert.equal(tests.length,30);
 const receipt={status:'PASS_SYNTHETIC_COSMETIC_MODULE_ONLY',engine:(await db.query('select version() as v')).rows[0].v,
  check_count:tests.length,checks:tests,live_reset_executed:false,live_reset_ready:false,
  limitations:['PGlite fixture only; no live writes','no writer/role phantom or multi-connection guarantee',

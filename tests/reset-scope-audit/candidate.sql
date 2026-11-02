@@ -21,6 +21,23 @@ BEGIN
  IF EXISTS(SELECT 1 FROM private.owner_protected_targets WHERE active
    AND (target_type IS NULL OR target_type NOT IN ('user','profile','account')))
  THEN RAISE EXCEPTION 'unresolved_protection_scope'; END IF;
+ -- Fail closed on protected entitlement dependencies into this target.
+ -- Link-row existence only; no mutation or whole-dependency-closure claim.
+ IF EXISTS(
+   WITH protected AS (
+     SELECT p.id FROM public.profiles p WHERE private.is_founder(p.id)
+     UNION SELECT user_id FROM private.admin_roles WHERE role='owner'
+     UNION SELECT user_id FROM private.role_assignments WHERE role_key='root_founder'
+     UNION SELECT p.id FROM public.profiles p JOIN private.owner_protected_targets x
+       ON x.active AND x.target_type IN ('user','profile','account')
+       AND x.target_id IN (p.id::text,p.public_id::text)
+   )
+   SELECT 1 FROM private.svip_entitlement_grants e
+   JOIN protected p ON p.id=e.user_id
+   LEFT JOIN private.cosmetic_grants g ON g.id=e.cosmetic_grant_id
+   LEFT JOIN private.svip_memberships m ON m.id=e.membership_id
+   WHERE g.user_id=p_user OR m.user_id=p_user
+ ) THEN RAISE EXCEPTION 'protected_incoming_dependency'; END IF;
  RETURN jsonb_build_object('policy','cosmetic-coverage-review-v1','user_id',p_user,
  'profile',v_profile,
  'grants',coalesce((SELECT jsonb_agg(to_jsonb(g) ORDER BY g.id)
