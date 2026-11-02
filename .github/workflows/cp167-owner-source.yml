@@ -29,7 +29,7 @@ jobs:
 
       - run: node --check coin-seller-control.js && node --check coin-seller-catalog.mjs && node --check coin-seller-qr.mjs
       - run: npm ci --prefix tests/coin-seller --ignore-scripts --no-audit --no-fund
-      - run: node --test tests/coin-seller/owner-dom.test.mjs && node tests/coin-seller/router.test.cjs
+      - run: node --test tests/coin-seller/owner-dom.test.mjs tests/coin-seller/country-controls.test.mjs && node tests/coin-seller/router.test.cjs
 
       - run: npm ci --prefix tests/coin-seller-sql --ignore-scripts --no-audit --no-fund
       - run: node tests/coin-seller-sql/validator-parity.test.mjs
