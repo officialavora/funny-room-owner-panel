@@ -1,3 +1,9 @@
+## 2026-11-02 — Bounded malformed-host guard in draft CoinSeller SQL
+
+The current SQL accepted malformed host percent escapes and bracketed non-IPv6 hosts rejected by the unchanged client. Added an authority-only guard; authority extraction stops at slash, query, fragment and backslash so valid path/query text is preserved. Seven actual preimage false accepts reproduce; fourteen explicit client-expectation cases extend the retained 527 to 541. Local PG17.5 WASM comparisons PASS with zero mismatches. Two prior residual examples move into the parity corpus; five remaining known differences stay separately asserted UNRESOLVED, including invalid IPv4 false acceptance. This does not establish general host validity/full WHATWG parity or financial readiness.
+
+Prior admission branches/port bound/helper/client/Owner UI/workflow are unchanged. Draft source only; no install, merge, publish, payment activation, reset or native build. Actual JWT/RLS/ACL/concurrency, reset/backup/restore/wholeOwner/content/device gates remain. Hosted CI for this new commit is pending at authoring. Full earlier handoff follows unchanged.
+
 ## 2026-11-02 — Draft SQL HTTPS port bound and retained regression corpus
 
 The review-only catalogue SQL accepted HTTPS destination ports 65536, 99999 and 00065536 while the unchanged actual client rejected them. Added one numeric port upper-bound guard (65535), retaining existing URL syntax, credentials, text, authority, amount and checkout gates. Sixteen boundary/leading-zero/long-digit cases extend the original asserted 459 to 475. A pinned exact pre-port fixture executes the three counterexamples before the candidate. Local PG17.5 WASM comparisons PASS with zero mismatches; hosted CI for this commit is pending at authoring. Other WHATWG URL semantics remain unproven; no full parity claim.
