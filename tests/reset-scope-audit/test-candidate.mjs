@@ -4,14 +4,14 @@ import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync} from 'node:fs';
 for(const [name,expected] of [
  ['candidate.pre-incoming.sql','80cdd09e1071468f5bce4aa58b25e2fef8842d6c23d3abe9aa82dd31dc20c8c5'],
- ['candidate.sql','05716c0afe562e95db6b4a4ef046aea57908bb29edbd6ec34a3a98bd219913e8']])
+ ['candidate.sql','c7c8320189b62f96df4a90e398ea41ce0a2deb0a2d8602f6077f1378c694b6a4']])
  assert.equal(createHash('sha256').update(readFileSync(new URL('./'+name,import.meta.url))).digest('hex'),expected);
 const db=new PGlite();
 const owner='11111111-1111-4111-8111-111111111111';
 const user='22222222-2222-4222-8222-222222222222';
 const other='33333333-3333-4333-8333-333333333333';
 const tests=[];
-async function test(name,fn){await fn();tests.push(name)}
+async function test(name,fn){try{await fn();tests.push(name)}catch(error){throw new Error(name+': '+error.message,{cause:error})}}
 await db.exec(`CREATE SCHEMA private;
 CREATE TABLE public.profiles(id uuid PRIMARY KEY,public_id bigint UNIQUE NOT NULL,
  display_name text,bio text,date_of_birth date,avatar_url text,cover_url text,
@@ -103,7 +103,7 @@ for(const kind of ['grant','membership'])await test(`baseline falsely accepts pr
  await db.exec('ROLLBACK');assert.deepEqual(await snap(),saved);assert.deepEqual(await protectedState(),protectedSaved);
 });
 await db.exec('DROP FUNCTION pg_temp.cosmetic_reset_apply(uuid,jsonb); DROP FUNCTION pg_temp.cosmetic_reset_snapshot(uuid);');
-await db.exec(readFileSync(new URL('./candidate.sql',import.meta.url),'utf8'));
+await db.exec(readFileSync(process.argv[2]||new URL('./candidate.sql',import.meta.url),'utf8'));
 for(const [actor,label] of [[owner,'Owner'],[other,'public-ID alias']])for(const kind of ['grant','membership'])
  await test(`protected incoming ${label} ${kind} blocks apply with exact rollback`,async()=>{
  const expected=await snap();const protectedSaved=await protectedState();
@@ -114,10 +114,12 @@ for(const [actor,label] of [[owner,'Owner'],[other,'public-ID alias']])for(const
  await db.exec('ROLLBACK TO SAVEPOINT guard_reject');
  await db.exec('ROLLBACK');assert.deepEqual(await snap(),expected);assert.deepEqual(await protectedState(),protectedSaved);
 });
-await test('unprotected incoming link does not overblock scoped cosmetic reset',async()=>{
+await test('single-target policy rejects unprotected incoming grant with exact rollback',async()=>{
  const expected=await snap();const protectedSaved=await protectedState();
  await db.exec('BEGIN');await addIncoming(other,'grant');
- const r=await apply(await snap());assert.equal(r.revoked_grants,3);
+ await db.exec('SAVEPOINT shared_reject');
+ await assert.rejects(()=>apply(expected),/shared_cosmetic_dependency/);
+ await db.exec('ROLLBACK TO SAVEPOINT shared_reject');
  await db.exec('ROLLBACK');assert.deepEqual(await snap(),expected);assert.deepEqual(await protectedState(),protectedSaved);
 });
 await db.exec("SET funnyroom.isolated_fixture='false'");
@@ -151,6 +153,32 @@ await test('missing resolved Owner blocks changes',async()=>{
  await db.exec('UPDATE private.admin_roles SET protected=false');
  await assert.rejects(()=>snap(),/owner_unresolved/);
  await db.exec('UPDATE private.admin_roles SET protected=true');
+});
+for(const [label,referencingUser] of [['Owner',owner],['other account',other],['unknown account',null]]){
+ await test(`incoming ${label} SVIP grant dependency blocks preview and apply`,async()=>{
+  await db.query('INSERT INTO private.svip_entitlement_grants(id,user_id,cosmetic_grant_id) VALUES($1,$2,$3)',[other,referencingUser,targetGrant]);
+  await assert.rejects(()=>snap(),/protected_incoming_dependency|shared_cosmetic_dependency/);
+  await assert.rejects(()=>apply(initial),/protected_incoming_dependency|shared_cosmetic_dependency/);
+  assert.equal((await db.query('SELECT status FROM private.cosmetic_grants WHERE id=$1',[targetGrant])).rows[0].status,'active');
+  await db.exec('DELETE FROM private.svip_entitlement_grants');
+ });
+}
+await test('same-user SVIP grant dependency is retained and permitted',async()=>{
+ await db.query('INSERT INTO private.svip_entitlement_grants(id,user_id,cosmetic_grant_id) VALUES($1,$2,$3)',[other,user,targetGrant]);
+ assert.deepEqual(await snap(),initial);
+ await db.exec('DELETE FROM private.svip_entitlement_grants');
+});
+await test('incoming dependency added after preview is rechecked before mutation',async()=>{
+ const s=await snap();
+ await db.query('INSERT INTO private.svip_entitlement_grants(id,user_id,cosmetic_grant_id) VALUES($1,$2,$3)',[other,owner,targetGrant]);
+ await assert.rejects(()=>apply(s),/protected_incoming_dependency/);
+ await db.exec('DELETE FROM private.svip_entitlement_grants');
+ assert.deepEqual(await snap(),s);
+});
+await test('missing dependency relation fails closed',async()=>{
+ await db.exec('ALTER TABLE private.svip_entitlement_grants RENAME TO missing_dependency_fixture');
+ await assert.rejects(()=>snap(),/svip_entitlement_grants/);
+ await db.exec('ALTER TABLE private.missing_dependency_fixture RENAME TO svip_entitlement_grants');
 });
 await test('null snapshot rejected',async()=>await assert.rejects(()=>apply(null),/snapshot_required/));
 await test('snapshot from another account rejected',async()=>await assert.rejects(async()=>apply(await snap(other)),/stale_snapshot/));
@@ -206,7 +234,7 @@ await test('missing required column fails closed',async()=>{
  await db.exec('ALTER TABLE private.cosmetic_grants DROP COLUMN status');
  await assert.rejects(async()=>apply(await snap()),/status/);
 });
-assert.equal(tests.length,30);
+assert.equal(tests.length,36);
 const receipt={status:'PASS_SYNTHETIC_COSMETIC_MODULE_ONLY',engine:(await db.query('select version() as v')).rows[0].v,
  check_count:tests.length,checks:tests,live_reset_executed:false,live_reset_ready:false,
  limitations:['PGlite fixture only; no live writes','no writer/role phantom or multi-connection guarantee',

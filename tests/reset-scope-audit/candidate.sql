@@ -38,7 +38,13 @@ BEGIN
    LEFT JOIN private.svip_memberships m ON m.id=e.membership_id
    WHERE g.user_id=p_user OR m.user_id=p_user
  ) THEN RAISE EXCEPTION 'protected_incoming_dependency'; END IF;
- RETURN jsonb_build_object('policy','cosmetic-coverage-review-v1','user_id',p_user,
+ -- This module approves one target only. Even an unprotected other account is
+ -- outside that scope; unknown holders are also rejected, never reassigned.
+ IF EXISTS(SELECT 1 FROM private.svip_entitlement_grants e
+   JOIN private.cosmetic_grants g ON g.id=e.cosmetic_grant_id
+   WHERE g.user_id=p_user AND e.user_id IS DISTINCT FROM p_user)
+ THEN RAISE EXCEPTION 'shared_cosmetic_dependency'; END IF;
+ RETURN jsonb_build_object('policy','cosmetic-coverage-review-v2','user_id',p_user,
  'profile',v_profile,
  'grants',coalesce((SELECT jsonb_agg(to_jsonb(g) ORDER BY g.id)
    FROM private.cosmetic_grants g WHERE g.user_id=p_user),'[]'::jsonb),
