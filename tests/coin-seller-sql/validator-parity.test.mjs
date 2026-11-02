@@ -9,7 +9,8 @@ const pins = {
  '../../coin-seller-catalog.mjs':'e34e21c35d63973df4af3a273f8f775cf98781927e2f6717854a5640a2090d37',
  'fixtures/validator.after.sql':'309263e586d03a7fa4723e47cfb8e71ecb1fcc1493e5e939d34eb044d2185e30',
  'fixtures/validator.pre-port.sql':'2fb090281512d18906c7f7c7b4b65d01a58c7204847af09a3cfb28209a70b64c',
- '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'86e1357b14853959595760c71878602ebe0744e8c652a8727eaf62b6a3a793ca'
+ 'fixtures/validator.pre-url-grammar.sql':'86e1357b14853959595760c71878602ebe0744e8c652a8727eaf62b6a3a793ca',
+ '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'afdf9f798330e75bddfb3a9e09094cbaa35b6895b97e5833f50e1226d1abf8e2'
 };
 for(const [n,h] of Object.entries(pins)) assert.equal(hash(read(n)),h,n);
 const seed = JSON.parse(read('fixtures/synthetic-seed.json'));
@@ -55,8 +56,20 @@ assert.equal(cases.length,459,'Finite corpus must remain complete');
 const ports=['0','1','80','443','65534','65535','65536','65537','99999','2147483647','00000','00080','00065535','00065536','9'.repeat(64),'9'.repeat(512)];
 for(const [i,port] of ports.entries())add('url-port:'+i,c=>{c.channels[1].paymentUrl='https://example.invalid:'+port+'/';});
 assert.equal(cases.length,475,'Retain 459 cases plus 16 port boundaries');
+// Bounded additive syntax only: original 475 cases remain above unchanged.
+// Legacy parser residuals below are explicit known mismatches, never counted as parity passes.
+const urlGrammarImproved = ["https://example.invalid:/", "HTTPS://example.invalid/", "https://example.invalid:443?x=y", "https://example.invalid:?x=y", "https://example.invalid:443#x", "https://example.invalid:#x", "https://example.invalid:65535?x=y", "https://example.invalid:65535#x", "https://example.invalid:00065535?x=y", "https://example.invalid:00065535#x", "HTTPS://example.invalid?x=y", "HTTPS://example.invalid#x", "HTTPS://example.invalid:/", "HTTPS://example.invalid:?x=y", "HTTPS://example.invalid:#x", "HTTPS://example.invalid:443/", "HTTPS://example.invalid:443?x=y", "HTTPS://example.invalid:443#x", "HTTPS://example.invalid:65535/", "HTTPS://example.invalid:65535?x=y", "HTTPS://example.invalid:65535#x", "HTTPS://example.invalid:00065535/", "HTTPS://example.invalid:00065535?x=y", "HTTPS://example.invalid:00065535#x", "hTtPs://example.invalid/", "hTtPs://example.invalid?x=y", "hTtPs://example.invalid#x", "hTtPs://example.invalid:/", "hTtPs://example.invalid:?x=y", "hTtPs://example.invalid:#x", "hTtPs://example.invalid:443/", "hTtPs://example.invalid:443?x=y", "hTtPs://example.invalid:443#x", "hTtPs://example.invalid:65535/", "hTtPs://example.invalid:65535?x=y", "hTtPs://example.invalid:65535#x", "hTtPs://example.invalid:00065535/", "hTtPs://example.invalid:00065535?x=y", "hTtPs://example.invalid:00065535#x", "https://example.invalid?next=https://a.invalid:99999/"];
+const urlGrammarGuards = ["https://user:pass@example.invalid/", "https://user@example.invalid/", "https://example.invalid/\n", "https://example.invalid:65536?x=y", "https://[::1]:65536/", "HTTPS://exa%mple.invalid/", "HTTPS://[broken]/", "HTTPS://example.123:443?x=y", "HTTPS://example.0x12:443?x=y", "HTTPS://example.08:443?x=y", "HTTPS://example.invalid:00065536#x", "https://example.invalid:99999#x"];
+const knownUrlResiduals = [{"url": "https://[::1]:443/", "client": "accept", "sql": "reject"}, {"url": "https://exa%mple.invalid/", "client": "reject", "sql": "accept"}, {"url": "https://[broken]/", "client": "reject", "sql": "accept"}, {"url": "https://999.999.999.999/", "client": "reject", "sql": "accept"}, {"url": "https://example.invalid/space here", "client": "accept", "sql": "reject"}, {"url": "https://example.invalid/\u0085", "client": "accept", "sql": "reject"}, {"url": "https://example.invalid:443\\path", "client": "accept", "sql": "reject"}];
+assert.equal(urlGrammarImproved.length,40);
+assert.equal(urlGrammarGuards.length,12);
+assert.equal(knownUrlResiduals.length,7);
+for(const [i,url] of urlGrammarImproved.entries())add('url-grammar-improved:'+i,c=>{c.channels[1].paymentUrl=url;});
+for(const [i,url] of urlGrammarGuards.entries())add('url-grammar-guard:'+i,c=>{c.channels[1].paymentUrl=url;});
+assert.ok(cases.slice(-12).every(row=>row.client==='reject'),'All URL guards must remain client rejections');
+assert.equal(cases.length,527,'Retain 475 and add 40 syntax improvements plus 12 rejection guards');
 const pg = new PGlite(); // ephemeral in-process engine; no URL, socket or persisted data directory
-const receipt={package:'@electric-sql/pglite@0.3.16',source_pins:pins,engine:null,preimage_counterexamples:[],cases:[],mismatches:[],native_reset_34_cases:'NOT RUN',production_connections:0,jwt_rls_concurrency:'NOT RUN'};
+const receipt={package:'@electric-sql/pglite@0.3.16',source_pins:pins,engine:null,preimage_counterexamples:[],url_grammar_preimage:[],known_url_residuals:[],cases:[],mismatches:[],native_reset_34_cases:'NOT RUN',production_connections:0,jwt_rls_concurrency:'NOT RUN'};
 try{
  receipt.engine=(await pg.query('select version() as version')).rows[0].version;
  assert.match(receipt.engine,/^PostgreSQL 17\./,'Require PostgreSQL17 WASM engine');
@@ -78,6 +91,15 @@ try{
  }
  await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
  await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
+ await pg.exec(read('fixtures/validator.pre-url-grammar.sql'));
+ for(const url of urlGrammarImproved){
+  const c=fresh();c.channels[1].paymentUrl=url;validateCatalog(c);
+  let rejected=false;try{await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);}catch{rejected=true;}
+  assert.equal(rejected,true,'Pinned preimage must reject newly admitted syntax');
+  receipt.url_grammar_preimage.push({url,sql:'reject',client:'accept'});
+ }
+ await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
+ await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
  await pg.exec(read('../../backend/review/coin-seller-catalog-validator.DRAFT.sql'));
  for(const {name,c,client} of cases){
   let sql='accept',sqlstate=null;
@@ -85,9 +107,19 @@ try{
   const row={name,client,sql,sqlstate,match:client===sql};receipt.cases.push(row);
   if(!row.match)receipt.mismatches.push(row);
  }
+ for(const expected of knownUrlResiduals){
+  const c=fresh();c.channels[1].paymentUrl=expected.url;
+  let client='accept',sql='accept';try{validateCatalog(c);}catch{client='reject';}
+  try{await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);}catch{sql='reject';}
+  assert.equal(client,expected.client,'Known residual client expectation');
+  assert.equal(sql,expected.sql,'Known residual SQL expectation');
+  assert.notEqual(client,sql,'Residual must not be mislabeled parity success');
+  receipt.known_url_residuals.push({...expected,status:'UNRESOLVED'});
+ }
+ receipt.full_whatwg_parity='NOT ESTABLISHED: 7 known URL residuals';
  receipt.case_count=receipt.cases.length;
  receipt.result=receipt.mismatches.length?'FAIL':'PASS';
  fs.writeFileSync(new URL('./text-runtime-receipt.json',import.meta.url),JSON.stringify(receipt,null,2)+'\n');
- console.log(JSON.stringify({engine:receipt.engine,cases:receipt.case_count,result:receipt.result,mismatches:receipt.mismatches,preimage_counterexamples:receipt.preimage_counterexamples,native_reset_34_cases:'NOT RUN'}));
+ console.log(JSON.stringify({engine:receipt.engine,cases:receipt.case_count,result:receipt.result,mismatches:receipt.mismatches,preimage_counterexamples:receipt.preimage_counterexamples,url_grammar_preimage_count:receipt.url_grammar_preimage.length,known_url_residuals:receipt.known_url_residuals,full_whatwg_parity:receipt.full_whatwg_parity,native_reset_34_cases:'NOT RUN'}));
  assert.equal(receipt.mismatches.length,0,'Client/SQL acceptance mismatch; receipt retained');
 } finally {await pg.close();}
