@@ -3,7 +3,7 @@
 Run `npm ci --prefix tests/coin-seller-sql --ignore-scripts --no-audit --no-fund`
 and `node tests/coin-seller-sql/validator-parity.test.mjs` from the repository root.
 
-This adds 541 finite client/SQL acceptance comparisons using the actual root
+This adds 610 finite client/SQL acceptance comparisons using the actual root
 `coin-seller-catalog.mjs` and a pinned, ephemeral PGlite PostgreSQL 17.5 engine.
 The draft SQL lives in `backend/review/coin-seller-catalog-validator.DRAFT.sql`.
 It is a pure validator and text helper, not a backend installer. The old SQL
@@ -44,3 +44,9 @@ residual examples now pass rejection parity; five known URL differences remain
 asserted UNRESOLVED (including invalid IPv4 false acceptance). New guard checks
 malformed percent escapes/brackets only in authority, stopping before backslash
 paths. This is not universal host validation or full WHATWG parity/admission.
+
+Current guard follow-up: the previous 590 corpus is retained. Twenty encoded-dot
+host/domain/path cases yield610 comparisons. Decode only %2e in authority before
+the existing decimal IPv4 bound; preserve other admission and financial rules.
+Eight pinned preimage false accepts reproduce. Four known URL differences remain
+explicitly UNRESOLVED; encoded digits/other WHATWG forms remain unproven.

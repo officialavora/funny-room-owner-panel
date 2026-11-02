@@ -13,7 +13,8 @@ const pins = {
  'fixtures/validator.pre-host-guards.sql':'afdf9f798330e75bddfb3a9e09094cbaa35b6895b97e5833f50e1226d1abf8e2',
  'fixtures/validator.pre-ipv4-guard.sql':'60158b677125074ef4f2d6afe87e05ed97e1f675673d95c5565a79b606d7d46b',
  'fixtures/validator.pre-ipv4-dot.sql':'3e8370bba75074e9b2320b171126394b67be116bbd2cd86d08a35ead6fdef55e',
- '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'2d4788a2e7bcbcecf229448742e926ba8c646de285873bc64d5323cd58645f66'
+ 'fixtures/validator.pre-encoded-dot.sql':'2d4788a2e7bcbcecf229448742e926ba8c646de285873bc64d5323cd58645f66',
+ '../../backend/review/coin-seller-catalog-validator.DRAFT.sql':'448ef78e0bd6b4a437ff46704e24e111b05c4fcd801dc8bbe4a174ecb7473597'
 };
 for(const [n,h] of Object.entries(pins)) assert.equal(hash(read(n)),h,n);
 const seed = JSON.parse(read('fixtures/synthetic-seed.json'));
@@ -114,6 +115,20 @@ assert.equal(cases.length,590,'Retain565 plus25 single-dot IPv4/path comparisons
 const dotKnownResiduals=ipv4KnownResiduals.filter(r=>r.url!=='https://1.2.3.999./');
 assert.equal(dotKnownResiduals.length,4,'Four prior URL residuals remain');
 dotKnownResiduals.push({url:'https://1.2.3.999%2e/',client:'reject',sql:'accept'});
+const encodedKnownResiduals=dotKnownResiduals.filter(r=>r.url!=='https://1.2.3.999%2e/');
+assert.equal(encodedKnownResiduals.length,4);
+const encodedDotCases=[];
+for(const n of [0,255,256,999]){
+ const expected=n<=255?'accept':'reject';
+ for(const url of ['https://1.2.3.'+n+'%2e/','https://1%2e2%2e3%2e'+n+'/','https://1.2%2E3.'+n+'./','https://1.2.3.'+n+'%2E:443/'])encodedDotCases.push([url,expected]);
+}
+encodedDotCases.push(['https://example.invalid/path%2e999','accept'],['https://example.invalid/?next=1.2.3.999%2e','accept'],['https://example.invalid/#1.2.3.999%2e','accept'],['https://example%2einvalid/','accept']);
+assert.equal(encodedDotCases.length,20);
+for(const [i,[url,expected]]of encodedDotCases.entries()){
+ add('url-ipv4-encoded-dot:'+i,c=>{c.channels[1].paymentUrl=url;});
+ assert.equal(cases.at(-1).client,expected,'Explicit encoded-dot client expectation');
+}
+assert.equal(cases.length,610,'Retain590 plus20 encoded-dot host/path cases');
 const pg = new PGlite(); // ephemeral in-process engine; no URL, socket or persisted data directory
 const receipt={package:'@electric-sql/pglite@0.3.16',source_pins:pins,engine:null,preimage_counterexamples:[],url_grammar_preimage:[],known_url_residuals:[],cases:[],mismatches:[],native_reset_34_cases:'NOT RUN',production_connections:0,jwt_rls_concurrency:'NOT RUN'};
 try{
@@ -174,6 +189,16 @@ try{
  }
  await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
  await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
+ await pg.exec(read('fixtures/validator.pre-encoded-dot.sql'));
+ receipt.encoded_dot_preimage=[];
+ for(const [url]of encodedDotCases.filter(x=>x[1]==='reject')){
+  const c=fresh();c.channels[1].paymentUrl=url;assert.throws(()=>validateCatalog(c));
+  await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);
+  receipt.encoded_dot_preimage.push({url,client:'reject',sql:'accept'});
+ }
+ assert.equal(receipt.encoded_dot_preimage.length,8);
+ await pg.exec('drop function coin_seller_api_v1.validate_coin_seller_catalog_v1(jsonb);');
+ await pg.exec('drop function coin_seller_api_v1.client_catalog_text_valid_v1(text,integer,boolean);');
  await pg.exec(read('../../backend/review/coin-seller-catalog-validator.DRAFT.sql'));
  for(const {name,c,client} of cases){
   let sql='accept',sqlstate=null;
@@ -181,7 +206,7 @@ try{
   const row={name,client,sql,sqlstate,match:client===sql};receipt.cases.push(row);
   if(!row.match)receipt.mismatches.push(row);
  }
- for(const expected of dotKnownResiduals){
+ for(const expected of encodedKnownResiduals){
   const c=fresh();c.channels[1].paymentUrl=expected.url;
   let client='accept',sql='accept';try{validateCatalog(c);}catch{client='reject';}
   try{await pg.query('select coin_seller_api_v1.validate_coin_seller_catalog_v1($1::jsonb)',[JSON.stringify(c)]);}catch{sql='reject';}
@@ -190,7 +215,7 @@ try{
   assert.notEqual(client,sql,'Residual must not be mislabeled parity success');
   receipt.known_url_residuals.push({...expected,status:'UNRESOLVED'});
  }
- receipt.full_whatwg_parity='NOT ESTABLISHED: 4 prior URL residuals plus explicitly documented encoded-dot IPv4 residual';
+ receipt.full_whatwg_parity='NOT ESTABLISHED: 4 known URL residuals; other encoded/WHATWG host forms unproven';
  receipt.case_count=receipt.cases.length;
  receipt.result=receipt.mismatches.length?'FAIL':'PASS';
  fs.writeFileSync(new URL('./text-runtime-receipt.json',import.meta.url),JSON.stringify(receipt,null,2)+'\n');
