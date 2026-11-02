@@ -1,0 +1,22 @@
+name: Synthetic reset admission PostgreSQL 17
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tests/reset-admission/**'
+      - '.github/workflows/reset-admission-synthetic.yml'
+permissions:
+  contents: read
+jobs:
+  admission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run exact synthetic 34 cases, no live data
+        run: bash tests/reset-admission/run-isolated.sh
+      - name: Remove disposable fixture container
+        if: always()
+        run: docker rm -fv "funnyroom-reset-admission-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >/dev/null 2>&1 || true

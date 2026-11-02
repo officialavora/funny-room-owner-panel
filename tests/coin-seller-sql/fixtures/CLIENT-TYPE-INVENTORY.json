@@ -1,0 +1,307 @@
+{
+  "strict_rows": [
+    {
+      "path": [
+        "schema"
+      ],
+      "type": "number",
+      "guard": "added-root-numbers"
+    },
+    {
+      "path": [
+        "version"
+      ],
+      "type": "number",
+      "guard": "added-root-numbers"
+    },
+    {
+      "path": [
+        "coinsPerUsd"
+      ],
+      "type": "number",
+      "guard": "added-root-numbers"
+    },
+    {
+      "path": [
+        "checkoutMinutes"
+      ],
+      "type": "number",
+      "guard": "added-root-numbers"
+    },
+    {
+      "path": [
+        "exitReviewHours"
+      ],
+      "type": "number",
+      "guard": "added-root-numbers"
+    },
+    {
+      "path": [
+        "merchantDepositUsdCents"
+      ],
+      "type": "number",
+      "guard": "added-root-numbers"
+    },
+    {
+      "path": [
+        "packages",
+        0,
+        "usdCents"
+      ],
+      "type": "number",
+      "guard": "added-package-numbers"
+    },
+    {
+      "path": [
+        "packages",
+        0,
+        "bonusBps"
+      ],
+      "type": "number",
+      "guard": "added-package-numbers"
+    },
+    {
+      "path": [
+        "brand"
+      ],
+      "type": "string",
+      "guard": "added-root-text"
+    },
+    {
+      "path": [
+        "supportEmail"
+      ],
+      "type": "string",
+      "guard": "added-root-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "provider"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "label"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "asset"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "network"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "address"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "recipient"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "memo"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "paymentUrl"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "instructions"
+      ],
+      "type": "string",
+      "guard": "added-channel-text"
+    },
+    {
+      "path": [
+        "countries",
+        0,
+        "name"
+      ],
+      "type": "string",
+      "guard": "added-country-name"
+    },
+    {
+      "path": [
+        "rules",
+        0,
+        "title"
+      ],
+      "type": "string",
+      "guard": "added-rule-text"
+    },
+    {
+      "path": [
+        "rules",
+        0,
+        "text"
+      ],
+      "type": "string",
+      "guard": "added-rule-text"
+    },
+    {
+      "path": [
+        "countryOverrides",
+        "IN",
+        "note"
+      ],
+      "type": "string",
+      "guard": "added-optional-note"
+    },
+    {
+      "path": [
+        "applicationOpen"
+      ],
+      "type": "boolean",
+      "guard": "existing-boolean"
+    },
+    {
+      "path": [
+        "checkoutOpen"
+      ],
+      "type": "boolean",
+      "guard": "existing-boolean"
+    },
+    {
+      "path": [
+        "packages",
+        0,
+        "enabled"
+      ],
+      "type": "boolean",
+      "guard": "existing-boolean"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "enabled"
+      ],
+      "type": "boolean",
+      "guard": "existing-boolean"
+    },
+    {
+      "path": [
+        "packages"
+      ],
+      "type": "array",
+      "guard": "existing-array-plus-required"
+    },
+    {
+      "path": [
+        "channels"
+      ],
+      "type": "array",
+      "guard": "existing-array-plus-required"
+    },
+    {
+      "path": [
+        "countries"
+      ],
+      "type": "array",
+      "guard": "existing-array-plus-required"
+    },
+    {
+      "path": [
+        "rules"
+      ],
+      "type": "array",
+      "guard": "existing-array-plus-required"
+    },
+    {
+      "path": [
+        "allowedCountries"
+      ],
+      "type": "array",
+      "guard": "existing-array-plus-required"
+    },
+    {
+      "path": [
+        "countryOverrides"
+      ],
+      "type": "object",
+      "guard": "existing-object-plus-required"
+    },
+    {
+      "path": [
+        "countryOverrides",
+        "IN"
+      ],
+      "type": "object",
+      "guard": "existing-object"
+    },
+    {
+      "path": [
+        "packages",
+        0,
+        "kind"
+      ],
+      "type": "enum-string",
+      "guard": "existing-enum"
+    },
+    {
+      "path": [
+        "channels",
+        0,
+        "kind"
+      ],
+      "type": "enum-string",
+      "guard": "existing-enum"
+    }
+  ],
+  "coercive_fields_not_tightened": [
+    "package.id",
+    "channel.id",
+    "channel.railId",
+    "channel.assetUnitsPerUsd",
+    "country.code",
+    "override.currency",
+    "override.localAmount",
+    "override.coins"
+  ],
+  "array_items": "client requires accessible object fields; invalid primitive/item shapes reject via existing guards",
+  "allowedCountries": "array; entries must equal a valid country code; uniqueness is a separate semantic condition"
+}

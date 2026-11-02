@@ -1,3 +1,119 @@
+## 2 November 2026 — bounded IPv6 catalogue compatibility fix (draft only)
+
+Validator parent44e290c26b40038eaed578a8c64469ce961b9948; rebased onto concurrent
+full-installer addition bb64f422ee873336cf42f1c3e06228b10e75f40c. Existing PR28/test branch retained;
+no merge, Pages, backend install, payment activation, native build, reset or OTA.
+The shared client accepts valid bracketed IPv6, while the parent SQL rejects all
+bracketed hosts. Added a separate complete IPv6-authority branch using restricted
+literal grammar plus PostgreSQL inet/family, strict optional port bounds, and no
+raw destination rewrite. The existing four unbracketed URL guards are preserved
+byte-for-byte. No client/editor/business-policy/permission/dependency/workflow edit.
+
+Actual local pinned PGlite0.3.16/PG17.5WASM:1038 explicit client/SQL comparisons PASS,
+zero mismatches, with all prior666 retained;338 exact old-SQL IPv6 rejection
+preimages reproduced. Separate deterministic8760-case bracketed-IPv6 audit PASS
+(586client accepts/8174rejects), zero mismatches/raw destination changes. Corpus
+sets may overlap; do not sum them or call them native reset acceptance. The prior
+34 native reset cases remain NOT RUN. SQL successor SHA256
+fd91e16bb254e420f7ff3d17e7e65567107c90f3f291cab0c1ca7a5f1c48e8e9.
+Old SQL and exact hashes retained in validator.pre-ipv6.sql; reverse only this
+source diff for rollback (no database install/rollback performed). No universal
+WHATWG/SSRF/network safety or production financial-readiness claim.
+
+Hosted exact-source CI receipt follows in session checkpoint after provider run;
+this entry does not assert future CI success. Concurrent bb64 synthetic installer
+was preserved and updated by exactly one validator-function replacement; exact
+inverse restores the complete317c0408 parent. New synthetic full-installer SHA256
+031d1f8ff7dc513f8f5c89cd5d0874a2e66684e45dcee21806e5065ff756ed29.
+Actual complete synthetic install and45checks PASS: retained35, eight installed
+IPv6 cases, and two authenticated Owner raw save/readback/transaction-rollback
+checks. No private seed/target URL/production connection. Legacy business functions,
+ACLs, seed, financial guards and concurrent workflow remain byte-preserved.
+Real JWT/session/RLS/ACL,
+concurrency, target authority/default-role review, settlement and actual backup+
+Storage/isolated restore/writer/preservation/rollback/device gates remain open.
+Native combined source0e01/runtime9a1 recovery and full CI are still prerequisites
+for a compatible test OTA/new binary; no old source substitution or provider-block
+bypass. Existing GitLab ticket765783 is separate; no duplicate ticket here.
+
+--- Previous full WORK_HANDOFF history, unchanged ---
+
+## 2026-11-02 — Explicit-port backslash path compatibility in review-only SQL
+
+A client-valid HTTPS destination such as https://example.invalid:443\path was rejected by the SQL admission/port grammar. In exactly those two existing lines, evaluate backslashes as slash separators; retain raw stored text and the existing authority/whitespace/host/IPv4/credential guards. No client, financial/authorization, workflow or dependency change. Exact inverse of the two-line source edit restores pinned preimage304f0a4a...; new SQL SHA d5355e1bd5b1abb47ff59190942287c0ef44bf5130c232dcb2a352ef4d82c04c.
+
+Actual local pinned PGlite0.3.16/PostgreSQL17.5WASM:666 finite client/SQL comparisons PASS, zero mismatches;14 old-SQL client-valid rejections reproduced. Original636 cases retained plus30 explicit scheme/port/backslash/authority/path expectations. One known validIPv6 difference remains explicitly UNRESOLVED; general encoded/Unicode/WHATWG equivalence unproven. Hosted exact-source CI pending at authoring.
+
+Draft source only, no merge/Pages/SQL installation/payment/reset/OTA/native release. Full target/JWT/RLS/session/concurrency, complete installer synchronization/admission, real backup+Storage isolated restore/wholeOwner/content/writer/rollback and device gates remain. Original34 native reset cases NOT RUN. Previous handoff retained below unchanged.
+
+## 2026-11-02 — Path whitespace compatibility in draft catalogue SQL
+
+The client accepts ASCII space and U+0085 inside HTTPS path/query/fragment text, while SQL applied its whitespace rejection to the entire URL. Limit that existing check to the already-delimited authority, preserving scheme/host admission, credential/port/IPv4 guards and ASCII-control rejection. Twenty pinned old-SQL rejections reproduce; six authority/credential/control negatives remain rejected. The retained 610 cases plus26 explicit client expectations give636 comparisons, local PG17.5WASM PASS/zero mismatches. The two resolved examples now enter the parity corpus; IPv6 and explicit-port backslash remain separately asserted UNRESOLVED. Other encoded/WHATWG forms remain unproven.
+
+Only the whitespace check's input changes. Shared client, editor, workflow, dependencies, authority, amounts and financial policy remain intact. Draft review only: no merge/install/publication/payment/reset/native build; full target/JWT/RLS/concurrency, wholeOwner/content, backup/restore/writer and device gates remain. Original34 native reset cases NOT RUN. Hosted CI for this commit pending at authoring. Prior handoff follows byte-unchanged.
+
+## 2026-11-02 — Encoded-dot IPv4 bound in review-only catalogue SQL
+
+The latest single-terminal-dot guard still accepted client-rejected hosts such as https://1.2.3.999%2e/. Decode only case-insensitive %2e within the already-delimited authority before applying the same bounded four-part decimal IPv4 predicate. Eight exact preimage false accepts reproduce. Twenty explicit client-expectation cases cover mixed/literal/encoded separators, terminal dots, ports, valid 0/255 and invalid 256/999, plus domain/path/query/fragment controls. The retained 590-case corpus grows to 610; local PG17.5 WASM comparisons PASS with zero mismatches. Four known URL differences remain separately asserted UNRESOLVED; other encoded/WHATWG forms are unproven. This is not general host safety or financial admission.
+
+Only the IPv4 authority expression changes; existing admission branches, port guard, malformed-host guard, helper, client, Owner editor, workflow and dependencies stay intact. Draft-only: no backend installation/merge/publication/payment/reset/native build. Original34 native reset cases and actual backup/restore/wholeOwner/content/writer/device gates remain pending. Hosted CI for this new commit is pending at authoring. Complete earlier handoff follows unchanged.
+
+## 2026-11-02 — Bounded malformed-host guard in draft CoinSeller SQL
+
+The current SQL accepted malformed host percent escapes and bracketed non-IPv6 hosts rejected by the unchanged client. Added an authority-only guard; authority extraction stops at slash, query, fragment and backslash so valid path/query text is preserved. Seven actual preimage false accepts reproduce; fourteen explicit client-expectation cases extend the retained 527 to 541. Local PG17.5 WASM comparisons PASS with zero mismatches. Two prior residual examples move into the parity corpus; five remaining known differences stay separately asserted UNRESOLVED, including invalid IPv4 false acceptance. This does not establish general host validity/full WHATWG parity or financial readiness.
+
+Prior admission branches/port bound/helper/client/Owner UI/workflow are unchanged. Draft source only; no install, merge, publish, payment activation, reset or native build. Actual JWT/RLS/ACL/concurrency, reset/backup/restore/wholeOwner/content/device gates remain. Hosted CI for this new commit is pending at authoring. Full earlier handoff follows unchanged.
+
+## 2026-11-02 — Draft SQL HTTPS port bound and retained regression corpus
+
+The review-only catalogue SQL accepted HTTPS destination ports 65536, 99999 and 00065536 while the unchanged actual client rejected them. Added one numeric port upper-bound guard (65535), retaining existing URL syntax, credentials, text, authority, amount and checkout gates. Sixteen boundary/leading-zero/long-digit cases extend the original asserted 459 to 475. A pinned exact pre-port fixture executes the three counterexamples before the candidate. Local PG17.5 WASM comparisons PASS with zero mismatches; hosted CI for this commit is pending at authoring. Other WHATWG URL semantics remain unproven; no full parity claim.
+
+Draft source only: no backend install, merge, publish, payment activation, reset or native APK/device acceptance. Original 34 native reset cases NOT RUN. Helper teardown between fixture and candidate is limited to the synthetic ephemeral test schema. All previous handoff history follows unchanged.
+
+# Coin Seller country controls — 2 November 2026
+
+Removing an eligible display country previously retained its eligibility code,
+so the existing catalog validator refused Save. Removal now deletes that code
+and its override while preserving all other countries and eligibility. Adding
+or searching countries now reports malformed JSON through the existing status
+field and refuses retained callbacks after navigation or while Save is pending.
+
+Twelve focused synthetic DOM regression cases include frozen-original failure
+reproductions, exact save arguments, empty eligibility, normal add/search,
+retired callbacks and pending-save behavior. The six existing DOM cases and all
+other workflow steps remain intact. Frozen preimage SHA256:
+a0f4e3266b59f70d859b379f2fad9d832352a98866a47f6cb3bae70a87a4d254.
+
+Local Node24 syntax checks pass. Local DOM execution was unavailable because
+offline npm lacked xmlchars2.2.0 (ENOTCACHED); hosted PR CI is pending at commit
+preparation. Review the actual check result before accepting the change.
+
+This is source-only on Draft PR28. Shared validators, financial RPC contracts,
+SQL, checkout admission, native builds and live databases are unchanged. No
+publication, merge or payment activation is included. Backend JWT/RLS/ACL/CAS,
+concurrency, isolated restore and device acceptance gates remain pending.
+
+--- PREVIOUS COMPLETE HANDOFF BELOW ---
+
+# Coin Seller pure SQL validator review candidate - 2 November 2026
+
+Draft PR28 addition over fc330a87dbb697fa3312790855aaf89aa6ba5683.
+The actual root shared client is unchanged. Add a seed-free review-only SQL
+validator/helper and 459 finite acceptance comparisons in ephemeral PostgreSQL
+17.5 WASM, with the existing workflow steps preserved and two steps appended.
+The repository-relative local test passes after integration; hosted exact-source
+CI remains pending at source preparation. Results belong in the shared checkpoint
+and PR checks; local checks do not establish hosted completion.
+
+This does not install SQL, activate payments, merge PR28 or publish Pages.
+Native PostgreSQL17 auth/JWT/RLS/ACL/CAS/concurrency, full migration dependencies,
+backup/isolated restore/Owner-content preservation/writer cutover, the original
+34 reset cases, APK/AAB and device gates remain unresolved. Synthetic fixtures
+only; no original blocked reset job is retried or rerouted. See
+tests/coin-seller-sql/README.md and the PR checks for bounded evidence.
+
+--- PREVIOUS COMPLETE HANDOFF BELOW ---
+
 # Owner login eye and Remember me — 30 October 2026
 
 Scoped change over main2201320: same approved login page gains an accessible show/hide eye and persistent/tab-only SDK session choice, standard browser autofill, no raw password storage. Server authority/RPC/financial behaviour and native source unchanged. See docs/LOGIN_CONTROLS_20261030.md for evidence, limitations and rollback. Seven focused cases and all existing Owner source workflow suites pass locally. Remote CI/publication IDs belong in the final delivery evidence; no browser or phone PASS inferred from source tests. This web-only change requires no Expo OTA/build. Previous unrelated v151/full-app release gates remain open.
@@ -300,3 +416,18 @@ Current app preimage SHA256 d458a0743fbf3a9618bd58ea7dc357ba9889685ccc786564c02c
 
 The existing Owner source workflow retains every prior check and adds both lifecycle tests. Remote verification IDs/outcome must be captured in the canonical START HERE after the PR run. SOURCE CANDIDATE ONLY: no merge, Pages/production deployment or authenticated web acceptance is claimed. Nine missing displayed-action contracts, paused Create staff, preview-only VIP/SVIP and app/backend/full-native acceptance gates remain open. Official panel/repository only; no alternative admin site. Native app source unchanged; its accepted v9 manifest and reviewed three-path candidate remain separately tracked in START HERE. Rollback is exact reversal of this one guarded-finally replacement and removal of the added tests/workflow step, preserving all login controls and previous handoff history.
 
+
+
+31 October 2026 — Coin Seller Owner configuration source proposal
+
+This source is based on the exact existing PR27 head b2e936e9c84a8dedf5864c13fdb8f1124cd6de08, preserving its retired-dialog submit fix and the existing login eye/Remember-me controls. Three narrow app.js seams add a dedicated Coin Seller catalogue page and its direct hash route. Existing source workflow assertions/steps are retained; three additional steps verify the new modules and five actual-module synthetic DOM tests.
+
+The editor supports package/bonus/deposit/rate/time controls, method add/remove/disable, provider-independent rail IDs, separate wallet/account/link fields, local QR generation, country display/rate overrides and explicit checkout-country requests. Public/private catalogue projection, immutable original retry version and canonical proof rail identity have separate native/backend source proposals. This public Owner repository contains no real wallet seed, backend credentials or private account details. Test seed is explicitly synthetic and cannot authorize payment.
+
+Actual local evidence: five actual-module jsdom groups pass; 22 separate native/shared-contract fixture groups and 15 local PGlite synthetic-session/role groups pass. The original SQL ambiguous variable/column error was preserved and corrected. These are not real JWT/HTTP, concurrency, provider verification, on-device UI, payment settlement or full app CI acceptance. Dedicated backend APIs remain uninstalled; checkoutOpen remains false, Epay remains disabled/unconfigured and all protected rail admissions are false. No balance, role, payment or provider action was performed.
+
+This draft is paired with the latest 4,833-file native baseline plus the independently reviewed one-file Owner read correction and separate Coin Seller v2 client source. The historical GitLab canonical three corresponding files differ from that latest recovered source, so this update does not claim whole native-source synchronization or permission to overwrite canonical with a sparse candidate. Existing whole-app CI099/Expo/native, privacy-server, financial and TeenPatti/Crash/affected Worker2 restrictions remain intact.
+
+No Pages publication, merge, OTA, signed native artifact, Store/Apple submission or Android/iPhone acceptance by this proposal. The remaining original grant assertions and nine existing handler/backend parity issues remain open. Next: normal independent source/backend/privacy/security admission and isolated cross-repository acceptance before any deployment. Preserve the existing PR27 and all older history.
+
+Same-proposal CI follow-up: first hosted run41148770293/job124380010129 failed the unchanged original assertion requiring exactly20 root pages, because the proposed catalogue had added a21st root. The editor is now nested under existing Recharge & Payments (commerce), retaining all20 root routes and their unchanged assertions. The #coinSeller deep link opens this child through the existing commerce route. Exact original source suite locally passes21checks; a separate8-check extracted actual-helper suite covers Founder denial, stale generation before/after loading and live navigation fencing. The module-loader seam is explicitly mocked; no real API executes. No historical assertion was altered. Original failed CI log remains evidence. No same-commit CI rerun was used; a source correction requires a new commit/run.
