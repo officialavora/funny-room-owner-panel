@@ -33,3 +33,8 @@ jobs:
 
       - run: npm ci --prefix tests/coin-seller-sql --ignore-scripts --no-audit --no-fund
       - run: node tests/coin-seller-sql/validator-parity.test.mjs
+      - name: Synthetic full installer review (35 checks; not production acceptance)
+        timeout-minutes: 10
+        run: |
+          node --check tests/coin-seller-sql/full-installer.test.mjs
+          node tests/coin-seller-sql/full-installer.test.mjs tests/coin-seller-sql/fixtures/full-installer.SYNTHETIC-ONLY.sql coin-seller-catalog.mjs tests/coin-seller-sql/fixtures/synthetic-seed.json
