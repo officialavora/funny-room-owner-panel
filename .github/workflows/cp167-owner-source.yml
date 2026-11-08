@@ -27,3 +27,14 @@ jobs:
       - run: node --check login-preferences.js && node tests/login-preferences.test.cjs
       - run: node tests/dialog-lifecycle.test.cjs app.js && node tests/dialog-lifecycle-independent.test.cjs app.js
 
+      - run: node --check coin-seller-control.js && node --check coin-seller-catalog.mjs && node --check coin-seller-qr.mjs
+      - run: npm ci --prefix tests/coin-seller --ignore-scripts --no-audit --no-fund
+      - run: node --test tests/coin-seller/owner-dom.test.mjs tests/coin-seller/country-controls.test.mjs && node tests/coin-seller/router.test.cjs
+
+      - run: npm ci --prefix tests/coin-seller-sql --ignore-scripts --no-audit --no-fund
+      - run: node tests/coin-seller-sql/validator-parity.test.mjs
+      - name: Synthetic full installer review (35 checks; not production acceptance)
+        timeout-minutes: 10
+        run: |
+          node --check tests/coin-seller-sql/full-installer.test.mjs
+          node tests/coin-seller-sql/full-installer.test.mjs tests/coin-seller-sql/fixtures/full-installer.SYNTHETIC-ONLY.sql coin-seller-catalog.mjs tests/coin-seller-sql/fixtures/synthetic-seed.json
