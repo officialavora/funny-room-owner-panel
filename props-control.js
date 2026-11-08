@@ -1,3 +1,4 @@
+import {addEntryTrial} from './entry-owner-trial.js';
 import {addMediaHistory} from './catalogue-media-history.js';
 import {addSavedMediaDownloads} from './catalogue-media-download.js';
 export const KINDS=['frame','entry','bubble','badge','medal','room_frame','room_theme','nameplate','noble','emoji_pack','gift_theme'];
@@ -29,7 +30,7 @@ export async function showPropsControl({root,rpc,client,isCurrent,toast}){
  const r=old||{kind:'frame',tier:'standard',visual:{},duration_days:30,sort_order:100,price_exact:'0',active:true,purchasable:false};
  const editor=root.querySelector('#propEditor');
  editor.innerHTML='<form class="card section" id="itemForm"><h3>'+esc(old?'Edit prop':'Add prop')+'</h3>'+label('Stable code',input('code',r.code,'text',!!old))+label('Name',input('name',r.name))+label('Kind',old?input('kind',r.kind,'text',true):select('kind',KINDS,r.kind))+label('Tier',select('tier',['standard','premium','vip','official'],r.tier))+label('Original artwork HTTPS URL',input('asset_url',r.asset_url))+mediaUploadField('artwork','Artwork / video file','image/png,image/jpeg,image/webp,image/gif,video/mp4')+label('Original sound HTTPS URL',input('sound_url',r.sound_url))+mediaUploadField('sound','Sound file','audio/mpeg,audio/mp4,audio/aac,audio/ogg,audio/wav,audio/x-m4a,audio/x-wav')+'<label><input name="video_embedded_sound" type="checkbox" '+(!r.sound_url&&/[.]mp4(?:[?#]|$)/i.test(r.asset_url||'')?'checked':'')+'>Use video’s own sound</label><p>Choose a file, then Save. Separate sound is optional.</p>'+label('Bundled sound key',input('sound_key',r.sound_key))+label('Visual JSON (preserve existing artwork / set metadata)','<textarea name="visual" rows="8" style="width:100%">'+esc(JSON.stringify(r.visual||{},null,2))+'</textarea>')+label('Coin price',input('price_coins',r.price_exact??r.price_coins??0,'number'))+label('Duration in days',input('duration_days',r.duration_days,'number'))+label('Order',input('sort_order',r.sort_order,'number'))+label('Available for sale',select('purchasable',['false','true'],r.purchasable))+label('Active (false archives)',select('active',['true','false'],r.active))+label('Required audit reason',input('reason'))+'<button class="primary" type="submit">Save prop</button><p>Existing code and kind are fixed to preserve purchases. To replace a kind, archive this item and create a new code.</p></form>';
- const form=editor.querySelector('form');wireMediaUploads(form);
+ const form=editor.querySelector('form');wireMediaUploads(form);addEntryTrial(form,old,{client,rpc,isCurrent:safe,toast});
  if(old?.kind==='entry'&&/^https:\/\/[^\s]+\.mp4(?:[?#].*)?$/i.test(old.asset_url||'')){
   const preview=form.ownerDocument.createElement('video');
   preview.controls=true;
