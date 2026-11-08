@@ -1,5 +1,12 @@
 import{createClient}from'https://esm.sh/@supabase/supabase-js@2';import{createRememberStorage,setupLoginControls}from'./login-preferences.js?v=20261030-1';
-const loginPreferences=createRememberStorage(),hideLoginPassword=setupLoginControls(loginPreferences);const supabase=createClient('https://zspcgyhchaqpiyujyxqp.supabase.co','sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ',{auth:{storage:loginPreferences.storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const recoveryUrl=new URL(location.href);
+const recoveryHash=new URLSearchParams(recoveryUrl.hash.slice(1));
+const recoveryPage=recoveryHash.get('type')==='recovery'||recoveryUrl.searchParams.get('type')==='recovery'||
+ recoveryUrl.searchParams.has('code')||recoveryUrl.searchParams.has('error')||recoveryHash.has('error')||
+ recoveryUrl.searchParams.has('error_code')||recoveryHash.has('error_code');
+const loginPreferences=createRememberStorage(),hideLoginPassword=setupLoginControls(loginPreferences);const supabase=createClient('https://zspcgyhchaqpiyujyxqp.supabase.co','sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ',{auth:recoveryPage
+ ? {storageKey:'owner-panel-password-recovery',persistSession:false,autoRefreshToken:false,detectSessionInUrl:true}
+ : {storage:loginPreferences.storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const $=s=>document.querySelector(s),esc=v=>String(v??'—').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),fmt=v=>{if(v==null||v==='')return '—';if(typeof v==='number'&&!Number.isSafeInteger(v))return 'Unavailable';const t=String(v);return /^-?\d+$/.test(t)?BigInt(t).toLocaleString():'Unavailable'},uuid=()=>crypto.randomUUID();
 let authority={},access={},page='overview',cache={},navigationRevision=0,bootRevision=0,dialogRevision=0,actionInFlight=false;
 function renderPage(token,html){if(token!==navigationRevision)return false;$('#content').innerHTML=html;return true}
@@ -98,4 +105,57 @@ logoutButton.onclick=async()=>{
   logoutButton.disabled=false;
  }
 };
-$('#menu').onclick=()=>$('.sidebar').classList.toggle('open');supabase.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT')showLogin()});boot();
+$('#menu').onclick=()=>$('.sidebar').classList.toggle('open');
+
+if(recoveryPage){
+ const form=$('#recoveryForm'),password=$('#newPassword'),confirm=$('#confirmPassword');
+ const save=$('#savePassword'),exit=$('#exitRecovery'),status=$('#recoveryStatus');
+ let account=null;
+ $('#login').classList.add('hidden');
+ $('#recovery').classList.remove('hidden');
+ supabase.auth.onAuthStateChange((event,session)=>{
+  if(event==='PASSWORD_RECOVERY'&&session?.user?.id){
+   account=session.user.id;
+   save.disabled=false;
+   status.textContent='Enter and confirm a new password.';
+   password.focus();
+  }else if(event==='SIGNED_OUT'||(event==='INITIAL_SESSION'&&!account)){
+   account=null;
+   save.disabled=true;
+   status.textContent='This recovery link is unavailable. Request a new one from sign-in.';
+  }
+ });
+ function returnToSignIn(){
+  password.value='';
+  confirm.value='';
+  location.replace(location.origin+location.pathname);
+ }
+ form.onsubmit=async event=>{
+  event.preventDefault();
+  if(!account||save.disabled)return;
+  if(!password.value||password.value!==confirm.value){
+   status.textContent='Enter matching passwords.';
+   return;
+  }
+  save.disabled=true;
+  exit.disabled=true;
+  try{
+   const {data,error}=await supabase.auth.updateUser({password:password.value});
+   if(error)throw error;
+   if(data?.user?.id!==account)throw new Error('Recovery account could not be confirmed.');
+   account=null;
+   password.value='';
+   confirm.value='';
+   status.textContent='Password updated. Select Return to sign-in to continue.';
+  }catch(error){
+   status.textContent=error.message||'Could not update the password. Try again.';
+  }finally{
+   save.disabled=!account;
+   exit.disabled=false;
+  }
+ };
+ exit.onclick=returnToSignIn;
+}else{
+ supabase.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT')showLogin()});
+ boot();
+}
