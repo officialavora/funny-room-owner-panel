@@ -1,14 +1,14 @@
-const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const path=require('node:path'),assert=require('node:assert/strict'),{pathToFileURL}=require('node:url');
 const {JSDOM}=require('./media-upload/node_modules/jsdom');
-const root=path.resolve(__dirname,'..'),dataURL=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const helperURL=dataURL(fs.readFileSync(path.join(root,'props-media-upload.js'),'utf8'));
-const source=fs.readFileSync(path.join(root,'emoji-control.js'),'utf8').replace('./props-media-upload.js?v=20261027-emoji',helperURL);
+const root=path.resolve(__dirname,'..');
+const helperURL=pathToFileURL(path.join(root,'props-media-upload.js')).href;
+const moduleURL=pathToFileURL(path.join(root,'emoji-control.js')).href;
 const actor='11111111-1111-1111-1111-111111111111',stamp='2026-10-27T01:00:00Z';
 const gif=()=>new File(['GIF89a original animation'],'emoji.gif',{type:'image/gif'}),sound=()=>new File(['ID3 original music'],'music.mp3',{type:'audio/mpeg'}),png=()=>new File([Uint8Array.from([137,80,78,71,13,10,26,10])],'poster.png',{type:'image/png'});
 const row={reaction_key:'laugh',display_label:'Laugh',emoji:'😂',media_url:'https://old.example/laugh.gif',poster_url:'https://old.example/poster.png',sound_url:'https://old.example/laugh.mp3',duration_ms:5000,sort_order:4,active:true,updated_at:stamp};
 const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return{promise,resolve};};
 (async()=>{
- const mod=await import(dataURL(source)),helper=await import(helperURL);let count=0;
+ const mod=await import(moduleURL),helper=await import(helperURL);let count=0;
  await assert.rejects(helper.validatePropMedia(new File([Uint8Array.from([0,0,0,16,102,116,121,112])],'clip.mp4',{type:'video/mp4'}),'image'));await assert.rejects(helper.validatePropMedia(gif(),'poster'));assert.equal((await helper.validatePropMedia(gif(),'image')).contentType,'image/gif');count++;
  async function editor(options={}){
   const dom=new JSDOM('<div id="root"></div>');dom.window.HTMLElement.prototype.scrollIntoView=function(){};
