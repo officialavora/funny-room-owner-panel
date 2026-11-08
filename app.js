@@ -1,12 +1,11 @@
 import{createClient}from'https://esm.sh/@supabase/supabase-js@2';import{createRememberStorage,setupLoginControls}from'./login-preferences.js?v=20261030-1';
-const recoveryUrl=new URL(location.href);
-const recoveryHash=new URLSearchParams(recoveryUrl.hash.slice(1));
-const recoveryPage=recoveryHash.get('type')==='recovery'||recoveryUrl.searchParams.get('type')==='recovery'||
- recoveryUrl.searchParams.has('code')||recoveryUrl.searchParams.has('error')||recoveryHash.has('error')||
- recoveryUrl.searchParams.has('error_code')||recoveryHash.has('error_code');
-const loginPreferences=createRememberStorage(),hideLoginPassword=setupLoginControls(loginPreferences);const supabase=createClient('https://zspcgyhchaqpiyujyxqp.supabase.co','sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ',{auth:recoveryPage
- ? {storageKey:'owner-panel-password-recovery',persistSession:false,autoRefreshToken:false,detectSessionInUrl:true}
- : {storage:loginPreferences.storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const loginPreferences=createRememberStorage(),hideLoginPassword=setupLoginControls(loginPreferences);const supabase=createClient('https://zspcgyhchaqpiyujyxqp.supabase.co','sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ',{auth:isRecoveryUrl(location.href)?{storageKey:'owner-panel-password-recovery',persistSession:false,autoRefreshToken:false,detectSessionInUrl:true}:{storage:loginPreferences.storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+function isRecoveryUrl(href){
+ if(!href)return false;
+ const url=new URL(href),hash=new URLSearchParams(url.hash.slice(1));
+ return hash.get('type')==='recovery'||url.searchParams.get('type')==='recovery'||url.searchParams.has('code')||
+  [url.searchParams,hash].some(params=>params.has('error')||params.has('error_code'));
+}
 const $=s=>document.querySelector(s),esc=v=>String(v??'—').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),fmt=v=>{if(v==null||v==='')return '—';if(typeof v==='number'&&!Number.isSafeInteger(v))return 'Unavailable';const t=String(v);return /^-?\d+$/.test(t)?BigInt(t).toLocaleString():'Unavailable'},uuid=()=>crypto.randomUUID();
 let authority={},access={},page='overview',cache={},navigationRevision=0,bootRevision=0,dialogRevision=0,actionInFlight=false;
 function renderPage(token,html){if(token!==navigationRevision)return false;$('#content').innerHTML=html;return true}
@@ -107,7 +106,7 @@ logoutButton.onclick=async()=>{
 };
 $('#menu').onclick=()=>$('.sidebar').classList.toggle('open');
 
-if(recoveryPage){
+if(isRecoveryUrl(location.href)){
  const form=$('#recoveryForm'),password=$('#newPassword'),confirm=$('#confirmPassword');
  const save=$('#savePassword'),exit=$('#exitRecovery'),status=$('#recoveryStatus');
  let account=null;
