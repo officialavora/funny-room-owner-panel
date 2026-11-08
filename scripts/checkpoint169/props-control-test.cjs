@@ -1,7 +1,7 @@
-const fs=require('fs'),assert=require('node:assert/strict'),path=require('path');
+const assert=require('node:assert/strict'),path=require('node:path'),{pathToFileURL}=require('node:url');
 (async()=>{
- const source=fs.readFileSync(path.join(process.env.OWNER_PANEL_AUDIT_ROOT||path.join(__dirname,'../..'),'props-control.js'),'utf8');
- const mod=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));let checks=0;
+ const sourcePath=path.resolve(process.env.OWNER_PANEL_AUDIT_ROOT||path.join(__dirname,'../..'),'props-control.js');
+ const mod=await import(pathToFileURL(sourcePath).href);let checks=0;
  for(const v of ['1e3','1.5','-1','9007199254740993','']){assert.throws(()=>mod.integer(v,'test'));checks++;}
  assert.equal(mod.integer('500','test'),500);checks++;
  assert.equal(mod.KINDS.length,11);assert.equal(mod.CATEGORIES.length,18);checks+=2;

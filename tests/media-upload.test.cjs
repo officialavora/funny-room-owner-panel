@@ -1,9 +1,7 @@
-const fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
+const path=require('node:path'),assert=require('node:assert/strict'),{pathToFileURL}=require('node:url');
 const {JSDOM}=require('./media-upload/node_modules/jsdom');
 const root=path.resolve(__dirname,'..');
-const dataURL=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const mediaSource=fs.readFileSync(path.join(root,'props-media-upload.js'),'utf8');
-const mediaURL=dataURL(mediaSource);
+const mediaURL=pathToFileURL(path.join(root,'props-media-upload.js')).href;
 const MP4=Buffer.from([0,0,0,16,102,116,121,112,105,115,111,109,0,0,0,0]);
 const mp4=()=>new File([MP4],'entry.mp4',{type:'video/mp4'}),audio=()=>new File(['ID3original soundtrack'],'track.mp3',{type:'audio/mpeg'});
 const actor='11111111-1111-1111-1111-111111111111';
@@ -24,8 +22,8 @@ const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return{p
   if(nullPrice)Object.assign(item,{price_exact:null,price_coins:null});
   const rpc=async(name,args)=>{calls.push({name,args});if(name==='owner_load_props_v169')return{items:[item],sets:[]};if(holdSave)await saveGate.promise;return item;};
   const chain={select(){return this},order(){return this},range(){return Promise.resolve({data:[item]})}};c.from=()=>chain;
-  let source=fs.readFileSync(path.join(root,kind==='prop'?'props-control.js':'gift-control.js'),'utf8').replace('./props-media-upload.js?v=20261027',mediaURL);
-  const module=await import(dataURL(source));
+  const moduleURL=pathToFileURL(path.join(root,kind==='prop'?'props-control.js':'gift-control.js')).href;
+  const module=await import(moduleURL);
   await module[kind==='prop'?'showPropsControl':'showGiftControl']({root:holder,client:c,rpc,isCurrent:()=>current,toast:(...args)=>toasts.push(args)});
   holder.querySelector(kind==='prop'?'[data-edit-item]':'[data-edit]').click();const form=holder.querySelector(kind==='prop'?'#itemForm':'#giftForm');
   if(kind==='prop')form.elements.reason.value='Owner requested watermark removal';
