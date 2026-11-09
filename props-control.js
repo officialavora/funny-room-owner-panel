@@ -1,3 +1,4 @@
+import {createGiftThumbnail,giftThumbnailSource} from './gift-thumbnail.js';
 import {addMediaHistory} from './catalogue-media-history.js';
 import {addSavedMediaDownloads} from './catalogue-media-download.js';
 export const KINDS=['frame','entry','bubble','badge','medal','room_frame','room_theme','nameplate','noble','emoji_pack','gift_theme'];
@@ -12,7 +13,7 @@ export function itemPayload(form,old=null){
 const select=(name,values,current)=>'<select name="'+name+'">'+values.map(v=>'<option '+(String(v)===String(current)?'selected ':'')+'value="'+esc(v)+'">'+esc(v)+'</option>').join('')+'</select>';
 const input=(name,value='',type='text',readonly=false)=>'<input name="'+name+'" type="'+type+'" value="'+esc(value)+'" '+(readonly?'readonly':'')+'>';
 const label=(title,field)=>'<label>'+esc(title)+'</label>'+field;
-export async function showPropsControl({root,rpc,client,isCurrent,toast}){
+export async function showPropsControl({root,rpc,client,isCurrent,toast,makeThumbnail=createGiftThumbnail}){
  let offset=0,items=[],sets=[],busy=false,request=0,search='',kind='';
  const safe=()=>isCurrent()&&root.isConnected;
  async function load(){const token=++request;const data=await rpc('owner_load_props_v169',{p_search:search,p_kind:kind,p_offset:offset});if(!safe()||token!==request)return;items=data.items||[];sets=data.sets||[];render()}
@@ -28,7 +29,7 @@ export async function showPropsControl({root,rpc,client,isCurrent,toast}){
  if(busy||!safe())return;
  const r=old||{kind:'frame',tier:'standard',visual:{},duration_days:30,sort_order:100,price_exact:'0',active:true,purchasable:false};
  const editor=root.querySelector('#propEditor');
- editor.innerHTML='<form class="card section" id="itemForm"><h3>'+esc(old?'Edit prop':'Add prop')+'</h3>'+label('Stable code',input('code',r.code,'text',!!old))+label('Name',input('name',r.name))+label('Kind',old?input('kind',r.kind,'text',true):select('kind',KINDS,r.kind))+label('Tier',select('tier',['standard','premium','vip','official'],r.tier))+label('Original artwork HTTPS URL',input('asset_url',r.asset_url))+mediaUploadField('artwork','Artwork / video file','image/png,image/jpeg,image/webp,image/gif,video/mp4')+label('Original sound HTTPS URL',input('sound_url',r.sound_url))+mediaUploadField('sound','Sound file','audio/mpeg,audio/mp4,audio/aac,audio/ogg,audio/wav,audio/x-m4a,audio/x-wav')+'<label><input name="video_embedded_sound" type="checkbox" '+(!r.sound_url&&/[.]mp4(?:[?#]|$)/i.test(r.asset_url||'')?'checked':'')+'>Use video’s own sound</label><p>Choose a file, then Save. Separate sound is optional.</p>'+label('Bundled sound key',input('sound_key',r.sound_key))+label('Visual JSON (preserve existing artwork / set metadata)','<textarea name="visual" rows="8" style="width:100%">'+esc(JSON.stringify(r.visual||{},null,2))+'</textarea>')+label('Coin price',input('price_coins',r.price_exact??r.price_coins??0,'number'))+label('Duration in days',input('duration_days',r.duration_days,'number'))+label('Order',input('sort_order',r.sort_order,'number'))+label('Available for sale',select('purchasable',['false','true'],r.purchasable))+label('Active (false archives)',select('active',['true','false'],r.active))+label('Required audit reason',input('reason'))+'<button class="primary" type="submit">Save prop</button><p>Existing code and kind are fixed to preserve purchases. To replace a kind, archive this item and create a new code.</p></form>';
+ editor.innerHTML='<form class="card section" id="itemForm"><h3>'+esc(old?'Edit prop':'Add prop')+'</h3>'+label('Stable code',input('code',r.code,'text',!!old))+label('Name',input('name',r.name))+label('Kind',old?input('kind',r.kind,'text',true):select('kind',KINDS,r.kind))+label('Tier',select('tier',['standard','premium','vip','official'],r.tier))+label('Original artwork HTTPS URL',input('asset_url',r.asset_url))+mediaUploadField('artwork','Artwork / video file','image/png,image/jpeg,image/webp,image/gif,video/mp4')+'<div data-entry-poster><label>Upload entry cover (optional)</label><input name="poster_file" type="file" accept="image/png,image/jpeg,image/webp"><p role="status" data-upload-status="poster"></p><label><input name="refresh_poster" type="checkbox"> Generate cover from the saved entry video</label></div>'+label('Original sound HTTPS URL',input('sound_url',r.sound_url))+mediaUploadField('sound','Sound file','audio/mpeg,audio/mp4,audio/aac,audio/ogg,audio/wav,audio/x-m4a,audio/x-wav')+'<label><input name="video_embedded_sound" type="checkbox" '+(!r.sound_url&&/[.]mp4(?:[?#]|$)/i.test(r.asset_url||'')?'checked':'')+'>Use video’s own sound</label><p>Choose a file, then Save. Separate sound is optional.</p>'+label('Bundled sound key',input('sound_key',r.sound_key))+label('Visual JSON (preserve existing artwork / set metadata)','<textarea name="visual" rows="8" style="width:100%">'+esc(JSON.stringify(r.visual||{},null,2))+'</textarea>')+label('Coin price',input('price_coins',r.price_exact??r.price_coins??0,'number'))+label('Duration in days',input('duration_days',r.duration_days,'number'))+label('Order',input('sort_order',r.sort_order,'number'))+label('Available for sale',select('purchasable',['false','true'],r.purchasable))+label('Active (false archives)',select('active',['true','false'],r.active))+label('Required audit reason',input('reason'))+'<button class="primary" type="submit">Save prop</button><p>Existing code and kind are fixed to preserve purchases. To replace a kind, archive this item and create a new code.</p></form>';
  const form=editor.querySelector('form');wireMediaUploads(form);
  if(old?.kind==='entry'&&/^https:\/\/[^\s]+\.mp4(?:[?#].*)?$/i.test(old.asset_url||'')){
   const preview=form.ownerDocument.createElement('video');
@@ -39,7 +40,7 @@ export async function showPropsControl({root,rpc,client,isCurrent,toast}){
   preview.style.cssText='display:block;width:100%;max-height:55vh;margin:12px 0;background:#100c1f';
   preview.setAttribute('aria-label','Preview saved entry video');
   form.insertBefore(preview,form.querySelector('h3').nextSibling);
- }addSavedMediaDownloads(form,old,[['asset_url','artwork'],['sound_url','sound']],toast);addMediaHistory(form,old,{client,toast,action:'catalog.prop_saved_v169',target:'cosmetic',id:old?.code,fields:['asset_url','sound_url','sound_key'],fileFields:['artwork_file','sound_file']});form.onsubmit=e=>{e.preventDefault();return submit(form,()=>rpc('owner_save_prop_v169',{p_item:itemPayload(form,old),p_revision:old?.revision||null,p_reason:form.elements.reason.value.trim()}))};editor.scrollIntoView({block:'start'});
+ }addSavedMediaDownloads(form,old,[['asset_url','artwork'],['sound_url','sound']],toast);addMediaHistory(form,old,{client,toast,action:'catalog.prop_saved_v169',target:'cosmetic',id:old?.code,fields:['asset_url','sound_url','sound_key'],fileFields:['artwork_file','sound_file','poster_file']});form.onsubmit=e=>{e.preventDefault();return submit(form,()=>rpc('owner_save_prop_v169',{p_item:itemPayload(form,old),p_revision:old?.revision||null,p_reason:form.elements.reason.value.trim()}),old)};editor.scrollIntoView({block:'start'});
  }
  function editSet(old){
  const r=old?.set||{category:'normal',active:false,official:false,sort_order:0};
@@ -52,31 +53,43 @@ export async function showPropsControl({root,rpc,client,isCurrent,toast}){
  function wireMediaUploads(form){
   const art=form.elements.namedItem('artwork_file'),sound=form.elements.namedItem('sound_file');
   const kindField=form.elements.namedItem('kind'),embeddedField=form.elements.namedItem('video_embedded_sound');
-  const updateMediaKind=()=>{const video=kindField.value==='entry';art.accept='image/png,image/jpeg,image/webp,image/gif'+(video?',video/mp4':'');form.querySelector('label[for="catalogue-artwork-file"]').textContent=video?'Upload video / image':'Upload image / GIF';embeddedField.disabled=!video;embeddedField.closest('label').hidden=!video;embeddedField.closest('label').style.display=video?'':'none';if(!video)embeddedField.checked=false;};
+  const updateMediaKind=()=>{const video=kindField.value==='entry';art.accept='image/png,image/jpeg,image/webp,image/gif'+(video?',video/mp4':'');form.querySelector('label[for="catalogue-artwork-file"]').textContent=video?'Upload video / image':'Upload image / GIF';embeddedField.disabled=!video;embeddedField.closest('label').hidden=!video;embeddedField.closest('label').style.display=video?'':'none';if(!video)embeddedField.checked=false;form.querySelector('[data-entry-poster]').hidden=!video;};
   kindField.onchange=updateMediaKind;updateMediaKind();
   const note=slot=>form.querySelector('[data-upload-status="'+slot+'"]');
   art.onchange=()=>{const file=art.files?.[0];note('artwork').textContent=file?'Selected. Save will upload and apply this file.':'';if(file&&/\.mp4$/i.test(file.name)&&!sound.files?.length){form.elements.namedItem('video_embedded_sound').checked=true;note('sound').textContent="Video's own sound selected. A separate soundtrack is optional.";}};
   sound.onchange=()=>{if(sound.files?.length){form.elements.namedItem('video_embedded_sound').checked=false;note('sound').textContent='Separate soundtrack selected. Save will upload and apply it.';}};
   form.elements.namedItem('sound_url').oninput=()=>{form.elements.namedItem('video_embedded_sound').checked=false;};
  }
- async function prepareFormMedia(form){
+ async function prepareFormMedia(form,old){
   const current=()=>safe()&&form.isConnected;
   const art=form.elements.namedItem('artwork_file'),sound=form.elements.namedItem('sound_file');if(!art||!sound)return;const artFile=art.files?.[0],soundFile=sound.files?.[0];
   const asset=form.elements.namedItem('asset_url'),soundURL=form.elements.namedItem('sound_url'),embedded=form.elements.namedItem('video_embedded_sound').checked&&!soundFile;
-  if(artFile||soundFile){
+  const kind=form.elements.namedItem('kind').value;
+  if(artFile&&kind!=='entry'&&/[.]mp4$/i.test(artFile.name))throw Error('This prop uses images and GIFs. Use an image or GIF for its artwork.');
+  const poster=form.elements.namedItem('poster_file'),visualInput=form.elements.namedItem('visual');
+  const visual=JSON.parse(visualInput.value||'{}');
+  const posterStatus=form.querySelector('[data-upload-status="poster"]');
+  let posterFile=kind==='entry'?poster.files?.[0]:null;
+  const source=kind==='entry'?giftThumbnailSource({file:artFile,videoUrl:asset.value,assetKey:visual.poster_url,
+   originalAssetKey:old?.visual?.poster_url,originalVideoUrl:old?.asset_url,regenerate:form.elements.namedItem('refresh_poster').checked}):null;
+  if(!posterFile&&source){
+   posterStatus.textContent='Extracting an entry cover…';
+   try{posterFile=await makeThumbnail(source);}
+   catch(error){posterStatus.textContent='Choose a JPG, PNG or WebP entry cover and save again.';throw error;}
+  }
+  if(artFile||soundFile||posterFile){
    if(!client)throw Error('Upload unavailable. Reload the panel.');
    const {uploadPropMedia,validatePropMedia}=await import('./props-media-upload.js?v=20261027');
-   if(artFile&&form.elements.namedItem('kind').value!=='entry'&&/\.mp4$/i.test(artFile.name))throw Error('This prop uses images and GIFs. Use an image or GIF for its artwork.');
-   if(artFile)await validatePropMedia(artFile,'artwork');if(soundFile)await validatePropMedia(soundFile,'sound');
+   if(artFile)await validatePropMedia(artFile,'artwork');if(soundFile)await validatePropMedia(soundFile,'sound');if(posterFile)await validatePropMedia(posterFile,'poster');
    if(!current())throw Error('Editor changed; reopen this item.');
-   for(const [slot,file,input,target] of [['artwork',artFile,art,asset],['sound',soundFile,sound,soundURL]]){
+   for(const [slot,file,input,target] of [['artwork',artFile,art,asset],['sound',soundFile,sound,soundURL],['poster',posterFile,poster,null]]){
     if(!file)continue;const status=form.querySelector('[data-upload-status="'+slot+'"]');status.textContent='Uploading…';
-    try{const result=await uploadPropMedia({client,file,slot,isCurrent:current});if(!current())throw Error('Editor changed; reopen this item.');target.value=result.url;input.value='';status.textContent='Uploaded; saving catalogue changes…';}
+    try{const result=await uploadPropMedia({client,file,slot,isCurrent:current});if(!current())throw Error('Editor changed; reopen this item.');if(slot==='poster')visualInput.value=JSON.stringify({...visual,poster_url:result.url},null,2);else target.value=result.url;input.value='';status.textContent='Uploaded; saving catalogue changes…';}
     catch(error){if(current())status.textContent=error.message;throw error;}
    }
   }
   if(embedded&&/\.mp4(?:[?#]|$)/i.test(asset.value))soundURL.value='';
  }
- async function submit(form,action){if(busy||!safe())return;busy=true;const unlock=lockForm(form);try{if(form.id==='itemForm'){itemPayload(form);if(!form.elements.reason.value.trim())throw Error('Audit reason required');}await prepareFormMedia(form);if(!safe()||!form.isConnected)return;await action();if(!safe())return;toast('Saved with audit history');await load()}catch(e){if(safe())toast(e.message,true)}finally{busy=false;if(safe()&&form.isConnected)unlock()}}
+ async function submit(form,action,old=null){if(busy||!safe())return;busy=true;const unlock=lockForm(form);try{if(form.id==='itemForm'){itemPayload(form);if(!form.elements.reason.value.trim())throw Error('Audit reason required');}await prepareFormMedia(form,old);if(!safe()||!form.isConnected)return;await action();if(!safe())return;toast('Saved with audit history');await load()}catch(e){if(safe())toast(e.message,true)}finally{busy=false;if(safe()&&form.isConnected)unlock()}}
  await load();
 }
