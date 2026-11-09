@@ -1,3 +1,7 @@
+# 9 November 2026 - Owner sign-out audit candidate
+
+Base 2b7e4096e48196aedda974ac875b2a02da61de64. The old handler ignored a returned sign-out error and showed success despite a retained session. The candidate awaits the result, keeps retry available on failure, blocks duplicate pending clicks and reloads the updated module through its cache version. Mocked DOM regression reproduced the old false confirmation and passed after the fix. Owner source suites also passed with their documented arguments. Live staff sign-in/recovery/sign-out and signed web deployment remain separate. Password recovery completion on the approved host is still an open audit item.
+
 # Owner login eye and Remember me — 30 October 2026
 
 Scoped change over main2201320: same approved login page gains an accessible show/hide eye and persistent/tab-only SDK session choice, standard browser autofill, no raw password storage. Server authority/RPC/financial behaviour and native source unchanged. See docs/LOGIN_CONTROLS_20261030.md for evidence, limitations and rollback. Seven focused cases and all existing Owner source workflow suites pass locally. Remote CI/publication IDs belong in the final delivery evidence; no browser or phone PASS inferred from source tests. This web-only change requires no Expo OTA/build. Previous unrelated v151/full-app release gates remain open.

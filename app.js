@@ -1,5 +1,11 @@
 import{createClient}from'https://esm.sh/@supabase/supabase-js@2';import{createRememberStorage,setupLoginControls}from'./login-preferences.js?v=20261030-1';
-const loginPreferences=createRememberStorage(),hideLoginPassword=setupLoginControls(loginPreferences);const supabase=createClient('https://zspcgyhchaqpiyujyxqp.supabase.co','sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ',{auth:{storage:loginPreferences.storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const loginPreferences=createRememberStorage(),hideLoginPassword=setupLoginControls(loginPreferences);const supabase=createClient('https://zspcgyhchaqpiyujyxqp.supabase.co','sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ',{auth:isRecoveryUrl(location.href)?{storageKey:'owner-panel-password-recovery',persistSession:false,autoRefreshToken:false,detectSessionInUrl:true}:{storage:loginPreferences.storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+function isRecoveryUrl(href){
+ if(!href)return false;
+ const url=new URL(href),hash=new URLSearchParams(url.hash.slice(1));
+ return hash.get('type')==='recovery'||url.searchParams.get('type')==='recovery'||url.searchParams.has('code')||
+  [url.searchParams,hash].some(params=>params.has('error')||params.has('error_code'));
+}
 const $=s=>document.querySelector(s),esc=v=>String(v??'—').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),fmt=v=>{if(v==null||v==='')return '—';if(typeof v==='number'&&!Number.isSafeInteger(v))return 'Unavailable';const t=String(v);return /^-?\d+$/.test(t)?BigInt(t).toLocaleString():'Unavailable'},uuid=()=>crypto.randomUUID();
 let authority={},access={},page='overview',cache={},navigationRevision=0,bootRevision=0,dialogRevision=0,actionInFlight=false;
 function renderPage(token,html){if(token!==navigationRevision)return false;$('#content').innerHTML=html;return true}
@@ -83,4 +89,72 @@ function wire(){document.querySelectorAll('[data-action]').forEach(b=>b.onclick=
 function openAction(key,id){if(key==='gift')return go('gifts');if(key==='cosmetic')return go('props');if(key==='createStaff')return openStaffCreation();let a=ACTIONS[key];if(!a)return toast('This advanced control opens after its safe preview contract is selected.',true);const token=++dialogRevision;$('#dialogTitle').textContent=a.title;$('#dialogFields').innerHTML=a.fields.map(([n,l,t='text',opts])=>`<label>${l}</label>${t==='select'?`<select data-field="${n}">${opts.split(',').map(x=>`<option value="${x}">${x}</option>`).join('')}</select>`:`<input data-field="${n}" type="${t}">`}`).join('');$('#dialogSubmit').onclick=async()=>{if(actionInFlight||token!==dialogRevision)return;try{let args={...(a.defaults||{})};document.querySelectorAll('[data-field]').forEach(el=>{let v=el.value;if(el.type==='number'){const optional=['p_duration_hours','p_target_public_id'].includes(el.dataset.field);if(v===''&&!optional)throw new Error('Required numeric input missing');v=v===''?null:exactInteger(v,el.dataset.field);}if(v==='true'||v==='false')v=v==='true';if(el.dataset.field==='p_categories')v=v.split(',').map(x=>x.trim()).filter(Boolean);args[el.dataset.field]=v});if(a.idKey)args[a.idKey]=id;actionInFlight=true;$('#dialogSubmit').disabled=true;let d=await rpc(a.rpc,args);if(token!==dialogRevision)return;$('#actionDialog').close();toast(a.defaults?.p_preview?'Preview prepared; no mutation executed':'Action completed and audit recorded');await go(page);console.info('Operation result',d)}catch(e){if(token===dialogRevision)toast(e.message,true)}finally{actionInFlight=false;$('#dialogSubmit').disabled=false}};$('#actionDialog').showModal()}
 $('#loginForm').onsubmit=async e=>{e.preventDefault();let b=$('#loginForm button[type=submit]');if(b.disabled)return;b.disabled=true;b.textContent='Verifying authority…';try{let response=await fetch('https://zspcgyhchaqpiyujyxqp.supabase.co/functions/v1/panel-login',{method:'POST',headers:{'Content-Type':'application/json','apikey':'sb_publishable_eUygC1Ff8vNqZHcZIOUrPw_rZb6fjQZ'},body:JSON.stringify({login_id:$('#email').value.trim(),password:$('#password').value})});let result=await response.json();if(!response.ok||!result.session)throw new Error(result.message||'Login failed');let{error}=await supabase.auth.setSession({access_token:result.session.access_token,refresh_token:result.session.refresh_token});if(error)throw error;$('#password').value='';hideLoginPassword();await boot()}catch(error){toast(error.message,true)}finally{b.disabled=false;b.textContent='Enter command center'}};
 $('#resetPassword').onclick=async()=>{let email=$('#email').value.trim();if(!email)return toast('Enter official email first',true);let{error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});toast(error?error.message:'Password recovery email sent',!!error)};
-$('#logout').onclick=async()=>{await supabase.auth.signOut({scope:'local'});showLogin();toast('Signed out securely')};$('#menu').onclick=()=>$('.sidebar').classList.toggle('open');supabase.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT')showLogin()});boot();
+const logoutButton=$('#logout');
+logoutButton.onclick=async()=>{
+ if(logoutButton.disabled)return;
+ logoutButton.disabled=true;
+ try{
+  const {error}=await supabase.auth.signOut({scope:'local'});
+  if(error)throw error;
+  showLogin();
+  toast('Signed out securely');
+ }catch{
+  toast('Could not sign out. Please try again.',true);
+ }finally{
+  logoutButton.disabled=false;
+ }
+};
+$('#menu').onclick=()=>$('.sidebar').classList.toggle('open');
+
+if(isRecoveryUrl(location.href)){
+ const form=$('#recoveryForm'),password=$('#newPassword'),confirm=$('#confirmPassword');
+ const save=$('#savePassword'),exit=$('#exitRecovery'),status=$('#recoveryStatus');
+ let account=null;
+ $('#login').classList.add('hidden');
+ $('#recovery').classList.remove('hidden');
+ supabase.auth.onAuthStateChange((event,session)=>{
+  if(event==='PASSWORD_RECOVERY'&&session?.user?.id){
+   account=session.user.id;
+   save.disabled=false;
+   status.textContent='Enter and confirm a new password.';
+   password.focus();
+  }else if(event==='SIGNED_OUT'||(event==='INITIAL_SESSION'&&!account)){
+   account=null;
+   save.disabled=true;
+   status.textContent='This recovery link is unavailable. Request a new one from sign-in.';
+  }
+ });
+ function returnToSignIn(){
+  password.value='';
+  confirm.value='';
+  location.replace(location.origin+location.pathname);
+ }
+ form.onsubmit=async event=>{
+  event.preventDefault();
+  if(!account||save.disabled)return;
+  if(!password.value||password.value!==confirm.value){
+   status.textContent='Enter matching passwords.';
+   return;
+  }
+  save.disabled=true;
+  exit.disabled=true;
+  try{
+   const {data,error}=await supabase.auth.updateUser({password:password.value});
+   if(error)throw error;
+   if(data?.user?.id!==account)throw new Error('Recovery account could not be confirmed.');
+   account=null;
+   password.value='';
+   confirm.value='';
+   status.textContent='Password updated. Select Return to sign-in to continue.';
+  }catch(error){
+   status.textContent=error.message||'Could not update the password. Try again.';
+  }finally{
+   save.disabled=!account;
+   exit.disabled=false;
+  }
+ };
+ exit.onclick=returnToSignIn;
+}else{
+ supabase.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT')showLogin()});
+ boot();
+}
