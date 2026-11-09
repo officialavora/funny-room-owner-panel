@@ -38,7 +38,7 @@ const PAGES={
  contact:async(token)=>{if(!authority.is_founder&&access.role!=='co_owner')throw Error('Owner access required');const {showOfficialContact}=await import('./official-contact.js');if(token!==navigationRevision)return;await showOfficialContact({root:$('#content'),client:supabase,rpc,isCurrent:()=>token===navigationRevision,toast});},
  gifts:async(token)=>{if(!authority.is_founder)throw Error("Founder permission required");const {showGiftControl}=await import("./gift-control.js?v=20261109-gift-thumbnails");if(token!==navigationRevision)return;await showGiftControl({root:$("#content"),rpc,client:supabase,isCurrent:()=>token===navigationRevision,toast})},
  props:async(token)=>{
- const [{showPropsControl},{showStoreLock}]=await Promise.all([import('./props-control.js?v=20261108-public-entry'),import('./store-owner-toggle.js')]);
+ const [{showPropsControl},{showStoreLock}]=await Promise.all([import('./props-control.js?v=20261109-entry-cover'),import('./store-owner-toggle.js')]);
  if(token!==navigationRevision)return;
  const root=$('#content'),lockRoot=document.createElement('div'),catalogRoot=document.createElement('div');
  root.replaceChildren(lockRoot,catalogRoot);
