@@ -8,5 +8,15 @@ for(const bad of ['1e3','1.2','-1','9007199254740993',''])assert.throws(()=>gift
 for(const bad of ['http://example.com/a','https://secret@example.com/a','javascript:alert(1)'])assert.throws(()=>giftPayload(n=>n==='effect_asset_url'?bad:values[n]));
 assert.throws(()=>giftPayload(n=>n==='combo_quantities'?'1,1':values[n]));assert.throws(()=>giftPayload(n=>n==='effect_duration_ms'?'999':values[n]));
 assert(source.includes('p_expected_version:old?.policy_version??null'));assert(source.includes('owner_save_gift_v3'));assert(!source.includes('.delete('));
+const {giftThumbnailSource}=await import(pathToFileURL(__dirname+'/gift-thumbnail.js').href);
+const videoUrl='https://example.com/gift.mp4';
+const assetKey='https://example.com/custom.jpg';
+const file={name:'new.mp4'};
+assert.equal(giftThumbnailSource({videoUrl,assetKey}),null);
+assert.equal(giftThumbnailSource({videoUrl,assetKey,regenerate:true}),videoUrl);
+assert.equal(giftThumbnailSource({videoUrl,assetKey:'🎁'}),videoUrl);
+assert.equal(giftThumbnailSource({file,assetKey,originalAssetKey:assetKey}),file);
+assert.equal(giftThumbnailSource({file,assetKey,originalAssetKey:'🎁'}),null);
+assert.equal(giftThumbnailSource({videoUrl:'https://example.com/gift.webp',regenerate:true}),null);
 console.log('PASS exact gift amounts, original asset key/ID preservation, URL validation, duplicate combo rejection, versioned audited save and reversible archive contract. Browser acceptance pending.');
 })().catch(e=>{console.error(e);process.exitCode=1});
