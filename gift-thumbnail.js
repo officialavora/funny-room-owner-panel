@@ -1,7 +1,7 @@
 const videoPath=/[.]mp4(?:[?#]|$)/i;
-export function giftThumbnailSource({file,videoUrl,assetKey,originalAssetKey,regenerate}){
+export function giftThumbnailSource({file,videoUrl,assetKey,originalAssetKey,originalVideoUrl,regenerate}){
  if(file)return videoPath.test(file.name)&&(!assetKey||assetKey===originalAssetKey)?file:null;
- return videoPath.test(videoUrl||'')&&(regenerate||!/^https:\/\//i.test(assetKey||''))?videoUrl:null;
+ return videoPath.test(videoUrl||'')&&(regenerate||videoUrl!==originalVideoUrl&&!/^https:\/\//i.test(assetKey||''))?videoUrl:null;
 }
 
 export async function createGiftThumbnail(source){
