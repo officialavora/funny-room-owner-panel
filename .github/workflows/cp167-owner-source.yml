@@ -27,3 +27,4 @@ jobs:
       - run: node --check login-preferences.js && node tests/login-preferences.test.cjs
       - run: node tests/dialog-lifecycle.test.cjs app.js && node tests/dialog-lifecycle-independent.test.cjs app.js
 
+      - run: node --check role-applications.js && node --check application-cancel-controller.mjs && node application-cancel.test.mjs
